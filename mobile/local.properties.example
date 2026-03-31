@@ -1,3 +1,11 @@
-## Copy values into local.properties (not committed) or ~/.gradle/gradle.properties
-LOCAPIN_API_BASE_URL=https://example.com/
-MAPS_API_KEY=YOUR_MAPS_KEY
+## Copy this file to `local.properties` and adjust for your machine.
+## Do not commit actual secrets.
+
+# Android SDK path example:
+# sdk.dir=/Users/you/Library/Android/sdk
+
+# LocaPin backend base URL (trailing slash required)
+LOCAPIN_API_BASE_URL=https://your-backend.example.com/
+
+# Google Maps SDK key for Android
+MAPS_API_KEY=YOUR_MAPS_API_KEY

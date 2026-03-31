@@ -45,6 +45,12 @@ fun MapScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         MapInstruction()
+        state.selectedZoneId?.let { zoneId ->
+            Text(
+                text = state.zones.firstOrNull { it.id == zoneId }?.displayName ?: zoneId,
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
         SegmentedSanJuanMap(
             zones = state.zones,
             selectedZoneId = state.selectedZoneId,
@@ -86,6 +92,9 @@ fun MapScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     Button(onClick = { launchDirections(context, selectedAttraction, state.userLocation) }) {
                         Text("Directions")
+                    }
+                    Button(onClick = { onDetails(selectedAttraction.id) }) {
+                        Text("Details")
                     }
                     Button(onClick = vm::refreshLocation) {
                         Text("Refresh distance")
