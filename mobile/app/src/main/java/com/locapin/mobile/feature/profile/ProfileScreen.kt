@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.locapin.mobile.BuildConfig
 import com.locapin.mobile.ui.MainViewModel
 
 @Composable
@@ -27,6 +28,6 @@ fun ProfileScreen(vm: MainViewModel, onSettings: () -> Unit) {
         Text(state.profile?.email ?: "")
         Button(onClick = onSettings, modifier = Modifier.fillMaxWidth()) { Text("Settings") }
         Button(onClick = vm::logout, modifier = Modifier.fillMaxWidth()) { Text("Logout") }
-        Text("LocaPin v1.0.0")
+        Text("LocaPin v${BuildConfig.VERSION_NAME}")
     }
 }
