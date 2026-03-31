@@ -1,0 +1,548 @@
+-- Merging decision tree log ---
+meta-data#com.google.android.geo.API_KEY
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:17:9-19:47
+	android:value
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:19:13-44
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:18:13-58
+manifest
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6a360e95482764004e5a5f38154dc700\workspace\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\244350ad80e69573d8984cbdabaa7df6\workspace\transformed\hilt-navigation-1.2.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0931d3e86138d527def69c86d94762c5\workspace\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1bc684466a33ad77d28fc598f43a8c35\workspace\transformed\navigation-runtime-2.8.5\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\322720310959e83975669649709616eb\workspace\transformed\navigation-common-ktx-2.8.5\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7c3b520f726560c1d38dcc89545ab5ec\workspace\transformed\navigation-runtime-ktx-2.8.5\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\125603abb9cbad40c797ed681b639d70\workspace\transformed\navigation-compose-2.8.5\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.maps.android:maps-compose:6.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\26b09c0f35af7328f967f794b74b21be\workspace\transformed\maps-compose-6.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.dagger:hilt-android:2.52] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\58f1318daa6b59c9db64ddb7d8146f02\workspace\transformed\hilt-android-2.52\AndroidManifest.xml:16:1-19:12
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e9a98597c2e663d9af401c6c81113a56\workspace\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.maps.android:maps-ktx:5.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\bf4bcfdcad467eed46acfed0c05fb231\workspace\transformed\maps-ktx-5.1.1\AndroidManifest.xml:18:1-23:12
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:17:1-44:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32a4afc38e73bd3666009ff6c98aea6f\workspace\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
+MERGED from [io.coil-kt:coil-svg:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\8e25a9e24d1295d9b82b17b1fbd4f72d\workspace\transformed\coil-svg-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil-compose:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4d9bfcb0e2996230323ee14572292ebb\workspace\transformed\coil-compose-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil-compose-base:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f83a9899df8e9d1b317025bb77fa675a\workspace\transformed\coil-compose-base-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e607eae0cb8cf89dce45c7ddcfd1d008\workspace\transformed\coil-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil-base:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\01063eee73da4032264308a384d1e6b2\workspace\transformed\coil-base-2.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a7c05cb0513d2f5aacabdfb125363ef1\workspace\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d6f9f8a27c9e9898d4540fac0bdc8bd8\workspace\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\46988198266645ef935139edae74cdcb\workspace\transformed\viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\93b5df41b1828c09521cbd18900db331\workspace\transformed\play-services-location-21.3.0\AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\10bcc17a98560b4d6f213a80197b573d\workspace\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.5.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\50c00deca474b11aed5c3cae9471c750\workspace\transformed\fragment-1.5.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4f45b73a38a58647f1b1913a05e82dcd\workspace\transformed\activity-1.10.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a7aca551a60ff5b846d42d206655bb7c\workspace\transformed\material3-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\22702b3f5f4d36e791b47c5c19e992f8\workspace\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\85d94589030b7646e9f90233ccf76af6\workspace\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\94753a80cb4996f154f66cbdeb838594\workspace\transformed\transition-1.5.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\311dfdeb01c0ba424843f4b8a83c2421\workspace\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\594c48198a6c36aaf89ff1a4d99b4cd9\workspace\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\dabe7b27674831b86ed7e860958ec46b\workspace\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.compose.material:material-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d46403f409bc99ce8cf75a7e18292429\workspace\transformed\material-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\cdf2baf7649d6720127270c10f371c20\workspace\transformed\material-ripple-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\536f491b54459f6cfb035ffa42a2bef2\workspace\transformed\foundation-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f58cd463eb12bef07ea1757dca3a788e\workspace\transformed\animation-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b540aeaaccf7fd7f16a21484f14969cf\workspace\transformed\ui-tooling-data-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\50f79d2d67b5e238d93e7c103f6a53eb\workspace\transformed\ui-unit-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\011056429ed271f9c9e4d767b160b90d\workspace\transformed\ui-graphics-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1927b0e11ef36e529672ad72d22aa455\workspace\transformed\ui-geometry-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5ef69ee6c97b6a80f6f24e1182717025\workspace\transformed\ui-util-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c355a93cede6269f73cb905c1cd36522\workspace\transformed\ui-text-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6c24ebd7d71300c842cd57ceafea819e\workspace\transformed\ui-tooling-preview-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.compose.animation:animation-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7f92fd1b9f9e711c1995d703beb00eaa\workspace\transformed\animation-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2d2734fb8475d9cb1e0ba1907191e794\workspace\transformed\foundation-layout-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\13c87046fd828c5b20d7f595e7046430\workspace\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07d1ae14f92058bb70516bb1f40462fa\workspace\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3ea204ffe0bf208843af6440d5e8a7c6\workspace\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\22db2ddee2dadeeb6defbe16e4994c52\workspace\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\952d51cadbfffdfd667d73ae11723aa2\workspace\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5d1573024bcd5065cd7cb318980b2502\workspace\transformed\autofill-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\49c8eeae4bcc9ee10dc89520c4ab9000\workspace\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4cfbb6b23c533f5e6d611fc63cc91b6e\workspace\transformed\graphics-path-1.0.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\419d63ae14b722582f7d7bef57e9ee1e\workspace\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a2f2e35323bf680a647154d90d1e0279\workspace\transformed\savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32b83d0f4ca7ea57b18d781c25ba316e\workspace\transformed\lifecycle-livedata-core-ktx-2.8.7\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c16e6284bdcd473c1c0568e4217d3562\workspace\transformed\lifecycle-livedata-2.8.7\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d1337ab1fec5ccb8d01322457226f038\workspace\transformed\lifecycle-viewmodel-2.8.7\AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\107ba853fa274826a33f755f76933791\workspace\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7ea87be7ff99fd4cf300425601bb8aa1\workspace\transformed\lifecycle-runtime-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f0985fd2e9f293a030b1a09ba26eb6f9\workspace\transformed\lifecycle-livedata-core-2.8.7\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0d36720498ad46e7b390f8818517ba00\workspace\transformed\lifecycle-viewmodel-ktx-2.8.7\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\ca01843935c6df0b7a3ed308a53ed151\workspace\transformed\lifecycle-viewmodel-savedstate-2.8.7\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a6d5839a58f49b0bfc54e7dbc34fda55\workspace\transformed\lifecycle-runtime-compose-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c113ebdd2517358234e2091c6643c89d\workspace\transformed\lifecycle-runtime-ktx-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\aa446de04f4cb7ce23ddc76ca35ccb29\workspace\transformed\lifecycle-viewmodel-compose-release\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.32.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3a449467ebb40f857c2bdafb1a050c17\workspace\transformed\accompanist-drawablepainter-0.32.0\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5335ef0a7be0b88d05d0319365a1926c\workspace\transformed\material-icons-extended-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b97714d82c6344b754392b51637ed286\workspace\transformed\material-icons-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1d99dbe358277fdf589c77126287547d\workspace\transformed\ui-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-ktx:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4e60e1906a690ca246b233dbb37f04bc\workspace\transformed\activity-ktx-1.10.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-compose:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b78860dbafe17a9199a83e795718cd05\workspace\transformed\activity-compose-1.10.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4576a04de4af22dfe57ca23f244174d1\workspace\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b557280d01e7a1c51d32756f4cd4a7c9\workspace\transformed\core-ktx-1.15.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\bbe29505c7e7299919362a6fe92f2b56\workspace\transformed\datastore-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\507c397483a59be8410fb8cc98507142\workspace\transformed\datastore-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\36969385f17aaaa093cb89666f06ee24\workspace\transformed\datastore-preferences-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5df5d5cb5e0b7872f898339f6a5a0f7e\workspace\transformed\runtime-saveable-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\8cc6e89f35d4972616a292554dc1be82\workspace\transformed\runtime-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\504cb816934cbd4687e1298c375773e7\workspace\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2550e62d775e5fedbc285471e20f4941\workspace\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6d385fddfc0cdd38c406abc0549306f8\workspace\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2b479c0d85060a0fdec17f9b30bbe1af\workspace\transformed\tracing-1.2.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c6433f994e0c721785f2fd20f6925604\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e03b7da9ed1b6633b95af4e09468f7d0\workspace\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5adc898af7dc99f02bb6545eed785cc0\workspace\transformed\exifinterface-1.3.7\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.databinding:viewbinding:8.4.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\63a928a4432ef112cbd75067a74aee87\workspace\transformed\viewbinding-8.4.2\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a97e8198f7fbc557ee862f76a1a9aee4\workspace\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\ff74692a7c3b6b5ef36b03a1911e541d\workspace\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0924ab29cfe7c918f50bf41f1cf26fca\workspace\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c4f469a00de6baa233db12e1ce1aa5dc\workspace\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\510f587f4b71eb369c405ff9f37e0df9\workspace\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1ba3c17e86f2f1f796889f67e00108a3\workspace\transformed\dagger-lint-aar-2.52\AndroidManifest.xml:16:1-19:12
+MERGED from [com.caverock:androidsvg-aar:1.4] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3bd071a955ea187adc0f588a8e4719a2\workspace\transformed\androidsvg-aar-1.4\AndroidManifest.xml:2:1-11:12
+	package
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:4:5-79
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:4:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:5:5-81
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:5:22-78
+uses-permission#android.permission.INTERNET
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:6:5-67
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:6:22-64
+application
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:8:5-30:19
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:8:5-30:19
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e9a98597c2e663d9af401c6c81113a56\workspace\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e9a98597c2e663d9af401c6c81113a56\workspace\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:36:5-42:19
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32a4afc38e73bd3666009ff6c98aea6f\workspace\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32a4afc38e73bd3666009ff6c98aea6f\workspace\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\93b5df41b1828c09521cbd18900db331\workspace\transformed\play-services-location-21.3.0\AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\93b5df41b1828c09521cbd18900db331\workspace\transformed\play-services-location-21.3.0\AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\10bcc17a98560b4d6f213a80197b573d\workspace\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\10bcc17a98560b4d6f213a80197b573d\workspace\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:5:5-7:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:5:5-7:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c6433f994e0c721785f2fd20f6925604\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c6433f994e0c721785f2fd20f6925604\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:14:9-35
+	android:label
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:12:9-41
+	android:roundIcon
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:13:9-54
+	android:icon
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:11:9-43
+	android:allowBackup
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:10:9-35
+	android:theme
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:15:9-45
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:9:9-39
+activity#com.locapin.mobile.MainActivity
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:21:9-29:20
+	android:exported
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:23:13-36
+	android:theme
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:24:13-49
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:22:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:25:13-28:29
+action#android.intent.action.MAIN
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:26:17-69
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:26:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:27:17-77
+	android:name
+		ADDED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml:27:27-74
+uses-sdk
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6a360e95482764004e5a5f38154dc700\workspace\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6a360e95482764004e5a5f38154dc700\workspace\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\244350ad80e69573d8984cbdabaa7df6\workspace\transformed\hilt-navigation-1.2.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\244350ad80e69573d8984cbdabaa7df6\workspace\transformed\hilt-navigation-1.2.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0931d3e86138d527def69c86d94762c5\workspace\transformed\navigation-common-2.8.5\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0931d3e86138d527def69c86d94762c5\workspace\transformed\navigation-common-2.8.5\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1bc684466a33ad77d28fc598f43a8c35\workspace\transformed\navigation-runtime-2.8.5\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1bc684466a33ad77d28fc598f43a8c35\workspace\transformed\navigation-runtime-2.8.5\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\322720310959e83975669649709616eb\workspace\transformed\navigation-common-ktx-2.8.5\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\322720310959e83975669649709616eb\workspace\transformed\navigation-common-ktx-2.8.5\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7c3b520f726560c1d38dcc89545ab5ec\workspace\transformed\navigation-runtime-ktx-2.8.5\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7c3b520f726560c1d38dcc89545ab5ec\workspace\transformed\navigation-runtime-ktx-2.8.5\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\125603abb9cbad40c797ed681b639d70\workspace\transformed\navigation-compose-2.8.5\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.5] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\125603abb9cbad40c797ed681b639d70\workspace\transformed\navigation-compose-2.8.5\AndroidManifest.xml:5:5-44
+MERGED from [com.google.maps.android:maps-compose:6.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\26b09c0f35af7328f967f794b74b21be\workspace\transformed\maps-compose-6.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.maps.android:maps-compose:6.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\26b09c0f35af7328f967f794b74b21be\workspace\transformed\maps-compose-6.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.dagger:hilt-android:2.52] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\58f1318daa6b59c9db64ddb7d8146f02\workspace\transformed\hilt-android-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:hilt-android:2.52] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\58f1318daa6b59c9db64ddb7d8146f02\workspace\transformed\hilt-android-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e9a98597c2e663d9af401c6c81113a56\workspace\transformed\material-1.12.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e9a98597c2e663d9af401c6c81113a56\workspace\transformed\material-1.12.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.maps.android:maps-ktx:5.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\bf4bcfdcad467eed46acfed0c05fb231\workspace\transformed\maps-ktx-5.1.1\AndroidManifest.xml:21:5-44
+MERGED from [com.google.maps.android:maps-ktx:5.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\bf4bcfdcad467eed46acfed0c05fb231\workspace\transformed\maps-ktx-5.1.1\AndroidManifest.xml:21:5-44
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32a4afc38e73bd3666009ff6c98aea6f\workspace\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32a4afc38e73bd3666009ff6c98aea6f\workspace\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [io.coil-kt:coil-svg:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\8e25a9e24d1295d9b82b17b1fbd4f72d\workspace\transformed\coil-svg-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-svg:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\8e25a9e24d1295d9b82b17b1fbd4f72d\workspace\transformed\coil-svg-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4d9bfcb0e2996230323ee14572292ebb\workspace\transformed\coil-compose-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4d9bfcb0e2996230323ee14572292ebb\workspace\transformed\coil-compose-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose-base:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f83a9899df8e9d1b317025bb77fa675a\workspace\transformed\coil-compose-base-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose-base:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f83a9899df8e9d1b317025bb77fa675a\workspace\transformed\coil-compose-base-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e607eae0cb8cf89dce45c7ddcfd1d008\workspace\transformed\coil-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e607eae0cb8cf89dce45c7ddcfd1d008\workspace\transformed\coil-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-base:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\01063eee73da4032264308a384d1e6b2\workspace\transformed\coil-base-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-base:2.7.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\01063eee73da4032264308a384d1e6b2\workspace\transformed\coil-base-2.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a7c05cb0513d2f5aacabdfb125363ef1\workspace\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a7c05cb0513d2f5aacabdfb125363ef1\workspace\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d6f9f8a27c9e9898d4540fac0bdc8bd8\workspace\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d6f9f8a27c9e9898d4540fac0bdc8bd8\workspace\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\46988198266645ef935139edae74cdcb\workspace\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\46988198266645ef935139edae74cdcb\workspace\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\93b5df41b1828c09521cbd18900db331\workspace\transformed\play-services-location-21.3.0\AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\93b5df41b1828c09521cbd18900db331\workspace\transformed\play-services-location-21.3.0\AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\10bcc17a98560b4d6f213a80197b573d\workspace\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\10bcc17a98560b4d6f213a80197b573d\workspace\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:3:5-44
+MERGED from [androidx.fragment:fragment:1.5.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\50c00deca474b11aed5c3cae9471c750\workspace\transformed\fragment-1.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\50c00deca474b11aed5c3cae9471c750\workspace\transformed\fragment-1.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4f45b73a38a58647f1b1913a05e82dcd\workspace\transformed\activity-1.10.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4f45b73a38a58647f1b1913a05e82dcd\workspace\transformed\activity-1.10.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a7aca551a60ff5b846d42d206655bb7c\workspace\transformed\material3-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a7aca551a60ff5b846d42d206655bb7c\workspace\transformed\material3-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\22702b3f5f4d36e791b47c5c19e992f8\workspace\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\22702b3f5f4d36e791b47c5c19e992f8\workspace\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\85d94589030b7646e9f90233ccf76af6\workspace\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\85d94589030b7646e9f90233ccf76af6\workspace\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\94753a80cb4996f154f66cbdeb838594\workspace\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\94753a80cb4996f154f66cbdeb838594\workspace\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\311dfdeb01c0ba424843f4b8a83c2421\workspace\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\311dfdeb01c0ba424843f4b8a83c2421\workspace\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\594c48198a6c36aaf89ff1a4d99b4cd9\workspace\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\594c48198a6c36aaf89ff1a4d99b4cd9\workspace\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\dabe7b27674831b86ed7e860958ec46b\workspace\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\dabe7b27674831b86ed7e860958ec46b\workspace\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.compose.material:material-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d46403f409bc99ce8cf75a7e18292429\workspace\transformed\material-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d46403f409bc99ce8cf75a7e18292429\workspace\transformed\material-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\cdf2baf7649d6720127270c10f371c20\workspace\transformed\material-ripple-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\cdf2baf7649d6720127270c10f371c20\workspace\transformed\material-ripple-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\536f491b54459f6cfb035ffa42a2bef2\workspace\transformed\foundation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\536f491b54459f6cfb035ffa42a2bef2\workspace\transformed\foundation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f58cd463eb12bef07ea1757dca3a788e\workspace\transformed\animation-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f58cd463eb12bef07ea1757dca3a788e\workspace\transformed\animation-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b540aeaaccf7fd7f16a21484f14969cf\workspace\transformed\ui-tooling-data-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b540aeaaccf7fd7f16a21484f14969cf\workspace\transformed\ui-tooling-data-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\50f79d2d67b5e238d93e7c103f6a53eb\workspace\transformed\ui-unit-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\50f79d2d67b5e238d93e7c103f6a53eb\workspace\transformed\ui-unit-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\011056429ed271f9c9e4d767b160b90d\workspace\transformed\ui-graphics-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\011056429ed271f9c9e4d767b160b90d\workspace\transformed\ui-graphics-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1927b0e11ef36e529672ad72d22aa455\workspace\transformed\ui-geometry-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1927b0e11ef36e529672ad72d22aa455\workspace\transformed\ui-geometry-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5ef69ee6c97b6a80f6f24e1182717025\workspace\transformed\ui-util-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5ef69ee6c97b6a80f6f24e1182717025\workspace\transformed\ui-util-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c355a93cede6269f73cb905c1cd36522\workspace\transformed\ui-text-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c355a93cede6269f73cb905c1cd36522\workspace\transformed\ui-text-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6c24ebd7d71300c842cd57ceafea819e\workspace\transformed\ui-tooling-preview-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6c24ebd7d71300c842cd57ceafea819e\workspace\transformed\ui-tooling-preview-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7f92fd1b9f9e711c1995d703beb00eaa\workspace\transformed\animation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7f92fd1b9f9e711c1995d703beb00eaa\workspace\transformed\animation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2d2734fb8475d9cb1e0ba1907191e794\workspace\transformed\foundation-layout-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2d2734fb8475d9cb1e0ba1907191e794\workspace\transformed\foundation-layout-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\13c87046fd828c5b20d7f595e7046430\workspace\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\13c87046fd828c5b20d7f595e7046430\workspace\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07d1ae14f92058bb70516bb1f40462fa\workspace\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07d1ae14f92058bb70516bb1f40462fa\workspace\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3ea204ffe0bf208843af6440d5e8a7c6\workspace\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3ea204ffe0bf208843af6440d5e8a7c6\workspace\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\22db2ddee2dadeeb6defbe16e4994c52\workspace\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\22db2ddee2dadeeb6defbe16e4994c52\workspace\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\952d51cadbfffdfd667d73ae11723aa2\workspace\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\952d51cadbfffdfd667d73ae11723aa2\workspace\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5d1573024bcd5065cd7cb318980b2502\workspace\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5d1573024bcd5065cd7cb318980b2502\workspace\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\49c8eeae4bcc9ee10dc89520c4ab9000\workspace\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\49c8eeae4bcc9ee10dc89520c4ab9000\workspace\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4cfbb6b23c533f5e6d611fc63cc91b6e\workspace\transformed\graphics-path-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4cfbb6b23c533f5e6d611fc63cc91b6e\workspace\transformed\graphics-path-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\419d63ae14b722582f7d7bef57e9ee1e\workspace\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\419d63ae14b722582f7d7bef57e9ee1e\workspace\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a2f2e35323bf680a647154d90d1e0279\workspace\transformed\savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a2f2e35323bf680a647154d90d1e0279\workspace\transformed\savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32b83d0f4ca7ea57b18d781c25ba316e\workspace\transformed\lifecycle-livedata-core-ktx-2.8.7\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32b83d0f4ca7ea57b18d781c25ba316e\workspace\transformed\lifecycle-livedata-core-ktx-2.8.7\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c16e6284bdcd473c1c0568e4217d3562\workspace\transformed\lifecycle-livedata-2.8.7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c16e6284bdcd473c1c0568e4217d3562\workspace\transformed\lifecycle-livedata-2.8.7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d1337ab1fec5ccb8d01322457226f038\workspace\transformed\lifecycle-viewmodel-2.8.7\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\d1337ab1fec5ccb8d01322457226f038\workspace\transformed\lifecycle-viewmodel-2.8.7\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\107ba853fa274826a33f755f76933791\workspace\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\107ba853fa274826a33f755f76933791\workspace\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7ea87be7ff99fd4cf300425601bb8aa1\workspace\transformed\lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\7ea87be7ff99fd4cf300425601bb8aa1\workspace\transformed\lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f0985fd2e9f293a030b1a09ba26eb6f9\workspace\transformed\lifecycle-livedata-core-2.8.7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\f0985fd2e9f293a030b1a09ba26eb6f9\workspace\transformed\lifecycle-livedata-core-2.8.7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0d36720498ad46e7b390f8818517ba00\workspace\transformed\lifecycle-viewmodel-ktx-2.8.7\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0d36720498ad46e7b390f8818517ba00\workspace\transformed\lifecycle-viewmodel-ktx-2.8.7\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\ca01843935c6df0b7a3ed308a53ed151\workspace\transformed\lifecycle-viewmodel-savedstate-2.8.7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\ca01843935c6df0b7a3ed308a53ed151\workspace\transformed\lifecycle-viewmodel-savedstate-2.8.7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a6d5839a58f49b0bfc54e7dbc34fda55\workspace\transformed\lifecycle-runtime-compose-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a6d5839a58f49b0bfc54e7dbc34fda55\workspace\transformed\lifecycle-runtime-compose-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c113ebdd2517358234e2091c6643c89d\workspace\transformed\lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c113ebdd2517358234e2091c6643c89d\workspace\transformed\lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\aa446de04f4cb7ce23ddc76ca35ccb29\workspace\transformed\lifecycle-viewmodel-compose-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\aa446de04f4cb7ce23ddc76ca35ccb29\workspace\transformed\lifecycle-viewmodel-compose-release\AndroidManifest.xml:5:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.32.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3a449467ebb40f857c2bdafb1a050c17\workspace\transformed\accompanist-drawablepainter-0.32.0\AndroidManifest.xml:21:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.32.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3a449467ebb40f857c2bdafb1a050c17\workspace\transformed\accompanist-drawablepainter-0.32.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5335ef0a7be0b88d05d0319365a1926c\workspace\transformed\material-icons-extended-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5335ef0a7be0b88d05d0319365a1926c\workspace\transformed\material-icons-extended-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b97714d82c6344b754392b51637ed286\workspace\transformed\material-icons-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b97714d82c6344b754392b51637ed286\workspace\transformed\material-icons-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1d99dbe358277fdf589c77126287547d\workspace\transformed\ui-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1d99dbe358277fdf589c77126287547d\workspace\transformed\ui-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4e60e1906a690ca246b233dbb37f04bc\workspace\transformed\activity-ktx-1.10.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4e60e1906a690ca246b233dbb37f04bc\workspace\transformed\activity-ktx-1.10.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b78860dbafe17a9199a83e795718cd05\workspace\transformed\activity-compose-1.10.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.10.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b78860dbafe17a9199a83e795718cd05\workspace\transformed\activity-compose-1.10.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4576a04de4af22dfe57ca23f244174d1\workspace\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4576a04de4af22dfe57ca23f244174d1\workspace\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b557280d01e7a1c51d32756f4cd4a7c9\workspace\transformed\core-ktx-1.15.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\b557280d01e7a1c51d32756f4cd4a7c9\workspace\transformed\core-ktx-1.15.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\bbe29505c7e7299919362a6fe92f2b56\workspace\transformed\datastore-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\bbe29505c7e7299919362a6fe92f2b56\workspace\transformed\datastore-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\507c397483a59be8410fb8cc98507142\workspace\transformed\datastore-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\507c397483a59be8410fb8cc98507142\workspace\transformed\datastore-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\36969385f17aaaa093cb89666f06ee24\workspace\transformed\datastore-preferences-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\36969385f17aaaa093cb89666f06ee24\workspace\transformed\datastore-preferences-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5df5d5cb5e0b7872f898339f6a5a0f7e\workspace\transformed\runtime-saveable-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5df5d5cb5e0b7872f898339f6a5a0f7e\workspace\transformed\runtime-saveable-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\8cc6e89f35d4972616a292554dc1be82\workspace\transformed\runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\8cc6e89f35d4972616a292554dc1be82\workspace\transformed\runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\504cb816934cbd4687e1298c375773e7\workspace\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\504cb816934cbd4687e1298c375773e7\workspace\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2550e62d775e5fedbc285471e20f4941\workspace\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2550e62d775e5fedbc285471e20f4941\workspace\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6d385fddfc0cdd38c406abc0549306f8\workspace\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\6d385fddfc0cdd38c406abc0549306f8\workspace\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2b479c0d85060a0fdec17f9b30bbe1af\workspace\transformed\tracing-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\2b479c0d85060a0fdec17f9b30bbe1af\workspace\transformed\tracing-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c6433f994e0c721785f2fd20f6925604\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c6433f994e0c721785f2fd20f6925604\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e03b7da9ed1b6633b95af4e09468f7d0\workspace\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\e03b7da9ed1b6633b95af4e09468f7d0\workspace\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5adc898af7dc99f02bb6545eed785cc0\workspace\transformed\exifinterface-1.3.7\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5adc898af7dc99f02bb6545eed785cc0\workspace\transformed\exifinterface-1.3.7\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.databinding:viewbinding:8.4.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\63a928a4432ef112cbd75067a74aee87\workspace\transformed\viewbinding-8.4.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.4.2] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\63a928a4432ef112cbd75067a74aee87\workspace\transformed\viewbinding-8.4.2\AndroidManifest.xml:5:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a97e8198f7fbc557ee862f76a1a9aee4\workspace\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\a97e8198f7fbc557ee862f76a1a9aee4\workspace\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\ff74692a7c3b6b5ef36b03a1911e541d\workspace\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\ff74692a7c3b6b5ef36b03a1911e541d\workspace\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0924ab29cfe7c918f50bf41f1cf26fca\workspace\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\0924ab29cfe7c918f50bf41f1cf26fca\workspace\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c4f469a00de6baa233db12e1ce1aa5dc\workspace\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\c4f469a00de6baa233db12e1ce1aa5dc\workspace\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\510f587f4b71eb369c405ff9f37e0df9\workspace\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\510f587f4b71eb369c405ff9f37e0df9\workspace\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1ba3c17e86f2f1f796889f67e00108a3\workspace\transformed\dagger-lint-aar-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1ba3c17e86f2f1f796889f67e00108a3\workspace\transformed\dagger-lint-aar-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.caverock:androidsvg-aar:1.4] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3bd071a955ea187adc0f588a8e4719a2\workspace\transformed\androidsvg-aar-1.4\AndroidManifest.xml:7:5-9:41
+MERGED from [com.caverock:androidsvg-aar:1.4] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\3bd071a955ea187adc0f588a8e4719a2\workspace\transformed\androidsvg-aar-1.4\AndroidManifest.xml:7:5-9:41
+	android:targetSdkVersion
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\GitHub\Locapin\mobile\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:23:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:28:9-32
+queries
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:30:5-34:15
+package#com.google.android.apps.maps
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:33:9-64
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:33:18-61
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:39:9-41:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\337c11def6fe580c078156d2c339a381\workspace\transformed\play-services-maps-19.0.0\AndroidManifest.xml:40:13-50
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\4ee6ba49eb1e00a743039c2a1e15bea3\workspace\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\1947154c2d0d3210d2ddc6935870f0ca\workspace\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\9db46ed8182c6b26f001172d38287e12\workspace\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\32ad01aaedee3ad1f58070456d72b7a2\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\5b6ef4f3229e154d6eee384d154349b3\workspace\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
+permission#com.locapin.mobile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
+uses-permission#com.locapin.mobile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\25dd8ef3a21f0bdbf0573c52b1472fcc\workspace\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\334e6eed64d45b64625fcd9654393fcc\workspace\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.gradle\caches\9.3.0\transforms\07192e930b069478369679f31fa82bc9\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92

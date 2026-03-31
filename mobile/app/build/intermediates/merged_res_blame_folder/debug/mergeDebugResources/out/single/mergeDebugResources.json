@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.locapin.mobile.app-debug-4:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.locapin.mobile.app-main-6:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.locapin.mobile.app-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.locapin.mobile.app-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.locapin.mobile.app-debug-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.locapin.mobile.app-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.locapin.mobile.app-debug-4:/raw_locapin_logo.svg.flat",
+        "source": "com.locapin.mobile.app-main-6:/raw/locapin_logo.svg"
+    },
+    {
+        "merged": "com.locapin.mobile.app-debug-4:/drawable_ic_locapin_logo.xml.flat",
+        "source": "com.locapin.mobile.app-main-6:/drawable/ic_locapin_logo.xml"
+    },
+    {
+        "merged": "com.locapin.mobile.app-debug-4:/xml_backup_rules.xml.flat",
+        "source": "com.locapin.mobile.app-main-6:/xml/backup_rules.xml"
+    }
+]

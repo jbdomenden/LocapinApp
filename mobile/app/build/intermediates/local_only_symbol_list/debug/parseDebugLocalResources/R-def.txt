@@ -1,0 +1,10 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_launcher_background
+drawable ic_locapin_logo
+mipmap ic_launcher
+mipmap ic_launcher_round
+raw locapin_logo
+string app_name
+style Theme.LocaPin
+xml backup_rules
