@@ -30,6 +30,7 @@ data class MainUiState(
     val selectedDestination: Destination? = null,
     val profile: User? = null,
     val searchResults: List<Destination> = emptyList(),
+    val recentSearches: List<String> = emptyList(),
     val error: String? = null
 )
 
@@ -49,6 +50,11 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             prefs.hasCompletedOnboarding.collectLatest { onboarded ->
                 _state.value = _state.value.copy(onboarded = onboarded, loading = false)
+            }
+        }
+        viewModelScope.launch {
+            prefs.recentSearches.collectLatest { recents ->
+                _state.value = _state.value.copy(recentSearches = recents)
             }
         }
         viewModelScope.launch {
@@ -73,6 +79,10 @@ class MainViewModel @Inject constructor(
     fun setSearchQuery(q: String) {
         queryFlow.value = q
         viewModelScope.launch { if (q.isNotBlank()) prefs.addRecentSearch(q) }
+    }
+
+    fun useRecentSearch(q: String) {
+        queryFlow.value = q
     }
 
     fun bootstrap() {
