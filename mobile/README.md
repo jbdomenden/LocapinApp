@@ -28,6 +28,9 @@ Production-ready Jetpack Compose Android client for LocaPin end users.
 
    - `app/src/main/java/com/locapin/mobile/data/remote/LocaPinApi.kt`
 5. Sync and run on Pixel 8 emulator.
+6. If Android Studio shows **Add Configuration**, create an **Android App** configuration with:
+   - Module: `app`
+   - Launch: **Default Activity** (or Activity: `com.locapin.mobile.MainActivity`)
 
 ## Backend route assumptions
 The current client assumes:
