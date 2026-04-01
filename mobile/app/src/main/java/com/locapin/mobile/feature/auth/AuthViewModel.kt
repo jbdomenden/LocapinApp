@@ -1,41 +1,56 @@
 package com.locapin.mobile.feature.auth
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.locapin.mobile.core.common.LocaPinResult
-import com.locapin.mobile.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
-
-data class AuthUiState(
-    val isLoading: Boolean = false,
-    val error: String? = null,
-    val isAuthenticated: Boolean = false
-)
+import kotlinx.coroutines.flow.update
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(
-    private val repo: AuthRepository
-) : ViewModel() {
+class AuthViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableStateFlow(AuthUiState())
     val state: StateFlow<AuthUiState> = _state.asStateFlow()
 
-    fun login(email: String, password: String) = submit { repo.login(email, password) }
-    fun register(name: String, email: String, password: String) = submit { repo.register(name, email, password) }
-    fun forgotPassword(email: String) = submit { repo.forgotPassword(email) }
+    fun onUsernameChange(value: String) {
+        _state.update { it.copy(username = value, errorMessage = null) }
+    }
 
-    private fun submit(action: suspend () -> LocaPinResult<Unit>) {
-        viewModelScope.launch {
-            _state.value = _state.value.copy(isLoading = true, error = null)
-            when (val result = action()) {
-                is LocaPinResult.Success -> _state.value = _state.value.copy(isLoading = false, isAuthenticated = true)
-                is LocaPinResult.Error -> _state.value = _state.value.copy(isLoading = false, error = result.message)
-                else -> Unit
-            }
+    fun onPasswordChange(value: String) {
+        _state.update { it.copy(password = value, errorMessage = null) }
+    }
+
+    fun togglePasswordVisibility() {
+        _state.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
+    }
+
+    fun clearUsername() {
+        _state.update { it.copy(username = "") }
+    }
+
+    fun login() {
+        submitAuth()
+    }
+
+    fun register() {
+        submitAuth()
+    }
+
+    fun forgotPassword() {
+        _state.update { it.copy(errorMessage = "Forgot password flow is not yet connected.") }
+    }
+
+    fun socialLogin(provider: String) {
+        _state.update { it.copy(errorMessage = "$provider login is not yet connected.") }
+    }
+
+    private fun submitAuth() {
+        val current = _state.value
+        if (current.username.isBlank() || current.password.isBlank()) {
+            _state.update { it.copy(errorMessage = "Username and password are required.") }
+            return
         }
+        _state.update { it.copy(isLoading = false, isAuthenticated = true, errorMessage = null) }
     }
 }
