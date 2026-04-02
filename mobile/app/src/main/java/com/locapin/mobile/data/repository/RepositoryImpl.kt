@@ -7,6 +7,7 @@ import com.locapin.mobile.data.remote.AuthRequest
 import com.locapin.mobile.data.remote.ForgotPasswordRequest
 import com.locapin.mobile.data.remote.LocaPinApi
 import com.locapin.mobile.data.remote.RegisterRequest
+import com.locapin.mobile.data.remote.SocialAuthRequest
 import com.locapin.mobile.domain.model.Category
 import com.locapin.mobile.domain.model.Destination
 import com.locapin.mobile.domain.model.User
@@ -16,6 +17,7 @@ import com.locapin.mobile.domain.repository.ProfileRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
+import retrofit2.HttpException
 
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
@@ -58,6 +60,36 @@ class AuthRepositoryImpl @Inject constructor(
             },
             onFailure = { LocaPinResult.Error(it.message ?: "Registration failed") }
         )
+
+    override suspend fun socialLogin(
+        provider: String,
+        idToken: String?,
+        accessToken: String?
+    ): LocaPinResult<Unit> = runCatching {
+        api.socialAuth(
+            SocialAuthRequest(
+                provider = provider.lowercase(),
+                idToken = idToken,
+                accessToken = accessToken
+            )
+        ).data?.token
+    }.fold(
+        onSuccess = { token ->
+            if (token.isNullOrBlank()) LocaPinResult.Error("Invalid social login response")
+            else {
+                prefs.setAuthToken(token)
+                LocaPinResult.Success(Unit)
+            }
+        },
+        onFailure = { throwable ->
+            val message = if (throwable is HttpException && throwable.code() == 404) {
+                "$provider sign-in is not available on the backend yet."
+            } else {
+                throwable.message ?: "$provider sign-in failed"
+            }
+            LocaPinResult.Error(message)
+        }
+    )
 
     override suspend fun forgotPassword(email: String): LocaPinResult<Unit> = runCatching {
         api.forgotPassword(ForgotPasswordRequest(email))

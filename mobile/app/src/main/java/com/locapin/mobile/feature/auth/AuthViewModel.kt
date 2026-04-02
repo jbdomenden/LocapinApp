@@ -71,6 +71,30 @@ class AuthViewModel @Inject constructor(
         _state.update { it.copy(hasAcceptedTerms = !it.hasAcceptedTerms, errorMessage = null) }
     }
 
+    fun socialLogin(provider: String, idToken: String? = null, accessToken: String? = null) {
+        if (idToken.isNullOrBlank() && accessToken.isNullOrBlank()) {
+            _state.update { it.copy(errorMessage = "$provider sign-in returned no usable token.") }
+            return
+        }
+        viewModelScope.launch {
+            _state.update { it.copy(socialLoadingProvider = provider, errorMessage = null) }
+            val result = authRepository.socialLogin(provider, idToken = idToken, accessToken = accessToken)
+            when (result) {
+                is LocaPinResult.Success -> {
+                    _state.update { it.copy(socialLoadingProvider = null, isAuthenticated = true) }
+                }
+                is LocaPinResult.Error -> {
+                    _state.update { it.copy(socialLoadingProvider = null, errorMessage = result.message) }
+                }
+                else -> _state.update { it.copy(socialLoadingProvider = null) }
+            }
+        }
+    }
+
+    fun onSocialAuthError(message: String) {
+        _state.update { it.copy(errorMessage = message, socialLoadingProvider = null) }
+    }
+
     fun login() {
         val current = _state.value
         if (current.loginIdentifier.isBlank() || current.loginPassword.isBlank()) {

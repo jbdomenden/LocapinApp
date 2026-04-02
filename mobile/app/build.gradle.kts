@@ -30,6 +30,23 @@ android {
 
         val mapsKey = (project.findProperty("MAPS_API_KEY") as? String) ?: ""
         manifestPlaceholders["MAPS_API_KEY"] = mapsKey
+
+        val googleServerClientId = (project.findProperty("GOOGLE_SERVER_CLIENT_ID") as? String)
+            ?: System.getenv("GOOGLE_SERVER_CLIENT_ID")
+            ?: ""
+        buildConfigField("String", "GOOGLE_SERVER_CLIENT_ID", "\"$googleServerClientId\"")
+
+        val facebookAppId = (project.findProperty("FACEBOOK_APP_ID") as? String)
+            ?: System.getenv("FACEBOOK_APP_ID")
+            ?: ""
+        val facebookClientToken = (project.findProperty("FACEBOOK_CLIENT_TOKEN") as? String)
+            ?: System.getenv("FACEBOOK_CLIENT_TOKEN")
+            ?: ""
+        manifestPlaceholders["FACEBOOK_APP_ID"] = facebookAppId
+        manifestPlaceholders["FACEBOOK_CLIENT_TOKEN"] = facebookClientToken
+        resValue("string", "facebook_app_id", facebookAppId.ifBlank { "0" })
+        resValue("string", "facebook_client_token", facebookClientToken)
+        resValue("string", "fb_login_protocol_scheme", "fb${facebookAppId.ifBlank { "0" }}")
     }
 
     buildTypes {
@@ -99,6 +116,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.3.0")
     implementation("com.google.maps.android:maps-compose:6.2.1")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    implementation("com.facebook.android:facebook-login:17.0.2")
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 

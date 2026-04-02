@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
     suspend fun login(identifier: String, password: String): LocaPinResult<Unit>
+    suspend fun socialLogin(provider: String, idToken: String? = null, accessToken: String? = null): LocaPinResult<Unit>
     suspend fun register(name: String, email: String, password: String): LocaPinResult<Unit>
     suspend fun forgotPassword(email: String): LocaPinResult<Unit>
     suspend fun logout()

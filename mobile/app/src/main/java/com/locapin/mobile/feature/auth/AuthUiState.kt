@@ -12,6 +12,7 @@ data class AuthUiState(
     val isSignupConfirmPasswordVisible: Boolean = false,
     val hasAcceptedTerms: Boolean = false,
     val isLoading: Boolean = false,
+    val socialLoadingProvider: String? = null,
     val errorMessage: String? = null,
     val isAuthenticated: Boolean = false
 )

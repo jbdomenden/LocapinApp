@@ -1,5 +1,11 @@
 package com.locapin.mobile.feature.auth
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,6 +25,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.Facebook
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,7 +41,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -50,6 +59,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.locapin.mobile.BuildConfig
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 private val LoginBackground = Color(0xFFFFF7F1)
 private val LoginFrame = Color(0xFFF4D8DD)
@@ -72,6 +89,44 @@ fun LoginScreen(
     vm: AuthViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val activity = context.findActivity()
+    val googleServerClientId = BuildConfig.GOOGLE_SERVER_CLIENT_ID
+    val callbackManager = remember { CallbackManager.Factory.create() }
+
+    val googleLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        runCatching { task.result }.onSuccess { account ->
+            val idToken = account.idToken
+            if (idToken.isNullOrBlank()) vm.onSocialAuthError("Google sign-in did not return an ID token.")
+            else vm.socialLogin(provider = "google", idToken = idToken)
+        }.onFailure {
+            vm.onSocialAuthError(it.message ?: "Google sign-in failed.")
+        }
+    }
+
+    DisposableEffect(callbackManager) {
+        FacebookAuthBridge.setCallbackManager(callbackManager)
+        LoginManager.getInstance().registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onCancel() = vm.onSocialAuthError("Facebook sign-in was cancelled.")
+                override fun onError(error: FacebookException) {
+                    vm.onSocialAuthError(error.message ?: "Facebook sign-in failed.")
+                }
+
+                override fun onSuccess(result: LoginResult) {
+                    val token = result.accessToken?.token
+                    if (token.isNullOrBlank()) vm.onSocialAuthError("Facebook sign-in returned no access token.")
+                    else vm.socialLogin(provider = "facebook", accessToken = token)
+                }
+            }
+        )
+        onDispose {
+            FacebookAuthBridge.clearCallbackManager(callbackManager)
+        }
+    }
+
     if (state.isAuthenticated) onSuccess()
     LoginScreenContent(
         state = state,
@@ -84,7 +139,25 @@ fun LoginScreen(
             onForgotPassword()
         },
         onPrimaryAction = vm::login,
-        onRegister = onRegister
+        onRegister = onRegister,
+        onGoogleLoginClick = {
+            if (googleServerClientId.isBlank()) {
+                vm.onSocialAuthError("Google sign-in is not configured.")
+                return@LoginScreenContent
+            }
+            val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken(googleServerClientId)
+                .build()
+            googleLauncher.launch(GoogleSignIn.getClient(context, options).signInIntent)
+        },
+        onFacebookLoginClick = {
+            if (activity == null) {
+                vm.onSocialAuthError("Facebook sign-in requires an activity context.")
+                return@LoginScreenContent
+            }
+            LoginManager.getInstance().logInWithReadPermissions(activity, callbackManager, listOf("email", "public_profile"))
+        }
     )
 }
 
@@ -280,6 +353,14 @@ private fun LoginScreenContent(
                                     )
                                 }
 
+                                Spacer(Modifier.height(16.dp))
+                                SocialAuthRow(
+                                    onGoogleClick = onGoogleLoginClick,
+                                    onFacebookClick = onFacebookLoginClick,
+                                    enabled = !state.isLoading && state.socialLoadingProvider == null,
+                                    loadingProvider = state.socialLoadingProvider
+                                )
+
                                 }
                             }
                         }
@@ -370,6 +451,44 @@ fun RegisterScreen(
     vm: AuthViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val activity = context.findActivity()
+    val googleServerClientId = BuildConfig.GOOGLE_SERVER_CLIENT_ID
+    val callbackManager = remember { CallbackManager.Factory.create() }
+
+    val googleLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        runCatching { task.result }.onSuccess { account ->
+            val idToken = account.idToken
+            if (idToken.isNullOrBlank()) vm.onSocialAuthError("Google sign-in did not return an ID token.")
+            else vm.socialLogin(provider = "google", idToken = idToken)
+        }.onFailure {
+            vm.onSocialAuthError(it.message ?: "Google sign-in failed.")
+        }
+    }
+
+    DisposableEffect(callbackManager) {
+        FacebookAuthBridge.setCallbackManager(callbackManager)
+        LoginManager.getInstance().registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onCancel() = vm.onSocialAuthError("Facebook sign-in was cancelled.")
+                override fun onError(error: FacebookException) {
+                    vm.onSocialAuthError(error.message ?: "Facebook sign-in failed.")
+                }
+
+                override fun onSuccess(result: LoginResult) {
+                    val token = result.accessToken?.token
+                    if (token.isNullOrBlank()) vm.onSocialAuthError("Facebook sign-in returned no access token.")
+                    else vm.socialLogin(provider = "facebook", accessToken = token)
+                }
+            }
+        )
+        onDispose {
+            FacebookAuthBridge.clearCallbackManager(callbackManager)
+        }
+    }
+
     if (state.isAuthenticated) onSuccess()
     RegisterScreenContent(
         state = state,
@@ -383,7 +502,25 @@ fun RegisterScreen(
         onToggleConfirmPassword = vm::toggleSignupConfirmPasswordVisibility,
         onTermsChange = vm::toggleTermsAcceptance,
         onPrimaryAction = vm::register,
-        onBack = onBack
+        onBack = onBack,
+        onGoogleLoginClick = {
+            if (googleServerClientId.isBlank()) {
+                vm.onSocialAuthError("Google sign-in is not configured.")
+                return@RegisterScreenContent
+            }
+            val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken(googleServerClientId)
+                .build()
+            googleLauncher.launch(GoogleSignIn.getClient(context, options).signInIntent)
+        },
+        onFacebookLoginClick = {
+            if (activity == null) {
+                vm.onSocialAuthError("Facebook sign-in requires an activity context.")
+                return@RegisterScreenContent
+            }
+            LoginManager.getInstance().logInWithReadPermissions(activity, callbackManager, listOf("email", "public_profile"))
+        }
     )
 }
 
@@ -618,6 +755,14 @@ private fun RegisterScreenContent(
                                         )
                                     }
 
+                                    Spacer(Modifier.height(16.dp))
+                                    SocialAuthRow(
+                                        onGoogleClick = onGoogleLoginClick,
+                                        onFacebookClick = onFacebookLoginClick,
+                                        enabled = !state.isLoading && state.socialLoadingProvider == null,
+                                        loadingProvider = state.socialLoadingProvider
+                                    )
+
                                 }
                             }
                         }
@@ -636,6 +781,42 @@ private fun RegisterScreenContent(
                     style = MaterialTheme.typography.titleSmall,
                     textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline
                 )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SocialAuthRow(
+    onGoogleClick: () -> Unit,
+    onFacebookClick: () -> Unit,
+    enabled: Boolean,
+    loadingProvider: String?
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Button(
+            onClick = onGoogleClick,
+            enabled = enabled,
+            modifier = Modifier.weight(1f),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF3EEE9), contentColor = LoginTextPrimary)
+        ) {
+            if (loadingProvider == "google") CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
+            else Text("Google")
+        }
+        Button(
+            onClick = onFacebookClick,
+            enabled = enabled,
+            modifier = Modifier.weight(1f),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF3EEE9), contentColor = LoginTextPrimary)
+        ) {
+            if (loadingProvider == "facebook") CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
+            else {
+                Icon(Icons.Outlined.Facebook, contentDescription = null, tint = Color(0xFF3B5998))
+                Spacer(Modifier.size(6.dp))
+                Text("Facebook")
             }
         }
     }
@@ -857,6 +1038,12 @@ private fun LoginScreenPreview() {
         onPrimaryAction = {},
         onRegister = {}
     )
+}
+
+private tailrec fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }
 
 @Preview(name = "Login - Dark", widthDp = 412, heightDp = 915, showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)
