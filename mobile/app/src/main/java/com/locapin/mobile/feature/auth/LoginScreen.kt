@@ -30,15 +30,16 @@ import androidx.compose.material.icons.outlined.Facebook
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -48,6 +49,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -70,15 +72,16 @@ private val AccentOrange = Color(0xFFF6C846)
 private val InputColor = Color(0xFFF6F1EA)
 private val LoginBackground = Color(0xFFFFF7F1)
 private val LoginFrame = Color(0xFFF4D8DD)
-private val LoginCard = Color(0xFFFFF1EE)
-private val LoginCardBorder = Color(0xFFEAB9C5)
-private val LoginTextPrimary = Color(0xFF5E3948)
-private val LoginTextSecondary = Color(0xFF886474)
-private val LoginGold = Color(0xFFC58B42)
-private val LoginButtonRose = Color(0xFFD26F8A)
+private val LoginCardOuter = Color(0xFFF2CED8)
+private val LoginCardInner = Color(0xFFFFF7F1)
+private val LoginCardBorder = Color(0x66D795AA)
+private val LoginTextPrimary = Color(0xFF532F3E)
+private val LoginTextSecondary = Color(0xFF8A6A78)
+private val LoginAccent = Color(0xFFD06384)
 private val LoginFieldBackground = Color(0xFFFFFBF8)
-private val LoginFieldFocused = Color(0xFFE8A7B8)
-private val LoginFieldUnfocused = Color(0xFFEFD6DC)
+private val LoginFieldFocused = Color(0xFFD47A96)
+private val LoginFieldUnfocused = Color(0xFFDDB7C3)
+private val LoginFieldPlaceholder = Color(0xFFA77F8D)
 
 @Composable
 fun LoginScreen(
@@ -120,7 +123,7 @@ private fun LoginScreenContent(
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    listOf(LoginBackground, Color(0xFFFFF0EC))
+                    listOf(LoginBackground, Color(0xFFFFEFE8))
                 )
             )
             .imePadding()
@@ -132,120 +135,168 @@ private fun LoginScreenContent(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                color = LoginFrame,
-                shape = RoundedCornerShape(36.dp),
-                shadowElevation = 4.dp
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
             ) {
-                Column(
-                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 22.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxWidth(0.92f)
+                        .height(220.dp)
+                        .graphicsLayer(alpha = 0.45f)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(Color(0xFFFFDCE4), Color.Transparent)
+                            ),
+                            shape = RoundedCornerShape(44.dp)
+                        )
+                )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = LoginFrame,
+                    shape = RoundedCornerShape(36.dp),
+                    shadowElevation = 10.dp
                 ) {
-                    Text(
-                        text = "LocaPin",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = LoginTextPrimary,
-                        fontWeight = FontWeight.ExtraBold
-                    )
-                    Text(
-                        text = "Discover your next San Juan moment.",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = LoginGold,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
-
-                    Spacer(Modifier.height(18.dp))
-
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        color = LoginCard,
-                        shape = RoundedCornerShape(30.dp),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, LoginCardBorder),
-                        shadowElevation = 8.dp
+                    Column(
+                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 30.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Column(
-                            modifier = Modifier.padding(horizontal = 18.dp, vertical = 20.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "Welcome back",
-                                style = MaterialTheme.typography.titleLarge,
-                                color = LoginTextPrimary,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                            Text(
-                                text = "Sign in to continue your exploration.",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = LoginTextSecondary,
-                                modifier = Modifier.padding(top = 2.dp, bottom = 14.dp)
-                            )
+                        Text(
+                            text = "LocaPin",
+                            style = MaterialTheme.typography.displaySmall.copy(letterSpacing = 1.2.sp),
+                            color = LoginTextPrimary,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            text = "Discover your next San Juan moment.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LoginTextSecondary,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
 
-                            AuthPillField(
-                                value = state.username,
-                                placeholder = "Email or username",
-                                onValueChange = onUsernameChange,
-                                trailing = {
-                                    if (state.username.isNotBlank()) {
-                                        IconButton(onClick = onClearUsername) {
-                                            Icon(Icons.Default.Close, contentDescription = "Clear username")
+                        Spacer(Modifier.height(24.dp))
+
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = LoginCardOuter,
+                            shape = RoundedCornerShape(32.dp),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, LoginCardBorder),
+                            shadowElevation = 12.dp
+                        ) {
+                            Surface(
+                                modifier = Modifier
+                                    .padding(1.dp)
+                                    .fillMaxWidth(),
+                                color = LoginCardInner,
+                                shape = RoundedCornerShape(31.dp),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x26FFFFFF))
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Welcome back",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = LoginTextPrimary,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                    Text(
+                                        text = "Sign in to continue your exploration.",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = LoginTextSecondary,
+                                        modifier = Modifier.padding(top = 4.dp, bottom = 18.dp)
+                                    )
+
+                                AuthPillField(
+                                    value = state.username,
+                                    placeholder = "Email or username",
+                                    onValueChange = onUsernameChange,
+                                    trailing = {
+                                        if (state.username.isNotBlank()) {
+                                            IconButton(onClick = onClearUsername) {
+                                                Icon(
+                                                    Icons.Default.Close,
+                                                    contentDescription = "Clear username",
+                                                    tint = LoginTextSecondary
+                                                )
+                                            }
                                         }
                                     }
-                                }
-                            )
-                            Spacer(Modifier.height(10.dp))
-                            AuthPillField(
-                                value = state.password,
-                                placeholder = "Password",
-                                onValueChange = onPasswordChange,
-                                isPassword = true,
-                                isPasswordVisible = state.isPasswordVisible,
-                                onTogglePassword = onTogglePassword
-                            )
-
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(top = 6.dp),
-                                horizontalArrangement = Arrangement.End
-                            ) {
-                                TextButton(onClick = onForgotPassword) {
-                                    Text("Forgot Password?", color = LoginGold)
-                                }
-                            }
-
-                            FilledTonalButton(
-                                onClick = onPrimaryAction,
-                                enabled = !state.isLoading,
-                                shape = RoundedCornerShape(24.dp),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(52.dp)
-                            ) {
-                                if (state.isLoading) {
-                                    CircularProgressIndicator(
-                                        modifier = Modifier.size(20.dp),
-                                        color = LoginTextPrimary,
-                                        strokeWidth = 2.dp
-                                    )
-                                } else {
-                                    Text(
-                                        text = "Login",
-                                        color = LoginButtonRose,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                }
-                            }
-
-                            state.errorMessage?.let {
-                                Text(
-                                    text = it,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = Color(0xFFAF3D4D),
-                                    textAlign = TextAlign.Center,
-                                    modifier = Modifier.padding(top = 10.dp)
                                 )
+                                Spacer(Modifier.height(14.dp))
+                                AuthPillField(
+                                    value = state.password,
+                                    placeholder = "Password",
+                                    onValueChange = onPasswordChange,
+                                    isPassword = true,
+                                    isPasswordVisible = state.isPasswordVisible,
+                                    onTogglePassword = onTogglePassword
+                                )
+
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = 8.dp),
+                                    horizontalArrangement = Arrangement.End
+                                ) {
+                                    TextButton(onClick = onForgotPassword) {
+                                        Text(
+                                            "Forgot Password?",
+                                            color = LoginAccent,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                    }
+                                }
+
+                                Button(
+                                    onClick = onPrimaryAction,
+                                    enabled = !state.isLoading,
+                                    shape = RoundedCornerShape(24.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = LoginAccent,
+                                        contentColor = Color(0xFFFFF7F3),
+                                        disabledContainerColor = LoginAccent.copy(alpha = 0.6f),
+                                        disabledContentColor = Color(0xFFFFF7F3).copy(alpha = 0.9f)
+                                    ),
+                                    elevation = ButtonDefaults.buttonElevation(
+                                        defaultElevation = 6.dp,
+                                        pressedElevation = 2.dp,
+                                        disabledElevation = 0.dp
+                                    ),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(56.dp)
+                                ) {
+                                    if (state.isLoading) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(20.dp),
+                                            color = Color(0xFFFFF7F3),
+                                            strokeWidth = 2.dp
+                                        )
+                                    } else {
+                                        Text(
+                                            text = "Login",
+                                            color = Color(0xFFFFF7F3),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                    }
+                                }
+
+                                state.errorMessage?.let {
+                                    Text(
+                                        text = it,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = Color(0xFFAF3D4D),
+                                        textAlign = TextAlign.Center,
+                                        modifier = Modifier.padding(top = 12.dp)
+                                    )
+                                }
+                                }
                             }
                         }
                     }
@@ -254,21 +305,16 @@ private fun LoginScreenContent(
 
             TextButton(
                 onClick = onRegister,
-                modifier = Modifier.padding(top = 16.dp)
+                modifier = Modifier.padding(top = 22.dp)
             ) {
                 Text(
                     text = "Create account",
-                    color = LoginButtonRose,
-                    fontWeight = FontWeight.SemiBold
+                    color = LoginAccent,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.titleSmall,
+                    textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline
                 )
             }
-
-            Text(
-                text = "More sign-in options are coming soon.",
-                style = MaterialTheme.typography.bodySmall,
-                color = LoginTextSecondary,
-                modifier = Modifier.padding(top = 4.dp)
-            )
         }
     }
 }
@@ -283,19 +329,25 @@ private fun AuthPillField(
     onTogglePassword: (() -> Unit)? = null,
     trailing: @Composable (() -> Unit)? = null
 ) {
-    TextField(
+    OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(62.dp),
         shape = RoundedCornerShape(26.dp),
         singleLine = true,
         placeholder = {
             Text(
                 text = placeholder,
-                color = LoginTextSecondary
+                color = LoginFieldPlaceholder,
+                style = MaterialTheme.typography.bodyMedium
             )
         },
-        textStyle = TextStyle(color = LoginTextPrimary),
+        textStyle = TextStyle(
+            color = LoginTextPrimary,
+            fontWeight = FontWeight.Medium
+        ),
         visualTransformation = if (isPassword && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
         trailingIcon = {
             when {
@@ -303,21 +355,25 @@ private fun AuthPillField(
                     IconButton(onClick = onTogglePassword) {
                         Icon(
                             if (isPasswordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                            contentDescription = "Toggle password visibility"
+                            contentDescription = "Toggle password visibility",
+                            tint = LoginTextSecondary
                         )
                     }
                 }
                 trailing != null -> trailing()
             }
         },
-        colors = TextFieldDefaults.colors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = LoginFieldBackground,
             unfocusedContainerColor = LoginFieldBackground,
             disabledContainerColor = LoginFieldBackground,
-            focusedIndicatorColor = LoginFieldFocused,
-            unfocusedIndicatorColor = LoginFieldUnfocused,
-            cursorColor = LoginButtonRose
-        )
+            focusedBorderColor = LoginFieldFocused,
+            unfocusedBorderColor = LoginFieldUnfocused,
+            focusedTrailingIconColor = LoginAccent,
+            unfocusedTrailingIconColor = LoginTextSecondary,
+            cursorColor = LoginAccent
+        ),
+        supportingText = {}
     )
 }
 
