@@ -103,7 +103,9 @@ fun LoginScreen(
             onForgotPassword()
         },
         onPrimaryAction = vm::login,
-        onRegister = onRegister
+        onRegister = onRegister,
+        onGoogleLoginClick = { vm.socialLogin("Google") },
+        onFacebookLoginClick = { vm.socialLogin("Facebook") }
     )
 }
 
@@ -116,7 +118,9 @@ private fun LoginScreenContent(
     onTogglePassword: () -> Unit,
     onForgotPassword: () -> Unit,
     onPrimaryAction: () -> Unit,
-    onRegister: () -> Unit
+    onRegister: () -> Unit,
+    onGoogleLoginClick: () -> Unit,
+    onFacebookLoginClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -125,6 +129,303 @@ private fun LoginScreenContent(
                 Brush.verticalGradient(
                     listOf(LoginBackground, Color(0xFFFFEFE8))
                 )
+            )
+            .imePadding()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp, vertical = 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxWidth(0.92f)
+                        .height(220.dp)
+                        .graphicsLayer(alpha = 0.45f)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(Color(0xFFFFDCE4), Color.Transparent)
+                            ),
+                            shape = RoundedCornerShape(44.dp)
+                        )
+                )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = LoginFrame,
+                    shape = RoundedCornerShape(36.dp),
+                    shadowElevation = 10.dp
+                ) {
+                    Column(
+                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 30.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "LocaPin",
+                            style = MaterialTheme.typography.displaySmall.copy(letterSpacing = 1.2.sp),
+                            color = LoginTextPrimary,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            text = "Discover your next San Juan moment.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LoginTextSecondary,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+
+                        Spacer(Modifier.height(24.dp))
+
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = LoginCardOuter,
+                            shape = RoundedCornerShape(32.dp),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, LoginCardBorder),
+                            shadowElevation = 12.dp
+                        ) {
+                            Surface(
+                                modifier = Modifier
+                                    .padding(1.dp)
+                                    .fillMaxWidth(),
+                                color = LoginCardInner,
+                                shape = RoundedCornerShape(31.dp),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x26FFFFFF))
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Welcome back",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = LoginTextPrimary,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                    Text(
+                                        text = "Sign in to continue your exploration.",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = LoginTextSecondary,
+                                        modifier = Modifier.padding(top = 4.dp, bottom = 18.dp)
+                                    )
+
+                                AuthPillField(
+                                    value = state.username,
+                                    placeholder = "Email or username",
+                                    onValueChange = onUsernameChange,
+                                    trailing = {
+                                        if (state.username.isNotBlank()) {
+                                            IconButton(onClick = onClearUsername) {
+                                                Icon(
+                                                    Icons.Default.Close,
+                                                    contentDescription = "Clear username",
+                                                    tint = LoginTextSecondary
+                                                )
+                                            }
+                                        }
+                                    }
+                                )
+                                Spacer(Modifier.height(14.dp))
+                                AuthPillField(
+                                    value = state.password,
+                                    placeholder = "Password",
+                                    onValueChange = onPasswordChange,
+                                    isPassword = true,
+                                    isPasswordVisible = state.isPasswordVisible,
+                                    onTogglePassword = onTogglePassword
+                                )
+
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(top = 8.dp),
+                                    horizontalArrangement = Arrangement.End
+                                ) {
+                                    TextButton(onClick = onForgotPassword) {
+                                        Text(
+                                            "Forgot Password?",
+                                            color = LoginAccent,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                    }
+                                }
+
+                                Button(
+                                    onClick = onPrimaryAction,
+                                    enabled = !state.isLoading,
+                                    shape = RoundedCornerShape(24.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = LoginAccent,
+                                        contentColor = Color(0xFFFFF7F3),
+                                        disabledContainerColor = LoginAccent.copy(alpha = 0.6f),
+                                        disabledContentColor = Color(0xFFFFF7F3).copy(alpha = 0.9f)
+                                    ),
+                                    elevation = ButtonDefaults.buttonElevation(
+                                        defaultElevation = 6.dp,
+                                        pressedElevation = 2.dp,
+                                        disabledElevation = 0.dp
+                                    ),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(56.dp)
+                                ) {
+                                    if (state.isLoading) {
+                                        CircularProgressIndicator(
+                                            modifier = Modifier.size(20.dp),
+                                            color = Color(0xFFFFF7F3),
+                                            strokeWidth = 2.dp
+                                        )
+                                    } else {
+                                        Text(
+                                            text = "Login",
+                                            color = Color(0xFFFFF7F3),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                    }
+                                }
+
+                                state.errorMessage?.let {
+                                    Text(
+                                        text = it,
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = Color(0xFFAF3D4D),
+                                        textAlign = TextAlign.Center,
+                                        modifier = Modifier.padding(top = 12.dp)
+                                    )
+                                }
+
+                                Spacer(Modifier.height(18.dp))
+                                SocialLoginSection(
+                                    onGoogleLoginClick = onGoogleLoginClick,
+                                    onFacebookLoginClick = onFacebookLoginClick
+                                )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            TextButton(
+                onClick = onRegister,
+                modifier = Modifier.padding(top = 22.dp)
+            ) {
+                Text(
+                    text = "Create account",
+                    color = LoginAccent,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.titleSmall,
+                    textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SocialLoginSection(
+    onGoogleLoginClick: () -> Unit,
+    onFacebookLoginClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(1.dp)
+                    .background(LoginFieldUnfocused.copy(alpha = 0.9f))
+            )
+            Text(
+                text = "Login with",
+                color = LoginTextSecondary,
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(horizontal = 10.dp)
+            )
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(1.dp)
+                    .background(LoginFieldUnfocused.copy(alpha = 0.9f))
+            )
+        }
+        Spacer(Modifier.height(12.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            SocialProviderButton(
+                modifier = Modifier.weight(1f),
+                label = "Google",
+                onClick = onGoogleLoginClick,
+                logo = {
+                    Text(
+                        text = "G",
+                        color = Color(0xFFB24C59),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            )
+            SocialProviderButton(
+                modifier = Modifier.weight(1f),
+                label = "Facebook",
+                onClick = onFacebookLoginClick,
+                logo = {
+                    Icon(
+                        imageVector = Icons.Outlined.Facebook,
+                        contentDescription = null,
+                        tint = Color(0xFF5F78AD)
+                    )
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun SocialProviderButton(
+    modifier: Modifier = Modifier,
+    label: String,
+    onClick: () -> Unit,
+    logo: @Composable () -> Unit
+) {
+    Surface(
+        modifier = modifier
+            .height(46.dp)
+            .clip(RoundedCornerShape(18.dp))
+            .clickable(onClick = onClick),
+        color = Color(0xFFFDF7F4),
+        shape = RoundedCornerShape(18.dp),
+        border = androidx.compose.foundation.BorderStroke(1.dp, LoginFieldUnfocused),
+        shadowElevation = 1.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            logo()
+            Spacer(Modifier.width(6.dp))
+            Text(
+                text = label,
+                color = LoginTextPrimary,
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.Medium
             )
             .imePadding()
             .verticalScroll(rememberScrollState())
@@ -774,7 +1075,9 @@ private fun LoginScreenPreview() {
         onTogglePassword = {},
         onForgotPassword = {},
         onPrimaryAction = {},
-        onRegister = {}
+        onRegister = {},
+        onGoogleLoginClick = {},
+        onFacebookLoginClick = {}
     )
 }
 
