@@ -1,9 +1,14 @@
 package com.locapin.mobile.feature.auth
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,24 +19,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material.icons.outlined.Facebook
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -41,17 +41,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -63,16 +59,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.locapin.mobile.BuildConfig
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
-private val AuthSpacing = 14.dp
-private val OuterGradient = listOf(Color(0xFF9F325D), Color(0xFFFF7A87), Color(0xFF9F325D))
-private val SurfaceColor = Color(0xFFF5F0E8)
-private val CardColor = Color(0xFFE7B6C3)
-private val BorderPink = Color(0xFFD87795)
-private val AccentGold = Color(0xFFC1882E)
-private val AccentPink = Color(0xFFFA2D9D)
-private val AccentOrange = Color(0xFFF6C846)
-private val InputColor = Color(0xFFF6F1EA)
 private val LoginBackground = Color(0xFFFFF7F1)
 private val LoginFrame = Color(0xFFF4D8DD)
 private val LoginCardOuter = Color(0xFFF2CED8)
@@ -94,30 +89,84 @@ fun LoginScreen(
     vm: AuthViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val activity = context.findActivity()
+    val googleServerClientId = BuildConfig.GOOGLE_SERVER_CLIENT_ID
+    val callbackManager = remember { CallbackManager.Factory.create() }
+
+    val googleLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        runCatching { task.result }.onSuccess { account ->
+            val idToken = account.idToken
+            if (idToken.isNullOrBlank()) vm.onSocialAuthError("Google sign-in did not return an ID token.")
+            else vm.socialLogin(provider = "google", idToken = idToken)
+        }.onFailure {
+            vm.onSocialAuthError(it.message ?: "Google sign-in failed.")
+        }
+    }
+
+    DisposableEffect(callbackManager) {
+        FacebookAuthBridge.setCallbackManager(callbackManager)
+        LoginManager.getInstance().registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onCancel() = vm.onSocialAuthError("Facebook sign-in was cancelled.")
+                override fun onError(error: FacebookException) {
+                    vm.onSocialAuthError(error.message ?: "Facebook sign-in failed.")
+                }
+
+                override fun onSuccess(result: LoginResult) {
+                    val token = result.accessToken?.token
+                    if (token.isNullOrBlank()) vm.onSocialAuthError("Facebook sign-in returned no access token.")
+                    else vm.socialLogin(provider = "facebook", accessToken = token)
+                }
+            }
+        )
+        onDispose {
+            FacebookAuthBridge.clearCallbackManager(callbackManager)
+        }
+    }
+
     if (state.isAuthenticated) onSuccess()
     LoginScreenContent(
         state = state,
-        onUsernameChange = vm::onUsernameChange,
-        onPasswordChange = vm::onPasswordChange,
-        onClearUsername = vm::clearUsername,
-        onTogglePassword = vm::togglePasswordVisibility,
+        onIdentifierChange = vm::onLoginIdentifierChange,
+        onPasswordChange = vm::onLoginPasswordChange,
+        onClearIdentifier = vm::clearLoginIdentifier,
+        onTogglePassword = vm::toggleLoginPasswordVisibility,
         onForgotPassword = {
             vm.forgotPassword()
             onForgotPassword()
         },
         onPrimaryAction = vm::login,
         onRegister = onRegister,
-        onGoogleLoginClick = { vm.socialLogin("Google") },
-        onFacebookLoginClick = { vm.socialLogin("Facebook") }
+        onGoogleLoginClick = {
+            if (googleServerClientId.isBlank()) {
+                vm.onSocialAuthError("Google sign-in is not configured.")
+                return@LoginScreenContent
+            }
+            val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken(googleServerClientId)
+                .build()
+            googleLauncher.launch(GoogleSignIn.getClient(context, options).signInIntent)
+        },
+        onFacebookLoginClick = {
+            if (activity == null) {
+                vm.onSocialAuthError("Facebook sign-in requires an activity context.")
+                return@LoginScreenContent
+            }
+            LoginManager.getInstance().logInWithReadPermissions(activity, callbackManager, listOf("email", "public_profile"))
+        }
     )
 }
 
 @Composable
 private fun LoginScreenContent(
     state: AuthUiState,
-    onUsernameChange: (String) -> Unit,
+    onIdentifierChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
-    onClearUsername: () -> Unit,
+    onClearIdentifier: () -> Unit,
     onTogglePassword: () -> Unit,
     onForgotPassword: () -> Unit,
     onPrimaryAction: () -> Unit,
@@ -219,13 +268,13 @@ private fun LoginScreenContent(
                                     )
 
                                 AuthPillField(
-                                    value = state.username,
+                                    value = state.loginIdentifier,
                                     placeholder = "Email or username",
-                                    onValueChange = onUsernameChange,
+                                    onValueChange = onIdentifierChange,
                                     enabled = !state.isLoading,
                                     trailing = {
-                                        if (state.username.isNotBlank()) {
-                                            IconButton(onClick = onClearUsername) {
+                                        if (state.loginIdentifier.isNotBlank()) {
+                                            IconButton(onClick = onClearIdentifier) {
                                                 Icon(
                                                     Icons.Default.Close,
                                                     contentDescription = "Clear username",
@@ -237,12 +286,12 @@ private fun LoginScreenContent(
                                 )
                                 Spacer(Modifier.height(14.dp))
                                 AuthPillField(
-                                    value = state.password,
+                                    value = state.loginPassword,
                                     placeholder = "Password",
                                     onValueChange = onPasswordChange,
                                     enabled = !state.isLoading,
                                     isPassword = true,
-                                    isPasswordVisible = state.isPasswordVisible,
+                                    isPasswordVisible = state.isLoginPasswordVisible,
                                     onTogglePassword = onTogglePassword
                                 )
 
@@ -306,11 +355,14 @@ private fun LoginScreenContent(
                                     )
                                 }
 
-                                Spacer(Modifier.height(18.dp))
-                                SocialLoginSection(
-                                    onGoogleLoginClick = onGoogleLoginClick,
-                                    onFacebookLoginClick = onFacebookLoginClick
+                                Spacer(Modifier.height(16.dp))
+                                SocialAuthRow(
+                                    onGoogleClick = onGoogleLoginClick,
+                                    onFacebookClick = onFacebookLoginClick,
+                                    enabled = !state.isLoading && state.socialLoadingProvider == null,
+                                    loadingProvider = state.socialLoadingProvider
                                 )
+
                                 }
                             }
                         }
@@ -330,108 +382,6 @@ private fun LoginScreenContent(
                     textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun SocialLoginSection(
-    onGoogleLoginClick: () -> Unit,
-    onFacebookLoginClick: () -> Unit
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .height(1.dp)
-                    .background(LoginFieldUnfocused.copy(alpha = 0.9f))
-            )
-            Text(
-                text = "Login with",
-                color = LoginTextSecondary,
-                style = MaterialTheme.typography.labelLarge,
-                modifier = Modifier.padding(horizontal = 10.dp)
-            )
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .height(1.dp)
-                    .background(LoginFieldUnfocused.copy(alpha = 0.9f))
-            )
-        }
-        Spacer(Modifier.height(12.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            SocialProviderButton(
-                modifier = Modifier.weight(1f),
-                label = "Google",
-                onClick = onGoogleLoginClick,
-                logo = {
-                    Text(
-                        text = "G",
-                        color = Color(0xFFB24C59),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            )
-            SocialProviderButton(
-                modifier = Modifier.weight(1f),
-                label = "Facebook",
-                onClick = onFacebookLoginClick,
-                logo = {
-                    Icon(
-                        imageVector = Icons.Outlined.Facebook,
-                        contentDescription = null,
-                        tint = Color(0xFF5F78AD)
-                    )
-                }
-            )
-        }
-    }
-}
-
-@Composable
-private fun SocialProviderButton(
-    modifier: Modifier = Modifier,
-    label: String,
-    onClick: () -> Unit,
-    logo: @Composable () -> Unit
-) {
-    Surface(
-        modifier = modifier
-            .height(46.dp)
-            .clip(RoundedCornerShape(18.dp))
-            .clickable(onClick = onClick),
-        color = Color(0xFFFDF7F4),
-        shape = RoundedCornerShape(18.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, LoginFieldUnfocused),
-        shadowElevation = 1.dp
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            logo()
-            Spacer(Modifier.width(6.dp))
-            Text(
-                text = label,
-                color = LoginTextPrimary,
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Medium
-            )
         }
     }
 }
@@ -500,40 +450,106 @@ private fun AuthPillField(
 fun RegisterScreen(
     onBack: () -> Unit,
     onSuccess: () -> Unit,
+    onOpenEula: () -> Unit,
+    onOpenTerms: () -> Unit,
     vm: AuthViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val activity = context.findActivity()
+    val googleServerClientId = BuildConfig.GOOGLE_SERVER_CLIENT_ID
+    val callbackManager = remember { CallbackManager.Factory.create() }
+
+    val googleLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        runCatching { task.result }.onSuccess { account ->
+            val idToken = account.idToken
+            if (idToken.isNullOrBlank()) vm.onSocialAuthError("Google sign-in did not return an ID token.")
+            else vm.socialLogin(provider = "google", idToken = idToken)
+        }.onFailure {
+            vm.onSocialAuthError(it.message ?: "Google sign-in failed.")
+        }
+    }
+
+    DisposableEffect(callbackManager) {
+        FacebookAuthBridge.setCallbackManager(callbackManager)
+        LoginManager.getInstance().registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onCancel() = vm.onSocialAuthError("Facebook sign-in was cancelled.")
+                override fun onError(error: FacebookException) {
+                    vm.onSocialAuthError(error.message ?: "Facebook sign-in failed.")
+                }
+
+                override fun onSuccess(result: LoginResult) {
+                    val token = result.accessToken?.token
+                    if (token.isNullOrBlank()) vm.onSocialAuthError("Facebook sign-in returned no access token.")
+                    else vm.socialLogin(provider = "facebook", accessToken = token)
+                }
+            }
+        )
+        onDispose {
+            FacebookAuthBridge.clearCallbackManager(callbackManager)
+        }
+    }
+
     if (state.isAuthenticated) onSuccess()
     RegisterScreenContent(
         state = state,
-        onEmailChange = vm::onUsernameChange,
-        onPasswordChange = vm::onPasswordChange,
-        onClearUsername = vm::clearUsername,
-        onTogglePassword = vm::togglePasswordVisibility,
+        onUsernameChange = vm::onSignupUsernameChange,
+        onEmailChange = vm::onSignupEmailChange,
+        onPasswordChange = vm::onSignupPasswordChange,
+        onConfirmPasswordChange = vm::onSignupConfirmPasswordChange,
+        onClearUsername = vm::clearSignupUsername,
+        onClearEmail = vm::clearSignupEmail,
+        onTogglePassword = vm::toggleSignupPasswordVisibility,
+        onToggleConfirmPassword = vm::toggleSignupConfirmPasswordVisibility,
+        onTermsChange = vm::toggleTermsAcceptance,
         onPrimaryAction = vm::register,
         onBack = onBack,
-        onGoogleLoginClick = { vm.socialLogin("Google") },
-        onFacebookLoginClick = { vm.socialLogin("Facebook") }
+        onOpenEula = onOpenEula,
+        onOpenTerms = onOpenTerms,
+        onGoogleLoginClick = {
+            if (googleServerClientId.isBlank()) {
+                vm.onSocialAuthError("Google sign-in is not configured.")
+                return@RegisterScreenContent
+            }
+            val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken(googleServerClientId)
+                .build()
+            googleLauncher.launch(GoogleSignIn.getClient(context, options).signInIntent)
+        },
+        onFacebookLoginClick = {
+            if (activity == null) {
+                vm.onSocialAuthError("Facebook sign-in requires an activity context.")
+                return@RegisterScreenContent
+            }
+            LoginManager.getInstance().logInWithReadPermissions(activity, callbackManager, listOf("email", "public_profile"))
+        }
     )
 }
 
 @Composable
 private fun RegisterScreenContent(
     state: AuthUiState,
+    onUsernameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
+    onConfirmPasswordChange: (String) -> Unit,
     onClearUsername: () -> Unit,
+    onClearEmail: () -> Unit,
     onTogglePassword: () -> Unit,
+    onToggleConfirmPassword: () -> Unit,
+    onTermsChange: () -> Unit,
     onPrimaryAction: () -> Unit,
     onBack: () -> Unit,
+    onOpenEula: () -> Unit,
+    onOpenTerms: () -> Unit,
     onGoogleLoginClick: () -> Unit,
     onFacebookLoginClick: () -> Unit
 ) {
-    var displayName by rememberSaveable { mutableStateOf("") }
-    var confirmPassword by rememberSaveable { mutableStateOf("") }
-    var isConfirmVisible by rememberSaveable { mutableStateOf(false) }
-    var localError by rememberSaveable { mutableStateOf<String?>(null) }
-    val signupError = state.errorMessage?.takeUnless { it.contains("not yet connected", ignoreCase = true) }
+    val signupError = state.errorMessage
 
     Box(
         modifier = Modifier
@@ -629,16 +645,13 @@ private fun RegisterScreenContent(
                                     )
 
                                     AuthPillField(
-                                        value = displayName,
+                                        value = state.signupUsername,
                                         placeholder = "Username",
                                         enabled = !state.isLoading,
-                                        onValueChange = {
-                                            displayName = it
-                                            localError = null
-                                        },
+                                        onValueChange = onUsernameChange,
                                         trailing = {
-                                            if (displayName.isNotBlank()) {
-                                                IconButton(onClick = { displayName = "" }) {
+                                            if (state.signupUsername.isNotBlank()) {
+                                                IconButton(onClick = onClearUsername) {
                                                     Icon(
                                                         Icons.Default.Close,
                                                         contentDescription = "Clear username",
@@ -650,16 +663,13 @@ private fun RegisterScreenContent(
                                     )
                                     Spacer(Modifier.height(14.dp))
                                     AuthPillField(
-                                        value = state.username,
+                                        value = state.signupEmail,
                                         placeholder = "Email",
                                         enabled = !state.isLoading,
-                                        onValueChange = {
-                                            onEmailChange(it)
-                                            localError = null
-                                        },
+                                        onValueChange = onEmailChange,
                                         trailing = {
-                                            if (state.username.isNotBlank()) {
-                                                IconButton(onClick = onClearUsername) {
+                                            if (state.signupEmail.isNotBlank()) {
+                                                IconButton(onClick = onClearEmail) {
                                                     Icon(
                                                         Icons.Default.Close,
                                                         contentDescription = "Clear email",
@@ -671,42 +681,59 @@ private fun RegisterScreenContent(
                                     )
                                     Spacer(Modifier.height(14.dp))
                                     AuthPillField(
-                                        value = state.password,
+                                        value = state.signupPassword,
                                         placeholder = "Password",
                                         enabled = !state.isLoading,
-                                        onValueChange = {
-                                            onPasswordChange(it)
-                                            localError = null
-                                        },
+                                        onValueChange = onPasswordChange,
                                         isPassword = true,
-                                        isPasswordVisible = state.isPasswordVisible,
+                                        isPasswordVisible = state.isSignupPasswordVisible,
                                         onTogglePassword = onTogglePassword
                                     )
                                     Spacer(Modifier.height(14.dp))
                                     AuthPillField(
-                                        value = confirmPassword,
+                                        value = state.signupConfirmPassword,
                                         placeholder = "Confirm password",
                                         enabled = !state.isLoading,
-                                        onValueChange = {
-                                            confirmPassword = it
-                                            localError = null
-                                        },
+                                        onValueChange = onConfirmPasswordChange,
                                         isPassword = true,
-                                        isPasswordVisible = isConfirmVisible,
-                                        onTogglePassword = { isConfirmVisible = !isConfirmVisible }
+                                        isPasswordVisible = state.isSignupConfirmPasswordVisible,
+                                        onTogglePassword = onToggleConfirmPassword
                                     )
 
                                     Spacer(Modifier.height(10.dp))
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable(enabled = !state.isLoading, onClick = onTermsChange),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Checkbox(
+                                            checked = state.hasAcceptedTerms,
+                                            onCheckedChange = { onTermsChange() },
+                                            enabled = !state.isLoading
+                                        )
+                                        Text(
+                                            text = "I agree to the EULA and Terms & Agreement.",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = LoginTextSecondary
+                                        )
+                                    }
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.End
+                                    ) {
+                                        TextButton(onClick = onOpenEula, enabled = !state.isLoading) {
+                                            Text("View EULA", color = LoginAccent)
+                                        }
+                                        TextButton(onClick = onOpenTerms, enabled = !state.isLoading) {
+                                            Text("View Terms", color = LoginAccent)
+                                        }
+                                    }
+
+                                    Spacer(Modifier.height(10.dp))
                                     Button(
-                                        onClick = {
-                                            localError = when {
-                                                displayName.isBlank() -> "Username is required."
-                                                confirmPassword != state.password -> "Passwords do not match."
-                                                else -> null
-                                            }
-                                            if (localError == null) onPrimaryAction()
-                                        },
-                                        enabled = !state.isLoading,
+                                        onClick = onPrimaryAction,
+                                        enabled = !state.isLoading && state.hasAcceptedTerms,
                                         shape = RoundedCornerShape(24.dp),
                                         colors = ButtonDefaults.buttonColors(
                                             containerColor = LoginAccent,
@@ -739,7 +766,7 @@ private fun RegisterScreenContent(
                                         }
                                     }
 
-                                    (localError ?: signupError)?.let {
+                                    signupError?.let {
                                         Text(
                                             text = it,
                                             style = MaterialTheme.typography.bodySmall,
@@ -749,11 +776,14 @@ private fun RegisterScreenContent(
                                         )
                                     }
 
-                                    Spacer(Modifier.height(18.dp))
-                                    SocialLoginSection(
-                                        onGoogleLoginClick = onGoogleLoginClick,
-                                        onFacebookLoginClick = onFacebookLoginClick
+                                    Spacer(Modifier.height(16.dp))
+                                    SocialAuthRow(
+                                        onGoogleClick = onGoogleLoginClick,
+                                        onFacebookClick = onFacebookLoginClick,
+                                        enabled = !state.isLoading && state.socialLoadingProvider == null,
+                                        loadingProvider = state.socialLoadingProvider
                                     )
+
                                 }
                             }
                         }
@@ -778,12 +808,48 @@ private fun RegisterScreenContent(
 }
 
 @Composable
+private fun SocialAuthRow(
+    onGoogleClick: () -> Unit,
+    onFacebookClick: () -> Unit,
+    enabled: Boolean,
+    loadingProvider: String?
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Button(
+            onClick = onGoogleClick,
+            enabled = enabled,
+            modifier = Modifier.weight(1f),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF3EEE9), contentColor = LoginTextPrimary)
+        ) {
+            if (loadingProvider == "google") CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
+            else Text("Google")
+        }
+        Button(
+            onClick = onFacebookClick,
+            enabled = enabled,
+            modifier = Modifier.weight(1f),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF3EEE9), contentColor = LoginTextPrimary)
+        ) {
+            if (loadingProvider == "facebook") CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
+            else {
+                Icon(Icons.Outlined.Facebook, contentDescription = null, tint = Color(0xFF3B5998))
+                Spacer(Modifier.size(6.dp))
+                Text("Facebook")
+            }
+        }
+    }
+}
+
+@Composable
 fun ForgotPasswordScreen(onBack: () -> Unit, vm: AuthViewModel = hiltViewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
     ForgotPasswordScreenContent(
         state = state,
-        onEmailChange = vm::onUsernameChange,
-        onClearUsername = vm::clearUsername,
+        onEmailChange = vm::onLoginIdentifierChange,
+        onClearUsername = vm::clearLoginIdentifier,
         onPrimaryAction = vm::forgotPassword,
         onBack = onBack
     )
@@ -895,12 +961,12 @@ private fun ForgotPasswordScreenContent(
                                     )
 
                                     AuthPillField(
-                                        value = state.username,
+                                        value = state.loginIdentifier,
                                         placeholder = "Email",
                                         onValueChange = onEmailChange,
                                         enabled = !state.isLoading,
                                         trailing = {
-                                            if (state.username.isNotBlank()) {
+                                            if (state.loginIdentifier.isNotBlank()) {
                                                 IconButton(onClick = onClearUsername) {
                                                     Icon(
                                                         Icons.Default.Close,
@@ -980,333 +1046,14 @@ private fun ForgotPasswordScreenContent(
     }
 }
 
-@Composable
-private fun AuthScreenContent(
-    state: AuthUiState,
-    title: String,
-    subtitle: String,
-    onUsernameChange: (String) -> Unit,
-    onPasswordChange: (String) -> Unit,
-    onClearUsername: () -> Unit,
-    onTogglePassword: () -> Unit,
-    onForgotPassword: () -> Unit,
-    onPrimaryAction: () -> Unit,
-    onGoogleClick: () -> Unit,
-    onFacebookClick: () -> Unit,
-    onPhoneClick: () -> Unit,
-    actionLabel: String,
-    footerAction: @Composable () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(brush = Brush.horizontalGradient(OuterGradient))
-            .padding(AuthSpacing)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(RoundedCornerShape(2.dp))
-                .background(SurfaceColor)
-                .padding(AuthSpacing)
-        ) {
-            TopOverlay(modifier = Modifier.align(Alignment.TopEnd))
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .border(4.dp, BorderPink, RoundedCornerShape(64.dp))
-                        .clip(RoundedCornerShape(64.dp))
-                        .background(SurfaceColor)
-                        .padding(horizontal = 20.dp, vertical = 24.dp)
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-                        LoginHeader()
-                        Spacer(Modifier.height(28.dp))
-                        GradientDivider()
-                        Spacer(Modifier.height(20.dp))
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clip(RoundedCornerShape(38.dp))
-                                .background(CardColor)
-                                .border(3.dp, BorderPink, RoundedCornerShape(38.dp))
-                                .shadow(8.dp, RoundedCornerShape(38.dp), clip = false)
-                                .padding(horizontal = 26.dp, vertical = 28.dp)
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text(
-                                    title,
-                                    style = TextStyle(
-                                        fontSize = 36.sp,
-                                        fontWeight = FontWeight.ExtraBold,
-                                        color = Color(0xFFFCE3F0),
-                                        shadow = androidx.compose.ui.graphics.Shadow(
-                                            color = BorderPink,
-                                            blurRadius = 2f
-                                        )
-                                    )
-                                )
-                                Text(
-                                    subtitle,
-                                    style = TextStyle(
-                                        fontSize = 28.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = AccentGold
-                                    )
-                                )
-                                Spacer(Modifier.height(26.dp))
-                                RoundedInputField(
-                                    value = state.username,
-                                    placeholder = "Username",
-                                    onValueChange = onUsernameChange,
-                                    trailing = {
-                                        IconButton(onClick = onClearUsername) {
-                                            Icon(Icons.Default.Close, contentDescription = "Clear username")
-                                        }
-                                    }
-                                )
-                                Spacer(Modifier.height(12.dp))
-                                PasswordInputField(
-                                    value = state.password,
-                                    isVisible = state.isPasswordVisible,
-                                    onValueChange = onPasswordChange,
-                                    onToggle = onTogglePassword
-                                )
-                                Text(
-                                    text = "Forgot Password?",
-                                    color = AccentGold,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier
-                                        .align(Alignment.Start)
-                                        .padding(start = 8.dp, top = 8.dp)
-                                        .clickable(onClick = onForgotPassword)
-                                )
-                                Spacer(Modifier.height(28.dp))
-                                LoginButton(
-                                    label = actionLabel,
-                                    isLoading = state.isLoading,
-                                    onClick = onPrimaryAction
-                                )
-                                state.errorMessage?.let {
-                                    Spacer(Modifier.height(10.dp))
-                                    Text(text = it, color = Color(0xFFB02645), textAlign = TextAlign.Center)
-                                }
-                                Spacer(Modifier.height(26.dp))
-                                GradientDivider("Login with")
-                                Spacer(Modifier.height(12.dp))
-                                SocialLoginRow(
-                                    onGoogleClick = onGoogleClick,
-                                    onFacebookClick = onFacebookClick,
-                                    onPhoneClick = onPhoneClick
-                                )
-                                Spacer(Modifier.height(12.dp))
-                                footerAction()
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun LoginHeader() {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            "Locapin",
-            style = TextStyle(
-                color = Color(0xFFE7B6C3),
-                fontSize = 68.sp,
-                fontWeight = FontWeight.ExtraBold,
-                shadow = androidx.compose.ui.graphics.Shadow(color = Color(0xFF6B3C50), blurRadius = 2f)
-            )
-        )
-        Text(
-            "A new chapter for San Juan exploration",
-            color = AccentGold,
-            style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun GradientDivider(text: String? = null) {
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(4.dp)
-                .clip(RoundedCornerShape(50))
-                .background(Brush.horizontalGradient(listOf(AccentPink, Color(0xFFFF8B8B), AccentOrange)))
-        )
-        if (text != null) {
-            Text(
-                text = text,
-                color = Color(0xFFFCE3F0),
-                style = TextStyle(fontWeight = FontWeight.ExtraBold, fontSize = 22.sp),
-                modifier = Modifier
-                    .background(CardColor)
-                    .padding(horizontal = 12.dp)
-            )
-        }
-    }
-}
-
-@Composable
-fun RoundedInputField(
-    value: String,
-    placeholder: String,
-    onValueChange: (String) -> Unit,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    trailing: @Composable () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(28.dp))
-            .background(InputColor)
-            .padding(start = 18.dp, end = 6.dp, top = 4.dp, bottom = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        BasicTextField(
-            value = value,
-            onValueChange = onValueChange,
-            singleLine = true,
-            visualTransformation = visualTransformation,
-            textStyle = TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFFD785A4)
-            ),
-            cursorBrush = SolidColor(BorderPink),
-            modifier = Modifier.weight(1f),
-            decorationBox = { inner ->
-                if (value.isBlank()) {
-                    Text(placeholder, color = Color(0xFFDDA4BA), fontWeight = FontWeight.Bold)
-                }
-                inner()
-            }
-        )
-        trailing()
-    }
-}
-
-@Composable
-fun PasswordInputField(
-    value: String,
-    isVisible: Boolean,
-    onValueChange: (String) -> Unit,
-    onToggle: () -> Unit
-) {
-    RoundedInputField(
-        value = value,
-        placeholder = "Password",
-        onValueChange = onValueChange,
-        visualTransformation = if (isVisible) VisualTransformation.None else PasswordVisualTransformation(),
-        trailing = {
-            IconButton(onClick = onToggle) {
-                Icon(
-                    if (isVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                    contentDescription = "Toggle password visibility"
-                )
-            }
-        }
-    )
-}
-
-@Composable
-fun LoginButton(label: String, isLoading: Boolean, onClick: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .width(190.dp)
-            .height(72.dp)
-            .shadow(10.dp, RoundedCornerShape(32.dp))
-            .clip(RoundedCornerShape(32.dp))
-            .background(Brush.horizontalGradient(listOf(Color(0xFFFF9AA0), Color(0xFFFFB57C))))
-            .clickable(
-                enabled = !isLoading,
-                interactionSource = MutableInteractionSource(),
-                indication = null
-            ) { onClick() },
-        contentAlignment = Alignment.Center
-    ) {
-        if (isLoading) CircularProgressIndicator(color = Color.White, modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
-        else Text(label, color = Color(0xFFF6E6F2), fontWeight = FontWeight.ExtraBold, fontSize = 22.sp)
-    }
-}
-
-@Composable
-fun SocialLoginRow(onGoogleClick: () -> Unit, onFacebookClick: () -> Unit, onPhoneClick: () -> Unit) {
-    Row(horizontalArrangement = Arrangement.spacedBy(24.dp), verticalAlignment = Alignment.CenterVertically) {
-        SocialCircle("G", Color(0xFF9B4BFF), onGoogleClick)
-        SocialCircle("f", Color(0xFF3559C7), onFacebookClick, icon = Icons.Outlined.Facebook)
-        SocialCircle("☎", Color(0xFF1A1A1A), onPhoneClick, icon = Icons.Default.Call)
-    }
-}
-
-@Composable
-private fun SocialCircle(text: String, tint: Color, onClick: () -> Unit, icon: androidx.compose.ui.graphics.vector.ImageVector? = null) {
-    Box(
-        modifier = Modifier
-            .size(54.dp)
-            .clip(CircleShape)
-            .background(Color.White)
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        if (icon != null) {
-            Icon(icon, contentDescription = text, tint = tint, modifier = Modifier.size(28.dp))
-        } else {
-            Text(text = text, color = tint, fontSize = 30.sp, fontWeight = FontWeight.ExtraBold)
-        }
-    }
-}
-
-@Composable
-fun TopOverlay(modifier: Modifier = Modifier) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Box(
-            modifier = Modifier
-                .size(62.dp)
-                .clip(RoundedCornerShape(6.dp))
-                .background(Color.White),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(Icons.Default.QrCode, contentDescription = "QR placeholder", tint = BorderPink)
-        }
-        Box(
-            modifier = Modifier
-                .size(62.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .background(Color(0xFFF7A2A4)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(Icons.Default.Map, contentDescription = "App icon placeholder", tint = Color.White)
-        }
-    }
-}
-
 @Preview(name = "Login - Pixel style", widthDp = 412, heightDp = 915, showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
     LoginScreenContent(
-        state = AuthUiState(username = "", password = ""),
-        onUsernameChange = {},
+        state = AuthUiState(loginIdentifier = "", loginPassword = ""),
+        onIdentifierChange = {},
         onPasswordChange = {},
-        onClearUsername = {},
+        onClearIdentifier = {},
         onTogglePassword = {},
         onForgotPassword = {},
         onPrimaryAction = {},
@@ -1314,6 +1061,12 @@ private fun LoginScreenPreview() {
         onGoogleLoginClick = {},
         onFacebookLoginClick = {}
     )
+}
+
+private tailrec fun Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }
 
 @Preview(name = "Login - Dark", widthDp = 412, heightDp = 915, showBackground = true, uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES)

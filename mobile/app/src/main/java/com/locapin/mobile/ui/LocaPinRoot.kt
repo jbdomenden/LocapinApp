@@ -29,6 +29,8 @@ import com.locapin.mobile.core.navigation.Routes
 import com.locapin.mobile.feature.auth.ForgotPasswordScreen
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.auth.RegisterScreen
+import com.locapin.mobile.feature.auth.EulaScreen
+import com.locapin.mobile.feature.auth.TermsScreen
 import com.locapin.mobile.feature.destination.DestinationDetailsScreen
 import com.locapin.mobile.feature.explore.ExploreScreen
 import com.locapin.mobile.feature.favorites.FavoritesScreen
@@ -52,28 +54,30 @@ fun LocaPinRoot(
     val state by vm.state.collectAsStateWithLifecycle()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    LaunchedEffect(state.loading, state.onboarded, state.authed) {
+    LaunchedEffect(state.loading, state.onboarded, state.authed, currentDestination?.route) {
         if (!state.loading) {
             val route = when {
                 !state.onboarded -> Routes.Onboarding
                 !state.authed -> Routes.Login
                 else -> Routes.Home
             }
-            
+
             val currentRoute = currentDestination?.route
-            if (currentRoute != route && 
-                currentRoute != Routes.Splash &&
-                currentRoute != Routes.Onboarding &&
-                currentRoute != Routes.Login &&
-                currentRoute != Routes.Register &&
-                currentRoute != Routes.ForgotPassword
-            ) {
-                 navController.navigate(route) {
-                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
-                }
-            } else if (currentRoute == Routes.Splash) {
+            if (currentRoute == Routes.Splash) {
                 navController.navigate(route) {
                     popUpTo(Routes.Splash) { inclusive = true }
+                }
+            } else if (currentRoute != route && route == Routes.Home) {
+                navController.navigate(route) {
+                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                }
+            } else if (
+                currentRoute != route &&
+                route != Routes.Home &&
+                currentRoute !in setOf(Routes.Register, Routes.ForgotPassword, Routes.Eula, Routes.Terms)
+            ) {
+                navController.navigate(route) {
+                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
                 }
             }
         }
@@ -135,9 +139,13 @@ fun LocaPinRoot(
             composable(Routes.Register) {
                 RegisterScreen(
                     onBack = { navController.popBackStack() },
-                    onSuccess = { navController.navigate(Routes.Home) }
+                    onSuccess = { navController.navigate(Routes.Home) },
+                    onOpenEula = { navController.navigate(Routes.Eula) },
+                    onOpenTerms = { navController.navigate(Routes.Terms) }
                 )
             }
+            composable(Routes.Eula) { EulaScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.Terms) { TermsScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.ForgotPassword) {
                 ForgotPasswordScreen(onBack = { navController.popBackStack() })
             }

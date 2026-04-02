@@ -5,6 +5,8 @@ object Routes {
     const val Onboarding = "onboarding"
     const val Login = "login"
     const val Register = "register"
+    const val Eula = "eula"
+    const val Terms = "terms"
     const val ForgotPassword = "forgot_password"
     const val Home = "home"
     const val Explore = "explore"
