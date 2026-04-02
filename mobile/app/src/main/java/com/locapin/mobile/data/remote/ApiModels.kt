@@ -11,7 +11,12 @@ data class ApiEnvelope<T>(
 )
 
 @Serializable
-data class AuthRequest(val email: String, val password: String)
+data class AuthRequest(
+    val identifier: String,
+    val password: String,
+    val email: String? = null,
+    val username: String? = null
+)
 
 @Serializable
 data class RegisterRequest(

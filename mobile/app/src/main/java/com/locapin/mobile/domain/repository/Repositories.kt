@@ -7,7 +7,7 @@ import com.locapin.mobile.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun login(email: String, password: String): LocaPinResult<Unit>
+    suspend fun login(identifier: String, password: String): LocaPinResult<Unit>
     suspend fun register(name: String, email: String, password: String): LocaPinResult<Unit>
     suspend fun forgotPassword(email: String): LocaPinResult<Unit>
     suspend fun logout()

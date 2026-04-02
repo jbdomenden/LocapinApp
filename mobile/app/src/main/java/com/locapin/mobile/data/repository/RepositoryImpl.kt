@@ -24,8 +24,18 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override val authToken: Flow<String?> = prefs.authToken
 
-    override suspend fun login(email: String, password: String): LocaPinResult<Unit> = runCatching {
-        api.login(AuthRequest(email, password)).data?.token
+    override suspend fun login(identifier: String, password: String): LocaPinResult<Unit> = runCatching {
+        val normalized = identifier.trim()
+        val email = normalized.takeIf { it.contains("@") }
+        val username = normalized.takeUnless { it.contains("@") }
+        api.login(
+            AuthRequest(
+                identifier = normalized,
+                password = password,
+                email = email,
+                username = username
+            )
+        ).data?.token
     }.fold(
         onSuccess = { token ->
             if (token.isNullOrBlank()) LocaPinResult.Error("Invalid login response")

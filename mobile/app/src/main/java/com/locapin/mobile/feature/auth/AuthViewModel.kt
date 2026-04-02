@@ -19,31 +19,67 @@ class AuthViewModel @Inject constructor(
     private val _state = MutableStateFlow(AuthUiState())
     val state: StateFlow<AuthUiState> = _state.asStateFlow()
 
-    fun onUsernameChange(value: String) {
-        _state.update { it.copy(username = value, errorMessage = null) }
+    fun onLoginIdentifierChange(value: String) {
+        _state.update { it.copy(loginIdentifier = value, errorMessage = null) }
     }
 
-    fun onPasswordChange(value: String) {
-        _state.update { it.copy(password = value, errorMessage = null) }
+    fun onLoginPasswordChange(value: String) {
+        _state.update { it.copy(loginPassword = value, errorMessage = null) }
     }
 
-    fun togglePasswordVisibility() {
-        _state.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
+    fun toggleLoginPasswordVisibility() {
+        _state.update { it.copy(isLoginPasswordVisible = !it.isLoginPasswordVisible) }
     }
 
-    fun clearUsername() {
-        _state.update { it.copy(username = "") }
+    fun clearLoginIdentifier() {
+        _state.update { it.copy(loginIdentifier = "") }
+    }
+
+    fun onSignupUsernameChange(value: String) {
+        _state.update { it.copy(signupUsername = value, errorMessage = null) }
+    }
+
+    fun clearSignupUsername() {
+        _state.update { it.copy(signupUsername = "", errorMessage = null) }
+    }
+
+    fun onSignupEmailChange(value: String) {
+        _state.update { it.copy(signupEmail = value, errorMessage = null) }
+    }
+
+    fun clearSignupEmail() {
+        _state.update { it.copy(signupEmail = "", errorMessage = null) }
+    }
+
+    fun onSignupPasswordChange(value: String) {
+        _state.update { it.copy(signupPassword = value, errorMessage = null) }
+    }
+
+    fun onSignupConfirmPasswordChange(value: String) {
+        _state.update { it.copy(signupConfirmPassword = value, errorMessage = null) }
+    }
+
+    fun toggleSignupPasswordVisibility() {
+        _state.update { it.copy(isSignupPasswordVisible = !it.isSignupPasswordVisible) }
+    }
+
+    fun toggleSignupConfirmPasswordVisibility() {
+        _state.update { it.copy(isSignupConfirmPasswordVisible = !it.isSignupConfirmPasswordVisible) }
+    }
+
+    fun toggleTermsAcceptance() {
+        _state.update { it.copy(hasAcceptedTerms = !it.hasAcceptedTerms, errorMessage = null) }
     }
 
     fun login() {
         val current = _state.value
-        if (current.username.isBlank() || current.password.isBlank()) {
-            _state.update { it.copy(errorMessage = "Email and password are required.") }
+        if (current.loginIdentifier.isBlank() || current.loginPassword.isBlank()) {
+            _state.update { it.copy(errorMessage = "Username/email and password are required.") }
             return
         }
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
-            val result = authRepository.login(current.username, current.password)
+            val result = authRepository.login(current.loginIdentifier.trim(), current.loginPassword)
             when (result) {
                 is LocaPinResult.Success -> {
                     _state.update { it.copy(isLoading = false, isAuthenticated = true) }
@@ -60,14 +96,18 @@ class AuthViewModel @Inject constructor(
 
     fun register() {
         val current = _state.value
-        if (current.username.isBlank() || current.password.isBlank()) {
-            _state.update { it.copy(errorMessage = "Email and password are required.") }
+        val validationError = validateSignup(current)
+        if (validationError != null) {
+            _state.update { it.copy(errorMessage = validationError) }
             return
         }
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
-            // Using username as both name and email for registration in this simple flow
-            val result = authRepository.register(current.username.split("@")[0], current.username, current.password)
+            val result = authRepository.register(
+                name = current.signupUsername.trim(),
+                email = current.signupEmail.trim(),
+                password = current.signupPassword
+            )
             when (result) {
                 is LocaPinResult.Success -> {
                     _state.update { it.copy(isLoading = false, isAuthenticated = true) }
@@ -83,7 +123,7 @@ class AuthViewModel @Inject constructor(
     }
 
     fun forgotPassword() {
-        val email = _state.value.username
+        val email = _state.value.loginIdentifier
         if (email.isBlank()) {
             _state.update { it.copy(errorMessage = "Please enter your email address.") }
             return
@@ -105,7 +145,20 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun socialLogin(provider: String) {
-        _state.update { it.copy(errorMessage = "$provider login is not yet connected.") }
+    private fun validateSignup(state: AuthUiState): String? {
+        val email = state.signupEmail.trim()
+        return when {
+            state.signupUsername.isBlank() -> "Username is required."
+            email.isBlank() -> "Email is required."
+            !EMAIL_REGEX.matches(email) -> "Please enter a valid email address."
+            state.signupPassword.length < 8 -> "Password must be at least 8 characters."
+            state.signupConfirmPassword != state.signupPassword -> "Passwords do not match."
+            !state.hasAcceptedTerms -> "You must accept the EULA and Terms & Agreement."
+            else -> null
+        }
+    }
+
+    private companion object {
+        val EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$".toRegex()
     }
 }
