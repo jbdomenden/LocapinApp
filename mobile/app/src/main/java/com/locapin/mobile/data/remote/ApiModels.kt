@@ -11,13 +11,25 @@ data class ApiEnvelope<T>(
 )
 
 @Serializable
-data class AuthRequest(val email: String, val password: String)
+data class AuthRequest(
+    val identifier: String,
+    val password: String,
+    val email: String? = null,
+    val username: String? = null
+)
 
 @Serializable
 data class RegisterRequest(
     val name: String,
     val email: String,
     val password: String
+)
+
+@Serializable
+data class SocialAuthRequest(
+    val provider: String,
+    @SerialName("id_token") val idToken: String? = null,
+    @SerialName("access_token") val accessToken: String? = null
 )
 
 @Serializable
