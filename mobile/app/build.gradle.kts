@@ -21,8 +21,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
 
-        val apiBaseUrl = (project.findProperty("LOCAPIN_API_BASE_URL") as? String)
-            ?: "https://example.com/"
+        val apiBaseUrl = (
+            project.findProperty("LOCAPIN_API_BASE_URL") as? String
+                ?: System.getenv("LOCAPIN_API_BASE_URL")
+                ?: "https://example.com/"
+            ).ensureTrailingSlash()
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
 
         val mapsKey = (project.findProperty("MAPS_API_KEY") as? String) ?: ""
@@ -53,6 +56,8 @@ android {
     }
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
 }
+
+fun String.ensureTrailingSlash(): String = if (endsWith("/")) this else "$this/"
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2025.01.01")
