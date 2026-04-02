@@ -170,9 +170,7 @@ private fun LoginScreenContent(
     onTogglePassword: () -> Unit,
     onForgotPassword: () -> Unit,
     onPrimaryAction: () -> Unit,
-    onRegister: () -> Unit,
-    onGoogleLoginClick: () -> Unit,
-    onFacebookLoginClick: () -> Unit
+    onRegister: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -1057,9 +1055,7 @@ private fun LoginScreenPreview() {
         onTogglePassword = {},
         onForgotPassword = {},
         onPrimaryAction = {},
-        onRegister = {},
-        onGoogleLoginClick = {},
-        onFacebookLoginClick = {}
+        onRegister = {}
     )
 }
 
