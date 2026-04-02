@@ -222,6 +222,7 @@ private fun LoginScreenContent(
                                     value = state.username,
                                     placeholder = "Email or username",
                                     onValueChange = onUsernameChange,
+                                    enabled = !state.isLoading,
                                     trailing = {
                                         if (state.username.isNotBlank()) {
                                             IconButton(onClick = onClearUsername) {
@@ -239,6 +240,7 @@ private fun LoginScreenContent(
                                     value = state.password,
                                     placeholder = "Password",
                                     onValueChange = onPasswordChange,
+                                    enabled = !state.isLoading,
                                     isPassword = true,
                                     isPasswordVisible = state.isPasswordVisible,
                                     onTogglePassword = onTogglePassword
@@ -439,6 +441,7 @@ private fun AuthPillField(
     value: String,
     placeholder: String,
     onValueChange: (String) -> Unit,
+    enabled: Boolean = true,
     isPassword: Boolean = false,
     isPasswordVisible: Boolean = false,
     onTogglePassword: (() -> Unit)? = null,
@@ -447,6 +450,7 @@ private fun AuthPillField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
+        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .height(62.dp),
@@ -627,6 +631,7 @@ private fun RegisterScreenContent(
                                     AuthPillField(
                                         value = displayName,
                                         placeholder = "Username",
+                                        enabled = !state.isLoading,
                                         onValueChange = {
                                             displayName = it
                                             localError = null
@@ -647,6 +652,7 @@ private fun RegisterScreenContent(
                                     AuthPillField(
                                         value = state.username,
                                         placeholder = "Email",
+                                        enabled = !state.isLoading,
                                         onValueChange = {
                                             onEmailChange(it)
                                             localError = null
@@ -667,6 +673,7 @@ private fun RegisterScreenContent(
                                     AuthPillField(
                                         value = state.password,
                                         placeholder = "Password",
+                                        enabled = !state.isLoading,
                                         onValueChange = {
                                             onPasswordChange(it)
                                             localError = null
@@ -679,6 +686,7 @@ private fun RegisterScreenContent(
                                     AuthPillField(
                                         value = confirmPassword,
                                         placeholder = "Confirm password",
+                                        enabled = !state.isLoading,
                                         onValueChange = {
                                             confirmPassword = it
                                             localError = null
@@ -772,32 +780,204 @@ private fun RegisterScreenContent(
 @Composable
 fun ForgotPasswordScreen(onBack: () -> Unit, vm: AuthViewModel = hiltViewModel()) {
     val state by vm.state.collectAsStateWithLifecycle()
-    AuthScreenContent(
+    ForgotPasswordScreenContent(
         state = state,
-        title = "Forgot Password",
-        subtitle = "Recover your account",
-        onUsernameChange = vm::onUsernameChange,
-        onPasswordChange = vm::onPasswordChange,
+        onEmailChange = vm::onUsernameChange,
         onClearUsername = vm::clearUsername,
-        onTogglePassword = vm::togglePasswordVisibility,
-        onForgotPassword = onBack,
         onPrimaryAction = vm::forgotPassword,
-        onGoogleClick = { vm.socialLogin("Google") },
-        onFacebookClick = { vm.socialLogin("Facebook") },
-        onPhoneClick = { vm.socialLogin("Phone") },
-        actionLabel = "Send Link",
-        footerAction = {
-            Text(
-                text = "Back",
-                color = BorderPink,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable(onClick = onBack)
-                    .padding(vertical = 6.dp, horizontal = 10.dp)
-            )
-        }
+        onBack = onBack
     )
+}
+
+@Composable
+private fun ForgotPasswordScreenContent(
+    state: AuthUiState,
+    onEmailChange: (String) -> Unit,
+    onClearUsername: () -> Unit,
+    onPrimaryAction: () -> Unit,
+    onBack: () -> Unit
+) {
+    val isSuccessMessage = state.errorMessage?.contains("reset link sent", ignoreCase = true) == true
+    val visibleMessage = state.errorMessage?.takeUnless { it.contains("not yet connected", ignoreCase = true) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(LoginBackground, Color(0xFFFFEFE8))
+                )
+            )
+            .imePadding()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp, vertical = 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxWidth(0.92f)
+                        .height(220.dp)
+                        .graphicsLayer(alpha = 0.45f)
+                        .background(
+                            Brush.radialGradient(
+                                colors = listOf(Color(0xFFFFDCE4), Color.Transparent)
+                            ),
+                            shape = RoundedCornerShape(44.dp)
+                        )
+                )
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = LoginFrame,
+                    shape = RoundedCornerShape(36.dp),
+                    shadowElevation = 10.dp
+                ) {
+                    Column(
+                        modifier = Modifier.padding(horizontal = 24.dp, vertical = 30.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "LocaPin",
+                            style = MaterialTheme.typography.displaySmall.copy(letterSpacing = 1.2.sp),
+                            color = LoginTextPrimary,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            text = "Discover your next San Juan moment.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LoginTextSecondary,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+
+                        Spacer(Modifier.height(24.dp))
+
+                        Surface(
+                            modifier = Modifier.fillMaxWidth(),
+                            color = LoginCardOuter,
+                            shape = RoundedCornerShape(32.dp),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, LoginCardBorder),
+                            shadowElevation = 12.dp
+                        ) {
+                            Surface(
+                                modifier = Modifier
+                                    .padding(1.dp)
+                                    .fillMaxWidth(),
+                                color = LoginCardInner,
+                                shape = RoundedCornerShape(31.dp),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0x26FFFFFF))
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = "Reset password",
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = LoginTextPrimary,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                    Text(
+                                        text = "Enter your email and we'll send a reset link.",
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = LoginTextSecondary,
+                                        textAlign = TextAlign.Center,
+                                        modifier = Modifier.padding(top = 4.dp, bottom = 18.dp)
+                                    )
+
+                                    AuthPillField(
+                                        value = state.username,
+                                        placeholder = "Email",
+                                        onValueChange = onEmailChange,
+                                        enabled = !state.isLoading,
+                                        trailing = {
+                                            if (state.username.isNotBlank()) {
+                                                IconButton(onClick = onClearUsername) {
+                                                    Icon(
+                                                        Icons.Default.Close,
+                                                        contentDescription = "Clear email",
+                                                        tint = LoginTextSecondary
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    )
+
+                                    Spacer(Modifier.height(14.dp))
+                                    Button(
+                                        onClick = onPrimaryAction,
+                                        enabled = !state.isLoading,
+                                        shape = RoundedCornerShape(24.dp),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = LoginAccent,
+                                            contentColor = Color(0xFFFFF7F3),
+                                            disabledContainerColor = LoginAccent.copy(alpha = 0.6f),
+                                            disabledContentColor = Color(0xFFFFF7F3).copy(alpha = 0.9f)
+                                        ),
+                                        elevation = ButtonDefaults.buttonElevation(
+                                            defaultElevation = 6.dp,
+                                            pressedElevation = 2.dp,
+                                            disabledElevation = 0.dp
+                                        ),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(56.dp)
+                                    ) {
+                                        if (state.isLoading) {
+                                            CircularProgressIndicator(
+                                                modifier = Modifier.size(20.dp),
+                                                color = Color(0xFFFFF7F3),
+                                                strokeWidth = 2.dp
+                                            )
+                                        } else {
+                                            Text(
+                                                text = "Send reset link",
+                                                color = Color(0xFFFFF7F3),
+                                                style = MaterialTheme.typography.titleMedium,
+                                                fontWeight = FontWeight.SemiBold
+                                            )
+                                        }
+                                    }
+
+                                    androidx.compose.animation.AnimatedVisibility(visible = visibleMessage != null) {
+                                        Text(
+                                            text = visibleMessage.orEmpty(),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = if (isSuccessMessage) Color(0xFF2E7D5B) else Color(0xFFAF3D4D),
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier.padding(top = 12.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            TextButton(
+                onClick = onBack,
+                modifier = Modifier.padding(top = 22.dp)
+            ) {
+                Text(
+                    text = "Back to login",
+                    color = LoginAccent,
+                    fontWeight = FontWeight.SemiBold,
+                    style = MaterialTheme.typography.titleSmall,
+                    textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline
+                )
+            }
+        }
+    }
 }
 
 @Composable
