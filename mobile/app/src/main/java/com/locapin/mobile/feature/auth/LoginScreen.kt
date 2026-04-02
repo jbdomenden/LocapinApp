@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,9 +30,15 @@ import androidx.compose.material.icons.outlined.Facebook
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -61,6 +68,17 @@ private val AccentGold = Color(0xFFC1882E)
 private val AccentPink = Color(0xFFFA2D9D)
 private val AccentOrange = Color(0xFFF6C846)
 private val InputColor = Color(0xFFF6F1EA)
+private val LoginBackground = Color(0xFFFFF7F1)
+private val LoginFrame = Color(0xFFF4D8DD)
+private val LoginCard = Color(0xFFFFF1EE)
+private val LoginCardBorder = Color(0xFFEAB9C5)
+private val LoginTextPrimary = Color(0xFF5E3948)
+private val LoginTextSecondary = Color(0xFF886474)
+private val LoginGold = Color(0xFFC58B42)
+private val LoginButtonRose = Color(0xFFD26F8A)
+private val LoginFieldBackground = Color(0xFFFFFBF8)
+private val LoginFieldFocused = Color(0xFFE8A7B8)
+private val LoginFieldUnfocused = Color(0xFFEFD6DC)
 
 @Composable
 fun LoginScreen(
@@ -71,10 +89,8 @@ fun LoginScreen(
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
     if (state.isAuthenticated) onSuccess()
-    AuthScreenContent(
+    LoginScreenContent(
         state = state,
-        title = "Login / Sign-Up",
-        subtitle = "Welcome Back!",
         onUsernameChange = vm::onUsernameChange,
         onPasswordChange = vm::onPasswordChange,
         onClearUsername = vm::clearUsername,
@@ -84,21 +100,224 @@ fun LoginScreen(
             onForgotPassword()
         },
         onPrimaryAction = vm::login,
-        onGoogleClick = { vm.socialLogin("Google") },
-        onFacebookClick = { vm.socialLogin("Facebook") },
-        onPhoneClick = { vm.socialLogin("Phone") },
-        actionLabel = "Login",
-        footerAction = {
+        onRegister = onRegister
+    )
+}
+
+@Composable
+private fun LoginScreenContent(
+    state: AuthUiState,
+    onUsernameChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onClearUsername: () -> Unit,
+    onTogglePassword: () -> Unit,
+    onForgotPassword: () -> Unit,
+    onPrimaryAction: () -> Unit,
+    onRegister: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(LoginBackground, Color(0xFFFFF0EC))
+                )
+            )
+            .imePadding()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp, vertical = 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = LoginFrame,
+                shape = RoundedCornerShape(36.dp),
+                shadowElevation = 4.dp
+            ) {
+                Column(
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 22.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "LocaPin",
+                        style = MaterialTheme.typography.headlineLarge,
+                        color = LoginTextPrimary,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                    Text(
+                        text = "Discover your next San Juan moment.",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = LoginGold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+
+                    Spacer(Modifier.height(18.dp))
+
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        color = LoginCard,
+                        shape = RoundedCornerShape(30.dp),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, LoginCardBorder),
+                        shadowElevation = 8.dp
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(horizontal = 18.dp, vertical = 20.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "Welcome back",
+                                style = MaterialTheme.typography.titleLarge,
+                                color = LoginTextPrimary,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Text(
+                                text = "Sign in to continue your exploration.",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = LoginTextSecondary,
+                                modifier = Modifier.padding(top = 2.dp, bottom = 14.dp)
+                            )
+
+                            AuthPillField(
+                                value = state.username,
+                                placeholder = "Email or username",
+                                onValueChange = onUsernameChange,
+                                trailing = {
+                                    if (state.username.isNotBlank()) {
+                                        IconButton(onClick = onClearUsername) {
+                                            Icon(Icons.Default.Close, contentDescription = "Clear username")
+                                        }
+                                    }
+                                }
+                            )
+                            Spacer(Modifier.height(10.dp))
+                            AuthPillField(
+                                value = state.password,
+                                placeholder = "Password",
+                                onValueChange = onPasswordChange,
+                                isPassword = true,
+                                isPasswordVisible = state.isPasswordVisible,
+                                onTogglePassword = onTogglePassword
+                            )
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 6.dp),
+                                horizontalArrangement = Arrangement.End
+                            ) {
+                                TextButton(onClick = onForgotPassword) {
+                                    Text("Forgot Password?", color = LoginGold)
+                                }
+                            }
+
+                            FilledTonalButton(
+                                onClick = onPrimaryAction,
+                                enabled = !state.isLoading,
+                                shape = RoundedCornerShape(24.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(52.dp)
+                            ) {
+                                if (state.isLoading) {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(20.dp),
+                                        color = LoginTextPrimary,
+                                        strokeWidth = 2.dp
+                                    )
+                                } else {
+                                    Text(
+                                        text = "Login",
+                                        color = LoginButtonRose,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                }
+                            }
+
+                            state.errorMessage?.let {
+                                Text(
+                                    text = it,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = Color(0xFFAF3D4D),
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(top = 10.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            TextButton(
+                onClick = onRegister,
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                Text(
+                    text = "Create account",
+                    color = LoginButtonRose,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+
             Text(
-                text = "Create account",
-                color = BorderPink,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable(onClick = onRegister)
-                    .padding(vertical = 6.dp, horizontal = 10.dp)
+                text = "More sign-in options are coming soon.",
+                style = MaterialTheme.typography.bodySmall,
+                color = LoginTextSecondary,
+                modifier = Modifier.padding(top = 4.dp)
             )
         }
+    }
+}
+
+@Composable
+private fun AuthPillField(
+    value: String,
+    placeholder: String,
+    onValueChange: (String) -> Unit,
+    isPassword: Boolean = false,
+    isPasswordVisible: Boolean = false,
+    onTogglePassword: (() -> Unit)? = null,
+    trailing: @Composable (() -> Unit)? = null
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(26.dp),
+        singleLine = true,
+        placeholder = {
+            Text(
+                text = placeholder,
+                color = LoginTextSecondary
+            )
+        },
+        textStyle = TextStyle(color = LoginTextPrimary),
+        visualTransformation = if (isPassword && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+        trailingIcon = {
+            when {
+                isPassword && onTogglePassword != null -> {
+                    IconButton(onClick = onTogglePassword) {
+                        Icon(
+                            if (isPasswordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
+                            contentDescription = "Toggle password visibility"
+                        )
+                    }
+                }
+                trailing != null -> trailing()
+            }
+        },
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = LoginFieldBackground,
+            unfocusedContainerColor = LoginFieldBackground,
+            disabledContainerColor = LoginFieldBackground,
+            focusedIndicatorColor = LoginFieldFocused,
+            unfocusedIndicatorColor = LoginFieldUnfocused,
+            cursorColor = LoginButtonRose
+        )
     )
 }
 
@@ -491,21 +710,15 @@ fun TopOverlay(modifier: Modifier = Modifier) {
 @Preview(name = "Login - Pixel style", widthDp = 412, heightDp = 915, showBackground = true)
 @Composable
 private fun LoginScreenPreview() {
-    AuthScreenContent(
+    LoginScreenContent(
         state = AuthUiState(username = "", password = ""),
-        title = "Login / Sign-Up",
-        subtitle = "Welcome Back!",
         onUsernameChange = {},
         onPasswordChange = {},
         onClearUsername = {},
         onTogglePassword = {},
         onForgotPassword = {},
         onPrimaryAction = {},
-        onGoogleClick = {},
-        onFacebookClick = {},
-        onPhoneClick = {},
-        actionLabel = "Login",
-        footerAction = {}
+        onRegister = {}
     )
 }
 
