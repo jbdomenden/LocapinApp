@@ -1,6 +1,7 @@
 package com.locapin.mobile
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import com.locapin.mobile.core.designsystem.theme.LocaPinTheme
+import com.locapin.mobile.feature.auth.FacebookAuthBridge
 import com.locapin.mobile.ui.LocaPinRoot
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,6 +43,14 @@ class MainActivity : ComponentActivity() {
                     }
                 )
             }
+        }
+    }
+
+    @Deprecated("Uses legacy callback dispatch required by Facebook SDK")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val handled = FacebookAuthBridge.handleActivityResult(requestCode, resultCode, data)
+        if (!handled) {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }

@@ -18,7 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,10 +27,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun MapScreen(
     hasLocationPermission: Boolean,
     requestPermission: () -> Unit ,
-    onDetails: (String) -> Unit,
     vm: SegmentedMapViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val state by vm.uiState.collectAsStateWithLifecycle()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showSheet by remember { mutableStateOf(false) }
@@ -56,15 +53,25 @@ fun MapScreen(
             selectedZoneId = state.selectedZoneId,
             visibleAttractions = state.visibleAttractions,
             selectedAttractionId = state.selectedAttractionId,
+            userLocation = state.userLocation,
+            navigationAttraction = state.navigationAttraction,
             onZoneTapped = {
                 vm.onZoneSelected(it)
-                showSheet = true
+                showSheet = false
             },
             onPinTapped = {
                 vm.onAttractionSelected(it)
                 showSheet = true
             }
         )
+
+        state.errorMessage?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.error
+            )
+        }
 
         if (!hasLocationPermission) {
             Button(onClick = requestPermission, modifier = Modifier.fillMaxWidth()) {
@@ -86,15 +93,13 @@ fun MapScreen(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Text(selectedAttraction.name, style = MaterialTheme.typography.titleLarge)
+                Text(selectedAttraction.description ?: "No description available.", style = MaterialTheme.typography.bodyMedium)
                 Text("Known For", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
                 Text(selectedAttraction.knownFor)
                 Text(vm.distanceTextFor(selectedAttraction), style = MaterialTheme.typography.bodyMedium)
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Button(onClick = { launchDirections(context, selectedAttraction, state.userLocation) }) {
-                        Text("Directions")
-                    }
-                    Button(onClick = { onDetails(selectedAttraction.id) }) {
-                        Text("Details")
+                    Button(onClick = { vm.onGoToAttraction(selectedAttraction.id) }) {
+                        Text("Go")
                     }
                     Button(onClick = vm::refreshLocation) {
                         Text("Refresh distance")
