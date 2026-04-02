@@ -448,6 +448,8 @@ private fun AuthPillField(
 fun RegisterScreen(
     onBack: () -> Unit,
     onSuccess: () -> Unit,
+    onOpenEula: () -> Unit,
+    onOpenTerms: () -> Unit,
     vm: AuthViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
@@ -503,6 +505,8 @@ fun RegisterScreen(
         onTermsChange = vm::toggleTermsAcceptance,
         onPrimaryAction = vm::register,
         onBack = onBack,
+        onOpenEula = onOpenEula,
+        onOpenTerms = onOpenTerms,
         onGoogleLoginClick = {
             if (googleServerClientId.isBlank()) {
                 vm.onSocialAuthError("Google sign-in is not configured.")
@@ -537,7 +541,11 @@ private fun RegisterScreenContent(
     onToggleConfirmPassword: () -> Unit,
     onTermsChange: () -> Unit,
     onPrimaryAction: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onOpenEula: () -> Unit,
+    onOpenTerms: () -> Unit,
+    onGoogleLoginClick: () -> Unit,
+    onFacebookLoginClick: () -> Unit
 ) {
     val signupError = state.errorMessage
 
@@ -703,10 +711,21 @@ private fun RegisterScreenContent(
                                             enabled = !state.isLoading
                                         )
                                         Text(
-                                            text = "I accept the EULA and Terms & Agreement.",
+                                            text = "I agree to the EULA and Terms & Agreement.",
                                             style = MaterialTheme.typography.bodySmall,
                                             color = LoginTextSecondary
                                         )
+                                    }
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.End
+                                    ) {
+                                        TextButton(onClick = onOpenEula, enabled = !state.isLoading) {
+                                            Text("View EULA", color = LoginAccent)
+                                        }
+                                        TextButton(onClick = onOpenTerms, enabled = !state.isLoading) {
+                                            Text("View Terms", color = LoginAccent)
+                                        }
                                     }
 
                                     Spacer(Modifier.height(10.dp))

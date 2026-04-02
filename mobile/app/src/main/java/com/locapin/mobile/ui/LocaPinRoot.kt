@@ -29,6 +29,8 @@ import com.locapin.mobile.core.navigation.Routes
 import com.locapin.mobile.feature.auth.ForgotPasswordScreen
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.auth.RegisterScreen
+import com.locapin.mobile.feature.auth.EulaScreen
+import com.locapin.mobile.feature.auth.TermsScreen
 import com.locapin.mobile.feature.destination.DestinationDetailsScreen
 import com.locapin.mobile.feature.explore.ExploreScreen
 import com.locapin.mobile.feature.favorites.FavoritesScreen
@@ -69,7 +71,11 @@ fun LocaPinRoot(
                 navController.navigate(route) {
                     popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
                 }
-            } else if (currentRoute != route && route != Routes.Home) {
+            } else if (
+                currentRoute != route &&
+                route != Routes.Home &&
+                currentRoute !in setOf(Routes.Register, Routes.ForgotPassword, Routes.Eula, Routes.Terms)
+            ) {
                 navController.navigate(route) {
                     popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
                 }
@@ -133,9 +139,13 @@ fun LocaPinRoot(
             composable(Routes.Register) {
                 RegisterScreen(
                     onBack = { navController.popBackStack() },
-                    onSuccess = { navController.navigate(Routes.Home) }
+                    onSuccess = { navController.navigate(Routes.Home) },
+                    onOpenEula = { navController.navigate(Routes.Eula) },
+                    onOpenTerms = { navController.navigate(Routes.Terms) }
                 )
             }
+            composable(Routes.Eula) { EulaScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.Terms) { TermsScreen(onBack = { navController.popBackStack() }) }
             composable(Routes.ForgotPassword) {
                 ForgotPasswordScreen(onBack = { navController.popBackStack() })
             }
