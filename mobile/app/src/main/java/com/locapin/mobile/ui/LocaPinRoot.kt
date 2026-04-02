@@ -199,8 +199,7 @@ fun LocaPinRoot(
                 composable(Routes.Map) {
                     MapScreen(
                         hasLocationPermission = hasLocationPermission,
-                        requestPermission = requestLocationPermission,
-                        onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }
+                        requestPermission = requestLocationPermission
                     )
                 }
                 composable(Routes.History) { HistoryScreen() }

@@ -36,6 +36,7 @@ class SegmentedMapRepositoryImpl @Inject constructor(
             ZoneAttraction(
                 id = it.id,
                 name = it.name,
+                description = it.description,
                 knownFor = it.knownFor,
                 latitude = it.latitude,
                 longitude = it.longitude,
@@ -45,7 +46,7 @@ class SegmentedMapRepositoryImpl @Inject constructor(
             )
         }
     }.fold(
-        onSuccess = { LocaPinResult.Success(it ?: seedDataSource.attractions()) },
-        onFailure = { LocaPinResult.Success(seedDataSource.attractions()) }
+        onSuccess = { LocaPinResult.Success(it ?: emptyList()) },
+        onFailure = { LocaPinResult.Error(it.message ?: "Unable to load attractions from backend.") }
     )
 }

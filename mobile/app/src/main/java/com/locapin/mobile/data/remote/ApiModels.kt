@@ -98,6 +98,7 @@ data class MapZoneDto(
 data class MapAttractionDto(
     val id: String,
     val name: String,
+    val description: String? = null,
     val knownFor: String,
     val latitude: Double,
     val longitude: Double,

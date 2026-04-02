@@ -23,6 +23,7 @@ data class SegmentedMapUiState(
     val attractions: List<ZoneAttraction> = emptyList(),
     val selectedZoneId: String? = null,
     val selectedAttractionId: String? = null,
+    val navigationAttractionId: String? = null,
     val userLocation: Pair<Double, Double>? = null,
     val permissionState: MapPermissionState = MapPermissionState.UNKNOWN,
     val errorMessage: String? = null
@@ -32,6 +33,9 @@ data class SegmentedMapUiState(
 
     val selectedAttraction: ZoneAttraction?
         get() = visibleAttractions.firstOrNull { it.id == selectedAttractionId } ?: visibleAttractions.firstOrNull()
+
+    val navigationAttraction: ZoneAttraction?
+        get() = visibleAttractions.firstOrNull { it.id == navigationAttractionId }
 }
 
 @HiltViewModel
@@ -49,19 +53,38 @@ class SegmentedMapViewModel @Inject constructor(
     fun loadMapData() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)
-            val zones = (repository.getMapZones() as? LocaPinResult.Success)?.data.orEmpty()
-            val attractions = (repository.getZoneAttractions() as? LocaPinResult.Success)?.data.orEmpty()
-            _uiState.value = _uiState.value.copy(isLoading = false, zones = zones, attractions = attractions)
+            val zonesResult = repository.getMapZones()
+            val attractionsResult = repository.getZoneAttractions()
+            val zones = (zonesResult as? LocaPinResult.Success)?.data.orEmpty()
+            val attractions = (attractionsResult as? LocaPinResult.Success)?.data.orEmpty()
+            val error = listOfNotNull(
+                (zonesResult as? LocaPinResult.Error)?.message,
+                (attractionsResult as? LocaPinResult.Error)?.message
+            ).joinToString("\n").ifBlank { null }
+            _uiState.value = _uiState.value.copy(
+                isLoading = false,
+                zones = zones,
+                attractions = attractions,
+                errorMessage = error
+            )
         }
     }
 
     fun onZoneSelected(zoneId: String) {
         val firstAttraction = _uiState.value.attractions.firstOrNull { it.zoneId == zoneId }
-        _uiState.value = _uiState.value.copy(selectedZoneId = zoneId, selectedAttractionId = firstAttraction?.id)
+        _uiState.value = _uiState.value.copy(
+            selectedZoneId = zoneId,
+            selectedAttractionId = firstAttraction?.id,
+            navigationAttractionId = null
+        )
     }
 
     fun onAttractionSelected(attractionId: String) {
         _uiState.value = _uiState.value.copy(selectedAttractionId = attractionId)
+    }
+
+    fun onGoToAttraction(attractionId: String) {
+        _uiState.value = _uiState.value.copy(navigationAttractionId = attractionId)
     }
 
     fun onPermissionResult(granted: Boolean) {
