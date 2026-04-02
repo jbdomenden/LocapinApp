@@ -170,9 +170,7 @@ private fun LoginScreenContent(
     onTogglePassword: () -> Unit,
     onForgotPassword: () -> Unit,
     onPrimaryAction: () -> Unit,
-    onRegister: () -> Unit,
-    onGoogleLoginClick: () -> Unit,
-    onFacebookLoginClick: () -> Unit
+    onRegister: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -539,9 +537,7 @@ private fun RegisterScreenContent(
     onToggleConfirmPassword: () -> Unit,
     onTermsChange: () -> Unit,
     onPrimaryAction: () -> Unit,
-    onBack: () -> Unit,
-    onGoogleLoginClick: () -> Unit,
-    onFacebookLoginClick: () -> Unit
+    onBack: () -> Unit
 ) {
     val signupError = state.errorMessage
 
@@ -1040,9 +1036,7 @@ private fun LoginScreenPreview() {
         onTogglePassword = {},
         onForgotPassword = {},
         onPrimaryAction = {},
-        onRegister = {},
-        onGoogleLoginClick = {},
-        onFacebookLoginClick = {}
+        onRegister = {}
     )
 }
 
