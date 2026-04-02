@@ -24,22 +24,22 @@ import javax.inject.Provider;
     "deprecation"
 })
 public final class AuthViewModel_Factory implements Factory<AuthViewModel> {
-  private final Provider<AuthRepository> repoProvider;
+  private final Provider<AuthRepository> authRepositoryProvider;
 
-  public AuthViewModel_Factory(Provider<AuthRepository> repoProvider) {
-    this.repoProvider = repoProvider;
+  public AuthViewModel_Factory(Provider<AuthRepository> authRepositoryProvider) {
+    this.authRepositoryProvider = authRepositoryProvider;
   }
 
   @Override
   public AuthViewModel get() {
-    return newInstance(repoProvider.get());
+    return newInstance(authRepositoryProvider.get());
   }
 
-  public static AuthViewModel_Factory create(Provider<AuthRepository> repoProvider) {
-    return new AuthViewModel_Factory(repoProvider);
+  public static AuthViewModel_Factory create(Provider<AuthRepository> authRepositoryProvider) {
+    return new AuthViewModel_Factory(authRepositoryProvider);
   }
 
-  public static AuthViewModel newInstance(AuthRepository repo) {
-    return new AuthViewModel(repo);
+  public static AuthViewModel newInstance(AuthRepository authRepository) {
+    return new AuthViewModel(authRepository);
   }
 }

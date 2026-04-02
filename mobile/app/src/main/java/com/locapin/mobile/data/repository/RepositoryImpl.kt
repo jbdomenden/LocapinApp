@@ -89,7 +89,7 @@ class DestinationRepositoryImpl @Inject constructor(
     override suspend fun getDestinationDetail(id: String): LocaPinResult<Destination> = runCatching {
         api.destinationDetail(id).data?.toDomain()
     }.fold(
-        onSuccess = { it?.let(LocaPinResult::Success) ?: LocaPinResult.Error("Destination not found") },
+        onSuccess = { it?.let { data -> LocaPinResult.Success(data) } ?: LocaPinResult.Error("Destination not found") },
         onFailure = { LocaPinResult.Error(it.message ?: "Failed to load destination") }
     )
 
@@ -128,7 +128,7 @@ class ProfileRepositoryImpl @Inject constructor(
     override suspend fun getProfile(): LocaPinResult<User> = runCatching {
         api.profile().data?.toDomain()
     }.fold(
-        onSuccess = { it?.let(LocaPinResult::Success) ?: LocaPinResult.Error("Missing profile") },
+        onSuccess = { it?.let { data -> LocaPinResult.Success(data) } ?: LocaPinResult.Error("Missing profile") },
         onFailure = { LocaPinResult.Error(it.message ?: "Unable to load profile") }
     )
 }

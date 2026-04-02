@@ -1,5 +1,6 @@
 package com.locapin.mobile.ui
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Favorite
@@ -15,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -38,10 +40,14 @@ import com.locapin.mobile.feature.profile.ProfileScreen
 import com.locapin.mobile.feature.search.SearchScreen
 import com.locapin.mobile.feature.settings.SettingsScreen
 
-private data class BottomItem(val route: String, val label: String, val icon: androidx.compose.ui.graphics.vector.ImageVector)
+private data class BottomItem(val route: String, val label: String, val icon: ImageVector)
 
 @Composable
-fun LocaPinRoot(hasLocationPermission: Boolean, requestLocationPermission: () -> Unit, vm: MainViewModel = hiltViewModel()) {
+fun LocaPinRoot(
+    hasLocationPermission: Boolean,
+    requestLocationPermission: () -> Unit,
+    vm: MainViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
     val state by vm.state.collectAsStateWithLifecycle()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
@@ -53,13 +59,29 @@ fun LocaPinRoot(hasLocationPermission: Boolean, requestLocationPermission: () ->
                 !state.authed -> Routes.Login
                 else -> Routes.Home
             }
-            navController.navigate(route) {
-                popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+            
+            val currentRoute = currentDestination?.route
+            if (currentRoute != route && 
+                currentRoute != Routes.Splash &&
+                currentRoute != Routes.Onboarding &&
+                currentRoute != Routes.Login &&
+                currentRoute != Routes.Register &&
+                currentRoute != Routes.ForgotPassword
+            ) {
+                 navController.navigate(route) {
+                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                }
+            } else if (currentRoute == Routes.Splash) {
+                navController.navigate(route) {
+                    popUpTo(Routes.Splash) { inclusive = true }
+                }
             }
         }
     }
 
-    val showBottom = currentDestination?.route in setOf(Routes.Home, Routes.Explore, Routes.Map, Routes.Favorites, Routes.Profile)
+    val showBottom = currentDestination?.route in setOf(
+        Routes.Home, Routes.Explore, Routes.Map, Routes.Favorites, Routes.Profile
+    )
     val bottomItems = listOf(
         BottomItem(Routes.Home, "Home", Icons.Default.Home),
         BottomItem(Routes.Explore, "Explore", Icons.Default.Explore),
@@ -80,10 +102,10 @@ fun LocaPinRoot(hasLocationPermission: Boolean, requestLocationPermission: () ->
                                 navController.navigate(item.route) {
                                     launchSingleTop = true
                                     restoreState = true
-                                    popUpTo(Routes.Home) { saveState = true }
+                                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                                 }
                             },
-                            icon = { Icon(item.icon, item.label) },
+                            icon = { Icon(item.icon, contentDescription = item.label) },
                             label = { Text(item.label) }
                         )
                     }
@@ -91,7 +113,11 @@ fun LocaPinRoot(hasLocationPermission: Boolean, requestLocationPermission: () ->
             }
         }
     ) { padding ->
-        NavHost(navController = navController, startDestination = Routes.Splash) {
+        NavHost(
+            navController = navController,
+            startDestination = Routes.Splash,
+            modifier = Modifier.padding(padding)
+        ) {
             composable(Routes.Splash) { SplashScreen() }
             composable(Routes.Onboarding) {
                 OnboardingScreen(
@@ -107,12 +133,28 @@ fun LocaPinRoot(hasLocationPermission: Boolean, requestLocationPermission: () ->
                 )
             }
             composable(Routes.Register) {
-                RegisterScreen(onBack = { navController.popBackStack() }, onSuccess = { navController.navigate(Routes.Home) })
+                RegisterScreen(
+                    onBack = { navController.popBackStack() },
+                    onSuccess = { navController.navigate(Routes.Home) }
+                )
             }
-            composable(Routes.ForgotPassword) { ForgotPasswordScreen(onBack = { navController.popBackStack() }) }
+            composable(Routes.ForgotPassword) {
+                ForgotPasswordScreen(onBack = { navController.popBackStack() })
+            }
 
-            composable(Routes.Home) { HomeScreen(vm, onOpenMap = { navController.navigate(Routes.Map) }, onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }) }
-            composable(Routes.Explore) { ExploreScreen(vm, onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }) }
+            composable(Routes.Home) {
+                HomeScreen(
+                    vm,
+                    onOpenMap = { navController.navigate(Routes.Map) },
+                    onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }
+                )
+            }
+            composable(Routes.Explore) {
+                ExploreScreen(
+                    vm,
+                    onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }
+                )
+            }
             composable(Routes.Map) {
                 MapScreen(
                     hasLocationPermission = hasLocationPermission,
@@ -120,12 +162,27 @@ fun LocaPinRoot(hasLocationPermission: Boolean, requestLocationPermission: () ->
                     onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }
                 )
             }
-            composable(Routes.Favorites) { FavoritesScreen(vm, onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }) }
-            composable(Routes.Profile) { ProfileScreen(vm, onSettings = { navController.navigate(Routes.Settings) }) }
-            composable(Routes.Search) { SearchScreen(vm, onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }) }
+            composable(Routes.Favorites) {
+                FavoritesScreen(
+                    vm,
+                    onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }
+                )
+            }
+            composable(Routes.Profile) {
+                ProfileScreen(
+                    vm,
+                    onSettings = { navController.navigate(Routes.Settings) }
+                )
+            }
+            composable(Routes.Search) {
+                SearchScreen(
+                    vm,
+                    onDetails = { navController.navigate("${Routes.DestinationDetailsBase}/$it") }
+                )
+            }
             composable(Routes.Settings) { SettingsScreen() }
-            composable(Routes.DestinationDetails) {
-                val id = it.arguments?.getString("id").orEmpty()
+            composable(Routes.DestinationDetails) { backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id").orEmpty()
                 DestinationDetailsScreen(vm, destinationId = id, onBack = { navController.popBackStack() })
             }
         }

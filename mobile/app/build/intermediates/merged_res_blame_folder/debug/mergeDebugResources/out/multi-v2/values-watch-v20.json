@@ -4,7 +4,17 @@
             "outputFile": "com.locapin.mobile.app-mergeDebugResources-2:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\john.domenden\\.gradle\\caches\\9.3.0\\transforms\\d6f9f8a27c9e9898d4540fac0bdc8bd8\\workspace\\transformed\\appcompat-1.6.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\transforms-4\\5f2bd22935cce7cba0c077406a5ce008\\transformed\\core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,129,205,280,357,428,496,566",
+                        "endColumns": "73,75,74,76,70,67,69,67",
+                        "endOffsets": "124,200,275,352,423,491,561,629"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\transforms-4\\9fdb4d786064b17bc51265b16c183cc2\\transformed\\appcompat-1.6.1\\res\\values-watch-v20\\values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",
@@ -20,16 +30,6 @@
                         "endLines": "12,15,18",
                         "endColumns": "12,12,12",
                         "endOffsets": "788,959,1132"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.gradle\\caches\\9.3.0\\transforms\\504cb816934cbd4687e1298c375773e7\\workspace\\transformed\\core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,129,205,280,357,428,496,566",
-                        "endColumns": "73,75,74,76,70,67,69,67",
-                        "endOffsets": "124,200,275,352,423,491,561,629"
                     }
                 }
             ]
