@@ -52,28 +52,26 @@ fun LocaPinRoot(
     val state by vm.state.collectAsStateWithLifecycle()
     val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    LaunchedEffect(state.loading, state.onboarded, state.authed) {
+    LaunchedEffect(state.loading, state.onboarded, state.authed, currentDestination?.route) {
         if (!state.loading) {
             val route = when {
                 !state.onboarded -> Routes.Onboarding
                 !state.authed -> Routes.Login
                 else -> Routes.Home
             }
-            
+
             val currentRoute = currentDestination?.route
-            if (currentRoute != route && 
-                currentRoute != Routes.Splash &&
-                currentRoute != Routes.Onboarding &&
-                currentRoute != Routes.Login &&
-                currentRoute != Routes.Register &&
-                currentRoute != Routes.ForgotPassword
-            ) {
-                 navController.navigate(route) {
-                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
-                }
-            } else if (currentRoute == Routes.Splash) {
+            if (currentRoute == Routes.Splash) {
                 navController.navigate(route) {
                     popUpTo(Routes.Splash) { inclusive = true }
+                }
+            } else if (currentRoute != route && route == Routes.Home) {
+                navController.navigate(route) {
+                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                }
+            } else if (currentRoute != route && route != Routes.Home) {
+                navController.navigate(route) {
+                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
                 }
             }
         }
