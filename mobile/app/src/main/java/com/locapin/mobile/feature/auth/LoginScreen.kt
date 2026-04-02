@@ -42,6 +42,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -427,6 +430,115 @@ private fun SocialProviderButton(
                 style = MaterialTheme.typography.labelLarge,
                 fontWeight = FontWeight.Medium
             )
+        }
+    }
+}
+
+@Composable
+private fun AuthPillField(
+    value: String,
+    placeholder: String,
+    onValueChange: (String) -> Unit,
+    isPassword: Boolean = false,
+    isPasswordVisible: Boolean = false,
+    onTogglePassword: (() -> Unit)? = null,
+    trailing: @Composable (() -> Unit)? = null
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(62.dp),
+        shape = RoundedCornerShape(26.dp),
+        singleLine = true,
+        placeholder = {
+            Text(
+                text = placeholder,
+                color = LoginFieldPlaceholder,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        },
+        textStyle = TextStyle(
+            color = LoginTextPrimary,
+            fontWeight = FontWeight.Medium
+        ),
+        visualTransformation = if (isPassword && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
+        trailingIcon = {
+            when {
+                isPassword && onTogglePassword != null -> {
+                    IconButton(onClick = onTogglePassword) {
+                        Icon(
+                            if (isPasswordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
+                            contentDescription = "Toggle password visibility",
+                            tint = LoginTextSecondary
+                        )
+                    }
+                }
+                trailing != null -> trailing()
+            }
+        },
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = LoginFieldBackground,
+            unfocusedContainerColor = LoginFieldBackground,
+            disabledContainerColor = LoginFieldBackground,
+            focusedBorderColor = LoginFieldFocused,
+            unfocusedBorderColor = LoginFieldUnfocused,
+            focusedTrailingIconColor = LoginAccent,
+            unfocusedTrailingIconColor = LoginTextSecondary,
+            cursorColor = LoginAccent
+        ),
+        supportingText = {}
+    )
+}
+
+@Composable
+fun RegisterScreen(
+    onBack: () -> Unit,
+    onSuccess: () -> Unit,
+    vm: AuthViewModel = hiltViewModel()
+) {
+    val state by vm.state.collectAsStateWithLifecycle()
+    if (state.isAuthenticated) onSuccess()
+    RegisterScreenContent(
+        state = state,
+        onEmailChange = vm::onUsernameChange,
+        onPasswordChange = vm::onPasswordChange,
+        onClearUsername = vm::clearUsername,
+        onTogglePassword = vm::togglePasswordVisibility,
+        onPrimaryAction = vm::register,
+        onBack = onBack,
+        onGoogleLoginClick = { vm.socialLogin("Google") },
+        onFacebookLoginClick = { vm.socialLogin("Facebook") }
+    )
+}
+
+@Composable
+private fun RegisterScreenContent(
+    state: AuthUiState,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onClearUsername: () -> Unit,
+    onTogglePassword: () -> Unit,
+    onPrimaryAction: () -> Unit,
+    onBack: () -> Unit,
+    onGoogleLoginClick: () -> Unit,
+    onFacebookLoginClick: () -> Unit
+) {
+    var displayName by rememberSaveable { mutableStateOf("") }
+    var confirmPassword by rememberSaveable { mutableStateOf("") }
+    var isConfirmVisible by rememberSaveable { mutableStateOf(false) }
+    var localError by rememberSaveable { mutableStateOf<String?>(null) }
+    val signupError = state.errorMessage?.takeUnless { it.contains("not yet connected", ignoreCase = true) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(LoginBackground, Color(0xFFFFEFE8))
+                )
+            )
             .imePadding()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp, vertical = 24.dp),
@@ -500,103 +612,140 @@ private fun SocialProviderButton(
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        text = "Welcome back",
+                                        text = "Create account",
                                         style = MaterialTheme.typography.titleLarge,
                                         color = LoginTextPrimary,
                                         fontWeight = FontWeight.SemiBold
                                     )
                                     Text(
-                                        text = "Sign in to continue your exploration.",
+                                        text = "Join LocaPin and start exploring.",
                                         style = MaterialTheme.typography.bodyMedium,
                                         color = LoginTextSecondary,
                                         modifier = Modifier.padding(top = 4.dp, bottom = 18.dp)
                                     )
 
-                                AuthPillField(
-                                    value = state.username,
-                                    placeholder = "Email or username",
-                                    onValueChange = onUsernameChange,
-                                    trailing = {
-                                        if (state.username.isNotBlank()) {
-                                            IconButton(onClick = onClearUsername) {
-                                                Icon(
-                                                    Icons.Default.Close,
-                                                    contentDescription = "Clear username",
-                                                    tint = LoginTextSecondary
-                                                )
+                                    AuthPillField(
+                                        value = displayName,
+                                        placeholder = "Username",
+                                        onValueChange = {
+                                            displayName = it
+                                            localError = null
+                                        },
+                                        trailing = {
+                                            if (displayName.isNotBlank()) {
+                                                IconButton(onClick = { displayName = "" }) {
+                                                    Icon(
+                                                        Icons.Default.Close,
+                                                        contentDescription = "Clear username",
+                                                        tint = LoginTextSecondary
+                                                    )
+                                                }
                                             }
                                         }
-                                    }
-                                )
-                                Spacer(Modifier.height(14.dp))
-                                AuthPillField(
-                                    value = state.password,
-                                    placeholder = "Password",
-                                    onValueChange = onPasswordChange,
-                                    isPassword = true,
-                                    isPasswordVisible = state.isPasswordVisible,
-                                    onTogglePassword = onTogglePassword
-                                )
-
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(top = 8.dp),
-                                    horizontalArrangement = Arrangement.End
-                                ) {
-                                    TextButton(onClick = onForgotPassword) {
-                                        Text(
-                                            "Forgot Password?",
-                                            color = LoginAccent,
-                                            fontWeight = FontWeight.Medium
-                                        )
-                                    }
-                                }
-
-                                Button(
-                                    onClick = onPrimaryAction,
-                                    enabled = !state.isLoading,
-                                    shape = RoundedCornerShape(24.dp),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = LoginAccent,
-                                        contentColor = Color(0xFFFFF7F3),
-                                        disabledContainerColor = LoginAccent.copy(alpha = 0.6f),
-                                        disabledContentColor = Color(0xFFFFF7F3).copy(alpha = 0.9f)
-                                    ),
-                                    elevation = ButtonDefaults.buttonElevation(
-                                        defaultElevation = 6.dp,
-                                        pressedElevation = 2.dp,
-                                        disabledElevation = 0.dp
-                                    ),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(56.dp)
-                                ) {
-                                    if (state.isLoading) {
-                                        CircularProgressIndicator(
-                                            modifier = Modifier.size(20.dp),
-                                            color = Color(0xFFFFF7F3),
-                                            strokeWidth = 2.dp
-                                        )
-                                    } else {
-                                        Text(
-                                            text = "Login",
-                                            color = Color(0xFFFFF7F3),
-                                            style = MaterialTheme.typography.titleMedium,
-                                            fontWeight = FontWeight.SemiBold
-                                        )
-                                    }
-                                }
-
-                                state.errorMessage?.let {
-                                    Text(
-                                        text = it,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = Color(0xFFAF3D4D),
-                                        textAlign = TextAlign.Center,
-                                        modifier = Modifier.padding(top = 12.dp)
                                     )
-                                }
+                                    Spacer(Modifier.height(14.dp))
+                                    AuthPillField(
+                                        value = state.username,
+                                        placeholder = "Email",
+                                        onValueChange = {
+                                            onEmailChange(it)
+                                            localError = null
+                                        },
+                                        trailing = {
+                                            if (state.username.isNotBlank()) {
+                                                IconButton(onClick = onClearUsername) {
+                                                    Icon(
+                                                        Icons.Default.Close,
+                                                        contentDescription = "Clear email",
+                                                        tint = LoginTextSecondary
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    )
+                                    Spacer(Modifier.height(14.dp))
+                                    AuthPillField(
+                                        value = state.password,
+                                        placeholder = "Password",
+                                        onValueChange = {
+                                            onPasswordChange(it)
+                                            localError = null
+                                        },
+                                        isPassword = true,
+                                        isPasswordVisible = state.isPasswordVisible,
+                                        onTogglePassword = onTogglePassword
+                                    )
+                                    Spacer(Modifier.height(14.dp))
+                                    AuthPillField(
+                                        value = confirmPassword,
+                                        placeholder = "Confirm password",
+                                        onValueChange = {
+                                            confirmPassword = it
+                                            localError = null
+                                        },
+                                        isPassword = true,
+                                        isPasswordVisible = isConfirmVisible,
+                                        onTogglePassword = { isConfirmVisible = !isConfirmVisible }
+                                    )
+
+                                    Spacer(Modifier.height(10.dp))
+                                    Button(
+                                        onClick = {
+                                            localError = when {
+                                                displayName.isBlank() -> "Username is required."
+                                                confirmPassword != state.password -> "Passwords do not match."
+                                                else -> null
+                                            }
+                                            if (localError == null) onPrimaryAction()
+                                        },
+                                        enabled = !state.isLoading,
+                                        shape = RoundedCornerShape(24.dp),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = LoginAccent,
+                                            contentColor = Color(0xFFFFF7F3),
+                                            disabledContainerColor = LoginAccent.copy(alpha = 0.6f),
+                                            disabledContentColor = Color(0xFFFFF7F3).copy(alpha = 0.9f)
+                                        ),
+                                        elevation = ButtonDefaults.buttonElevation(
+                                            defaultElevation = 6.dp,
+                                            pressedElevation = 2.dp,
+                                            disabledElevation = 0.dp
+                                        ),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(56.dp)
+                                    ) {
+                                        if (state.isLoading) {
+                                            CircularProgressIndicator(
+                                                modifier = Modifier.size(20.dp),
+                                                color = Color(0xFFFFF7F3),
+                                                strokeWidth = 2.dp
+                                            )
+                                        } else {
+                                            Text(
+                                                text = "Sign Up",
+                                                color = Color(0xFFFFF7F3),
+                                                style = MaterialTheme.typography.titleMedium,
+                                                fontWeight = FontWeight.SemiBold
+                                            )
+                                        }
+                                    }
+
+                                    (localError ?: signupError)?.let {
+                                        Text(
+                                            text = it,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Color(0xFFAF3D4D),
+                                            textAlign = TextAlign.Center,
+                                            modifier = Modifier.padding(top = 12.dp)
+                                        )
+                                    }
+
+                                    Spacer(Modifier.height(18.dp))
+                                    SocialLoginSection(
+                                        onGoogleLoginClick = onGoogleLoginClick,
+                                        onFacebookLoginClick = onFacebookLoginClick
+                                    )
                                 }
                             }
                         }
@@ -605,11 +754,11 @@ private fun SocialProviderButton(
             }
 
             TextButton(
-                onClick = onRegister,
+                onClick = onBack,
                 modifier = Modifier.padding(top = 22.dp)
             ) {
                 Text(
-                    text = "Create account",
+                    text = "Back to login",
                     color = LoginAccent,
                     fontWeight = FontWeight.SemiBold,
                     style = MaterialTheme.typography.titleSmall,
@@ -618,100 +767,6 @@ private fun SocialProviderButton(
             }
         }
     }
-}
-
-@Composable
-private fun AuthPillField(
-    value: String,
-    placeholder: String,
-    onValueChange: (String) -> Unit,
-    isPassword: Boolean = false,
-    isPasswordVisible: Boolean = false,
-    onTogglePassword: (() -> Unit)? = null,
-    trailing: @Composable (() -> Unit)? = null
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(62.dp),
-        shape = RoundedCornerShape(26.dp),
-        singleLine = true,
-        placeholder = {
-            Text(
-                text = placeholder,
-                color = LoginFieldPlaceholder,
-                style = MaterialTheme.typography.bodyMedium
-            )
-        },
-        textStyle = TextStyle(
-            color = LoginTextPrimary,
-            fontWeight = FontWeight.Medium
-        ),
-        visualTransformation = if (isPassword && !isPasswordVisible) PasswordVisualTransformation() else VisualTransformation.None,
-        trailingIcon = {
-            when {
-                isPassword && onTogglePassword != null -> {
-                    IconButton(onClick = onTogglePassword) {
-                        Icon(
-                            if (isPasswordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
-                            contentDescription = "Toggle password visibility",
-                            tint = LoginTextSecondary
-                        )
-                    }
-                }
-                trailing != null -> trailing()
-            }
-        },
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedContainerColor = LoginFieldBackground,
-            unfocusedContainerColor = LoginFieldBackground,
-            disabledContainerColor = LoginFieldBackground,
-            focusedBorderColor = LoginFieldFocused,
-            unfocusedBorderColor = LoginFieldUnfocused,
-            focusedTrailingIconColor = LoginAccent,
-            unfocusedTrailingIconColor = LoginTextSecondary,
-            cursorColor = LoginAccent
-        ),
-        supportingText = {}
-    )
-}
-
-@Composable
-fun RegisterScreen(
-    onBack: () -> Unit,
-    onSuccess: () -> Unit,
-    vm: AuthViewModel = hiltViewModel()
-) {
-    val state by vm.state.collectAsStateWithLifecycle()
-    if (state.isAuthenticated) onSuccess()
-    AuthScreenContent(
-        state = state,
-        title = "Create Account",
-        subtitle = "Join LocaPin",
-        onUsernameChange = vm::onUsernameChange,
-        onPasswordChange = vm::onPasswordChange,
-        onClearUsername = vm::clearUsername,
-        onTogglePassword = vm::togglePasswordVisibility,
-        onForgotPassword = onBack,
-        onPrimaryAction = vm::register,
-        onGoogleClick = { vm.socialLogin("Google") },
-        onFacebookClick = { vm.socialLogin("Facebook") },
-        onPhoneClick = { vm.socialLogin("Phone") },
-        actionLabel = "Sign Up",
-        footerAction = {
-            Text(
-                text = "Back to login",
-                color = BorderPink,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable(onClick = onBack)
-                    .padding(vertical = 6.dp, horizontal = 10.dp)
-            )
-        }
-    )
 }
 
 @Composable
