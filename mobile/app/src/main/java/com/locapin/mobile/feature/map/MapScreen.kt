@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -40,6 +41,9 @@ fun MapScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         MapInstruction()
+        if (state.isLoading) {
+            CircularProgressIndicator()
+        }
         state.selectedZoneId?.let { zoneId ->
             Text(
                 text = state.zones.firstOrNull { it.id == zoneId }?.displayName ?: zoneId,
@@ -69,6 +73,13 @@ fun MapScreen(
                 text = it,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.error
+            )
+        }
+
+        if (!state.isLoading && state.selectedZoneId != null && state.visibleAttractions.isEmpty()) {
+            Text(
+                text = "No attractions currently available for this area.",
+                style = MaterialTheme.typography.bodySmall
             )
         }
 

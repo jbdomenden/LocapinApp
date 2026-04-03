@@ -43,6 +43,7 @@ import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 data class HistoryUiState(
+    val isLoading: Boolean = true,
     val items: List<VisitedAttraction> = emptyList(),
     val currentLocation: Pair<Double, Double>? = null
 )
@@ -58,7 +59,7 @@ class HistoryViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             historyRepository.history.collect { history ->
-                _uiState.update { it.copy(items = history) }
+                _uiState.update { it.copy(items = history, isLoading = false) }
             }
         }
     }
@@ -110,20 +111,31 @@ fun HistoryScreen(vm: HistoryViewModel = hiltViewModel()) {
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Text("Visited Attractions", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        if (state.items.isEmpty()) {
-            Text("No visits yet. Use the map and tap Go to add history entries.")
-        } else {
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(state.items, key = { it.id + it.visitedAtEpochMs }) { item ->
-                    Surface(
-                        tonalElevation = 2.dp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { selected = item }
-                    ) {
-                        Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(item.name, fontWeight = FontWeight.SemiBold)
-                            Text(item.knownFor, style = MaterialTheme.typography.bodySmall)
+        when {
+            state.isLoading -> {
+                Text("Loading history…", color = MaterialTheme.colorScheme.primary)
+            }
+            state.items.isEmpty() -> {
+                Surface(tonalElevation = 2.dp, modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        "No visits yet. Use the Map module and tap Go to record visited attractions.",
+                        modifier = Modifier.padding(14.dp)
+                    )
+                }
+            }
+            else -> {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    items(state.items, key = { it.id + it.visitedAtEpochMs }) { item ->
+                        Surface(
+                            tonalElevation = 2.dp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { selected = item }
+                        ) {
+                            Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                                Text(item.name, fontWeight = FontWeight.SemiBold)
+                                Text(item.knownFor, style = MaterialTheme.typography.bodySmall)
+                            }
                         }
                     }
                 }
