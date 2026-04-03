@@ -106,3 +106,9 @@ data class MapAttractionDto(
     val imageUrl: String? = null,
     val category: String? = null
 )
+
+@Serializable
+data class RoutePointDto(
+    val lat: Double,
+    val lng: Double
+)

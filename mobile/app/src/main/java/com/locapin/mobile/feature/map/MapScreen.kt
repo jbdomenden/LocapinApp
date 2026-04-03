@@ -55,6 +55,7 @@ fun MapScreen(
             selectedAttractionId = state.selectedAttractionId,
             userLocation = state.userLocation,
             navigationAttraction = state.navigationAttraction,
+            routePath = state.routePath,
             onZoneTapped = {
                 vm.onZoneSelected(it)
                 showSheet = false
@@ -100,6 +101,11 @@ fun MapScreen(
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     Button(onClick = { vm.onGoToAttraction(selectedAttraction.id) }) {
                         Text("Go")
+                    }
+                    if (!hasLocationPermission) {
+                        Button(onClick = requestPermission) {
+                            Text("Allow GPS")
+                        }
                     }
                     Button(onClick = vm::refreshLocation) {
                         Text("Refresh distance")

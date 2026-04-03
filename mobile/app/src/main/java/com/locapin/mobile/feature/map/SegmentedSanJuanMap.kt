@@ -30,6 +30,7 @@ fun SegmentedSanJuanMap(
     selectedAttractionId: String?,
     userLocation: Pair<Double, Double>?,
     navigationAttraction: ZoneAttraction?,
+    routePath: List<Pair<Double, Double>>,
     onZoneTapped: (String) -> Unit,
     onPinTapped: (String) -> Unit
 ) {
@@ -82,12 +83,9 @@ fun SegmentedSanJuanMap(
             )
         }
 
-        if (userLocation != null && navigationAttraction != null) {
+        if (userLocation != null && navigationAttraction != null && routePath.isNotEmpty()) {
             Polyline(
-                points = listOf(
-                    LatLng(userLocation.first, userLocation.second),
-                    LatLng(navigationAttraction.latitude, navigationAttraction.longitude)
-                ),
+                points = routePath.map { LatLng(it.first, it.second) },
                 color = MaterialTheme.colorScheme.primary,
                 width = 10f
             )

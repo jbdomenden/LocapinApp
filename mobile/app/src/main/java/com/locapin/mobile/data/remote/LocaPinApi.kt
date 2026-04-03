@@ -46,6 +46,14 @@ interface LocaPinApi {
     @GET("map/attractions")
     suspend fun mapAttractions(): ApiEnvelope<List<MapAttractionDto>>
 
+    @GET("map/route")
+    suspend fun mapRoute(
+        @Query("origin_lat") originLat: Double,
+        @Query("origin_lng") originLng: Double,
+        @Query("destination_lat") destinationLat: Double,
+        @Query("destination_lng") destinationLng: Double
+    ): ApiEnvelope<List<RoutePointDto>>
+
     @GET("favorites")
     suspend fun favorites(): ApiEnvelope<List<DestinationDto>>
 

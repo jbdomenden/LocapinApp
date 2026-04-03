@@ -49,4 +49,37 @@ class SegmentedMapRepositoryImpl @Inject constructor(
         onSuccess = { LocaPinResult.Success(it ?: emptyList()) },
         onFailure = { LocaPinResult.Error(it.message ?: "Unable to load attractions from backend.") }
     )
+
+    override suspend fun getRoutePath(
+        originLat: Double,
+        originLng: Double,
+        destinationLat: Double,
+        destinationLng: Double
+    ): LocaPinResult<List<Pair<Double, Double>>> = runCatching {
+        api.mapRoute(originLat, originLng, destinationLat, destinationLng).data?.map { it.lat to it.lng }
+    }.fold(
+        onSuccess = { points ->
+            val safePoints = points?.takeIf { it.size >= 2 }
+                ?: interpolateFallback(originLat, originLng, destinationLat, destinationLng)
+            LocaPinResult.Success(safePoints)
+        },
+        onFailure = {
+            LocaPinResult.Success(interpolateFallback(originLat, originLng, destinationLat, destinationLng))
+        }
+    )
+
+    private fun interpolateFallback(
+        originLat: Double,
+        originLng: Double,
+        destinationLat: Double,
+        destinationLng: Double,
+        steps: Int = 24
+    ): List<Pair<Double, Double>> {
+        return (0..steps).map { step ->
+            val fraction = step.toDouble() / steps.toDouble()
+            val lat = originLat + (destinationLat - originLat) * fraction
+            val lng = originLng + (destinationLng - originLng) * fraction
+            lat to lng
+        }
+    }
 }

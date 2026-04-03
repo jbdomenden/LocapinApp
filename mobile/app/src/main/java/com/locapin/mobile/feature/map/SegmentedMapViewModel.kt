@@ -24,6 +24,7 @@ data class SegmentedMapUiState(
     val selectedZoneId: String? = null,
     val selectedAttractionId: String? = null,
     val navigationAttractionId: String? = null,
+    val routePath: List<Pair<Double, Double>> = emptyList(),
     val userLocation: Pair<Double, Double>? = null,
     val permissionState: MapPermissionState = MapPermissionState.UNKNOWN,
     val errorMessage: String? = null
@@ -75,12 +76,44 @@ class SegmentedMapViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(
             selectedZoneId = zoneId,
             selectedAttractionId = firstAttraction?.id,
-            navigationAttractionId = null
+            navigationAttractionId = null,
+            routePath = emptyList(),
+            errorMessage = null
         )
     }
 
     fun onAttractionSelected(attractionId: String) {
-        _uiState.value = _uiState.value.copy(selectedAttractionId = attractionId)
+        _uiState.value = _uiState.value.copy(selectedAttractionId = attractionId, errorMessage = null)
+    }
+
+    fun onGoToAttraction(attractionId: String) {
+        val state = _uiState.value
+        if (state.permissionState != MapPermissionState.GRANTED) {
+            _uiState.value = state.copy(errorMessage = "Location permission is required for in-app navigation.")
+            return
+        }
+        viewModelScope.launch {
+            val attraction = state.visibleAttractions.firstOrNull { it.id == attractionId } ?: return@launch
+            val user = locationProvider.getLastKnownLocation()
+            if (user == null) {
+                _uiState.value = _uiState.value.copy(errorMessage = "Current GPS location unavailable.")
+                return@launch
+            }
+            val routeResult = repository.getRoutePath(
+                originLat = user.first,
+                originLng = user.second,
+                destinationLat = attraction.latitude,
+                destinationLng = attraction.longitude
+            )
+            val path = (routeResult as? LocaPinResult.Success)?.data.orEmpty()
+            val routeError = (routeResult as? LocaPinResult.Error)?.message
+            _uiState.value = _uiState.value.copy(
+                userLocation = user,
+                navigationAttractionId = attractionId,
+                routePath = path,
+                errorMessage = routeError
+            )
+        }
     }
 
     fun onGoToAttraction(attractionId: String) {
@@ -96,7 +129,24 @@ class SegmentedMapViewModel @Inject constructor(
 
     fun refreshLocation() {
         viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(userLocation = locationProvider.getLastKnownLocation())
+            val user = locationProvider.getLastKnownLocation()
+            _uiState.value = _uiState.value.copy(
+                userLocation = user,
+                errorMessage = if (user == null) "Current GPS location unavailable." else _uiState.value.errorMessage
+            )
+            val nav = _uiState.value.navigationAttraction
+            if (user != null && nav != null) {
+                val routeResult = repository.getRoutePath(
+                    originLat = user.first,
+                    originLng = user.second,
+                    destinationLat = nav.latitude,
+                    destinationLng = nav.longitude
+                )
+                _uiState.value = _uiState.value.copy(
+                    routePath = (routeResult as? LocaPinResult.Success)?.data.orEmpty(),
+                    errorMessage = (routeResult as? LocaPinResult.Error)?.message
+                )
+            }
         }
     }
 
