@@ -11,6 +11,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -30,6 +32,13 @@ class UserPreferencesDataStore @Inject constructor(
 
     val recentSearches: Flow<List<String>> = context.userPrefs.data.map {
         it[RECENT_SEARCHES_KEY]?.split("||")?.filter(String::isNotBlank) ?: emptyList()
+    }
+
+    val visitedAttractions: Flow<List<VisitedAttractionRecord>> = context.userPrefs.data.map { prefs ->
+        prefs[VISITED_ATTRACTIONS_KEY]
+            ?.takeIf { it.isNotBlank() }
+            ?.let { raw -> runCatching { json.decodeFromString<List<VisitedAttractionRecord>>(raw) }.getOrDefault(emptyList()) }
+            ?: emptyList()
     }
 
     suspend fun setOnboardingCompleted(completed: Boolean) {
@@ -61,9 +70,27 @@ class UserPreferencesDataStore @Inject constructor(
         }
     }
 
+    suspend fun saveVisitedAttractions(history: List<VisitedAttractionRecord>) {
+        context.userPrefs.edit { prefs ->
+            prefs[VISITED_ATTRACTIONS_KEY] = json.encodeToString(history)
+        }
+    }
+
+    @Serializable
+    data class VisitedAttractionRecord(
+        val id: String,
+        val name: String,
+        val description: String? = null,
+        val knownFor: String,
+        val latitude: Double,
+        val longitude: Double,
+        val visitedAtEpochMs: Long
+    )
+
     private companion object {
         val ONBOARDING_KEY: Preferences.Key<Boolean> = booleanPreferencesKey("onboarding_done")
         val TOKEN_KEY: Preferences.Key<String> = stringPreferencesKey("auth_token")
         val RECENT_SEARCHES_KEY: Preferences.Key<String> = stringPreferencesKey("recent_searches")
+        val VISITED_ATTRACTIONS_KEY: Preferences.Key<String> = stringPreferencesKey("visited_attractions")
     }
 }
