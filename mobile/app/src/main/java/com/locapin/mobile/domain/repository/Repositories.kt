@@ -3,11 +3,13 @@ package com.locapin.mobile.domain.repository
 import com.locapin.mobile.core.common.LocaPinResult
 import com.locapin.mobile.domain.model.Category
 import com.locapin.mobile.domain.model.Destination
+import com.locapin.mobile.domain.model.ZoneAttraction
 import com.locapin.mobile.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
-    suspend fun login(email: String, password: String): LocaPinResult<Unit>
+    suspend fun login(identifier: String, password: String): LocaPinResult<Unit>
+    suspend fun socialLogin(provider: String, idToken: String? = null, accessToken: String? = null): LocaPinResult<Unit>
     suspend fun register(name: String, email: String, password: String): LocaPinResult<Unit>
     suspend fun forgotPassword(email: String): LocaPinResult<Unit>
     suspend fun logout()
@@ -33,3 +35,18 @@ interface DestinationRepository {
 interface ProfileRepository {
     suspend fun getProfile(): LocaPinResult<User>
 }
+
+interface HistoryRepository {
+    val history: Flow<List<VisitedAttraction>>
+    suspend fun recordVisit(attraction: ZoneAttraction)
+}
+
+data class VisitedAttraction(
+    val id: String,
+    val name: String,
+    val description: String?,
+    val knownFor: String,
+    val latitude: Double,
+    val longitude: Double,
+    val visitedAtEpochMs: Long
+)

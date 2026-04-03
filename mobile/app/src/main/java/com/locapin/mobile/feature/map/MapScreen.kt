@@ -2,10 +2,10 @@ package com.locapin.mobile.feature.map
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -18,8 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
@@ -28,10 +26,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun MapScreen(
     hasLocationPermission: Boolean,
     requestPermission: () -> Unit ,
-    onDetails: (String) -> Unit,
     vm: SegmentedMapViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val state by vm.uiState.collectAsStateWithLifecycle()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showSheet by remember { mutableStateOf(false) }
@@ -45,6 +41,9 @@ fun MapScreen(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         MapInstruction()
+        if (state.isLoading) {
+            CircularProgressIndicator()
+        }
         state.selectedZoneId?.let { zoneId ->
             Text(
                 text = state.zones.firstOrNull { it.id == zoneId }?.displayName ?: zoneId,
@@ -56,15 +55,33 @@ fun MapScreen(
             selectedZoneId = state.selectedZoneId,
             visibleAttractions = state.visibleAttractions,
             selectedAttractionId = state.selectedAttractionId,
+            userLocation = state.userLocation,
+            navigationAttraction = state.navigationAttraction,
+            routePath = state.routePath,
             onZoneTapped = {
                 vm.onZoneSelected(it)
-                showSheet = true
+                showSheet = false
             },
             onPinTapped = {
                 vm.onAttractionSelected(it)
                 showSheet = true
             }
         )
+
+        state.errorMessage?.let {
+            Text(
+                text = it,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.error
+            )
+        }
+
+        if (!state.isLoading && state.selectedZoneId != null && state.visibleAttractions.isEmpty()) {
+            Text(
+                text = "No attractions currently available for this area.",
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
 
         if (!hasLocationPermission) {
             Button(onClick = requestPermission, modifier = Modifier.fillMaxWidth()) {
@@ -79,28 +96,16 @@ fun MapScreen(
             onDismissRequest = { showSheet = false },
             sheetState = sheetState
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                Text(selectedAttraction.name, style = MaterialTheme.typography.titleLarge)
-                Text("Known For", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                Text(selectedAttraction.knownFor)
-                Text(vm.distanceTextFor(selectedAttraction), style = MaterialTheme.typography.bodyMedium)
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Button(onClick = { launchDirections(context, selectedAttraction, state.userLocation) }) {
-                        Text("Directions")
-                    }
-                    Button(onClick = { onDetails(selectedAttraction.id) }) {
-                        Text("Details")
-                    }
-                    Button(onClick = vm::refreshLocation) {
-                        Text("Refresh distance")
-                    }
-                }
-            }
+            AttractionDetailSheetContent(
+                name = selectedAttraction.name,
+                description = selectedAttraction.description,
+                knownFor = selectedAttraction.knownFor,
+                distanceText = vm.distanceTextFor(selectedAttraction),
+                onGo = { vm.onGoToAttraction(selectedAttraction.id) },
+                onRefreshDistance = vm::refreshLocation,
+                showPermissionAction = !hasLocationPermission,
+                onRequestPermission = requestPermission
+            )
         }
     }
 }

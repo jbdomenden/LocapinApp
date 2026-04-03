@@ -16,6 +16,7 @@ data class MapZone(
 data class ZoneAttraction(
     val id: String,
     val name: String,
+    val description: String? = null,
     val knownFor: String,
     val latitude: Double,
     val longitude: Double,
