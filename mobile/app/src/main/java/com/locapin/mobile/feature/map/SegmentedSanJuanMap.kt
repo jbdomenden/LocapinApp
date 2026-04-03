@@ -15,6 +15,7 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.Polygon
+import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.locapin.mobile.domain.model.MapZone
 import com.locapin.mobile.domain.model.ZoneAttraction
@@ -27,6 +28,9 @@ fun SegmentedSanJuanMap(
     selectedZoneId: String?,
     visibleAttractions: List<ZoneAttraction>,
     selectedAttractionId: String?,
+    userLocation: Pair<Double, Double>?,
+    navigationAttraction: ZoneAttraction?,
+    routePath: List<Pair<Double, Double>>,
     onZoneTapped: (String) -> Unit,
     onPinTapped: (String) -> Unit
 ) {
@@ -69,6 +73,21 @@ fun SegmentedSanJuanMap(
                     onPinTapped(attraction.id)
                     true
                 }
+            )
+        }
+
+        userLocation?.let { user ->
+            Marker(
+                state = MarkerState(position = LatLng(user.first, user.second)),
+                title = "You are here"
+            )
+        }
+
+        if (userLocation != null && navigationAttraction != null && routePath.isNotEmpty()) {
+            Polyline(
+                points = routePath.map { LatLng(it.first, it.second) },
+                color = MaterialTheme.colorScheme.primary,
+                width = 10f
             )
         }
     }
