@@ -95,11 +95,6 @@ fun DashboardScreen(
 }
 
 @Composable
-fun HistoryScreen() {
-    CenterModuleText(title = "History", body = "Your visited attractions will appear here.")
-}
-
-@Composable
 fun HelpScreen() {
     CenterModuleText(title = "Help", body = "Read quick guides and FAQs for using LocaPin.")
 }

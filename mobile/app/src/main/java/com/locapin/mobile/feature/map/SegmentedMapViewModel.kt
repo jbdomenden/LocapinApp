@@ -6,6 +6,7 @@ import com.locapin.mobile.core.common.LocaPinResult
 import com.locapin.mobile.core.location.LocationProvider
 import com.locapin.mobile.domain.model.MapZone
 import com.locapin.mobile.domain.model.ZoneAttraction
+import com.locapin.mobile.domain.repository.HistoryRepository
 import com.locapin.mobile.domain.repository.SegmentedMapRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -42,7 +43,8 @@ data class SegmentedMapUiState(
 @HiltViewModel
 class SegmentedMapViewModel @Inject constructor(
     private val repository: SegmentedMapRepository,
-    private val locationProvider: LocationProvider
+    private val locationProvider: LocationProvider,
+    private val historyRepository: HistoryRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SegmentedMapUiState())
     val uiState: StateFlow<SegmentedMapUiState> = _uiState.asStateFlow()
@@ -94,6 +96,7 @@ class SegmentedMapViewModel @Inject constructor(
         }
         viewModelScope.launch {
             val attraction = state.visibleAttractions.firstOrNull { it.id == attractionId } ?: return@launch
+            historyRepository.recordVisit(attraction)
             val user = locationProvider.getLastKnownLocation()
             if (user == null) {
                 _uiState.value = _uiState.value.copy(errorMessage = "Current GPS location unavailable.")
@@ -114,10 +117,6 @@ class SegmentedMapViewModel @Inject constructor(
                 errorMessage = routeError
             )
         }
-    }
-
-    fun onGoToAttraction(attractionId: String) {
-        _uiState.value = _uiState.value.copy(navigationAttractionId = attractionId)
     }
 
     fun onPermissionResult(granted: Boolean) {
