@@ -116,6 +116,10 @@ class SegmentedMapViewModel @Inject constructor(
         }
     }
 
+    fun onGoToAttraction(attractionId: String) {
+        _uiState.value = _uiState.value.copy(navigationAttractionId = attractionId)
+    }
+
     fun onPermissionResult(granted: Boolean) {
         _uiState.value = _uiState.value.copy(
             permissionState = if (granted) MapPermissionState.GRANTED else MapPermissionState.DENIED
