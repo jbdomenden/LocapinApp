@@ -47,7 +47,7 @@ fun LoginScreen(
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
     onRoleResolved: (UserRole) -> Unit,
-    vm: AuthViewModel = hiltViewModel()
+    vm: LoginViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
 
@@ -72,7 +72,7 @@ fun LoginScreen(
                 style = MaterialTheme.typography.headlineSmall
             )
             Text(
-                text = "Sign in once and the app routes you by role.",
+                text = "Sign in with your account to continue.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -82,6 +82,7 @@ fun LoginScreen(
                 onValueChange = vm::onEmailChange,
                 label = { Text("Email") },
                 singleLine = true,
+                enabled = !state.isLoading,
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
@@ -89,9 +90,10 @@ fun LoginScreen(
                 onValueChange = vm::onPasswordChange,
                 label = { Text("Password") },
                 singleLine = true,
+                enabled = !state.isLoading,
                 visualTransformation = if (state.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    IconButton(onClick = vm::togglePasswordVisibility) {
+                    IconButton(onClick = vm::togglePasswordVisibility, enabled = !state.isLoading) {
                         Icon(
                             imageVector = if (state.isPasswordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
                             contentDescription = "Toggle password visibility"
@@ -118,8 +120,8 @@ fun LoginScreen(
             }
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                TextButton(onClick = onForgotPassword) { Text("Forgot Password") }
-                TextButton(onClick = onSignUp) { Text("Sign Up") }
+                TextButton(onClick = onForgotPassword, enabled = !state.isLoading) { Text("Forgot Password") }
+                TextButton(onClick = onSignUp, enabled = !state.isLoading) { Text("Sign Up") }
             }
 
             Divider(modifier = Modifier.padding(vertical = 8.dp))
@@ -129,20 +131,26 @@ fun LoginScreen(
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Quick Test Accounts", style = MaterialTheme.typography.titleMedium)
-                    Text("Development-only helper", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Test Accounts", style = MaterialTheme.typography.titleMedium)
+                    Text(
+                        "Development helper",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
 
                     QuickAccountRow(
-                        label = "ADMIN",
+                        label = "Admin",
                         email = "admin@locapin.app",
-                        password = "Admin123!",
-                        onUse = { vm.applyQuickAccount(UserRole.ADMIN) }
+                        password = " / Admin123!",
+                        onUse = { vm.applyQuickAccount(UserRole.ADMIN) },
+                        enabled = !state.isLoading
                     )
                     QuickAccountRow(
-                        label = "TOURIST",
+                        label = "Tourist",
                         email = "tourist@locapin.app",
-                        password = "Tourist123!",
-                        onUse = { vm.applyQuickAccount(UserRole.TOURIST) }
+                        password = " / Tourist123!",
+                        onUse = { vm.applyQuickAccount(UserRole.TOURIST) },
+                        enabled = !state.isLoading
                     )
                 }
             }
@@ -156,7 +164,8 @@ private fun QuickAccountRow(
     label: String,
     email: String,
     password: String,
-    onUse: () -> Unit
+    onUse: () -> Unit,
+    enabled: Boolean
 ) {
     Row(
         modifier = Modifier
@@ -171,6 +180,6 @@ private fun QuickAccountRow(
             Text(email, style = MaterialTheme.typography.bodySmall)
             Text(password, style = MaterialTheme.typography.bodySmall)
         }
-        TextButton(onClick = onUse) { Text("Use") }
+        TextButton(onClick = onUse, enabled = enabled) { Text("Use") }
     }
 }

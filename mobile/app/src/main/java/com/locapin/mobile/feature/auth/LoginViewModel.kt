@@ -14,9 +14,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(
+class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
+
     private val _state = MutableStateFlow(AuthUiState())
     val state: StateFlow<AuthUiState> = _state.asStateFlow()
 
@@ -34,8 +35,12 @@ class AuthViewModel @Inject constructor(
 
     fun applyQuickAccount(role: UserRole) {
         when (role) {
-            UserRole.ADMIN -> _state.update { it.copy(email = "admin@locapin.app", password = "Admin123!", errorMessage = null) }
-            UserRole.TOURIST -> _state.update { it.copy(email = "tourist@locapin.app", password = "Tourist123!", errorMessage = null) }
+            UserRole.ADMIN -> _state.update {
+                it.copy(email = "admin@locapin.app", password = "Admin123!", errorMessage = null)
+            }
+            UserRole.TOURIST -> _state.update {
+                it.copy(email = "tourist@locapin.app", password = "Tourist123!", errorMessage = null)
+            }
         }
     }
 
@@ -45,30 +50,39 @@ class AuthViewModel @Inject constructor(
 
     fun login() {
         val current = _state.value
-        if (current.email.isBlank() || current.password.isBlank()) {
+        if (current.isLoading) return
+
+        val trimmedEmail = current.email.trim()
+        if (trimmedEmail.isBlank() || current.password.isBlank()) {
             _state.update { it.copy(errorMessage = "Email and password are required.") }
             return
         }
 
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
-            when (val result = authRepository.login(current.email.trim(), current.password)) {
+
+            when (val result = authRepository.login(trimmedEmail, current.password)) {
                 is LocaPinResult.Success -> {
                     _state.update {
                         it.copy(
+                            email = trimmedEmail,
                             isLoading = false,
                             errorMessage = null,
                             loggedInRole = result.data.role
                         )
                     }
                 }
-
                 is LocaPinResult.Error -> {
-                    _state.update { it.copy(isLoading = false, errorMessage = result.message) }
+                    _state.update {
+                        it.copy(
+                            email = trimmedEmail,
+                            isLoading = false,
+                            errorMessage = result.message
+                        )
+                    }
                 }
-
                 LocaPinResult.Loading -> {
-                    _state.update { it.copy(isLoading = true) }
+                    _state.update { it.copy(email = trimmedEmail, isLoading = true) }
                 }
             }
         }
