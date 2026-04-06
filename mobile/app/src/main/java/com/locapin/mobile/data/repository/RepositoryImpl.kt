@@ -1,105 +1,15 @@
 package com.locapin.mobile.data.repository
 
 import com.locapin.mobile.core.common.LocaPinResult
-import com.locapin.mobile.core.datastore.UserPreferencesDataStore
 import com.locapin.mobile.data.local.InMemoryCache
-import com.locapin.mobile.data.remote.AuthRequest
-import com.locapin.mobile.data.remote.ForgotPasswordRequest
 import com.locapin.mobile.data.remote.LocaPinApi
-import com.locapin.mobile.data.remote.RegisterRequest
-import com.locapin.mobile.data.remote.SocialAuthRequest
 import com.locapin.mobile.domain.model.Category
 import com.locapin.mobile.domain.model.Destination
 import com.locapin.mobile.domain.model.User
-import com.locapin.mobile.domain.repository.AuthRepository
 import com.locapin.mobile.domain.repository.DestinationRepository
 import com.locapin.mobile.domain.repository.ProfileRepository
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
-
-@Singleton
-class AuthRepositoryImpl @Inject constructor(
-    private val api: LocaPinApi,
-    private val prefs: UserPreferencesDataStore
-) : AuthRepository {
-    override val authToken: Flow<String?> = prefs.authToken
-
-    override suspend fun login(identifier: String, password: String): LocaPinResult<Unit> = runCatching {
-        val normalized = identifier.trim()
-        val email = normalized.takeIf { it.contains("@") }
-        val username = normalized.takeUnless { it.contains("@") }
-        api.login(
-            AuthRequest(
-                identifier = normalized,
-                password = password,
-                email = email,
-                username = username
-            )
-        ).data?.token
-    }.fold(
-        onSuccess = { token ->
-            if (token.isNullOrBlank()) LocaPinResult.Error("Invalid login response")
-            else {
-                prefs.setAuthToken(token)
-                LocaPinResult.Success(Unit)
-            }
-        },
-        onFailure = { LocaPinResult.Error(it.message ?: "Login failed") }
-    )
-
-    override suspend fun register(name: String, email: String, password: String): LocaPinResult<Unit> =
-        runCatching { api.register(RegisterRequest(name, email, password)).data?.token }.fold(
-            onSuccess = { token ->
-                if (token.isNullOrBlank()) LocaPinResult.Error("Invalid registration response")
-                else {
-                    prefs.setAuthToken(token)
-                    LocaPinResult.Success(Unit)
-                }
-            },
-            onFailure = { LocaPinResult.Error(it.message ?: "Registration failed") }
-        )
-
-    override suspend fun socialLogin(
-        provider: String,
-        idToken: String?,
-        accessToken: String?
-    ): LocaPinResult<Unit> = runCatching {
-        api.socialAuth(
-            SocialAuthRequest(
-                provider = provider.lowercase(),
-                idToken = idToken,
-                accessToken = accessToken
-            )
-        ).data?.token
-    }.fold(
-        onSuccess = { token ->
-            if (token.isNullOrBlank()) LocaPinResult.Error("Invalid social login response")
-            else {
-                prefs.setAuthToken(token)
-                LocaPinResult.Success(Unit)
-            }
-        },
-        onFailure = { throwable ->
-            val message = if (throwable is HttpException && throwable.code() == 404) {
-                "$provider sign-in is not available on the backend yet."
-            } else {
-                throwable.message ?: "$provider sign-in failed"
-            }
-            LocaPinResult.Error(message)
-        }
-    )
-
-    override suspend fun forgotPassword(email: String): LocaPinResult<Unit> = runCatching {
-        api.forgotPassword(ForgotPasswordRequest(email))
-    }.fold(
-        onSuccess = { LocaPinResult.Success(Unit) },
-        onFailure = { LocaPinResult.Error(it.message ?: "Request failed") }
-    )
-
-    override suspend fun logout() = prefs.clearSession()
-}
 
 @Singleton
 class DestinationRepositoryImpl @Inject constructor(
