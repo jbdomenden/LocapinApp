@@ -7,13 +7,16 @@ import com.locapin.mobile.domain.model.MapZone
 import com.locapin.mobile.domain.model.ZoneAttraction
 import com.locapin.mobile.domain.model.ZonePoint
 import com.locapin.mobile.domain.repository.SegmentedMapRepository
+import com.locapin.mobile.feature.admin.AdminAttractionRepository
+import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SegmentedMapRepositoryImpl @Inject constructor(
     private val api: LocaPinApi,
-    private val seedDataSource: SanJuanSeedDataSource
+    private val seedDataSource: SanJuanSeedDataSource,
+    private val adminAttractionRepository: AdminAttractionRepository
 ) : SegmentedMapRepository {
 
     override suspend fun getMapZones(): LocaPinResult<List<MapZone>> = runCatching {
@@ -31,24 +34,27 @@ class SegmentedMapRepositoryImpl @Inject constructor(
         onFailure = { LocaPinResult.Success(seedDataSource.mapZones()) }
     )
 
-    override suspend fun getZoneAttractions(): LocaPinResult<List<ZoneAttraction>> = runCatching {
-        api.mapAttractions().data?.map {
-            ZoneAttraction(
-                id = it.id,
-                name = it.name,
-                description = it.description,
-                knownFor = it.knownFor,
-                latitude = it.latitude,
-                longitude = it.longitude,
-                zoneId = it.zoneId,
-                imageUrl = it.imageUrl,
-                category = it.category
-            )
-        }
-    }.fold(
-        onSuccess = { LocaPinResult.Success(it ?: emptyList()) },
-        onFailure = { LocaPinResult.Error(it.message ?: "Unable to load attractions from backend.") }
-    )
+    override suspend fun getZoneAttractions(): LocaPinResult<List<ZoneAttraction>> {
+        val attractions = adminAttractionRepository.attractions.value
+            .asSequence()
+            .filter { it.isVisible }
+            .map { item ->
+                ZoneAttraction(
+                    id = item.id,
+                    name = item.name,
+                    description = item.description,
+                    knownFor = item.knownFor,
+                    latitude = item.latitude,
+                    longitude = item.longitude,
+                    zoneId = item.area.toZoneId(),
+                    area = item.area,
+                    category = item.category
+                )
+            }
+            .sortedBy { it.name.lowercase(Locale.getDefault()) }
+            .toList()
+        return LocaPinResult.Success(attractions)
+    }
 
     override suspend fun getRoutePath(
         originLat: Double,
@@ -67,6 +73,15 @@ class SegmentedMapRepositoryImpl @Inject constructor(
             LocaPinResult.Success(interpolateFallback(originLat, originLng, destinationLat, destinationLng))
         }
     )
+
+    private fun String.toZoneId(): String {
+        val areaKey = lowercase(Locale.getDefault())
+        return when {
+            "greenhills" in areaKey -> "greenhills"
+            "pinaglabanan" in areaKey -> "pinaglabanan"
+            else -> "city_center"
+        }
+    }
 
     private fun interpolateFallback(
         originLat: Double,

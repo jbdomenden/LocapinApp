@@ -21,6 +21,7 @@ data class ZoneAttraction(
     val latitude: Double,
     val longitude: Double,
     val zoneId: String,
+    val area: String? = null,
     val imageUrl: String? = null,
     val category: String? = null
 )
