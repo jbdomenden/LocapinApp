@@ -29,6 +29,8 @@ import com.locapin.mobile.feature.admin.AdminAttractionsListScreen
 import com.locapin.mobile.feature.admin.AdminCategoriesListScreen
 import com.locapin.mobile.feature.admin.AdminCategoryFormScreen
 import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
+import com.locapin.mobile.feature.admin.AdminMapAreaFormScreen
+import com.locapin.mobile.feature.admin.AdminMapAreasListScreen
 import com.locapin.mobile.feature.auth.EulaScreen
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.auth.PrivacyLocationConsentScreen
@@ -211,11 +213,20 @@ private fun NavGraphBuilder.adminGraph(
         AdminCategoryFormScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.AdminMapAreas) {
-        AdminModulePlaceholderScreen(
-            title = "Manage Map Areas",
-            description = "Map area controls will be added once the admin backend is connected.",
-            onBack = navController::popBackStack
+        AdminMapAreasListScreen(
+            onBack = navController::popBackStack,
+            onCreateMapArea = { navController.navigate(AppDestinations.AdminMapAreaCreate) },
+            onEditMapArea = { id -> navController.navigate(AppDestinations.adminMapAreaEdit(id)) }
         )
+    }
+    composable(AppDestinations.AdminMapAreaCreate) {
+        AdminMapAreaFormScreen(onBack = navController::popBackStack)
+    }
+    composable(
+        route = AppDestinations.AdminMapAreaEdit,
+        arguments = listOf(navArgument("mapAreaId") { type = NavType.StringType })
+    ) {
+        AdminMapAreaFormScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.AdminReports) {
         AdminModulePlaceholderScreen(
