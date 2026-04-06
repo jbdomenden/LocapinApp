@@ -104,6 +104,8 @@ fun MapScreen(
                 category = selectedAttraction.category,
                 area = selectedAttraction.area,
                 distanceText = vm.distanceTextFor(selectedAttraction),
+                isFavorite = vm.isFavoriteAttraction(selectedAttraction.id),
+                onToggleFavorite = { vm.toggleFavorite(selectedAttraction.id) },
                 onGo = { vm.onGoToAttraction(selectedAttraction.id) },
                 onRefreshDistance = vm::refreshLocation,
                 showPermissionAction = !hasLocationPermission,

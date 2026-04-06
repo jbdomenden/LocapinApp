@@ -6,13 +6,16 @@ import com.locapin.mobile.core.common.LocaPinResult
 import com.locapin.mobile.core.location.LocationProvider
 import com.locapin.mobile.domain.model.MapZone
 import com.locapin.mobile.domain.model.ZoneAttraction
+import com.locapin.mobile.domain.repository.DestinationRepository
 import com.locapin.mobile.domain.repository.HistoryRepository
 import com.locapin.mobile.domain.repository.SegmentedMapRepository
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -27,6 +30,7 @@ data class SegmentedMapUiState(
     val navigationAttractionId: String? = null,
     val routePath: List<Pair<Double, Double>> = emptyList(),
     val userLocation: Pair<Double, Double>? = null,
+    val favoriteIds: Set<String> = emptySet(),
     val permissionState: MapPermissionState = MapPermissionState.UNKNOWN,
     val errorMessage: String? = null
 ) {
@@ -44,13 +48,24 @@ data class SegmentedMapUiState(
 class SegmentedMapViewModel @Inject constructor(
     private val repository: SegmentedMapRepository,
     private val locationProvider: LocationProvider,
-    private val historyRepository: HistoryRepository
+    private val historyRepository: HistoryRepository,
+    private val destinationRepository: DestinationRepository,
+    private val favoritesRepository: TouristFavoritesRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SegmentedMapUiState())
     val uiState: StateFlow<SegmentedMapUiState> = _uiState.asStateFlow()
 
     init {
         loadMapData()
+        observeFavorites()
+    }
+
+    private fun observeFavorites() {
+        viewModelScope.launch {
+            favoritesRepository.favoriteIds.collect { ids ->
+                _uiState.value = _uiState.value.copy(favoriteIds = ids)
+            }
+        }
     }
 
     fun loadMapData() {
@@ -86,6 +101,15 @@ class SegmentedMapViewModel @Inject constructor(
 
     fun onAttractionSelected(attractionId: String) {
         _uiState.value = _uiState.value.copy(selectedAttractionId = attractionId, errorMessage = null)
+    }
+
+    fun isFavoriteAttraction(attractionId: String): Boolean = _uiState.value.favoriteIds.contains(attractionId)
+
+    fun toggleFavorite(attractionId: String) {
+        viewModelScope.launch {
+            val shouldSave = !isFavoriteAttraction(attractionId)
+            destinationRepository.setFavorite(attractionId, shouldSave)
+        }
     }
 
     fun onGoToAttraction(attractionId: String) {

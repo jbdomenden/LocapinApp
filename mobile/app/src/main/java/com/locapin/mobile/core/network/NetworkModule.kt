@@ -9,11 +9,13 @@ import com.locapin.mobile.data.repository.DestinationRepositoryImpl
 import com.locapin.mobile.data.repository.HistoryRepositoryImpl
 import com.locapin.mobile.data.repository.ProfileRepositoryImpl
 import com.locapin.mobile.data.repository.SegmentedMapRepositoryImpl
+import com.locapin.mobile.data.repository.TouristFavoritesRepositoryImpl
 import com.locapin.mobile.domain.repository.AuthRepository
 import com.locapin.mobile.domain.repository.DestinationRepository
 import com.locapin.mobile.domain.repository.HistoryRepository
 import com.locapin.mobile.domain.repository.ProfileRepository
 import com.locapin.mobile.domain.repository.SegmentedMapRepository
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -73,4 +75,5 @@ abstract class RepositoryModule {
     @Binds abstract fun bindHistoryRepository(impl: HistoryRepositoryImpl): HistoryRepository
     @Binds abstract fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
     @Binds abstract fun bindSegmentedMapRepository(impl: SegmentedMapRepositoryImpl): SegmentedMapRepository
+    @Binds abstract fun bindTouristFavoritesRepository(impl: TouristFavoritesRepositoryImpl): TouristFavoritesRepository
 }

@@ -7,18 +7,20 @@ import com.locapin.mobile.domain.model.Destination
 import com.locapin.mobile.domain.model.User
 import com.locapin.mobile.domain.repository.DestinationRepository
 import com.locapin.mobile.domain.repository.ProfileRepository
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository
 import com.locapin.mobile.feature.admin.AdminAttraction
 import com.locapin.mobile.feature.admin.AdminAttractionRepository
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.first
 
 @Singleton
 class DestinationRepositoryImpl @Inject constructor(
     private val api: LocaPinApi,
-    private val adminAttractionRepository: AdminAttractionRepository
+    private val adminAttractionRepository: AdminAttractionRepository,
+    private val favoritesRepository: TouristFavoritesRepository
 ) : DestinationRepository {
-    private val favoriteIds = linkedSetOf<String>()
 
     override suspend fun getDestinations(
         query: String?,
@@ -28,6 +30,7 @@ class DestinationRepositoryImpl @Inject constructor(
         lat: Double?,
         lng: Double?
     ): LocaPinResult<List<Destination>> {
+        val favoriteIds = favoritesRepository.favoriteIds.first()
         val categoryNameFilter = categoryId?.let { resolveCategoryName(it) }
         val normalizedQuery = query?.trim()?.lowercase(Locale.getDefault()).orEmpty()
 
@@ -53,6 +56,7 @@ class DestinationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDestinationDetail(id: String): LocaPinResult<Destination> {
+        val favoriteIds = favoritesRepository.favoriteIds.first()
         val attraction = adminAttractionRepository.getAttractionById(id)
             ?: return LocaPinResult.Error("Destination not found")
         return LocaPinResult.Success(attraction.toDestination(favoriteIds.contains(id)))
@@ -77,6 +81,7 @@ class DestinationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getFavorites(): LocaPinResult<List<Destination>> {
+        val favoriteIds = favoritesRepository.favoriteIds.first()
         val favorites = adminAttractionRepository.attractions.value
             .filter { it.id in favoriteIds && it.isVisible }
             .sortedBy { it.name.lowercase(Locale.getDefault()) }
@@ -85,7 +90,7 @@ class DestinationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setFavorite(id: String, save: Boolean): LocaPinResult<Unit> {
-        if (save) favoriteIds.add(id) else favoriteIds.remove(id)
+        favoritesRepository.setFavorite(id = id, save = save)
         return LocaPinResult.Success(Unit)
     }
 

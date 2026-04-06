@@ -7,6 +7,7 @@ import com.locapin.mobile.domain.model.Destination
 import com.locapin.mobile.domain.model.User
 import com.locapin.mobile.domain.model.ZoneAttraction
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 interface AuthRepository {
     suspend fun login(email: String, password: String): LocaPinResult<AuthSession>
@@ -38,6 +39,11 @@ interface DestinationRepository {
 
 interface ProfileRepository {
     suspend fun getProfile(): LocaPinResult<User>
+}
+
+interface TouristFavoritesRepository {
+    val favoriteIds: StateFlow<Set<String>>
+    suspend fun setFavorite(id: String, save: Boolean)
 }
 
 interface HistoryRepository {
