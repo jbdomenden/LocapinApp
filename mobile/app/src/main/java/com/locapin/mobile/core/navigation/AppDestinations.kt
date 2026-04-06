@@ -14,6 +14,8 @@ object AppDestinations {
     const val AdminAttractionCreate = "admin/attractions/create"
     const val AdminAttractionEdit = "admin/attractions/{attractionId}"
     const val AdminCategories = "admin/categories"
+    const val AdminCategoryCreate = "admin/categories/create"
+    const val AdminCategoryEdit = "admin/categories/{categoryId}"
     const val AdminMapAreas = "admin/map_areas"
     const val AdminReports = "admin/reports"
     const val AdminProfile = "admin/profile"
@@ -32,4 +34,5 @@ object AppDestinations {
     const val TouristChangePassword = "tourist/change_password"
 
     fun adminAttractionEdit(attractionId: String): String = "admin/attractions/$attractionId"
+    fun adminCategoryEdit(categoryId: String): String = "admin/categories/$categoryId"
 }

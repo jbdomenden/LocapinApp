@@ -26,6 +26,8 @@ import com.locapin.mobile.core.navigation.RoleResolver
 import com.locapin.mobile.feature.admin.AdminDashboardScreen
 import com.locapin.mobile.feature.admin.AdminAttractionFormScreen
 import com.locapin.mobile.feature.admin.AdminAttractionsListScreen
+import com.locapin.mobile.feature.admin.AdminCategoriesListScreen
+import com.locapin.mobile.feature.admin.AdminCategoryFormScreen
 import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
 import com.locapin.mobile.feature.auth.EulaScreen
 import com.locapin.mobile.feature.auth.LoginScreen
@@ -193,11 +195,20 @@ private fun NavGraphBuilder.adminGraph(
         AdminAttractionFormScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.AdminCategories) {
-        AdminModulePlaceholderScreen(
-            title = "Manage Categories",
-            description = "Category management for attractions is staged for the next phase.",
-            onBack = navController::popBackStack
+        AdminCategoriesListScreen(
+            onBack = navController::popBackStack,
+            onCreateCategory = { navController.navigate(AppDestinations.AdminCategoryCreate) },
+            onEditCategory = { id -> navController.navigate(AppDestinations.adminCategoryEdit(id)) }
         )
+    }
+    composable(AppDestinations.AdminCategoryCreate) {
+        AdminCategoryFormScreen(onBack = navController::popBackStack)
+    }
+    composable(
+        route = AppDestinations.AdminCategoryEdit,
+        arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+    ) {
+        AdminCategoryFormScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.AdminMapAreas) {
         AdminModulePlaceholderScreen(
