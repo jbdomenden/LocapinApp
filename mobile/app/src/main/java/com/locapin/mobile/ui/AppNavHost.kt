@@ -22,7 +22,11 @@ import com.locapin.mobile.core.navigation.AppDestinations
 import com.locapin.mobile.core.navigation.RoleResolver
 import com.locapin.mobile.feature.admin.AdminDashboardScreen
 import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
+import com.locapin.mobile.feature.auth.EulaScreen
 import com.locapin.mobile.feature.auth.LoginScreen
+import com.locapin.mobile.feature.auth.PrivacyLocationConsentScreen
+import com.locapin.mobile.feature.auth.SignUpScreen
+import com.locapin.mobile.feature.auth.TermsConditionsScreen
 import com.locapin.mobile.feature.common.ComingSoonScreen
 import com.locapin.mobile.feature.explore.ExploreScreen
 import com.locapin.mobile.feature.favorites.FavoritesScreen
@@ -92,11 +96,24 @@ fun AppNavHost(
         }
 
         composable(AppDestinations.SignUp) {
-            ComingSoonScreen(
-                title = "Sign Up",
-                description = "Sign up will be enabled after backend account creation is finalized.",
-                onBack = navController::popBackStack
+            SignUpScreen(
+                onBack = navController::popBackStack,
+                onOpenEula = { navController.navigate(AppDestinations.Eula) },
+                onOpenTerms = { navController.navigate(AppDestinations.TermsConditions) },
+                onOpenPrivacyConsent = { navController.navigate(AppDestinations.PrivacyLocationConsent) }
             )
+        }
+
+        composable(AppDestinations.Eula) {
+            EulaScreen(onBack = navController::popBackStack)
+        }
+
+        composable(AppDestinations.TermsConditions) {
+            TermsConditionsScreen(onBack = navController::popBackStack)
+        }
+
+        composable(AppDestinations.PrivacyLocationConsent) {
+            PrivacyLocationConsentScreen(onBack = navController::popBackStack)
         }
 
         adminGraph(
@@ -250,7 +267,11 @@ private fun NavGraphBuilder.touristGraph(
         TouristAboutScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.TouristSettings) {
-        SettingsScreen()
+        SettingsScreen(
+            onOpenEula = { navController.navigate(AppDestinations.Eula) },
+            onOpenTermsConditions = { navController.navigate(AppDestinations.TermsConditions) },
+            onOpenPrivacyConsent = { navController.navigate(AppDestinations.PrivacyLocationConsent) }
+        )
     }
     composable(AppDestinations.TouristChangePassword) {
         ChangePasswordPlaceholderScreen(onBack = navController::popBackStack)

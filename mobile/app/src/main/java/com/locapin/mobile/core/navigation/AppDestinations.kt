@@ -5,6 +5,9 @@ object AppDestinations {
     const val Auth = "auth/login"
     const val ForgotPassword = "auth/forgot_password"
     const val SignUp = "auth/sign_up"
+    const val Eula = "auth/eula"
+    const val TermsConditions = "auth/terms_conditions"
+    const val PrivacyLocationConsent = "auth/privacy_location_consent"
 
     const val AdminEntry = "admin/dashboard"
     const val AdminAttractions = "admin/attractions"
