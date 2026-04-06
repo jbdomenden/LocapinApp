@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.locapin.mobile.core.navigation.AppDestinations
+import com.locapin.mobile.domain.model.AuthSession
 import com.locapin.mobile.core.navigation.RoleResolver
 import com.locapin.mobile.feature.admin.AdminDashboardScreen
 import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
@@ -30,10 +31,10 @@ import com.locapin.mobile.feature.auth.TermsConditionsScreen
 import com.locapin.mobile.feature.common.ComingSoonScreen
 import com.locapin.mobile.feature.explore.ExploreScreen
 import com.locapin.mobile.feature.favorites.FavoritesScreen
-import com.locapin.mobile.feature.home.ChangePasswordPlaceholderScreen
 import com.locapin.mobile.feature.home.TouristAboutScreen
 import com.locapin.mobile.feature.home.TouristDashboardScreen
 import com.locapin.mobile.feature.map.MapScreen
+import com.locapin.mobile.feature.profile.ChangePasswordScreen
 import com.locapin.mobile.feature.profile.ProfileScreen
 import com.locapin.mobile.feature.settings.SettingsScreen
 
@@ -119,12 +120,14 @@ fun AppNavHost(
         adminGraph(
             navController = navController,
             adminName = session?.name,
+            session = session,
             onLogout = ::logoutAndGoToAuth
         )
 
         touristGraph(
             navController = navController,
             touristName = session?.name,
+            session = session,
             hasLocationPermission = hasLocationPermission,
             requestLocationPermission = requestLocationPermission,
             onLogout = ::logoutAndGoToAuth
@@ -154,6 +157,7 @@ private fun SessionCheckScreen() {
 private fun NavGraphBuilder.adminGraph(
     navController: NavHostController,
     adminName: String?,
+    session: AuthSession?,
     onLogout: () -> Unit
 ) {
     composable(AppDestinations.AdminEntry) {
@@ -197,9 +201,10 @@ private fun NavGraphBuilder.adminGraph(
         )
     }
     composable(AppDestinations.AdminProfile) {
-        AdminModulePlaceholderScreen(
-            title = "Profile",
-            description = "Admin profile management will be enabled in a future backend phase.",
+        ProfileScreen(
+            name = session?.name ?: "Guest",
+            email = session?.email ?: "No email available",
+            role = session?.role?.name ?: "Unknown",
             onBack = navController::popBackStack
         )
     }
@@ -211,17 +216,14 @@ private fun NavGraphBuilder.adminGraph(
         )
     }
     composable(AppDestinations.AdminChangePassword) {
-        ComingSoonScreen(
-            title = "Change Password",
-            description = "Secure password updates will be available once account management is finalized.",
-            onBack = navController::popBackStack
-        )
+        ChangePasswordScreen(onBack = navController::popBackStack)
     }
 }
 
 private fun NavGraphBuilder.touristGraph(
     navController: NavHostController,
     touristName: String?,
+    session: AuthSession?,
     hasLocationPermission: Boolean,
     requestLocationPermission: () -> Unit,
     onLogout: () -> Unit
@@ -259,8 +261,10 @@ private fun NavGraphBuilder.touristGraph(
     }
     composable(AppDestinations.TouristProfile) {
         ProfileScreen(
-            vm = hiltViewModel<MainViewModel>(),
-            onSettings = { navController.navigate(AppDestinations.TouristSettings) }
+            name = touristName ?: "Guest",
+            email = session?.email ?: "No email available",
+            role = session?.role?.name ?: "Unknown",
+            onBack = navController::popBackStack
         )
     }
     composable(AppDestinations.TouristAbout) {
@@ -274,6 +278,6 @@ private fun NavGraphBuilder.touristGraph(
         )
     }
     composable(AppDestinations.TouristChangePassword) {
-        ChangePasswordPlaceholderScreen(onBack = navController::popBackStack)
+        ChangePasswordScreen(onBack = navController::popBackStack)
     }
 }
