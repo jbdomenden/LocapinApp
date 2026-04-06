@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.locapin.mobile.BuildConfig
 import com.locapin.mobile.core.datastore.UserPreferencesDataStore
 import com.locapin.mobile.data.remote.LocaPinApi
-import com.locapin.mobile.data.repository.AuthRepositoryImpl
+import com.locapin.mobile.data.repository.FakeAuthRepository
 import com.locapin.mobile.data.repository.DestinationRepositoryImpl
 import com.locapin.mobile.data.repository.HistoryRepositoryImpl
 import com.locapin.mobile.data.repository.ProfileRepositoryImpl
@@ -68,7 +68,7 @@ object NetworkModule {
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    @Binds abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+    @Binds abstract fun bindAuthRepository(impl: FakeAuthRepository): AuthRepository
     @Binds abstract fun bindDestinationRepository(impl: DestinationRepositoryImpl): DestinationRepository
     @Binds abstract fun bindHistoryRepository(impl: HistoryRepositoryImpl): HistoryRepository
     @Binds abstract fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
