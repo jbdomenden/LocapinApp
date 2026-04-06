@@ -1,28 +1,20 @@
 package com.locapin.mobile.data.auth
 
-import com.locapin.mobile.domain.model.UserRole
+import com.locapin.mobile.domain.model.AuthRole
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class MockAuthDataSource @Inject constructor() {
-    private val accounts = listOf(
-        MockAccount("admin-1", "Admin One", "admin@locapin.app", "Admin123!", UserRole.ADMIN),
-        MockAccount("tourist-1", "Tourist One", "tourist@locapin.app", "Tourist123!", UserRole.TOURIST),
-        MockAccount("admin-2", "Admin Two", "admin2@locapin.app", "Admin123!", UserRole.ADMIN),
-        MockAccount("tourist-2", "Tourist Two", "tourist2@locapin.app", "Tourist123!", UserRole.TOURIST)
+    private val users = listOf(
+        MockUser(id = "admin-1", name = "Admin One", email = "admin@locapin.app", password = "Admin123!", role = AuthRole.ADMIN),
+        MockUser(id = "tourist-1", name = "Tourist One", email = "tourist@locapin.app", password = "Tourist123!", role = AuthRole.TOURIST),
+        MockUser(id = "admin-2", name = "Admin Two", email = "admin2@locapin.app", password = "Admin123!", role = AuthRole.ADMIN),
+        MockUser(id = "tourist-2", name = "Tourist Two", email = "tourist2@locapin.app", password = "Tourist123!", role = AuthRole.TOURIST)
     )
 
-    fun findAccount(email: String, password: String): MockAccount? {
-        val normalized = email.trim().lowercase()
-        return accounts.firstOrNull { it.email == normalized && it.password == password }
+    fun findUser(email: String, password: String): MockUser? {
+        val normalizedEmail = email.trim().lowercase()
+        return users.firstOrNull { it.email == normalizedEmail && it.password == password }
     }
-
-    data class MockAccount(
-        val userId: String,
-        val name: String,
-        val email: String,
-        val password: String,
-        val role: UserRole
-    )
 }

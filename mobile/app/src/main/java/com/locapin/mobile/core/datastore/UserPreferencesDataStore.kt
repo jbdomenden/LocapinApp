@@ -36,23 +36,23 @@ class UserPreferencesDataStore @Inject constructor(
         val name = prefs[SESSION_NAME]
         val email = prefs[SESSION_EMAIL]
         val roleRaw = prefs[SESSION_ROLE]
-        val token = prefs[SESSION_TOKEN]
 
         if (!isLoggedIn || userId.isNullOrBlank() || name.isNullOrBlank() || email.isNullOrBlank() || roleRaw.isNullOrBlank()) {
             null
         } else {
             AuthSession(
-                isLoggedIn = true,
                 userId = userId,
                 name = name,
                 email = email,
                 role = UserRole.valueOf(roleRaw),
-                token = token.orEmpty()
+                isLoggedIn = true
             )
         }
     }
 
-    val authToken: Flow<String?> = session.map { it?.token?.takeIf(String::isNotBlank) }
+    val authToken: Flow<String?> = session.map { currentSession ->
+        if (currentSession?.isLoggedIn == true) "mock-authenticated" else null
+    }
 
     val recentSearches: Flow<List<String>> = context.userPrefs.data.map {
         it[RECENT_SEARCHES_KEY]?.split("||")?.filter(String::isNotBlank) ?: emptyList()
@@ -76,13 +76,6 @@ class UserPreferencesDataStore @Inject constructor(
             prefs[SESSION_NAME] = session.name
             prefs[SESSION_EMAIL] = session.email
             prefs[SESSION_ROLE] = session.role.name
-            prefs[SESSION_TOKEN] = session.token
-        }
-    }
-
-    suspend fun setAuthToken(token: String?) {
-        context.userPrefs.edit { prefs ->
-            if (token.isNullOrBlank()) prefs.remove(SESSION_TOKEN) else prefs[SESSION_TOKEN] = token
         }
     }
 
@@ -106,7 +99,6 @@ class UserPreferencesDataStore @Inject constructor(
             prefs.remove(SESSION_NAME)
             prefs.remove(SESSION_EMAIL)
             prefs.remove(SESSION_ROLE)
-            prefs.remove(SESSION_TOKEN)
         }
     }
 
@@ -134,7 +126,6 @@ class UserPreferencesDataStore @Inject constructor(
         val SESSION_NAME: Preferences.Key<String> = stringPreferencesKey("session_name")
         val SESSION_EMAIL: Preferences.Key<String> = stringPreferencesKey("session_email")
         val SESSION_ROLE: Preferences.Key<String> = stringPreferencesKey("session_role")
-        val SESSION_TOKEN: Preferences.Key<String> = stringPreferencesKey("session_token")
         val RECENT_SEARCHES_KEY: Preferences.Key<String> = stringPreferencesKey("recent_searches")
         val VISITED_ATTRACTIONS_KEY: Preferences.Key<String> = stringPreferencesKey("visited_attractions")
     }

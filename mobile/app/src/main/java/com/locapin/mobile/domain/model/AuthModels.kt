@@ -1,15 +1,16 @@
 package com.locapin.mobile.domain.model
 
-enum class UserRole {
+enum class AuthRole {
     ADMIN,
     TOURIST
 }
 
+typealias UserRole = AuthRole
+
 data class AuthSession(
-    val isLoggedIn: Boolean,
     val userId: String,
     val name: String,
     val email: String,
-    val role: UserRole,
-    val token: String
+    val role: AuthRole,
+    val isLoggedIn: Boolean
 )
