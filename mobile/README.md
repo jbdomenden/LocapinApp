@@ -1,37 +1,12 @@
-# LocaPin Mobile (Android) — Mock Auth Mode
+# LocaPin Mobile (Android)
 
-LocaPin is now a **mobile-only** system. There is no separate admin website in scope.
+This repository is **mobile-only**.
 
-## Current temporary auth mode
-Admin and tourist login currently run on a local fake auth layer so development can continue while backend admin auth is finalized.
-
-### Sample accounts
-
-**Admin**
-- Email: `admin@locapin.app`
-- Password: `Admin123!`
-
-**Tourist**
-- Email: `tourist@locapin.app`
-- Password: `Tourist123!`
-
-Optional extras:
-- `admin2@locapin.app` / `Admin123!`
-- `tourist2@locapin.app` / `Tourist123!`
-
-## Behavior
-- Single login screen for all users.
-- On success, role-aware routing sends:
-  - `ADMIN` → admin dashboard
-  - `TOURIST` → tourist dashboard
-- Session is persisted locally (DataStore) with:
-  - `isLoggedIn`, `userId`, `name`, `email`, `role`, `session token placeholder`
-- Logout clears session and returns to login.
-
-## Architecture notes
-- UI depends on `AuthRepository` abstraction.
-- Current implementation uses `FakeAuthRepository` + `MockAuthDataSource`.
-- This structure is intentionally ready to swap with real backend auth later with minimal refactor.
+- There is **no admin website** anymore.
+- The product is one **Android app** used by both **Tourist** and **Admin** users.
+- There is one **shared login** for all users.
+- The **Admin path is currently mock** while backend work continues.
+- **Mock sample accounts will be added in later phases.**
 
 ## Setup
 1. Open `mobile/` in Android Studio.
