@@ -14,6 +14,8 @@ interface AuthRepository {
     suspend fun register(name: String, email: String, password: String): LocaPinResult<AuthSession>
     suspend fun forgotPassword(email: String): LocaPinResult<Unit>
     suspend fun logout()
+    suspend fun getCurrentSession(): AuthSession?
+    suspend fun restoreSession(): AuthSession?
     val session: Flow<AuthSession?>
     val authToken: Flow<String?>
 }

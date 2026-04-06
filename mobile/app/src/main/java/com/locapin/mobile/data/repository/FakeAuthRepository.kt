@@ -1,8 +1,8 @@
 package com.locapin.mobile.data.repository
 
 import com.locapin.mobile.core.common.LocaPinResult
-import com.locapin.mobile.core.datastore.UserPreferencesDataStore
 import com.locapin.mobile.data.auth.MockAuthDataSource
+import com.locapin.mobile.data.session.SessionManager
 import com.locapin.mobile.domain.model.AuthSession
 import com.locapin.mobile.domain.repository.AuthRepository
 import javax.inject.Inject
@@ -13,26 +13,33 @@ import kotlinx.coroutines.flow.map
 @Singleton
 class FakeAuthRepository @Inject constructor(
     private val mockAuthDataSource: MockAuthDataSource,
-    private val prefs: UserPreferencesDataStore
+    private val sessionManager: SessionManager
 ) : AuthRepository {
 
-    override val session: Flow<AuthSession?> = prefs.session
-    override val authToken: Flow<String?> = session.map { it?.token }
+    override val session: Flow<AuthSession?> = sessionManager.sessionFlow
+
+    override val authToken: Flow<String?> = session.map { currentSession ->
+        if (currentSession?.isLoggedIn == true) {
+            "mock-authenticated"
+        } else {
+            null
+        }
+    }
 
     override suspend fun login(email: String, password: String): LocaPinResult<AuthSession> {
-        val account = mockAuthDataSource.findAccount(email, password)
-            ?: return LocaPinResult.Error("Invalid credentials. Use one of the Quick Test Accounts.")
+        val user = mockAuthDataSource.findUser(email, password)
+            ?: return LocaPinResult.Error("Invalid credentials.")
 
-        val session = AuthSession(
-            isLoggedIn = true,
-            userId = account.userId,
-            name = account.name,
-            email = account.email,
-            role = account.role,
-            token = "mock-token-${account.userId}"
+        val authSession = AuthSession(
+            userId = user.id,
+            name = user.name,
+            email = user.email,
+            role = user.role,
+            isLoggedIn = true
         )
-        prefs.saveSession(session)
-        return LocaPinResult.Success(session)
+
+        sessionManager.saveSession(authSession)
+        return LocaPinResult.Success(authSession)
     }
 
     override suspend fun socialLogin(
@@ -47,5 +54,11 @@ class FakeAuthRepository @Inject constructor(
     override suspend fun forgotPassword(email: String): LocaPinResult<Unit> =
         LocaPinResult.Success(Unit)
 
-    override suspend fun logout() = prefs.clearSession()
+    override suspend fun logout() {
+        sessionManager.clearSession()
+    }
+
+    override suspend fun getCurrentSession(): AuthSession? = sessionManager.getSession()
+
+    override suspend fun restoreSession(): AuthSession? = sessionManager.getSession()
 }
