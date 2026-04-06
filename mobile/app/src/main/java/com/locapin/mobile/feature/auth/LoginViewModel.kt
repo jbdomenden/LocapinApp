@@ -53,15 +53,24 @@ class LoginViewModel @Inject constructor(
         if (current.isLoading) return
 
         val trimmedEmail = current.email.trim()
-        if (trimmedEmail.isBlank() || current.password.isBlank()) {
-            _state.update { it.copy(errorMessage = "Email and password are required.") }
+        val trimmedPassword = current.password.trim()
+        if (trimmedEmail.isBlank() && trimmedPassword.isBlank()) {
+            _state.update { it.copy(errorMessage = "Please enter your email and password.") }
+            return
+        }
+        if (trimmedEmail.isBlank()) {
+            _state.update { it.copy(errorMessage = "Please enter your email.") }
+            return
+        }
+        if (trimmedPassword.isBlank()) {
+            _state.update { it.copy(errorMessage = "Please enter your password.") }
             return
         }
 
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
 
-            when (val result = authRepository.login(trimmedEmail, current.password)) {
+            when (val result = authRepository.login(trimmedEmail, trimmedPassword)) {
                 is LocaPinResult.Success -> {
                     _state.update {
                         it.copy(

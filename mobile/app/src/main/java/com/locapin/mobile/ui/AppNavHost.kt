@@ -1,12 +1,18 @@
 package com.locapin.mobile.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,7 +48,7 @@ fun AppNavHost(
     fun logoutAndGoToAuth() {
         vm.logout()
         navController.navigate(AppDestinations.Auth) {
-            popUpTo(0)
+            popUpTo(navController.graph.id) { inclusive = true }
             launchSingleTop = true
         }
     }
@@ -53,6 +59,8 @@ fun AppNavHost(
         modifier = Modifier.fillMaxSize()
     ) {
         composable(AppDestinations.SessionCheck) {
+            SessionCheckScreen()
+
             LaunchedEffect(isReady, session) {
                 if (!isReady) return@LaunchedEffect
                 navController.navigate(roleResolver.resolveDestination(session)) {
@@ -68,7 +76,7 @@ fun AppNavHost(
                 onSignUp = { navController.navigate(AppDestinations.SignUp) },
                 onRoleResolved = { role ->
                     navController.navigate(roleResolver.resolveDestination(role)) {
-                        popUpTo(AppDestinations.Auth) { inclusive = true }
+                        popUpTo(navController.graph.id) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
@@ -91,13 +99,11 @@ fun AppNavHost(
             )
         }
 
-        composable(AppDestinations.AdminEntry) {
-            ComingSoonScreen(
-                title = "Admin Entry",
-                description = "Admin dashboard is not part of Phase 6 and remains as implemented in Phase 5.",
-                onBack = ::logoutAndGoToAuth
-            )
-        }
+        adminGraph(
+            navController = navController,
+            adminName = session?.name,
+            onLogout = ::logoutAndGoToAuth
+        )
 
         touristGraph(
             navController = navController,
@@ -109,7 +115,94 @@ fun AppNavHost(
     }
 }
 
-private fun androidx.navigation.NavGraphBuilder.touristGraph(
+@Composable
+private fun SessionCheckScreen() {
+    androidx.compose.foundation.layout.Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        androidx.compose.foundation.layout.Column(
+            modifier = Modifier.wrapContentSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator()
+            Text(
+                text = "Checking session…",
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
+}
+
+private fun NavGraphBuilder.adminGraph(
+    navController: NavHostController,
+    adminName: String?,
+    onLogout: () -> Unit
+) {
+    composable(AppDestinations.AdminEntry) {
+        val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+            ?: AppDestinations.AdminEntry
+
+        AdminDashboardScreen(
+            adminName = adminName,
+            currentRoute = currentRoute,
+            onOpenModule = { route -> navController.navigate(route) { launchSingleTop = true } },
+            onChangePassword = { navController.navigate(AppDestinations.AdminChangePassword) },
+            onLogout = onLogout
+        )
+    }
+    composable(AppDestinations.AdminAttractions) {
+        AdminModulePlaceholderScreen(
+            title = "Manage Attractions",
+            description = "Attraction management tools will be available in a backend-connected phase.",
+            onBack = navController::popBackStack
+        )
+    }
+    composable(AppDestinations.AdminCategories) {
+        AdminModulePlaceholderScreen(
+            title = "Manage Categories",
+            description = "Category management for attractions is staged for the next phase.",
+            onBack = navController::popBackStack
+        )
+    }
+    composable(AppDestinations.AdminMapAreas) {
+        AdminModulePlaceholderScreen(
+            title = "Manage Map Areas",
+            description = "Map area controls will be added once the admin backend is connected.",
+            onBack = navController::popBackStack
+        )
+    }
+    composable(AppDestinations.AdminReports) {
+        AdminModulePlaceholderScreen(
+            title = "Reports",
+            description = "Operational analytics and summary reports are coming soon.",
+            onBack = navController::popBackStack
+        )
+    }
+    composable(AppDestinations.AdminProfile) {
+        AdminModulePlaceholderScreen(
+            title = "Profile",
+            description = "Admin profile management will be enabled in a future backend phase.",
+            onBack = navController::popBackStack
+        )
+    }
+    composable(AppDestinations.AdminSettings) {
+        AdminModulePlaceholderScreen(
+            title = "Settings",
+            description = "Admin configuration settings are not yet connected in mock mode.",
+            onBack = navController::popBackStack
+        )
+    }
+    composable(AppDestinations.AdminChangePassword) {
+        ComingSoonScreen(
+            title = "Change Password",
+            description = "Secure password updates will be available once account management is finalized.",
+            onBack = navController::popBackStack
+        )
+    }
+}
+
+private fun NavGraphBuilder.touristGraph(
     navController: NavHostController,
     touristName: String?,
     hasLocationPermission: Boolean,
@@ -118,7 +211,7 @@ private fun androidx.navigation.NavGraphBuilder.touristGraph(
 ) {
     composable(AppDestinations.TouristEntry) {
         val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-            ?: AppDestinations.TouristDashboard
+            ?: AppDestinations.TouristEntry
 
         TouristDashboardScreen(
             touristName = touristName,
