@@ -14,7 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import com.locapin.mobile.core.designsystem.theme.LocaPinTheme
 import com.locapin.mobile.feature.auth.FacebookAuthBridge
-import com.locapin.mobile.ui.LocaPinRoot
+import com.locapin.mobile.ui.AppNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             LocaPinTheme {
-                LocaPinRoot(
+                AppNavHost(
                     hasLocationPermission = hasLocationPermission,
                     requestLocationPermission = {
                         locationPermissionRequester.launch(Manifest.permission.ACCESS_FINE_LOCATION)
