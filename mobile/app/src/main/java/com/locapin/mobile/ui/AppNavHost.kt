@@ -14,14 +14,18 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.locapin.mobile.core.navigation.AppDestinations
 import com.locapin.mobile.domain.model.AuthSession
 import com.locapin.mobile.core.navigation.RoleResolver
 import com.locapin.mobile.feature.admin.AdminDashboardScreen
+import com.locapin.mobile.feature.admin.AdminAttractionFormScreen
+import com.locapin.mobile.feature.admin.AdminAttractionsListScreen
 import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
 import com.locapin.mobile.feature.auth.EulaScreen
 import com.locapin.mobile.feature.auth.LoginScreen
@@ -173,11 +177,20 @@ private fun NavGraphBuilder.adminGraph(
         )
     }
     composable(AppDestinations.AdminAttractions) {
-        AdminModulePlaceholderScreen(
-            title = "Manage Attractions",
-            description = "Attraction management tools will be available in a backend-connected phase.",
-            onBack = navController::popBackStack
+        AdminAttractionsListScreen(
+            onBack = navController::popBackStack,
+            onCreateAttraction = { navController.navigate(AppDestinations.AdminAttractionCreate) },
+            onEditAttraction = { id -> navController.navigate(AppDestinations.adminAttractionEdit(id)) }
         )
+    }
+    composable(AppDestinations.AdminAttractionCreate) {
+        AdminAttractionFormScreen(onBack = navController::popBackStack)
+    }
+    composable(
+        route = AppDestinations.AdminAttractionEdit,
+        arguments = listOf(navArgument("attractionId") { type = NavType.StringType })
+    ) {
+        AdminAttractionFormScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.AdminCategories) {
         AdminModulePlaceholderScreen(
