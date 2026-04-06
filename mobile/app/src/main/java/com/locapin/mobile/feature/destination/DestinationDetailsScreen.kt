@@ -42,6 +42,9 @@ fun DestinationDetailsScreen(vm: MainViewModel, destinationId: String, onBack: (
             )
             Text(destination.name, style = MaterialTheme.typography.headlineMedium)
             Text(destination.description)
+            Text("Known for: ${destination.knownFor}")
+            Text("Category: ${destination.categoryName}")
+            Text("Area: ${destination.area}")
             Text("Address: ${destination.address}")
             destination.openingHours?.let { Text("Hours: $it") }
             destination.contactInfo?.let { Text("Contact: $it") }

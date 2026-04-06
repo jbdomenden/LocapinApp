@@ -17,6 +17,8 @@ fun AttractionDetailSheetContent(
     name: String,
     description: String?,
     knownFor: String,
+    category: String?,
+    area: String?,
     distanceText: String,
     onGo: () -> Unit,
     onRefreshDistance: () -> Unit,
@@ -31,6 +33,12 @@ fun AttractionDetailSheetContent(
     ) {
         Text(name, style = MaterialTheme.typography.titleLarge)
         Text(description ?: "No description available.", style = MaterialTheme.typography.bodyMedium)
+        category?.takeIf { it.isNotBlank() }?.let {
+            Text("Category: $it", style = MaterialTheme.typography.bodySmall)
+        }
+        area?.takeIf { it.isNotBlank() }?.let {
+            Text("Area: $it", style = MaterialTheme.typography.bodySmall)
+        }
         Text("Known For", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         Text(knownFor)
         Text(distanceText, style = MaterialTheme.typography.bodyMedium)

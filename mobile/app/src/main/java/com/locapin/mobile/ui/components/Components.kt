@@ -38,12 +38,12 @@ fun DestinationCard(destination: Destination, onClick: () -> Unit) {
             )
             Column(Modifier.padding(12.dp)) {
                 Text(destination.name, style = MaterialTheme.typography.titleMedium)
-                Text(destination.description, maxLines = 2, style = MaterialTheme.typography.bodyMedium)
+                Text(destination.knownFor, maxLines = 2, style = MaterialTheme.typography.bodyMedium)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     AssistChip(onClick = {}, label = { Text(destination.categoryName.ifBlank { "Attraction" }) })
                     Row {
                         Icon(Icons.Default.LocationOn, contentDescription = null)
-                        Text(destination.distanceKm?.let { "%.1f km".format(it) } ?: "San Juan")
+                        Text(destination.area.ifBlank { "San Juan" })
                     }
                 }
             }

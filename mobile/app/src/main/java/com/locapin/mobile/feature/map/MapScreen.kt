@@ -101,6 +101,8 @@ fun MapScreen(
                 name = selectedAttraction.name,
                 description = selectedAttraction.description,
                 knownFor = selectedAttraction.knownFor,
+                category = selectedAttraction.category,
+                area = selectedAttraction.area,
                 distanceText = vm.distanceTextFor(selectedAttraction),
                 onGo = { vm.onGoToAttraction(selectedAttraction.id) },
                 onRefreshDistance = vm::refreshLocation,
