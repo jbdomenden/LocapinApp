@@ -14,6 +14,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.locapin.mobile.core.navigation.AppDestinations
 import com.locapin.mobile.core.navigation.RoleResolver
+import com.locapin.mobile.feature.admin.AdminDashboardScreen
+import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.common.ComingSoonScreen
 import com.locapin.mobile.feature.explore.ExploreScreen

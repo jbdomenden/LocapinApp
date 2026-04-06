@@ -6,7 +6,15 @@ object AppDestinations {
     const val ForgotPassword = "auth/forgot_password"
     const val SignUp = "auth/sign_up"
 
-    const val AdminEntry = "admin/entry"
+    const val AdminEntry = "admin/dashboard"
+    const val AdminAttractions = "admin/attractions"
+    const val AdminCategories = "admin/categories"
+    const val AdminMapAreas = "admin/map_areas"
+    const val AdminReports = "admin/reports"
+    const val AdminProfile = "admin/profile"
+    const val AdminSettings = "admin/settings"
+    const val AdminChangePassword = "admin/change_password"
+
     const val TouristEntry = "tourist/entry"
 
     const val TouristDashboard = "tourist/dashboard"
