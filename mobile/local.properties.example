@@ -1,16 +1,21 @@
 ## Copy this file to `local.properties` and adjust for your machine.
-## Do not commit actual secrets.
+## Do not commit `local.properties` or real secrets.
 
-# Android SDK path example:
-# sdk.dir=/Users/you/Library/Android/sdk
+# Android SDK path example (use your own local SDK path):
+sdk.dir=/Users/you/Library/Android/sdk
 
-# LocaPin backend base URL (trailing slash required)
+# Backend base URL used by backend-driven modules where implemented:
 LOCAPIN_API_BASE_URL=https://your-backend.example.com/
 
-# Google Maps SDK key for Android
+# Google Maps SDK key for Android:
 MAPS_API_KEY=YOUR_MAPS_API_KEY
 
-# OAuth backend handoff IDs for social auth
+# OAuth/social config placeholders:
 GOOGLE_SERVER_CLIENT_ID=YOUR_GOOGLE_SERVER_CLIENT_ID
 FACEBOOK_APP_ID=YOUR_FACEBOOK_APP_ID
 FACEBOOK_CLIENT_TOKEN=YOUR_FACEBOOK_CLIENT_TOKEN
+
+# Notes:
+# - Mock login works even if backend auth is not ready.
+# - Admin dashboard flow is currently mock.
+# - Tourist modules may still use backend-driven flows where already implemented.
