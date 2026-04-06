@@ -65,6 +65,14 @@ class UserPreferencesDataStore @Inject constructor(
             ?: emptyList()
     }
 
+    val favoriteAttractionIds: Flow<Set<String>> = context.userPrefs.data.map { prefs ->
+        prefs[FAVORITE_ATTRACTION_IDS_KEY]
+            ?.takeIf { it.isNotBlank() }
+            ?.let { raw -> runCatching { json.decodeFromString<List<String>>(raw) }.getOrDefault(emptyList()) }
+            ?.toSet()
+            ?: emptySet()
+    }
+
     suspend fun setOnboardingCompleted(completed: Boolean) {
         context.userPrefs.edit { it[ONBOARDING_KEY] = completed }
     }
@@ -108,6 +116,18 @@ class UserPreferencesDataStore @Inject constructor(
         }
     }
 
+    suspend fun setFavoriteAttraction(id: String, save: Boolean) {
+        context.userPrefs.edit { prefs ->
+            val current = prefs[FAVORITE_ATTRACTION_IDS_KEY]
+                ?.takeIf { it.isNotBlank() }
+                ?.let { raw -> runCatching { json.decodeFromString<List<String>>(raw) }.getOrDefault(emptyList()) }
+                ?.toMutableSet()
+                ?: mutableSetOf()
+            if (save) current.add(id) else current.remove(id)
+            prefs[FAVORITE_ATTRACTION_IDS_KEY] = json.encodeToString(current.sorted())
+        }
+    }
+
     @Serializable
     data class VisitedAttractionRecord(
         val id: String,
@@ -128,5 +148,6 @@ class UserPreferencesDataStore @Inject constructor(
         val SESSION_ROLE: Preferences.Key<String> = stringPreferencesKey("session_role")
         val RECENT_SEARCHES_KEY: Preferences.Key<String> = stringPreferencesKey("recent_searches")
         val VISITED_ATTRACTIONS_KEY: Preferences.Key<String> = stringPreferencesKey("visited_attractions")
+        val FAVORITE_ATTRACTION_IDS_KEY: Preferences.Key<String> = stringPreferencesKey("favorite_attraction_ids")
     }
 }

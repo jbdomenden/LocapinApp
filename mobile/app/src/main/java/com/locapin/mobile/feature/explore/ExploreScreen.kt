@@ -13,12 +13,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -100,10 +105,14 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 itemsIndexed(state.filteredAttractions, key = { _, item -> item.id }) { _, destination ->
-                    DestinationCard(destination = destination, onClick = {
-                        selectedDestination = destination
-                        onDetails(destination.id)
-                    })
+                    DestinationCard(
+                        destination = destination,
+                        onClick = {
+                            selectedDestination = destination
+                            onDetails(destination.id)
+                        },
+                        onFavoriteToggle = { vm.toggleFavorite(destination) }
+                    )
                 }
             }
         }
@@ -121,7 +130,16 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
                     .padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Text(detail.name, style = MaterialTheme.typography.titleLarge)
+                androidx.compose.foundation.layout.Row(modifier = Modifier.fillMaxWidth()) {
+                    Text(detail.name, style = MaterialTheme.typography.titleLarge)
+                    androidx.compose.foundation.layout.Spacer(modifier = Modifier.weight(1f))
+                    IconButton(onClick = { vm.toggleFavorite(detail) }) {
+                        Icon(
+                            imageVector = if (detail.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                            contentDescription = if (detail.isFavorite) "Remove from favorites" else "Add to favorites"
+                        )
+                    }
+                }
                 Text(detail.description.ifBlank { "No description available." }, style = MaterialTheme.typography.bodyMedium)
                 Text("Known for: ${detail.knownFor}")
                 Text("Category: ${detail.categoryName}")

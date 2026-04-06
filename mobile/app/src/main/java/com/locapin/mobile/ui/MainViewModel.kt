@@ -10,6 +10,7 @@ import com.locapin.mobile.domain.model.User
 import com.locapin.mobile.domain.repository.AuthRepository
 import com.locapin.mobile.domain.repository.DestinationRepository
 import com.locapin.mobile.domain.repository.ProfileRepository
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.FlowPreview
@@ -35,6 +36,7 @@ data class MainUiState(
     val attractionCategoryFilters: List<String> = emptyList(),
     val attractionAreaFilters: List<String> = emptyList(),
     val filteredAttractions: List<Destination> = emptyList(),
+    val favoriteIds: Set<String> = emptySet(),
     val searchResults: List<Destination> = emptyList(),
     val recentSearches: List<String> = emptyList(),
     val error: String? = null
@@ -46,7 +48,8 @@ class MainViewModel @Inject constructor(
     private val prefs: UserPreferencesDataStore,
     private val authRepository: AuthRepository,
     private val destinationRepository: DestinationRepository,
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val favoritesRepository: TouristFavoritesRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(MainUiState())
     val state: StateFlow<MainUiState> = _state.asStateFlow()
@@ -67,6 +70,11 @@ class MainViewModel @Inject constructor(
             authRepository.authToken.collectLatest { token ->
                 _state.value = _state.value.copy(authed = !token.isNullOrBlank())
                 if (!token.isNullOrBlank()) bootstrap()
+            }
+        }
+        viewModelScope.launch {
+            favoritesRepository.favoriteIds.collectLatest { favoriteIds ->
+                applyFavoriteIds(favoriteIds)
             }
         }
         viewModelScope.launch {
@@ -96,13 +104,11 @@ class MainViewModel @Inject constructor(
             _state.value = _state.value.copy(loading = true, error = null)
             val destinations = (destinationRepository.getDestinations() as? LocaPinResult.Success)?.data.orEmpty()
             val categories = (destinationRepository.getCategories() as? LocaPinResult.Success)?.data.orEmpty()
-            val favorites = (destinationRepository.getFavorites() as? LocaPinResult.Success)?.data.orEmpty()
             val profile = (profileRepository.getProfile() as? LocaPinResult.Success)?.data
             _state.value = _state.value.copy(
                 loading = false,
                 destinations = destinations,
                 categories = categories,
-                favorites = favorites,
                 profile = profile
             )
             recomputeAttractionsFilter()
@@ -176,8 +182,21 @@ class MainViewModel @Inject constructor(
     fun toggleFavorite(destination: Destination) {
         viewModelScope.launch {
             destinationRepository.setFavorite(destination.id, !destination.isFavorite)
-            bootstrap()
         }
+    }
+
+    private fun applyFavoriteIds(favoriteIds: Set<String>) {
+        val current = _state.value
+        fun Destination.withFavorite() = copy(isFavorite = favoriteIds.contains(id))
+        val destinations = current.destinations.map { it.withFavorite() }
+        _state.value = current.copy(
+            favoriteIds = favoriteIds,
+            destinations = destinations,
+            favorites = destinations.filter { it.isFavorite },
+            selectedDestination = current.selectedDestination?.withFavorite(),
+            searchResults = current.searchResults.map { it.withFavorite() }
+        )
+        recomputeAttractionsFilter()
     }
 
     fun logout() = viewModelScope.launch { authRepository.logout() }
