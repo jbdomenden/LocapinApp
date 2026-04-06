@@ -11,4 +11,6 @@ public final class BuildConfig {
   public static final String VERSION_NAME = "1.0.0";
   // Field from default config.
   public static final String API_BASE_URL = "https://example.com/";
+  // Field from default config.
+  public static final String GOOGLE_SERVER_CLIENT_ID = "";
 }

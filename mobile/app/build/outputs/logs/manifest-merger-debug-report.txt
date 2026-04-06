@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 meta-data#com.google.android.geo.API_KEY
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:17:9-19:47
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:18:9-20:47
 	android:value
 		INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:19:13-44
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:20:13-44
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:18:13-58
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:19:13-58
 manifest
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-32:12
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-57:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\74f5b0d090bcf618522c0a5c7f7a8f02\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\3def97728376a3e8e4249b9872be6031\transformed\hilt-navigation-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f311a8db3b7db30dbf0e3f83fa6716a\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
@@ -23,7 +23,10 @@ MERGED from [com.google.dagger:hilt-android:2.52] C:\Users\john.domenden\.jdks\o
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\bbc09422d6024eabc7406911522a8787\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.maps.android:maps-ktx:5.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\4101001054df75aeb4eacc5a17c5abbd\transformed\maps-ktx-5.1.1\AndroidManifest.xml:18:1-23:12
 MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:17:1-44:12
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:17:1-40:12
+MERGED from [com.facebook.android:facebook-login:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dc0412c4e8cd74d3bb455fbbfe4a1d78\transformed\facebook-login-17.0.2\AndroidManifest.xml:9:1-19:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d1b5511e9107586a9dc89f29c5ba50c5\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:9:1-44:12
 MERGED from [io.coil-kt:coil-svg:2.7.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c953c20d9ab1bf76f174202937d3de40\transformed\coil-svg-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose:2.7.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\a793a9d4e23df3d875f9aed073af058b\transformed\coil-compose-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose-base:2.7.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\b12486713934541274bc558be00e243b\transformed\coil-compose-base-2.7.0\AndroidManifest.xml:2:1-7:12
@@ -33,16 +36,25 @@ MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\john.domende
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9fdb4d786064b17bc51265b16c183cc2\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\df786ad17123a1ef0f58f97075c216dd\transformed\viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\adf53ec16af99e3f955a96749b20764a\transformed\play-services-location-21.3.0\AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\cc75f54bd944fb45ff94686ec1a4e904\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e86257ebfeb9a175516d7353eaf65eca\transformed\play-services-auth-base-18.0.10\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c0bfb67e6350d07e32024405e82a684e\transformed\play-services-fido-20.0.1\AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e2690ab4b03ae1ff2878752547f903da\transformed\play-services-base-18.5.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1081e96517cfab508877f1260a940dd6\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:2:1-5:12
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.fragment:fragment:1.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7e065370274492356509b56c461f86ab\transformed\fragment-1.5.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\385fc0764a415d70d3092e897aac6292\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.5.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\36529e6d86c508f9678c9ef07ce9c0aa\transformed\fragment-1.5.7\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\11d5a36fb3cffa05b2be2d25e1e62e70\transformed\activity-1.10.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0de0ce01a8d90e319ff3c6279dfbf912\transformed\transition-1.5.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f2632dbd8e3342da1504f931d2b6b9d\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:9:1-50:12
+MERGED from [androidx.browser:browser:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7972410e001c0de353bde343bd541fe0\transformed\browser-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\72ed7977fb4b6a9c96b245bda7817598\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9a73b362f0a6ea8d9593bd679b5e73f0\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7dedab7674cc04ce107fce7b79236b3e\transformed\loader-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\766591adfa4a37132853e5278b198419\transformed\material3-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\6bb795cca37a2585f12252d9a1e2c965\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\55b6dbb48ff066b63859e39fe96d370c\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0de0ce01a8d90e319ff3c6279dfbf912\transformed\transition-1.5.0\AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f2632dbd8e3342da1504f931d2b6b9d\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\45aa590239fdf72830f1fd75e7ef03b0\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0af36a15b267650ffac0ddf05864f21d\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.compose.material:material-android:1.7.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\840b3a501791da241ac1ddaf54f50520\transformed\material-release\AndroidManifest.xml:2:1-7:12
@@ -61,19 +73,19 @@ MERGED from [androidx.compose.animation:animation-android:1.7.7] C:\Users\john.d
 MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c92fcd61a0b2468e0e5aa3e3143642c3\transformed\foundation-layout-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\03d2fbb710393edaa43871017aa1e145\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dfb117c81f14b3578b8ec66977d108a6\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2eefc62376eebed816b14fe1fe7c5fe5\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\180ddaaa1a3c6180195bf095ce57d00d\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9a73b362f0a6ea8d9593bd679b5e73f0\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\248d0fd812738b8201bd2893d05c03ab\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c2f1e126ce605a3b0c525f3d588e1425\transformed\autofill-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\bc4eb3f9f6b7f27b4951e610d75dd921\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\74a56cc916044c2e3cc52605231434dd\transformed\emoji2-1.3.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f0324b58782240177a033d30b3d565ef\transformed\media-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f0b7f3b8781ebfbc2100dc250aead8a\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d789fd500ae6b4cc3ef835363a91a0a6\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\fa06814db6ac4fd1df18a951e5d53973\transformed\graphics-path-1.0.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\eade71b46803a97846e0414d7721ed1e\transformed\core-1.15.0\AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\4c0b7103d2c30b22fe20594aa87618cc\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c74455aaf54173536f736d2724014161\transformed\savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\19a6aade84267cc1c46f402d812c503b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2157ff612fcff33a84b4866d7e1be768\transformed\lifecycle-livedata-core-ktx-2.8.7\AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\386cd4e61978c3a70448acd7735b5829\transformed\lifecycle-livedata-2.8.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\665a083dec32f5681b0c969d84e8495c\transformed\lifecycle-viewmodel-2.8.7\AndroidManifest.xml:2:1-5:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\6a024a730f548b1bd4f21fecf23a0f57\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\473374217ee2529015e85afc8e4f7e39\transformed\lifecycle-runtime-release\AndroidManifest.xml:17:1-22:12
@@ -89,6 +101,7 @@ MERGED from [androidx.compose.material:material-icons-core-android:1.7.7] C:\Use
 MERGED from [androidx.compose.ui:ui-android:1.7.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\88df528d91f51e2f93224a77938ebe10\transformed\ui-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity-ktx:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e068974bd66ceb7f968de15b2178c29d\transformed\activity-ktx-1.10.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity-compose:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\61060c1a42743d6bbcd4b474ef338dcb\transformed\activity-compose-1.10.0\AndroidManifest.xml:2:1-7:12
+MERGED from [com.facebook.android:facebook-bolts:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\680eed6fb6ade54a0cbf0590ebfe23d8\transformed\facebook-bolts-17.0.2\AndroidManifest.xml:9:1-19:12
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e56b79710aeafd4b9b33f472bad7b185\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f6cf863682b5550efedd5229aa70e2f9\transformed\core-ktx-1.15.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.datastore:datastore-core-android:1.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c10e5f62328a588b09309c805cd11815\transformed\datastore-core-release\AndroidManifest.xml:2:1-7:12
@@ -113,6 +126,7 @@ MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\john.domenden\.jdks
 MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d19eded586c9fa6c6f76d2f539beb4e1\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\a3d589b285ac27cc9ef50e6b2823751b\transformed\dagger-lint-aar-2.52\AndroidManifest.xml:16:1-19:12
 MERGED from [com.caverock:androidsvg-aar:1.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\4c9fdc7a2cb648ae2cf658d5ac9d5bea\transformed\androidsvg-aar-1.4\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:2:1-13:12
 	package
 		INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -135,23 +149,39 @@ MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.dom
 MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:6:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:7:22-76
 application
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:8:5-30:19
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:8:5-30:19
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:9:5-55:19
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:9:5-55:19
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\bbc09422d6024eabc7406911522a8787\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\bbc09422d6024eabc7406911522a8787\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:36:5-42:19
 MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:22:5-38:19
+MERGED from [com.facebook.android:facebook-login:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dc0412c4e8cd74d3bb455fbbfe4a1d78\transformed\facebook-login-17.0.2\AndroidManifest.xml:16:5-17:19
+MERGED from [com.facebook.android:facebook-login:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dc0412c4e8cd74d3bb455fbbfe4a1d78\transformed\facebook-login-17.0.2\AndroidManifest.xml:16:5-17:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d1b5511e9107586a9dc89f29c5ba50c5\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d1b5511e9107586a9dc89f29c5ba50c5\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:21:5-42:19
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:21:5-42:19
 MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\adf53ec16af99e3f955a96749b20764a\transformed\play-services-location-21.3.0\AndroidManifest.xml:6:5-20
 MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\adf53ec16af99e3f955a96749b20764a\transformed\play-services-location-21.3.0\AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c0bfb67e6350d07e32024405e82a684e\transformed\play-services-fido-20.0.1\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c0bfb67e6350d07e32024405e82a684e\transformed\play-services-fido-20.0.1\AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e2690ab4b03ae1ff2878752547f903da\transformed\play-services-base-18.5.0\AndroidManifest.xml:4:5-6:19
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e2690ab4b03ae1ff2878752547f903da\transformed\play-services-base-18.5.0\AndroidManifest.xml:4:5-6:19
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1081e96517cfab508877f1260a940dd6\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:4:5-20
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1081e96517cfab508877f1260a940dd6\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:4:5-20
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:5:5-7:19
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:5:5-7:19
+MERGED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:18:5-48:19
+MERGED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:18:5-48:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\43fbb93944bfb68847d5cc07e70bf999\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\43fbb93944bfb68847d5cc07e70bf999\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\74a56cc916044c2e3cc52605231434dd\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
@@ -160,48 +190,102 @@ MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.
 MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\eade71b46803a97846e0414d7721ed1e\transformed\core-1.15.0\AndroidManifest.xml:28:5-89
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\19a6aade84267cc1c46f402d812c503b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\19a6aade84267cc1c46f402d812c503b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:23:5-33:19
+MERGED from [com.facebook.android:facebook-bolts:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\680eed6fb6ade54a0cbf0590ebfe23d8\transformed\facebook-bolts-17.0.2\AndroidManifest.xml:16:5-17:19
+MERGED from [com.facebook.android:facebook-bolts:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\680eed6fb6ade54a0cbf0590ebfe23d8\transformed\facebook-bolts-17.0.2\AndroidManifest.xml:16:5-17:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\b6fafd960a32f45c4416e1f17a7e3660\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\b6fafd960a32f45c4416e1f17a7e3660\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f73123ca1c432d8cb8944bb739d90de8\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f73123ca1c432d8cb8944bb739d90de8\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\681d85c14f44e53238c127045f0def63\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\681d85c14f44e53238c127045f0def63\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:11:5-20
+MERGED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:11:5-20
 	android:extractNativeLibs
 		INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\eade71b46803a97846e0414d7721ed1e\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:14:9-35
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:9-35
 	android:label
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:13:9-41
 	android:roundIcon
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:13:9-54
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:14:9-54
 	android:icon
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:9-45
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:16:9-45
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:9:9-39
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:10:9-39
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:22:9-24:55
+	android:value
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:24:13-52
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:23:13-58
+meta-data#com.facebook.sdk.ClientToken
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:25:9-27:61
+	android:value
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:27:13-58
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:26:13-56
 activity#com.locapin.mobile.MainActivity
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:21:9-29:20
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:29:9-37:20
 	android:exported
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:23:13-36
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:31:13-36
 	android:theme
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:24:13-49
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:32:13-49
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:22:13-59
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:30:13-59
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:25:13-28:29
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:13-36:29
 action#android.intent.action.MAIN
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:26:17-69
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:17-69
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:26:25-66
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:27:17-77
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:35:17-77
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:27:27-74
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:35:27-74
+activity#com.facebook.FacebookActivity
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:39:9-42:48
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:22:9-25:66
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:22:9-25:66
+	android:label
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:42:13-45
+	android:configChanges
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:41:13-96
+	android:theme
+		ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:25:13-63
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:40:13-57
+activity#com.facebook.CustomTabActivity
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:44:9-53:20
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:27:9-41:20
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:27:9-41:20
+	android:exported
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:46:13-36
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:45:13-58
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:@string/fb_login_protocol_scheme
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:47:13-52:29
+action#android.intent.action.VIEW
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:48:17-69
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:48:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:49:17-76
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:49:27-73
+category#android.intent.category.BROWSABLE
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:50:17-78
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:50:27-75
+data
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:51:17-75
+	android:scheme
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:51:23-72
 uses-sdk
 INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml
@@ -230,8 +314,14 @@ MERGED from [com.google.maps.android:maps-ktx:5.1.1] C:\Users\john.domenden\.jdk
 MERGED from [com.google.maps.android:maps-ktx:5.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\4101001054df75aeb4eacc5a17c5abbd\transformed\maps-ktx-5.1.1\AndroidManifest.xml:21:5-44
 MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.android:facebook-login:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dc0412c4e8cd74d3bb455fbbfe4a1d78\transformed\facebook-login-17.0.2\AndroidManifest.xml:12:5-14:41
+MERGED from [com.facebook.android:facebook-login:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dc0412c4e8cd74d3bb455fbbfe4a1d78\transformed\facebook-login-17.0.2\AndroidManifest.xml:12:5-14:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d1b5511e9107586a9dc89f29c5ba50c5\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d1b5511e9107586a9dc89f29c5ba50c5\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:13:5-15:41
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:13:5-15:41
 MERGED from [io.coil-kt:coil-svg:2.7.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c953c20d9ab1bf76f174202937d3de40\transformed\coil-svg-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-svg:2.7.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c953c20d9ab1bf76f174202937d3de40\transformed\coil-svg-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose:2.7.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\a793a9d4e23df3d875f9aed073af058b\transformed\coil-compose-2.7.0\AndroidManifest.xml:5:5-44
@@ -250,26 +340,44 @@ MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\john.domenden\.jdks\
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\df786ad17123a1ef0f58f97075c216dd\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\adf53ec16af99e3f955a96749b20764a\transformed\play-services-location-21.3.0\AndroidManifest.xml:4:5-44
 MERGED from [com.google.android.gms:play-services-location:21.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\adf53ec16af99e3f955a96749b20764a\transformed\play-services-location-21.3.0\AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\cc75f54bd944fb45ff94686ec1a4e904\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\cc75f54bd944fb45ff94686ec1a4e904\transformed\play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e86257ebfeb9a175516d7353eaf65eca\transformed\play-services-auth-base-18.0.10\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e86257ebfeb9a175516d7353eaf65eca\transformed\play-services-auth-base-18.0.10\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c0bfb67e6350d07e32024405e82a684e\transformed\play-services-fido-20.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c0bfb67e6350d07e32024405e82a684e\transformed\play-services-fido-20.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e2690ab4b03ae1ff2878752547f903da\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e2690ab4b03ae1ff2878752547f903da\transformed\play-services-base-18.5.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1081e96517cfab508877f1260a940dd6\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-tasks:18.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1081e96517cfab508877f1260a940dd6\transformed\play-services-tasks-18.2.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:3:5-44
 MERGED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:3:5-44
-MERGED from [androidx.fragment:fragment:1.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7e065370274492356509b56c461f86ab\transformed\fragment-1.5.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7e065370274492356509b56c461f86ab\transformed\fragment-1.5.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\385fc0764a415d70d3092e897aac6292\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\385fc0764a415d70d3092e897aac6292\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.5.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\36529e6d86c508f9678c9ef07ce9c0aa\transformed\fragment-1.5.7\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\36529e6d86c508f9678c9ef07ce9c0aa\transformed\fragment-1.5.7\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.activity:activity:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\11d5a36fb3cffa05b2be2d25e1e62e70\transformed\activity-1.10.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.activity:activity:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\11d5a36fb3cffa05b2be2d25e1e62e70\transformed\activity-1.10.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0de0ce01a8d90e319ff3c6279dfbf912\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0de0ce01a8d90e319ff3c6279dfbf912\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f2632dbd8e3342da1504f931d2b6b9d\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f2632dbd8e3342da1504f931d2b6b9d\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:12:5-14:41
+MERGED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:12:5-14:41
+MERGED from [androidx.browser:browser:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7972410e001c0de353bde343bd541fe0\transformed\browser-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7972410e001c0de353bde343bd541fe0\transformed\browser-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\72ed7977fb4b6a9c96b245bda7817598\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\72ed7977fb4b6a9c96b245bda7817598\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9a73b362f0a6ea8d9593bd679b5e73f0\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9a73b362f0a6ea8d9593bd679b5e73f0\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7dedab7674cc04ce107fce7b79236b3e\transformed\loader-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7dedab7674cc04ce107fce7b79236b3e\transformed\loader-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\766591adfa4a37132853e5278b198419\transformed\material3-release\AndroidManifest.xml:20:5-44
 MERGED from [androidx.compose.material3:material3-android:1.3.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\766591adfa4a37132853e5278b198419\transformed\material3-release\AndroidManifest.xml:20:5-44
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\6bb795cca37a2585f12252d9a1e2c965\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\6bb795cca37a2585f12252d9a1e2c965\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\55b6dbb48ff066b63859e39fe96d370c\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\55b6dbb48ff066b63859e39fe96d370c\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0de0ce01a8d90e319ff3c6279dfbf912\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
-MERGED from [androidx.transition:transition:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0de0ce01a8d90e319ff3c6279dfbf912\transformed\transition-1.5.0\AndroidManifest.xml:5:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f2632dbd8e3342da1504f931d2b6b9d\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f2632dbd8e3342da1504f931d2b6b9d\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\45aa590239fdf72830f1fd75e7ef03b0\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\45aa590239fdf72830f1fd75e7ef03b0\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\0af36a15b267650ffac0ddf05864f21d\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -306,18 +414,22 @@ MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\john.domenden\.j
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\03d2fbb710393edaa43871017aa1e145\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dfb117c81f14b3578b8ec66977d108a6\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\dfb117c81f14b3578b8ec66977d108a6\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2eefc62376eebed816b14fe1fe7c5fe5\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2eefc62376eebed816b14fe1fe7c5fe5\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\180ddaaa1a3c6180195bf095ce57d00d\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\180ddaaa1a3c6180195bf095ce57d00d\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9a73b362f0a6ea8d9593bd679b5e73f0\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\9a73b362f0a6ea8d9593bd679b5e73f0\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\248d0fd812738b8201bd2893d05c03ab\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\248d0fd812738b8201bd2893d05c03ab\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c2f1e126ce605a3b0c525f3d588e1425\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c2f1e126ce605a3b0c525f3d588e1425\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\bc4eb3f9f6b7f27b4951e610d75dd921\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\bc4eb3f9f6b7f27b4951e610d75dd921\transformed\emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\74a56cc916044c2e3cc52605231434dd\transformed\emoji2-1.3.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\74a56cc916044c2e3cc52605231434dd\transformed\emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f0324b58782240177a033d30b3d565ef\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f0324b58782240177a033d30b3d565ef\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f0b7f3b8781ebfbc2100dc250aead8a\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2f0b7f3b8781ebfbc2100dc250aead8a\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d789fd500ae6b4cc3ef835363a91a0a6\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d789fd500ae6b4cc3ef835363a91a0a6\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\fa06814db6ac4fd1df18a951e5d53973\transformed\graphics-path-1.0.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\fa06814db6ac4fd1df18a951e5d53973\transformed\graphics-path-1.0.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.core:core:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\eade71b46803a97846e0414d7721ed1e\transformed\core-1.15.0\AndroidManifest.xml:20:5-44
@@ -328,10 +440,6 @@ MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\john.domenden\.jdks\
 MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\c74455aaf54173536f736d2724014161\transformed\savedstate-1.2.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\19a6aade84267cc1c46f402d812c503b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:21:5-44
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\19a6aade84267cc1c46f402d812c503b\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2157ff612fcff33a84b4866d7e1be768\transformed\lifecycle-livedata-core-ktx-2.8.7\AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\2157ff612fcff33a84b4866d7e1be768\transformed\lifecycle-livedata-core-ktx-2.8.7\AndroidManifest.xml:5:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\386cd4e61978c3a70448acd7735b5829\transformed\lifecycle-livedata-2.8.7\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\386cd4e61978c3a70448acd7735b5829\transformed\lifecycle-livedata-2.8.7\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\665a083dec32f5681b0c969d84e8495c\transformed\lifecycle-viewmodel-2.8.7\AndroidManifest.xml:4:5-43
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\665a083dec32f5681b0c969d84e8495c\transformed\lifecycle-viewmodel-2.8.7\AndroidManifest.xml:4:5-43
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\6a024a730f548b1bd4f21fecf23a0f57\transformed\lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
@@ -362,6 +470,8 @@ MERGED from [androidx.activity:activity-ktx:1.10.0] C:\Users\john.domenden\.jdks
 MERGED from [androidx.activity:activity-ktx:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e068974bd66ceb7f968de15b2178c29d\transformed\activity-ktx-1.10.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.activity:activity-compose:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\61060c1a42743d6bbcd4b474ef338dcb\transformed\activity-compose-1.10.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.activity:activity-compose:1.10.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\61060c1a42743d6bbcd4b474ef338dcb\transformed\activity-compose-1.10.0\AndroidManifest.xml:5:5-44
+MERGED from [com.facebook.android:facebook-bolts:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\680eed6fb6ade54a0cbf0590ebfe23d8\transformed\facebook-bolts-17.0.2\AndroidManifest.xml:12:5-14:41
+MERGED from [com.facebook.android:facebook-bolts:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\680eed6fb6ade54a0cbf0590ebfe23d8\transformed\facebook-bolts-17.0.2\AndroidManifest.xml:12:5-14:41
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e56b79710aeafd4b9b33f472bad7b185\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e56b79710aeafd4b9b33f472bad7b185\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.core:core-ktx:1.15.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\f6cf863682b5550efedd5229aa70e2f9\transformed\core-ktx-1.15.0\AndroidManifest.xml:5:5-44
@@ -410,14 +520,12 @@ MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\john.domenden\.jdk
 MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\a3d589b285ac27cc9ef50e6b2823751b\transformed\dagger-lint-aar-2.52\AndroidManifest.xml:18:3-42
 MERGED from [com.caverock:androidsvg-aar:1.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\4c9fdc7a2cb648ae2cf658d5ac9d5bea\transformed\androidsvg-aar-1.4\AndroidManifest.xml:7:5-9:41
 MERGED from [com.caverock:androidsvg-aar:1.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\4c9fdc7a2cb648ae2cf658d5ac9d5bea\transformed\androidsvg-aar-1.4\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:5:5-7:41
 	android:targetSdkVersion
 		INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:23:5-79
-	android:name
-		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:23:22-76
 uses-feature#0x00020000
 ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
@@ -426,6 +534,8 @@ ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.dome
 		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:28:9-32
 queries
 ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:30:5-34:15
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:17:5-19:15
+MERGED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:17:5-19:15
 package#com.google.android.apps.maps
 ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:33:9-64
 	android:name
@@ -436,6 +546,38 @@ ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.dome
 		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:41:13-37
 	android:name
 		ADDED from [com.google.android.gms:play-services-maps:19.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\204eddfa6518dccaed86ee40ea230566\transformed\play-services-maps-19.0.0\AndroidManifest.xml:40:13-50
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:33:9-37:51
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:35:13-36
+	android:visibleToInstantApps
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:37:13-48
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\783d2ff42ed9f1d1d627be5ea1a4e045\transformed\play-services-auth-21.2.0\AndroidManifest.xml:34:13-89
+package#com.facebook.katana
+ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:18:9-55
+	android:name
+		ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:18:18-52
+activity#com.facebook.CustomTabMainActivity
+ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:26:9-71
+	android:name
+		ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:26:19-68
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:cct.${applicationId}+data:scheme:fbconnect
+ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:31:13-40:29
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:cct.com.locapin.mobile+data:scheme:fbconnect
+ADDED from [com.facebook.android:facebook-common:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\1c0cfbf339decbf5d5b10723b7f845b1\transformed\facebook-common-17.0.2\AndroidManifest.xml:31:13-40:29
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\e2690ab4b03ae1ff2878752547f903da\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
 	android:exported
@@ -450,6 +592,42 @@ ADDED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.
 		ADDED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:18.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\7872096e30f4dddfdd714f439a2d1e76\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
+uses-permission#com.google.android.gms.permission.AD_ID
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:16:5-79
+	android:name
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:16:22-76
+provider#com.facebook.internal.FacebookInitProvider
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:29:9-32:40
+	android:authorities
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:31:13-72
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:30:13-70
+receiver#com.facebook.CurrentAccessTokenExpirationBroadcastReceiver
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:34:9-40:20
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:36:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:35:13-86
+intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:37:13-39:29
+action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:38:17-95
+	android:name
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:38:25-92
+receiver#com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:41:9-47:20
+	android:exported
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:43:13-37
+	android:name
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:42:13-118
+intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:44:13-46:29
+action#com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED
+ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:45:17-103
+	android:name
+		ADDED from [com.facebook.android:facebook-core:17.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\d4394c6e36b3dfbc5191d69de625ff4f\transformed\facebook-core-17.0.2\AndroidManifest.xml:45:25-100
 activity#androidx.compose.ui.tooling.PreviewActivity
 ADDED from [androidx.compose.ui:ui-tooling-android:1.7.7] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\43fbb93944bfb68847d5cc07e70bf999\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
 	android:exported
@@ -546,3 +724,7 @@ action#androidx.profileinstaller.action.BENCHMARK_OPERATION
 ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\b6fafd960a32f45c4416e1f17a7e3660\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
 	android:name
 		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\b6fafd960a32f45c4416e1f17a7e3660\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:9:5-110
+	android:name
+		ADDED from [com.android.installreferrer:installreferrer:1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\transforms-4\35edab6915746d3286c85a28b1c09dee\transformed\installreferrer-1.0\AndroidManifest.xml:9:22-107

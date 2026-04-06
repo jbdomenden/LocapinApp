@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -170,7 +171,9 @@ private fun LoginScreenContent(
     onTogglePassword: () -> Unit,
     onForgotPassword: () -> Unit,
     onPrimaryAction: () -> Unit,
-    onRegister: () -> Unit
+    onRegister: () -> Unit,
+    onGoogleLoginClick: () -> Unit,
+    onFacebookLoginClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -1055,12 +1058,14 @@ private fun LoginScreenPreview() {
         onTogglePassword = {},
         onForgotPassword = {},
         onPrimaryAction = {},
-        onRegister = {}
+        onRegister = {},
+        onGoogleLoginClick = {},
+        onFacebookLoginClick = {}
     )
 }
 
-private tailrec fun Context.findActivity(): Activity? = when (this) {
-    is Activity -> this
+private tailrec fun Context.findActivity(): ComponentActivity? = when (this) {
+    is ComponentActivity -> this
     is ContextWrapper -> baseContext.findActivity()
     else -> null
 }

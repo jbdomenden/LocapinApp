@@ -6,5 +6,8 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 raw locapin_logo
 string app_name
+string facebook_app_id
+string facebook_client_token
+string fb_login_protocol_scheme
 style Theme.LocaPin
 xml backup_rules

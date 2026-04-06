@@ -1,6 +1,7 @@
 package com.locapin.mobile.feature.map;
 
 import com.locapin.mobile.core.location.LocationProvider;
+import com.locapin.mobile.domain.repository.HistoryRepository;
 import com.locapin.mobile.domain.repository.SegmentedMapRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -29,25 +30,30 @@ public final class SegmentedMapViewModel_Factory implements Factory<SegmentedMap
 
   private final Provider<LocationProvider> locationProvider;
 
+  private final Provider<HistoryRepository> historyRepositoryProvider;
+
   public SegmentedMapViewModel_Factory(Provider<SegmentedMapRepository> repositoryProvider,
-      Provider<LocationProvider> locationProvider) {
+      Provider<LocationProvider> locationProvider,
+      Provider<HistoryRepository> historyRepositoryProvider) {
     this.repositoryProvider = repositoryProvider;
     this.locationProvider = locationProvider;
+    this.historyRepositoryProvider = historyRepositoryProvider;
   }
 
   @Override
   public SegmentedMapViewModel get() {
-    return newInstance(repositoryProvider.get(), locationProvider.get());
+    return newInstance(repositoryProvider.get(), locationProvider.get(), historyRepositoryProvider.get());
   }
 
   public static SegmentedMapViewModel_Factory create(
       Provider<SegmentedMapRepository> repositoryProvider,
-      Provider<LocationProvider> locationProvider) {
-    return new SegmentedMapViewModel_Factory(repositoryProvider, locationProvider);
+      Provider<LocationProvider> locationProvider,
+      Provider<HistoryRepository> historyRepositoryProvider) {
+    return new SegmentedMapViewModel_Factory(repositoryProvider, locationProvider, historyRepositoryProvider);
   }
 
   public static SegmentedMapViewModel newInstance(SegmentedMapRepository repository,
-      LocationProvider locationProvider) {
-    return new SegmentedMapViewModel(repository, locationProvider);
+      LocationProvider locationProvider, HistoryRepository historyRepository) {
+    return new SegmentedMapViewModel(repository, locationProvider, historyRepository);
   }
 }
