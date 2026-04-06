@@ -29,6 +29,12 @@ data class MainUiState(
     val favorites: List<Destination> = emptyList(),
     val selectedDestination: Destination? = null,
     val profile: User? = null,
+    val attractionsQuery: String = "",
+    val selectedAttractionCategory: String? = null,
+    val selectedAttractionArea: String? = null,
+    val attractionCategoryFilters: List<String> = emptyList(),
+    val attractionAreaFilters: List<String> = emptyList(),
+    val filteredAttractions: List<Destination> = emptyList(),
     val searchResults: List<Destination> = emptyList(),
     val recentSearches: List<String> = emptyList(),
     val error: String? = null
@@ -99,7 +105,62 @@ class MainViewModel @Inject constructor(
                 favorites = favorites,
                 profile = profile
             )
+            recomputeAttractionsFilter()
         }
+    }
+
+    fun setAttractionsQuery(query: String) {
+        _state.value = _state.value.copy(attractionsQuery = query)
+        recomputeAttractionsFilter()
+    }
+
+    fun setAttractionsCategory(category: String?) {
+        _state.value = _state.value.copy(selectedAttractionCategory = category)
+        recomputeAttractionsFilter()
+    }
+
+    fun setAttractionsArea(area: String?) {
+        _state.value = _state.value.copy(selectedAttractionArea = area)
+        recomputeAttractionsFilter()
+    }
+
+    fun clearAttractionsFilters() {
+        _state.value = _state.value.copy(
+            attractionsQuery = "",
+            selectedAttractionCategory = null,
+            selectedAttractionArea = null
+        )
+        recomputeAttractionsFilter()
+    }
+
+    private fun recomputeAttractionsFilter() {
+        val current = _state.value
+        val categoryFilters = current.destinations
+            .map { it.categoryName.trim() }
+            .filter { it.isNotBlank() }
+            .distinct()
+            .sorted()
+        val areaFilters = current.destinations
+            .map { it.area.trim() }
+            .filter { it.isNotBlank() }
+            .distinct()
+            .sorted()
+        val normalizedQuery = current.attractionsQuery.trim()
+        val filtered = current.destinations.filter { destination ->
+            val matchesQuery = normalizedQuery.isBlank() ||
+                destination.name.contains(normalizedQuery, ignoreCase = true) ||
+                destination.knownFor.contains(normalizedQuery, ignoreCase = true)
+            val matchesCategory = current.selectedAttractionCategory.isNullOrBlank() ||
+                destination.categoryName.equals(current.selectedAttractionCategory, ignoreCase = true)
+            val matchesArea = current.selectedAttractionArea.isNullOrBlank() ||
+                destination.area.equals(current.selectedAttractionArea, ignoreCase = true)
+            matchesQuery && matchesCategory && matchesArea
+        }
+        _state.value = current.copy(
+            attractionCategoryFilters = categoryFilters,
+            attractionAreaFilters = areaFilters,
+            filteredAttractions = filtered
+        )
     }
 
     fun openDestination(id: String) {
