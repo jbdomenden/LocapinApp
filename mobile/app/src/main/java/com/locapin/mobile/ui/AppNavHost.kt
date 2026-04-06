@@ -9,9 +9,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.locapin.mobile.core.navigation.AppDestinations
 import com.locapin.mobile.core.navigation.RoleResolver
+import com.locapin.mobile.feature.admin.AdminDashboardScreen
+import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.common.ComingSoonScreen
 import com.locapin.mobile.feature.home.DashboardScreen
@@ -27,6 +30,14 @@ fun AppNavHost(
     val roleResolver = remember { RoleResolver() }
     val session = vm.session.collectAsStateWithLifecycle().value
     val isReady = vm.isReady.collectAsStateWithLifecycle().value
+
+    fun logoutToAuth() {
+        vm.logout()
+        navController.navigate(AppDestinations.Auth) {
+            popUpTo(navController.graph.id) { inclusive = true }
+            launchSingleTop = true
+        }
+    }
 
     NavHost(
         navController = navController,
@@ -73,15 +84,73 @@ fun AppNavHost(
         }
 
         composable(AppDestinations.AdminEntry) {
-            ComingSoonScreen(
-                title = "Admin Entry",
-                description = "Admin dashboard is not part of Phase 4 and will be added later.",
-                onBack = {
-                    vm.logout()
-                    navController.navigate(AppDestinations.Auth) {
-                        popUpTo(0)
+            val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route.orEmpty()
+            AdminDashboardScreen(
+                adminName = session?.name,
+                currentRoute = currentRoute,
+                onOpenModule = { route ->
+                    if (route != AppDestinations.AdminEntry) {
+                        navController.navigate(route) { launchSingleTop = true }
                     }
-                }
+                },
+                onChangePassword = { navController.navigate(AppDestinations.AdminChangePassword) },
+                onLogout = ::logoutToAuth
+            )
+        }
+
+        composable(AppDestinations.AdminAttractions) {
+            AdminModulePlaceholderScreen(
+                title = "Manage Attractions",
+                description = "Manage tourist attraction records, content, and visibility.",
+                onBack = navController::popBackStack
+            )
+        }
+
+        composable(AppDestinations.AdminCategories) {
+            AdminModulePlaceholderScreen(
+                title = "Manage Categories",
+                description = "Manage attraction categories and content grouping.",
+                onBack = navController::popBackStack
+            )
+        }
+
+        composable(AppDestinations.AdminMapAreas) {
+            AdminModulePlaceholderScreen(
+                title = "Manage Map Areas",
+                description = "Manage San Juan map areas and attraction mapping.",
+                onBack = navController::popBackStack
+            )
+        }
+
+        composable(AppDestinations.AdminReports) {
+            AdminModulePlaceholderScreen(
+                title = "Reports",
+                description = "View summary insights and future analytics for the mobile admin side.",
+                onBack = navController::popBackStack
+            )
+        }
+
+        composable(AppDestinations.AdminProfile) {
+            AdminModulePlaceholderScreen(
+                title = "Profile",
+                description = "View and manage the current admin account details.",
+                onBack = navController::popBackStack
+            )
+        }
+
+        composable(AppDestinations.AdminSettings) {
+            AdminModulePlaceholderScreen(
+                title = "Settings",
+                description = "Access admin app settings and future configuration options.",
+                onBack = navController::popBackStack
+            )
+        }
+
+        composable(AppDestinations.AdminChangePassword) {
+            AdminModulePlaceholderScreen(
+                title = "Change Password",
+                description = "Securely update admin credentials from this screen in a future phase.",
+                onBack = navController::popBackStack
             )
         }
 
