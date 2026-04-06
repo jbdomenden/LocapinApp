@@ -4,11 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -22,16 +24,25 @@ import androidx.compose.ui.unit.dp
 fun EulaScreen(onBack: () -> Unit) {
     LegalDocumentScreen(
         title = "End User License Agreement",
-        content = EULA_CONTENT,
+        sections = EULA_CONTENT,
         onBack = onBack
     )
 }
 
 @Composable
-fun TermsScreen(onBack: () -> Unit) {
+fun TermsConditionsScreen(onBack: () -> Unit) {
     LegalDocumentScreen(
-        title = "Terms and Agreement",
-        content = TERMS_CONTENT,
+        title = "Terms and Conditions",
+        sections = TERMS_CONTENT,
+        onBack = onBack
+    )
+}
+
+@Composable
+fun PrivacyLocationConsentScreen(onBack: () -> Unit) {
+    LegalDocumentScreen(
+        title = "Privacy and Location Consent",
+        sections = PRIVACY_CONTENT,
         onBack = onBack
     )
 }
@@ -40,46 +51,44 @@ fun TermsScreen(onBack: () -> Unit) {
 @Composable
 private fun LegalDocumentScreen(
     title: String,
-    content: List<LegalSection>,
+    sections: List<LegalSection>,
     onBack: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text(title) })
+            TopAppBar(
+                title = { Text(title) },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
         }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding),
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            item {
-                Text(
-                    text = "Effective date: April 2, 2026",
-                    style = MaterialTheme.typography.bodySmall
-                )
-            }
-            items(content.size) { index ->
-                val section = content[index]
+            items(sections.size) { index ->
+                val section = sections[index]
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(
                         text = section.title,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
-                    Text(text = section.body, style = MaterialTheme.typography.bodyMedium)
-                }
-            }
-            item {
-                Button(
-                    onClick = onBack,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 12.dp)
-                ) {
-                    Text("Back")
+                    Text(
+                        text = section.body,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             }
         }
@@ -90,54 +99,77 @@ private data class LegalSection(val title: String, val body: String)
 
 private val EULA_CONTENT = listOf(
     LegalSection(
-        title = "1. License Grant",
-        body = "LocaPin grants you a limited, non-exclusive, revocable license to install and use the app for personal, non-commercial travel discovery and navigation support."
+        title = "About LocaPin",
+        body = "LocaPin is a San Juan City tourism mobile application designed to help visitors discover attractions and nearby points of interest."
     ),
     LegalSection(
-        title = "2. Location Services",
-        body = "LocaPin uses your device location to calculate attraction distance and provide in-app directions. You may disable location permission, but distance calculations and routing quality may be limited or unavailable."
+        title = "Location and Connectivity",
+        body = "The app may use device location for nearby attraction context, distance estimates, and route guidance. LocaPin requires internet access and may use GPS or network-based location services for key features."
     ),
     LegalSection(
-        title = "3. Internet Requirement",
-        body = "LocaPin requires internet connectivity to fetch backend-driven attraction data, account status, map overlays, and route information. Offline behavior may be restricted."
+        title = "User Responsibilities",
+        body = "You are responsible for lawful and appropriate use of the app, including how location and route guidance are used while traveling."
     ),
     LegalSection(
-        title = "4. Account and Usage Data",
-        body = "To provide core functionality, LocaPin may process account identifiers, authentication tokens, destination interactions, and app usage events related to your session and saved preferences."
+        title = "Service Changes",
+        body = "App content, attractions, and feature behavior may change over time. Services may be updated, interrupted, or temporarily unavailable during maintenance or technical issues."
     ),
     LegalSection(
-        title = "5. Restrictions",
-        body = "You may not reverse engineer, misuse, disrupt, or attempt unauthorized access to LocaPin services, APIs, or related systems."
-    ),
-    LegalSection(
-        title = "6. Disclaimer and Liability",
-        body = "LocaPin is provided as-is. Map routes, travel times, and attraction details are best-effort and may change. Use judgment when traveling and follow local laws and safety guidance."
+        title = "Deployment Disclaimer",
+        body = "To the extent appropriate for a student or capstone-style deployment, LocaPin is provided on an as-is basis without guaranteed uninterrupted performance."
     )
 )
 
 private val TERMS_CONTENT = listOf(
     LegalSection(
-        title = "1. Service Scope",
-        body = "LocaPin helps users discover attractions, view map information, and navigate with in-app routing features driven by backend-managed content."
+        title = "Eligibility and Responsible Use",
+        body = "You agree to use LocaPin responsibly and in compliance with applicable laws and platform policies."
     ),
     LegalSection(
-        title = "2. Location and Directions Disclosure",
-        body = "By using LocaPin, you acknowledge that location access is used to compute real-time distance and provide in-app directions to attractions."
+        title = "Account Responsibility",
+        body = "You are responsible for your account credentials, profile information, and any activity performed through your account."
     ),
     LegalSection(
-        title = "3. Connectivity and Backend Data",
-        body = "Internet access is required for authentication, profile retrieval, destination listings, map content, and other backend-supported features."
+        title = "Accuracy and Limitations",
+        body = "Attraction details, route guidance, and location-based information are provided on a best-effort basis and may not always be complete, current, or fully accurate."
     ),
     LegalSection(
-        title = "4. Data Processing",
-        body = "LocaPin may process data relevant to account security, login sessions, attraction history, and app usage to deliver and improve service functionality."
+        title = "Prohibited Misuse",
+        body = "You may not misuse the app by attempting unauthorized access, disrupting services, or using content and features for unlawful purposes."
     ),
     LegalSection(
-        title = "5. User Responsibilities",
-        body = "You are responsible for accurate account information, secure credentials, and lawful use of location and map features."
+        title = "Third-Party Dependencies",
+        body = "Some features may rely on third-party services such as map providers or social login providers. Their availability can affect app behavior."
     ),
     LegalSection(
-        title = "6. Changes and Termination",
-        body = "These terms may be updated over time. Continued use after updates means acceptance of revised terms. Access may be suspended for policy or security violations."
+        title = "Content Management and Updates",
+        body = "Administrative users are responsible for content they manage when applicable. Features and terms may be updated in later releases."
+    )
+)
+
+private val PRIVACY_CONTENT = listOf(
+    LegalSection(
+        title = "Account Data Use",
+        body = "LocaPin may collect and use account details needed for authentication and profile-related features."
+    ),
+    LegalSection(
+        title = "Location Data Use",
+        body = "The app may access your current location to calculate distance and support navigation-related features for attractions in and around San Juan City."
+    ),
+    LegalSection(
+        title = "How Location Works",
+        body = "GPS, network connectivity, and third-party map services may be used to provide map display, direction guidance, and nearby context."
+    ),
+    LegalSection(
+        title = "Permission Control",
+        body = "Location permission is controlled at the device level. You can allow, deny, or revoke access in system settings at any time."
+    ),
+    LegalSection(
+        title = "Feature Impact",
+        body = "If location access is denied, some distance, map, and navigation features may not work properly."
+    ),
+    LegalSection(
+        title = "Scope Commitment",
+        body = "This consent reflects current app scope and does not claim data collection beyond planned authentication, profile, and tourism navigation use cases."
     )
 )
