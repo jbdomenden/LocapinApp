@@ -1,7 +1,7 @@
 package com.locapin.mobile.feature.home
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -50,6 +50,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.locapin.mobile.feature.common.ComingSoonScreen
 import kotlinx.coroutines.launch
 
 private data class TouristModuleItem(
@@ -93,7 +94,7 @@ fun TouristDashboardScreen(
                 Text(
                     text = "Tourist Modules",
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)
                 )
                 modules.forEach { module ->
                     NavigationDrawerItem(
@@ -103,11 +104,12 @@ fun TouristDashboardScreen(
                         onClick = {
                             onNavigate(module.route)
                             scope.launch { drawerState.close() }
-                        }
+                        },
+                        modifier = Modifier.padding(horizontal = 12.dp)
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                Divider(modifier = Modifier.padding(horizontal = 12.dp))
+                Divider(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp))
                 NavigationDrawerItem(
                     label = { Text("Logout") },
                     selected = false,
@@ -115,7 +117,8 @@ fun TouristDashboardScreen(
                     onClick = {
                         scope.launch { drawerState.close() }
                         onLogout()
-                    }
+                    },
+                    modifier = Modifier.padding(horizontal = 12.dp)
                 )
             }
         }
@@ -126,12 +129,12 @@ fun TouristDashboardScreen(
                     title = { Text("Tourist Dashboard") },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Open menu")
+                            Icon(Icons.Default.Menu, contentDescription = "Open tourist menu")
                         }
                     },
                     actions = {
                         IconButton(onClick = { showMenu = true }) {
-                            Icon(Icons.Default.MoreVert, contentDescription = "More")
+                            Icon(Icons.Default.MoreVert, contentDescription = "Dashboard actions")
                         }
                         DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                             DropdownMenuItem(
@@ -162,7 +165,7 @@ fun TouristDashboardScreen(
                 Text(
                     text = "Welcome${touristName?.let { ", $it" } ?: ""}",
                     style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.padding(top = 16.dp)
                 )
                 Text(
@@ -246,30 +249,9 @@ fun TouristAboutScreen(onBack: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChangePasswordPlaceholderScreen(onBack: () -> Unit) {
-    Scaffold(topBar = { TopAppBar(title = { Text("Change Password") }) }) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Text(
-                text = "Password settings",
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "Secure password updates will be available once backend account management is finalized.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = "Back",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clickable(onClick = onBack)
-            )
-        }
-    }
+    ComingSoonScreen(
+        title = "Change Password",
+        description = "Secure password updates will be available once backend account management is finalized.",
+        onBack = onBack
+    )
 }
