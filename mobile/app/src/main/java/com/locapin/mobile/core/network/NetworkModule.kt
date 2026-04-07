@@ -134,7 +134,11 @@ object RepositoryModule {
         mode: AppDataMode,
         mockRepository: DestinationRepositoryImpl,
         remoteRepository: RemoteDestinationRepository
-    ): DestinationRepository = if (mode == AppDataMode.MOCK) mockRepository else remoteRepository
+    ): DestinationRepository {
+        val isRemoteTouristAttractionsReadEnabled =
+            mode == AppDataMode.REMOTE || BuildConfig.ENABLE_REMOTE_TOURIST_ATTRACTIONS_READ
+        return if (isRemoteTouristAttractionsReadEnabled) remoteRepository else mockRepository
+    }
 
     @Provides
     @Singleton

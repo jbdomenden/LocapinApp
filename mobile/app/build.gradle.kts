@@ -35,6 +35,17 @@ android {
             ).toBoolean()
         buildConfigField("boolean", "USE_MOCK_DATA", useMockData.toString())
 
+        val enableRemoteTouristAttractionsRead = (
+            project.findProperty("LOCAPIN_ENABLE_REMOTE_TOURIST_ATTRACTIONS_READ") as? String
+                ?: System.getenv("LOCAPIN_ENABLE_REMOTE_TOURIST_ATTRACTIONS_READ")
+                ?: "false"
+            ).toBoolean()
+        buildConfigField(
+            "boolean",
+            "ENABLE_REMOTE_TOURIST_ATTRACTIONS_READ",
+            enableRemoteTouristAttractionsRead.toString()
+        )
+
         val mapsKey = (project.findProperty("MAPS_API_KEY") as? String) ?: ""
         manifestPlaceholders["MAPS_API_KEY"] = mapsKey
 
