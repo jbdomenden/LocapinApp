@@ -13,7 +13,8 @@ import kotlinx.coroutines.flow.update
 
 data class AdminAttractionsListUiState(
     val searchQuery: String = "",
-    val attractions: List<AdminAttraction> = emptyList()
+    val attractions: List<AdminAttraction> = emptyList(),
+    val errorMessage: String? = null
 )
 
 @HiltViewModel
@@ -25,14 +26,15 @@ class AdminAttractionsListViewModel @Inject constructor(
 
     val uiState: StateFlow<AdminAttractionsListUiState> = combine(
         searchQuery,
-        repository.attractions
-    ) { query, attractions ->
+        repository.attractions,
+        repository.errorMessage
+    ) { query, attractions, errorMessage ->
         val filtered = if (query.isBlank()) {
             attractions
         } else {
             attractions.filter { it.name.contains(query, ignoreCase = true) }
         }
-        AdminAttractionsListUiState(searchQuery = query, attractions = filtered)
+        AdminAttractionsListUiState(searchQuery = query, attractions = filtered, errorMessage = errorMessage)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
@@ -41,6 +43,10 @@ class AdminAttractionsListViewModel @Inject constructor(
 
     fun onSearchQueryChange(value: String) {
         searchQuery.update { value }
+    }
+
+    fun onErrorShown() {
+        repository.clearError()
     }
 
     fun deleteAttraction(id: String) {
