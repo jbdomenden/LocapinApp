@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -134,7 +133,7 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                itemsIndexed(state.filteredAttractions, key = { _, item -> item.id }) { _, destination ->
+                items(state.filteredAttractions, key = { it.id }) { destination ->
                     DestinationCard(
                         destination = destination,
                         onClick = {

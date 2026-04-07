@@ -12,6 +12,7 @@ import com.locapin.mobile.domain.repository.SegmentedMapRepository
 import com.locapin.mobile.domain.repository.TouristFavoritesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -52,6 +53,7 @@ class SegmentedMapViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SegmentedMapUiState())
     val uiState: StateFlow<SegmentedMapUiState> = _uiState.asStateFlow()
+    private var locationRefreshJob: Job? = null
 
     init {
         loadMapData()
@@ -61,6 +63,7 @@ class SegmentedMapViewModel @Inject constructor(
     private fun observeFavorites() {
         viewModelScope.launch {
             favoritesRepository.favoriteIds.collect { ids ->
+                if (_uiState.value.favoriteIds == ids) return@collect
                 _uiState.value = _uiState.value.copy(favoriteIds = ids)
             }
         }
@@ -68,7 +71,10 @@ class SegmentedMapViewModel @Inject constructor(
 
     fun loadMapData() {
         viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(isLoading = true)
+            _uiState.value = _uiState.value.copy(
+                isLoading = _uiState.value.zones.isEmpty(),
+                errorMessage = null
+            )
             val zonesResult = repository.getMapZones()
             val attractionsResult = repository.getZoneAttractions()
             val zones = (zonesResult as? LocaPinResult.Success)?.data.orEmpty()
@@ -127,9 +133,8 @@ class SegmentedMapViewModel @Inject constructor(
     }
 
     fun onPermissionResult(permissionState: LocationPermissionUiState) {
-        _uiState.value = _uiState.value.copy(
-            permissionState = permissionState
-        )
+        if (_uiState.value.permissionState == permissionState) return
+        _uiState.value = _uiState.value.copy(permissionState = permissionState)
         if (permissionState == LocationPermissionUiState.GRANTED) refreshLocation()
     }
 
@@ -142,7 +147,8 @@ class SegmentedMapViewModel @Inject constructor(
             )
             return
         }
-        viewModelScope.launch {
+        if (locationRefreshJob?.isActive == true) return
+        locationRefreshJob = viewModelScope.launch {
             val user = locationProvider.getLastKnownLocation()
             _uiState.value = _uiState.value.copy(
                 userLocation = user,
@@ -165,6 +171,8 @@ class SegmentedMapViewModel @Inject constructor(
                     errorMessage = (routeResult as? LocaPinResult.Error)?.message
                 )
             }
+        }.also { job ->
+            job.invokeOnCompletion { if (locationRefreshJob === job) locationRefreshJob = null }
         }
     }
 

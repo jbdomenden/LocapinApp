@@ -57,6 +57,7 @@ class MainViewModel @Inject constructor(
     private val _state = MutableStateFlow(MainUiState())
     val state: StateFlow<MainUiState> = _state.asStateFlow()
     val queryFlow = MutableStateFlow("")
+    private var lastBootstrappedToken: String? = null
 
     init {
         viewModelScope.launch {
@@ -71,8 +72,17 @@ class MainViewModel @Inject constructor(
         }
         viewModelScope.launch {
             authRepository.authToken.collectLatest { token ->
-                _state.value = _state.value.copy(authed = !token.isNullOrBlank())
-                if (!token.isNullOrBlank()) bootstrap()
+                val isAuthed = !token.isNullOrBlank()
+                if (!isAuthed) {
+                    lastBootstrappedToken = null
+                    _state.value = _state.value.copy(authed = false)
+                } else {
+                    _state.value = _state.value.copy(authed = true)
+                    if (token != lastBootstrappedToken) {
+                        lastBootstrappedToken = token
+                        bootstrap(showLoading = _state.value.destinations.isEmpty())
+                    }
+                }
             }
         }
         viewModelScope.launch {
@@ -102,9 +112,13 @@ class MainViewModel @Inject constructor(
         queryFlow.value = q
     }
 
-    fun bootstrap() {
+    fun bootstrap(showLoading: Boolean = true) {
         viewModelScope.launch {
-            _state.value = _state.value.copy(loading = true, error = null, contentError = null)
+            _state.value = _state.value.copy(
+                loading = if (showLoading) true else _state.value.loading,
+                error = null,
+                contentError = null
+            )
             val destinationsResult = destinationRepository.getDestinations()
             val categoriesResult = destinationRepository.getCategories()
             val profileResult = profileRepository.getProfile()
@@ -140,26 +154,33 @@ class MainViewModel @Inject constructor(
 
     fun retryContentLoad() {
         if (_state.value.loading) return
-        bootstrap()
+        bootstrap(showLoading = _state.value.destinations.isEmpty())
     }
 
     fun setAttractionsQuery(query: String) {
+        if (_state.value.attractionsQuery == query) return
         _state.value = _state.value.copy(attractionsQuery = query)
         recomputeAttractionsFilter()
     }
 
     fun setAttractionsCategory(category: String?) {
+        if (_state.value.selectedAttractionCategory == category) return
         _state.value = _state.value.copy(selectedAttractionCategory = category)
         recomputeAttractionsFilter()
     }
 
     fun setAttractionsArea(area: String?) {
+        if (_state.value.selectedAttractionArea == area) return
         _state.value = _state.value.copy(selectedAttractionArea = area)
         recomputeAttractionsFilter()
     }
 
     fun clearAttractionsFilters() {
-        _state.value = _state.value.copy(
+        val current = _state.value
+        if (current.attractionsQuery.isBlank() && current.selectedAttractionCategory == null && current.selectedAttractionArea == null) {
+            return
+        }
+        _state.value = current.copy(
             attractionsQuery = "",
             selectedAttractionCategory = null,
             selectedAttractionArea = null
@@ -190,6 +211,12 @@ class MainViewModel @Inject constructor(
                 destination.area.equals(current.selectedAttractionArea, ignoreCase = true)
             matchesQuery && matchesCategory && matchesArea
         }
+        if (current.attractionCategoryFilters == categoryFilters &&
+            current.attractionAreaFilters == areaFilters &&
+            current.filteredAttractions == filtered
+        ) {
+            return
+        }
         _state.value = current.copy(
             attractionCategoryFilters = categoryFilters,
             attractionAreaFilters = areaFilters,
@@ -215,6 +242,7 @@ class MainViewModel @Inject constructor(
 
     private fun applyFavoriteIds(favoriteIds: Set<String>) {
         val current = _state.value
+        if (current.favoriteIds == favoriteIds) return
         fun Destination.withFavorite() = copy(isFavorite = favoriteIds.contains(id))
         val destinations = current.destinations.map { it.withFavorite() }
         _state.value = current.copy(

@@ -75,14 +75,23 @@ fun TouristDashboardScreen(
     onNavigate: (String) -> Unit,
     onLogout: () -> Unit
 ) {
-    val modules = listOf(
+    val modules = remember(
+        mapRoute,
+        attractionsRoute,
+        favoritesRoute,
+        profileRoute,
+        aboutRoute,
+        settingsRoute
+    ) {
+        listOf(
         TouristModuleItem(mapRoute, "Map", "Explore San Juan City on an interactive map.", Icons.Default.Map),
         TouristModuleItem(attractionsRoute, "Attractions", "Browse curated destinations nearby.", Icons.Default.Explore),
         TouristModuleItem(favoritesRoute, "Favorites", "Access your saved places instantly.", Icons.Default.Favorite),
         TouristModuleItem(profileRoute, "Profile", "View your account and travel profile.", Icons.Default.Person),
         TouristModuleItem(aboutRoute, "About", "Learn more about the LocaPin app.", Icons.Default.Info),
         TouristModuleItem(settingsRoute, "Settings", "Adjust app preferences and controls.", Icons.Default.Settings)
-    )
+        )
+    }
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var showMenu by remember { mutableStateOf(false) }
