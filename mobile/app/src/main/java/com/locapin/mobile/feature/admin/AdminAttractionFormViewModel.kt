@@ -33,9 +33,9 @@ class AdminAttractionFormViewModel @Inject constructor(
 
     var uiState by mutableStateOf(
         attractionId
-        ?.let(repository::getAttractionById)
-        ?.toUiState()
-        ?: AdminAttractionFormUiState(attractionId = attractionId)
+            ?.let(repository::getAttractionById)
+            ?.toUiState()
+            ?: AdminAttractionFormUiState(attractionId = attractionId)
     )
         private set
 
@@ -67,8 +67,13 @@ class AdminAttractionFormViewModel @Inject constructor(
         )
 
         val id = uiState.attractionId
-        if (id == null) repository.createAttraction(payload) else repository.updateAttraction(id, payload)
-        return true
+        val didSave = if (id == null) repository.createAttraction(payload) else repository.updateAttraction(id, payload)
+        if (!didSave) {
+            uiState = uiState.copy(
+                errors = uiState.errors + ("form" to (repository.errorMessage.value ?: "Unable to save attraction."))
+            )
+        }
+        return didSave
     }
 
     private fun validate(state: AdminAttractionFormUiState): Map<String, String> {
@@ -96,7 +101,7 @@ class AdminAttractionFormViewModel @Inject constructor(
     }
 
     private fun update(transform: AdminAttractionFormUiState.() -> AdminAttractionFormUiState) {
-        uiState = uiState.transform().copy(errors = uiState.errors - setOf("name", "knownFor", "description", "latitude", "longitude"))
+        uiState = uiState.transform().copy(errors = uiState.errors - setOf("name", "knownFor", "description", "latitude", "longitude", "form"))
     }
 
     private fun AdminAttraction.toUiState(): AdminAttractionFormUiState = AdminAttractionFormUiState(

@@ -10,10 +10,12 @@ import kotlinx.coroutines.flow.update
 
 interface AdminAttractionRepository {
     val attractions: StateFlow<List<AdminAttraction>>
+    val errorMessage: StateFlow<String?>
+    fun clearError()
     fun getAttractionById(id: String): AdminAttraction?
-    fun createAttraction(input: AdminAttractionInput)
-    fun updateAttraction(id: String, input: AdminAttractionInput)
-    fun deleteAttraction(id: String)
+    fun createAttraction(input: AdminAttractionInput): Boolean
+    fun updateAttraction(id: String, input: AdminAttractionInput): Boolean
+    fun deleteAttraction(id: String): Boolean
 }
 
 data class AdminAttractionInput(
@@ -30,26 +32,36 @@ data class AdminAttractionInput(
 @Singleton
 class InMemoryAdminAttractionRepository @Inject constructor() : AdminAttractionRepository {
     private val _attractions = MutableStateFlow(seedAttractions())
+    private val _errorMessage = MutableStateFlow<String?>(null)
+
     override val attractions: StateFlow<List<AdminAttraction>> = _attractions.asStateFlow()
+    override val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
+
+    override fun clearError() {
+        _errorMessage.value = null
+    }
 
     override fun getAttractionById(id: String): AdminAttraction? =
         _attractions.value.firstOrNull { it.id == id }
 
-    override fun createAttraction(input: AdminAttractionInput) {
+    override fun createAttraction(input: AdminAttractionInput): Boolean {
         val newItem = input.toAttraction(id = UUID.randomUUID().toString())
         _attractions.update { existing -> (existing + newItem).sortedBy { it.name.lowercase() } }
+        return true
     }
 
-    override fun updateAttraction(id: String, input: AdminAttractionInput) {
+    override fun updateAttraction(id: String, input: AdminAttractionInput): Boolean {
         _attractions.update { existing ->
             existing.map { item ->
                 if (item.id == id) input.toAttraction(id) else item
             }.sortedBy { it.name.lowercase() }
         }
+        return true
     }
 
-    override fun deleteAttraction(id: String) {
+    override fun deleteAttraction(id: String): Boolean {
         _attractions.update { existing -> existing.filterNot { it.id == id } }
+        return true
     }
 
     private fun AdminAttractionInput.toAttraction(id: String): AdminAttraction = AdminAttraction(

@@ -80,6 +80,30 @@ fun AdminAttractionsListScreen(
                 singleLine = true
             )
 
+            uiState.errorMessage?.let { message ->
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
+                ) {
+                    androidx.compose.foundation.layout.Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = message,
+                            modifier = Modifier.weight(1f),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onErrorContainer
+                        )
+                        TextButton(onClick = viewModel::onErrorShown) {
+                            Text("Dismiss")
+                        }
+                    }
+                }
+            }
+
             if (uiState.attractions.isEmpty()) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
