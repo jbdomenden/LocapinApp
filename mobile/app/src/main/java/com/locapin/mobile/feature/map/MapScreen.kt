@@ -18,9 +18,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.locapin.mobile.core.navigation.DirectionsLaunchResult
+import com.locapin.mobile.core.navigation.DirectionsLauncher
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,6 +33,7 @@ fun MapScreen(
     vm: SegmentedMapViewModel = hiltViewModel()
 ) {
     val state by vm.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showSheet by remember { mutableStateOf(false) }
 
@@ -106,7 +110,20 @@ fun MapScreen(
                 distanceText = vm.distanceTextFor(selectedAttraction),
                 isFavorite = vm.isFavoriteAttraction(selectedAttraction.id),
                 onToggleFavorite = { vm.toggleFavorite(selectedAttraction.id) },
-                onGo = { vm.onGoToAttraction(selectedAttraction.id) },
+                onGo = {
+                    when (
+                        DirectionsLauncher.launch(
+                            context = context,
+                            latitude = selectedAttraction.latitude,
+                            longitude = selectedAttraction.longitude,
+                            destinationLabel = selectedAttraction.name
+                        )
+                    ) {
+                        DirectionsLaunchResult.Launched -> vm.onGoToAttraction(selectedAttraction.id)
+                        DirectionsLaunchResult.InvalidCoordinates -> vm.showErrorMessage("This attraction has invalid coordinates.")
+                        DirectionsLaunchResult.NoNavigationApp -> vm.showErrorMessage("No navigation app is available on this device.")
+                    }
+                },
                 onRefreshDistance = vm::refreshLocation,
                 showPermissionAction = !hasLocationPermission,
                 onRequestPermission = requestPermission
