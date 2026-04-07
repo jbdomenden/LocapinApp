@@ -114,33 +114,18 @@ class SegmentedMapViewModel @Inject constructor(
 
     fun onGoToAttraction(attractionId: String) {
         val state = _uiState.value
-        if (state.permissionState != MapPermissionState.GRANTED) {
-            _uiState.value = state.copy(errorMessage = "Location permission is required for in-app navigation.")
-            return
-        }
         viewModelScope.launch {
             val attraction = state.visibleAttractions.firstOrNull { it.id == attractionId } ?: return@launch
             historyRepository.recordVisit(attraction)
-            val user = locationProvider.getLastKnownLocation()
-            if (user == null) {
-                _uiState.value = _uiState.value.copy(errorMessage = "Current GPS location unavailable.")
-                return@launch
-            }
-            val routeResult = repository.getRoutePath(
-                originLat = user.first,
-                originLng = user.second,
-                destinationLat = attraction.latitude,
-                destinationLng = attraction.longitude
-            )
-            val path = (routeResult as? LocaPinResult.Success)?.data.orEmpty()
-            val routeError = (routeResult as? LocaPinResult.Error)?.message
             _uiState.value = _uiState.value.copy(
-                userLocation = user,
                 navigationAttractionId = attractionId,
-                routePath = path,
-                errorMessage = routeError
+                errorMessage = null
             )
         }
+    }
+
+    fun showErrorMessage(message: String) {
+        _uiState.value = _uiState.value.copy(errorMessage = message)
     }
 
     fun onPermissionResult(granted: Boolean) {
@@ -189,7 +174,10 @@ class SegmentedMapViewModel @Inject constructor(
     }
 
     private fun formatDistanceMeters(meters: Float): String {
-        return if (meters < 1000) "${meters.roundToInt()} m away"
-        else "${"%.1f".format(meters / 1000f)} km away"
+        return when {
+            meters < 1000 -> "${meters.roundToInt()} m away"
+            meters < 10_000 -> "${"%.1f".format(meters / 1000f)} km away"
+            else -> "${(meters / 1000f).roundToInt()} km away"
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.locapin.mobile.feature.destination
 
-import android.content.Intent
-import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,6 +19,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.locapin.mobile.core.navigation.DirectionsLaunchResult
+import com.locapin.mobile.core.navigation.DirectionsLauncher
 import com.locapin.mobile.ui.MainViewModel
 
 @Composable
@@ -57,8 +58,22 @@ fun DestinationDetailsScreen(vm: MainViewModel, destinationId: String, onBack: (
                 Text(if (destination.isFavorite) "Remove from favorites" else "Save to favorites")
             }
             Button(onClick = {
-                val uri = Uri.parse("geo:${destination.lat},${destination.lng}?q=${Uri.encode(destination.name)}")
-                context.startActivity(Intent(Intent.ACTION_VIEW, uri))
+                when (
+                    DirectionsLauncher.launch(
+                        context = context,
+                        latitude = destination.lat,
+                        longitude = destination.lng,
+                        destinationLabel = destination.name
+                    )
+                ) {
+                    DirectionsLaunchResult.Launched -> Unit
+                    DirectionsLaunchResult.InvalidCoordinates -> {
+                        Toast.makeText(context, "This attraction has invalid coordinates.", Toast.LENGTH_SHORT).show()
+                    }
+                    DirectionsLaunchResult.NoNavigationApp -> {
+                        Toast.makeText(context, "No navigation app is available on this device.", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }, modifier = Modifier.fillMaxWidth()) { Text("Open in Maps") }
             Button(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Back") }
         }
