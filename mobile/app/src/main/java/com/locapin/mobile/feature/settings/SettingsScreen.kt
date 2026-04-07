@@ -3,7 +3,10 @@ package com.locapin.mobile.feature.settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -21,14 +24,28 @@ fun SettingsScreen(
         Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         Text("Settings", style = MaterialTheme.typography.headlineSmall)
-        Text("Map + location preferences")
+        Text(
+            "Map and location preferences.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
-        Text("Legal", style = MaterialTheme.typography.titleMedium)
-        TextButton(onClick = onOpenEula) { Text("End User License Agreement") }
-        TextButton(onClick = onOpenTermsConditions) { Text("Terms and Conditions") }
-        TextButton(onClick = onOpenPrivacyConsent) { Text("Privacy and Location Consent") }
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text("Legal", style = MaterialTheme.typography.titleMedium)
+                TextButton(onClick = onOpenEula) { Text("End User License Agreement") }
+                TextButton(onClick = onOpenTermsConditions) { Text("Terms and Conditions") }
+                TextButton(onClick = onOpenPrivacyConsent) { Text("Privacy and Location Consent") }
+            }
+        }
     }
 }
