@@ -28,6 +28,13 @@ android {
             ).ensureTrailingSlash()
         buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
 
+        val useMockData = (
+            project.findProperty("LOCAPIN_USE_MOCK_DATA") as? String
+                ?: System.getenv("LOCAPIN_USE_MOCK_DATA")
+                ?: "true"
+            ).toBoolean()
+        buildConfigField("boolean", "USE_MOCK_DATA", useMockData.toString())
+
         val mapsKey = (project.findProperty("MAPS_API_KEY") as? String) ?: ""
         manifestPlaceholders["MAPS_API_KEY"] = mapsKey
 

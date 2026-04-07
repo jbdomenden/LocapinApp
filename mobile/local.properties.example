@@ -7,6 +7,9 @@ sdk.dir=/Users/you/Library/Android/sdk
 # Backend base URL used by backend-driven modules where implemented:
 LOCAPIN_API_BASE_URL=https://your-backend.example.com/
 
+# Keep mock mode enabled by default during phased backend integration:
+LOCAPIN_USE_MOCK_DATA=true
+
 # Google Maps SDK key for Android:
 MAPS_API_KEY=YOUR_MAPS_API_KEY
 
