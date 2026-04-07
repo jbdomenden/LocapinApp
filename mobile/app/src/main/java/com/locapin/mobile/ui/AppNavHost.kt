@@ -37,6 +37,7 @@ import com.locapin.mobile.feature.auth.PrivacyLocationConsentScreen
 import com.locapin.mobile.feature.auth.SignUpScreen
 import com.locapin.mobile.feature.auth.TermsConditionsScreen
 import com.locapin.mobile.feature.common.ComingSoonScreen
+import com.locapin.mobile.feature.destination.DestinationDetailsScreen
 import com.locapin.mobile.feature.explore.ExploreScreen
 import com.locapin.mobile.feature.favorites.FavoritesScreen
 import com.locapin.mobile.feature.home.TouristAboutScreen
@@ -305,7 +306,27 @@ private fun NavGraphBuilder.touristGraph(
             navController.getBackStackEntry(AppDestinations.TouristEntry)
         }
         val mainViewModel = hiltViewModel<MainViewModel>(parentEntry)
-        FavoritesScreen(vm = mainViewModel, onDetails = {})
+        FavoritesScreen(
+            vm = mainViewModel,
+            onDetails = { attractionId ->
+                navController.navigate(AppDestinations.touristAttractionDetails(attractionId))
+            }
+        )
+    }
+    composable(
+        route = AppDestinations.TouristAttractionDetails,
+        arguments = listOf(navArgument("attractionId") { type = NavType.StringType })
+    ) { backStackEntry ->
+        val parentEntry = remember(backStackEntry) {
+            navController.getBackStackEntry(AppDestinations.TouristEntry)
+        }
+        val mainViewModel = hiltViewModel<MainViewModel>(parentEntry)
+        val attractionId = backStackEntry.arguments?.getString("attractionId").orEmpty()
+        DestinationDetailsScreen(
+            vm = mainViewModel,
+            destinationId = attractionId,
+            onBack = navController::popBackStack
+        )
     }
     composable(AppDestinations.TouristProfile) {
         ProfileScreen(
