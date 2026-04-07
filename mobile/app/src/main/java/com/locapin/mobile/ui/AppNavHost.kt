@@ -293,11 +293,19 @@ private fun NavGraphBuilder.touristGraph(
             openAppSettings = openAppSettings
         )
     }
-    composable(AppDestinations.TouristAttractions) {
-        ExploreScreen(vm = hiltViewModel<MainViewModel>(), onDetails = {})
+    composable(AppDestinations.TouristAttractions) { backStackEntry ->
+        val parentEntry = remember(backStackEntry) {
+            navController.getBackStackEntry(AppDestinations.TouristEntry)
+        }
+        val mainViewModel = hiltViewModel<MainViewModel>(parentEntry)
+        ExploreScreen(vm = mainViewModel, onDetails = {})
     }
-    composable(AppDestinations.TouristFavorites) {
-        FavoritesScreen(vm = hiltViewModel<MainViewModel>(), onDetails = {})
+    composable(AppDestinations.TouristFavorites) { backStackEntry ->
+        val parentEntry = remember(backStackEntry) {
+            navController.getBackStackEntry(AppDestinations.TouristEntry)
+        }
+        val mainViewModel = hiltViewModel<MainViewModel>(parentEntry)
+        FavoritesScreen(vm = mainViewModel, onDetails = {})
     }
     composable(AppDestinations.TouristProfile) {
         ProfileScreen(

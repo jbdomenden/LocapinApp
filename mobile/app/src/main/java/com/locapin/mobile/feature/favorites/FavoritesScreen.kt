@@ -29,7 +29,7 @@ fun FavoritesScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        items(state.favorites) { item ->
+        items(state.favorites, key = { it.id }) { item ->
             DestinationCard(
                 destination = item,
                 onClick = { onDetails(item.id) },
