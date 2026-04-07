@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "38876762420",
+    "project_id": "locapin-8f041",
+    "storage_bucket": "locapin-8f041.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38876762420:android:6ee9638672e6e51da8d561",
+        "android_client_info": {
+          "package_name": "com.locapin.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBq9h5AH2KiAxIVeMWq1mOo9FIscGlzfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

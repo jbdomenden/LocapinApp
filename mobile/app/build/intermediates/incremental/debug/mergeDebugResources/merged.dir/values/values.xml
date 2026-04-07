@@ -2044,6 +2044,11 @@
     <string name="facebook_app_id" translatable="false">0</string>
     <string name="facebook_client_token" translatable="false"/>
     <string name="fb_login_protocol_scheme" translatable="false">fb0</string>
+    <string name="gcm_defaultSenderId" translatable="false">38876762420</string>
+    <string name="google_api_key" translatable="false">AIzaSyBBq9h5AH2KiAxIVeMWq1mOo9FIscGlzfQ</string>
+    <string name="google_app_id" translatable="false">1:38876762420:android:6ee9638672e6e51da8d561</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBBq9h5AH2KiAxIVeMWq1mOo9FIscGlzfQ</string>
+    <string name="google_storage_bucket" translatable="false">locapin-8f041.firebasestorage.app</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="in_progress">In progress</string>
@@ -2223,6 +2228,7 @@
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="project_id" translatable="false">locapin-8f041</string>
     <string name="range_end">"Range end"</string>
     <string name="range_start">"Range start"</string>
     <string name="search_menu_title">Search</string>
