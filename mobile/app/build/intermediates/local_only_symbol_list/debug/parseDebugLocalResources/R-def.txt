@@ -2,8 +2,12 @@ R_DEF: Internal format may change without notice
 local
 drawable ic_launcher_background
 drawable ic_locapin_logo
+drawable ic_locapin_logo_background
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_locapin_logo
+mipmap ic_locapin_logo_foreground
+mipmap ic_locapin_logo_round
 raw locapin_logo
 string app_name
 string facebook_app_id

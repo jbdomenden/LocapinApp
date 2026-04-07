@@ -2,6 +2,7 @@ package com.locapin.mobile.data.repository;
 
 import com.locapin.mobile.data.local.SanJuanSeedDataSource;
 import com.locapin.mobile.data.remote.LocaPinApi;
+import com.locapin.mobile.feature.admin.AdminAttractionRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -29,24 +30,29 @@ public final class SegmentedMapRepositoryImpl_Factory implements Factory<Segment
 
   private final Provider<SanJuanSeedDataSource> seedDataSourceProvider;
 
+  private final Provider<AdminAttractionRepository> adminAttractionRepositoryProvider;
+
   public SegmentedMapRepositoryImpl_Factory(Provider<LocaPinApi> apiProvider,
-      Provider<SanJuanSeedDataSource> seedDataSourceProvider) {
+      Provider<SanJuanSeedDataSource> seedDataSourceProvider,
+      Provider<AdminAttractionRepository> adminAttractionRepositoryProvider) {
     this.apiProvider = apiProvider;
     this.seedDataSourceProvider = seedDataSourceProvider;
+    this.adminAttractionRepositoryProvider = adminAttractionRepositoryProvider;
   }
 
   @Override
   public SegmentedMapRepositoryImpl get() {
-    return newInstance(apiProvider.get(), seedDataSourceProvider.get());
+    return newInstance(apiProvider.get(), seedDataSourceProvider.get(), adminAttractionRepositoryProvider.get());
   }
 
   public static SegmentedMapRepositoryImpl_Factory create(Provider<LocaPinApi> apiProvider,
-      Provider<SanJuanSeedDataSource> seedDataSourceProvider) {
-    return new SegmentedMapRepositoryImpl_Factory(apiProvider, seedDataSourceProvider);
+      Provider<SanJuanSeedDataSource> seedDataSourceProvider,
+      Provider<AdminAttractionRepository> adminAttractionRepositoryProvider) {
+    return new SegmentedMapRepositoryImpl_Factory(apiProvider, seedDataSourceProvider, adminAttractionRepositoryProvider);
   }
 
   public static SegmentedMapRepositoryImpl newInstance(LocaPinApi api,
-      SanJuanSeedDataSource seedDataSource) {
-    return new SegmentedMapRepositoryImpl(api, seedDataSource);
+      SanJuanSeedDataSource seedDataSource, AdminAttractionRepository adminAttractionRepository) {
+    return new SegmentedMapRepositoryImpl(api, seedDataSource, adminAttractionRepository);
   }
 }

@@ -13,4 +13,6 @@ public final class BuildConfig {
   public static final String API_BASE_URL = "https://example.com/";
   // Field from default config.
   public static final String GOOGLE_SERVER_CLIENT_ID = "";
+  // Field from default config.
+  public static final boolean USE_MOCK_DATA = true;
 }

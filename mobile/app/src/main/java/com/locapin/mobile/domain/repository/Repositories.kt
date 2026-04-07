@@ -58,5 +58,7 @@ data class VisitedAttraction(
     val knownFor: String,
     val latitude: Double,
     val longitude: Double,
-    val visitedAtEpochMs: Long
+    val visitedAtEpochMs: Long,
+    val category: String? = null,
+    val area: String? = null
 )

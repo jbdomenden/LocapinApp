@@ -4,6 +4,7 @@ import com.locapin.mobile.core.datastore.UserPreferencesDataStore;
 import com.locapin.mobile.domain.repository.AuthRepository;
 import com.locapin.mobile.domain.repository.DestinationRepository;
 import com.locapin.mobile.domain.repository.ProfileRepository;
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -35,31 +36,36 @@ public final class MainViewModel_Factory implements Factory<MainViewModel> {
 
   private final Provider<ProfileRepository> profileRepositoryProvider;
 
+  private final Provider<TouristFavoritesRepository> favoritesRepositoryProvider;
+
   public MainViewModel_Factory(Provider<UserPreferencesDataStore> prefsProvider,
       Provider<AuthRepository> authRepositoryProvider,
       Provider<DestinationRepository> destinationRepositoryProvider,
-      Provider<ProfileRepository> profileRepositoryProvider) {
+      Provider<ProfileRepository> profileRepositoryProvider,
+      Provider<TouristFavoritesRepository> favoritesRepositoryProvider) {
     this.prefsProvider = prefsProvider;
     this.authRepositoryProvider = authRepositoryProvider;
     this.destinationRepositoryProvider = destinationRepositoryProvider;
     this.profileRepositoryProvider = profileRepositoryProvider;
+    this.favoritesRepositoryProvider = favoritesRepositoryProvider;
   }
 
   @Override
   public MainViewModel get() {
-    return newInstance(prefsProvider.get(), authRepositoryProvider.get(), destinationRepositoryProvider.get(), profileRepositoryProvider.get());
+    return newInstance(prefsProvider.get(), authRepositoryProvider.get(), destinationRepositoryProvider.get(), profileRepositoryProvider.get(), favoritesRepositoryProvider.get());
   }
 
   public static MainViewModel_Factory create(Provider<UserPreferencesDataStore> prefsProvider,
       Provider<AuthRepository> authRepositoryProvider,
       Provider<DestinationRepository> destinationRepositoryProvider,
-      Provider<ProfileRepository> profileRepositoryProvider) {
-    return new MainViewModel_Factory(prefsProvider, authRepositoryProvider, destinationRepositoryProvider, profileRepositoryProvider);
+      Provider<ProfileRepository> profileRepositoryProvider,
+      Provider<TouristFavoritesRepository> favoritesRepositoryProvider) {
+    return new MainViewModel_Factory(prefsProvider, authRepositoryProvider, destinationRepositoryProvider, profileRepositoryProvider, favoritesRepositoryProvider);
   }
 
   public static MainViewModel newInstance(UserPreferencesDataStore prefs,
       AuthRepository authRepository, DestinationRepository destinationRepository,
-      ProfileRepository profileRepository) {
-    return new MainViewModel(prefs, authRepository, destinationRepository, profileRepository);
+      ProfileRepository profileRepository, TouristFavoritesRepository favoritesRepository) {
+    return new MainViewModel(prefs, authRepository, destinationRepository, profileRepository, favoritesRepository);
   }
 }

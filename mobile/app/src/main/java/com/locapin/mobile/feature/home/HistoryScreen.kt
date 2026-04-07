@@ -32,12 +32,14 @@ import com.locapin.mobile.domain.model.ZoneAttraction
 import com.locapin.mobile.domain.repository.HistoryRepository
 import com.locapin.mobile.domain.repository.VisitedAttraction
 import com.locapin.mobile.feature.map.AttractionDetailSheetContent
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
@@ -45,12 +47,14 @@ import kotlin.math.roundToInt
 data class HistoryUiState(
     val isLoading: Boolean = true,
     val items: List<VisitedAttraction> = emptyList(),
+    val favoriteIds: Set<String> = emptySet(),
     val currentLocation: Pair<Double, Double>? = null
 )
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val historyRepository: HistoryRepository,
+    private val favoritesRepository: TouristFavoritesRepository,
     private val locationProvider: LocationProvider
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HistoryUiState())
@@ -58,9 +62,19 @@ class HistoryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            historyRepository.history.collect { history ->
-                _uiState.update { it.copy(items = history, isLoading = false) }
-            }
+            combine(
+                historyRepository.history,
+                favoritesRepository.favoriteIds
+            ) { history, favorites ->
+                _uiState.update { it.copy(items = history, favoriteIds = favorites, isLoading = false) }
+            }.collect()
+        }
+    }
+
+    fun toggleFavorite(id: String) {
+        viewModelScope.launch {
+            val isFavorite = _uiState.value.favoriteIds.contains(id)
+            favoritesRepository.setFavorite(id, !isFavorite)
         }
     }
 
@@ -152,7 +166,11 @@ fun HistoryScreen(vm: HistoryViewModel = hiltViewModel()) {
                 name = item.name,
                 description = item.description,
                 knownFor = item.knownFor,
+                category = item.category,
+                area = item.area,
                 distanceText = vm.distanceTextFor(item),
+                isFavorite = state.favoriteIds.contains(item.id),
+                onToggleFavorite = { vm.toggleFavorite(item.id) },
                 onGo = { vm.revisit(item) },
                 onRefreshDistance = vm::refreshLocation,
                 showPermissionAction = false,

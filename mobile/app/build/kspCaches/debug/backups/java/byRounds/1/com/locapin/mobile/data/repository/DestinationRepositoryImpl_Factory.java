@@ -1,7 +1,8 @@
 package com.locapin.mobile.data.repository;
 
-import com.locapin.mobile.data.local.InMemoryCache;
 import com.locapin.mobile.data.remote.LocaPinApi;
+import com.locapin.mobile.domain.repository.TouristFavoritesRepository;
+import com.locapin.mobile.feature.admin.AdminAttractionRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -27,25 +28,32 @@ import javax.inject.Provider;
 public final class DestinationRepositoryImpl_Factory implements Factory<DestinationRepositoryImpl> {
   private final Provider<LocaPinApi> apiProvider;
 
-  private final Provider<InMemoryCache> cacheProvider;
+  private final Provider<AdminAttractionRepository> adminAttractionRepositoryProvider;
+
+  private final Provider<TouristFavoritesRepository> favoritesRepositoryProvider;
 
   public DestinationRepositoryImpl_Factory(Provider<LocaPinApi> apiProvider,
-      Provider<InMemoryCache> cacheProvider) {
+      Provider<AdminAttractionRepository> adminAttractionRepositoryProvider,
+      Provider<TouristFavoritesRepository> favoritesRepositoryProvider) {
     this.apiProvider = apiProvider;
-    this.cacheProvider = cacheProvider;
+    this.adminAttractionRepositoryProvider = adminAttractionRepositoryProvider;
+    this.favoritesRepositoryProvider = favoritesRepositoryProvider;
   }
 
   @Override
   public DestinationRepositoryImpl get() {
-    return newInstance(apiProvider.get(), cacheProvider.get());
+    return newInstance(apiProvider.get(), adminAttractionRepositoryProvider.get(), favoritesRepositoryProvider.get());
   }
 
   public static DestinationRepositoryImpl_Factory create(Provider<LocaPinApi> apiProvider,
-      Provider<InMemoryCache> cacheProvider) {
-    return new DestinationRepositoryImpl_Factory(apiProvider, cacheProvider);
+      Provider<AdminAttractionRepository> adminAttractionRepositoryProvider,
+      Provider<TouristFavoritesRepository> favoritesRepositoryProvider) {
+    return new DestinationRepositoryImpl_Factory(apiProvider, adminAttractionRepositoryProvider, favoritesRepositoryProvider);
   }
 
-  public static DestinationRepositoryImpl newInstance(LocaPinApi api, InMemoryCache cache) {
-    return new DestinationRepositoryImpl(api, cache);
+  public static DestinationRepositoryImpl newInstance(LocaPinApi api,
+      AdminAttractionRepository adminAttractionRepository,
+      TouristFavoritesRepository favoritesRepository) {
+    return new DestinationRepositoryImpl(api, adminAttractionRepository, favoritesRepository);
   }
 }

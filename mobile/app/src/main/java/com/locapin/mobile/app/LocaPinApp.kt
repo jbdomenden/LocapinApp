@@ -11,21 +11,14 @@ class LocaPinApp : Application() {
     override fun onCreate() {
         super.onCreate()
         
-        // Ensure Facebook SDK is initialized
+        // Ensure Facebook SDK is initialized only if valid credentials are provided
         val appId = getString(R.string.facebook_app_id)
-        if (appId != "0" && appId.isNotBlank()) {
-            FacebookSdk.setApplicationId(appId)
-            val clientToken = getString(R.string.facebook_client_token)
-            if (clientToken.isNotBlank()) {
-                FacebookSdk.setClientToken(clientToken)
-            }
-        }
+        val clientToken = getString(R.string.facebook_client_token)
         
-        // Always call sdkInitialize to prevent "The SDK has not been initialized" crashes 
-        // when LoginManager.getInstance() is called, even if the App ID is not yet configured.
-        FacebookSdk.sdkInitialize(this)
-
-        if (appId != "0" && appId.isNotBlank()) {
+        if (appId != "0" && appId.isNotBlank() && clientToken.isNotBlank()) {
+            FacebookSdk.setApplicationId(appId)
+            FacebookSdk.setClientToken(clientToken)
+            FacebookSdk.sdkInitialize(this)
             AppEventsLogger.activateApp(this)
         }
     }

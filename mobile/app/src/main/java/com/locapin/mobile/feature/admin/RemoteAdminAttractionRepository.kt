@@ -74,7 +74,7 @@ class RemoteAdminAttractionRepository @Inject constructor(
         repositoryScope.launch {
             runCatching {
                 attractionApiService.getAttractions(size = 100).data.orEmpty()
-                    .map(DestinationDto::toAdminAttraction)
+                    .map { it.toAdminAttraction() }
                     .sortedBy { it.name.lowercase() }
             }.onSuccess { remoteAttractions ->
                 _attractions.value = remoteAttractions

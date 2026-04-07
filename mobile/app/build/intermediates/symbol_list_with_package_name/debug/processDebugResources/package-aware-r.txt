@@ -3102,6 +3102,7 @@ drawable ic_clock_black_24dp
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_locapin_logo
+drawable ic_locapin_logo_background
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3911,6 +3912,9 @@ layout splash_screen_view
 layout support_simple_spinner_dropdown_item
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_locapin_logo
+mipmap ic_locapin_logo_foreground
+mipmap ic_locapin_logo_round
 plurals mtrl_badge_content_description
 raw locapin_logo
 string abc_action_bar_home_description

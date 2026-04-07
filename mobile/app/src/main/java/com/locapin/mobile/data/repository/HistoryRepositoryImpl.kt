@@ -23,7 +23,9 @@ class HistoryRepositoryImpl @Inject constructor(
                 knownFor = it.knownFor,
                 latitude = it.latitude,
                 longitude = it.longitude,
-                visitedAtEpochMs = it.visitedAtEpochMs
+                visitedAtEpochMs = it.visitedAtEpochMs,
+                category = it.category,
+                area = it.area
             )
         }
     }
@@ -40,7 +42,9 @@ class HistoryRepositoryImpl @Inject constructor(
                 knownFor = attraction.knownFor,
                 latitude = attraction.latitude,
                 longitude = attraction.longitude,
-                visitedAtEpochMs = System.currentTimeMillis()
+                visitedAtEpochMs = System.currentTimeMillis(),
+                category = attraction.category,
+                area = attraction.area
             )
         )
         prefs.saveVisitedAttractions(current.take(100))
