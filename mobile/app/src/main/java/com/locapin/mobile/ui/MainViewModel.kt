@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.locapin.mobile.core.common.LocaPinResult
 import com.locapin.mobile.core.datastore.UserPreferencesDataStore
+import com.locapin.mobile.core.network.ConnectivityStatusHelper
 import com.locapin.mobile.domain.model.Category
 import com.locapin.mobile.domain.model.Destination
 import com.locapin.mobile.domain.model.User
@@ -39,6 +40,7 @@ data class MainUiState(
     val favoriteIds: Set<String> = emptySet(),
     val searchResults: List<Destination> = emptyList(),
     val recentSearches: List<String> = emptyList(),
+    val contentError: String? = null,
     val error: String? = null
 )
 
@@ -49,7 +51,8 @@ class MainViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val destinationRepository: DestinationRepository,
     private val profileRepository: ProfileRepository,
-    private val favoritesRepository: TouristFavoritesRepository
+    private val favoritesRepository: TouristFavoritesRepository,
+    private val connectivityStatusHelper: ConnectivityStatusHelper
 ) : ViewModel() {
     private val _state = MutableStateFlow(MainUiState())
     val state: StateFlow<MainUiState> = _state.asStateFlow()
@@ -101,18 +104,43 @@ class MainViewModel @Inject constructor(
 
     fun bootstrap() {
         viewModelScope.launch {
-            _state.value = _state.value.copy(loading = true, error = null)
-            val destinations = (destinationRepository.getDestinations() as? LocaPinResult.Success)?.data.orEmpty()
-            val categories = (destinationRepository.getCategories() as? LocaPinResult.Success)?.data.orEmpty()
-            val profile = (profileRepository.getProfile() as? LocaPinResult.Success)?.data
+            _state.value = _state.value.copy(loading = true, error = null, contentError = null)
+            val destinationsResult = destinationRepository.getDestinations()
+            val categoriesResult = destinationRepository.getCategories()
+            val profileResult = profileRepository.getProfile()
+
+            val destinations = (destinationsResult as? LocaPinResult.Success)?.data.orEmpty()
+            val categories = (categoriesResult as? LocaPinResult.Success)?.data.orEmpty()
+            val profile = (profileResult as? LocaPinResult.Success)?.data
+            val hasAnyFailure =
+                destinationsResult is LocaPinResult.Error ||
+                    categoriesResult is LocaPinResult.Error ||
+                    profileResult is LocaPinResult.Error
+
+            val contentError = if (hasAnyFailure) {
+                if (!connectivityStatusHelper.isConnected()) {
+                    "No internet connection detected. Retry when you are back online."
+                } else {
+                    "Could not load data right now. Please try again."
+                }
+            } else {
+                null
+            }
+
             _state.value = _state.value.copy(
                 loading = false,
                 destinations = destinations,
                 categories = categories,
-                profile = profile
+                profile = profile,
+                contentError = contentError
             )
             recomputeAttractionsFilter()
         }
+    }
+
+    fun retryContentLoad() {
+        if (_state.value.loading) return
+        bootstrap()
     }
 
     fun setAttractionsQuery(query: String) {

@@ -41,6 +41,7 @@ import com.locapin.mobile.feature.explore.ExploreScreen
 import com.locapin.mobile.feature.favorites.FavoritesScreen
 import com.locapin.mobile.feature.home.TouristAboutScreen
 import com.locapin.mobile.feature.home.TouristDashboardScreen
+import com.locapin.mobile.feature.map.LocationPermissionUiState
 import com.locapin.mobile.feature.map.MapScreen
 import com.locapin.mobile.feature.profile.ChangePasswordScreen
 import com.locapin.mobile.feature.profile.ProfileScreen
@@ -49,8 +50,9 @@ import com.locapin.mobile.feature.settings.SettingsScreen
 @Suppress("UNUSED_PARAMETER")
 @Composable
 fun AppNavHost(
-    hasLocationPermission: Boolean,
+    locationPermissionUiState: LocationPermissionUiState,
     requestLocationPermission: () -> Unit,
+    openAppSettings: () -> Unit,
     vm: RootViewModel = hiltViewModel()
 ) {
     val navController = rememberNavController()
@@ -136,8 +138,9 @@ fun AppNavHost(
             navController = navController,
             touristName = session?.name,
             session = session,
-            hasLocationPermission = hasLocationPermission,
+            locationPermissionUiState = locationPermissionUiState,
             requestLocationPermission = requestLocationPermission,
+            openAppSettings = openAppSettings,
             onLogout = ::logoutAndGoToAuth
         )
     }
@@ -259,8 +262,9 @@ private fun NavGraphBuilder.touristGraph(
     navController: NavHostController,
     touristName: String?,
     session: AuthSession?,
-    hasLocationPermission: Boolean,
+    locationPermissionUiState: LocationPermissionUiState,
     requestLocationPermission: () -> Unit,
+    openAppSettings: () -> Unit,
     onLogout: () -> Unit
 ) {
     composable(AppDestinations.TouristEntry) {
@@ -284,8 +288,9 @@ private fun NavGraphBuilder.touristGraph(
 
     composable(AppDestinations.TouristMap) {
         MapScreen(
-            hasLocationPermission = hasLocationPermission,
-            requestPermission = requestLocationPermission
+            permissionUiState = locationPermissionUiState,
+            requestPermission = requestLocationPermission,
+            openAppSettings = openAppSettings
         )
     }
     composable(AppDestinations.TouristAttractions) {

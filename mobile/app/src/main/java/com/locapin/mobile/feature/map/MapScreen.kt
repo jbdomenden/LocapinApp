@@ -4,9 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -28,8 +31,9 @@ import com.locapin.mobile.core.navigation.DirectionsLauncher
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(
-    hasLocationPermission: Boolean,
+    permissionUiState: LocationPermissionUiState,
     requestPermission: () -> Unit,
+    openAppSettings: () -> Unit,
     vm: SegmentedMapViewModel = hiltViewModel()
 ) {
     val state by vm.uiState.collectAsStateWithLifecycle()
@@ -37,8 +41,8 @@ fun MapScreen(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     var showSheet by remember { mutableStateOf(false) }
 
-    LaunchedEffect(hasLocationPermission) {
-        vm.onPermissionResult(hasLocationPermission)
+    LaunchedEffect(permissionUiState) {
+        vm.onPermissionResult(permissionUiState)
     }
 
     Column(
@@ -73,12 +77,27 @@ fun MapScreen(
             }
         )
 
+        when (permissionUiState) {
+            LocationPermissionUiState.PERMANENTLY_DENIED -> {
+                InfoCard(
+                    message = "Location access is off for this app. You can still browse attractions without it.",
+                    actionLabel = "Open Settings",
+                    onAction = openAppSettings
+                )
+            }
+
+            LocationPermissionUiState.DENIED,
+            LocationPermissionUiState.UNKNOWN -> {
+                InfoCard(
+                    message = "Location access is needed to show your live distance to attractions."
+                )
+            }
+
+            LocationPermissionUiState.GRANTED -> Unit
+        }
+
         state.errorMessage?.let {
-            Text(
-                text = it,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.error
-            )
+            ErrorCard(message = it, onRetry = vm::refreshLocation, onDismiss = vm::clearErrorMessage)
         }
 
         if (!state.isLoading && state.selectedZoneId != null && state.visibleAttractions.isEmpty()) {
@@ -88,9 +107,26 @@ fun MapScreen(
             )
         }
 
-        if (!hasLocationPermission) {
-            Button(onClick = requestPermission, modifier = Modifier.fillMaxWidth()) {
-                Text("Enable location for real-time distance")
+        if (!state.isLoading && state.zones.isEmpty()) {
+            ErrorCard(
+                message = "No map areas are available right now.",
+                onRetry = vm::loadMapData
+            )
+        }
+
+        if (permissionUiState != LocationPermissionUiState.GRANTED) {
+            val actionLabel = if (permissionUiState == LocationPermissionUiState.PERMANENTLY_DENIED) {
+                "Open app settings"
+            } else {
+                "Enable location"
+            }
+            val action = if (permissionUiState == LocationPermissionUiState.PERMANENTLY_DENIED) {
+                openAppSettings
+            } else {
+                requestPermission
+            }
+            Button(onClick = action, modifier = Modifier.fillMaxWidth()) {
+                Text(actionLabel)
             }
         }
     }
@@ -125,9 +161,55 @@ fun MapScreen(
                     }
                 },
                 onRefreshDistance = vm::refreshLocation,
-                showPermissionAction = !hasLocationPermission,
-                onRequestPermission = requestPermission
+                showPermissionAction = permissionUiState != LocationPermissionUiState.GRANTED,
+                onRequestPermission = {
+                    if (permissionUiState == LocationPermissionUiState.PERMANENTLY_DENIED) openAppSettings()
+                    else requestPermission()
+                }
             )
+        }
+    }
+}
+
+@Composable
+private fun InfoCard(message: String, actionLabel: String? = null, onAction: (() -> Unit)? = null) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(text = message, style = MaterialTheme.typography.bodySmall)
+            if (actionLabel != null && onAction != null) {
+                OutlinedButton(onClick = onAction) { Text(actionLabel) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ErrorCard(message: String, onRetry: () -> Unit, onDismiss: (() -> Unit)? = null) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onErrorContainer
+            )
+            androidx.compose.foundation.layout.Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedButton(onClick = onRetry) { Text("Retry") }
+                if (onDismiss != null) {
+                    OutlinedButton(onClick = onDismiss) { Text("Dismiss") }
+                }
+            }
         }
     }
 }
