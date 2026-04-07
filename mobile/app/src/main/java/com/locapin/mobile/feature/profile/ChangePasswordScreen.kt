@@ -81,15 +81,15 @@ fun ChangePasswordScreen(onBack: () -> Unit) {
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     Text(
                         text = "Update your password",
@@ -145,10 +145,18 @@ fun ChangePasswordScreen(onBack: () -> Unit) {
                     )
 
                     errorMessage?.let {
-                        Text(text = it, color = MaterialTheme.colorScheme.error)
+                        Text(
+                            text = it,
+                            color = MaterialTheme.colorScheme.error,
+                            style = MaterialTheme.typography.bodySmall
+                        )
                     }
                     infoMessage?.let {
-                        Text(text = it, color = MaterialTheme.colorScheme.primary)
+                        Text(
+                            text = it,
+                            color = MaterialTheme.colorScheme.primary,
+                            style = MaterialTheme.typography.bodySmall
+                        )
                     }
 
                     Button(
@@ -171,7 +179,7 @@ fun ChangePasswordScreen(onBack: () -> Unit) {
                         enabled = !isSubmitting,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(if (isSubmitting) "Submitting..." else "Submit")
+                        Text(if (isSubmitting) "Saving..." else "Save Password")
                     }
                 }
             }

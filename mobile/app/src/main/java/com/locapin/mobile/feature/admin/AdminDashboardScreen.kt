@@ -130,6 +130,12 @@ fun AdminDashboardScreen(
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)
                 )
+                Text(
+                    text = "LocaPin Control Panel",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
+                )
                 modules.forEach { module ->
                     NavigationDrawerItem(
                         label = { Text(module.title) },
@@ -139,7 +145,7 @@ fun AdminDashboardScreen(
                             onOpenModule(module.route)
                             scope.launch { drawerState.close() }
                         },
-                        modifier = Modifier.padding(horizontal = 12.dp)
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp)
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
@@ -152,7 +158,7 @@ fun AdminDashboardScreen(
                         scope.launch { drawerState.close() }
                         onLogout()
                     },
-                    modifier = Modifier.padding(horizontal = 12.dp)
+                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp)
                 )
             }
         }
@@ -203,7 +209,7 @@ fun AdminDashboardScreen(
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
-                    text = "Mobile admin control center",
+                    text = "Mobile admin control center.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -219,7 +225,7 @@ fun AdminDashboardScreen(
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(164.dp)
+                                .height(156.dp)
                                 .clickable { onOpenModule(module.route) },
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
                         ) {

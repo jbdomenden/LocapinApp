@@ -1,7 +1,6 @@
 package com.locapin.mobile.feature.explore
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,11 +31,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.locapin.mobile.domain.model.Destination
+import com.locapin.mobile.feature.common.CenteredStateCard
 import com.locapin.mobile.ui.MainViewModel
 import com.locapin.mobile.ui.components.DestinationCard
 import com.locapin.mobile.ui.components.LoadingBlock
@@ -57,7 +56,7 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
             onValueChange = vm::setAttractionsQuery,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 8.dp),
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             label = { Text("Search attractions") },
             singleLine = true
         )
@@ -77,7 +76,7 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
             OutlinedButton(
                 onClick = vm::clearAttractionsFilters,
                 modifier = Modifier
-                    .padding(horizontal = 12.dp)
+                    .padding(horizontal = 16.dp)
                     .padding(top = 4.dp)
             ) {
                 Text("Clear filters")
@@ -90,7 +89,7 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(12.dp),
+                    .padding(horizontal = 16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
             ) {
                 Column(
@@ -98,7 +97,7 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = state.contentError,
+                        text = "Unable to load attractions. $state.contentError",
                         color = MaterialTheme.colorScheme.onErrorContainer
                     )
                     OutlinedButton(onClick = vm::retryContentLoad) {
@@ -132,7 +131,7 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
             )
         } else {
             LazyColumn(
-                contentPadding = PaddingValues(12.dp),
+                contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 itemsIndexed(state.filteredAttractions, key = { _, item -> item.id }) { _, destination ->
@@ -201,10 +200,10 @@ private fun FilterChipRow(
         Text(
             text = title,
             style = MaterialTheme.typography.labelLarge,
-            modifier = Modifier.padding(horizontal = 12.dp)
+            modifier = Modifier.padding(horizontal = 16.dp)
         )
         LazyRow(
-            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
@@ -231,27 +230,11 @@ private fun EmptyAttractionsState(
     subtitle: String,
     onClearFilters: (() -> Unit)? = null
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = title, style = MaterialTheme.typography.titleMedium)
-            Text(
-                text = subtitle,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            if (onClearFilters != null) {
-                OutlinedButton(onClick = onClearFilters) {
-                    Text("Reset filters")
-                }
-            }
-        }
-    }
+    CenteredStateCard(
+        title = title,
+        description = subtitle,
+        actionLabel = if (onClearFilters != null) "Reset filters" else null,
+        onAction = onClearFilters,
+        modifier = Modifier.padding(horizontal = 12.dp)
+    )
 }
