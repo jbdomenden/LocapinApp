@@ -12,7 +12,8 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDestinationRepository @Inject constructor(
     private val attractionApiService: AttractionApiService,
-    private val categoryApiService: CategoryApiService
+    private val categoryApiService: CategoryApiService,
+    private val fallbackRepository: DestinationRepositoryImpl
 ) : DestinationRepository {
     override suspend fun getDestinations(
         query: String?,
@@ -21,32 +22,59 @@ class RemoteDestinationRepository @Inject constructor(
         page: Int,
         lat: Double?,
         lng: Double?
-    ): LocaPinResult<List<Destination>> = runCatching {
-        val response = attractionApiService.getAttractions(
-            query = query,
-            categoryId = categoryId,
-            sort = sort,
-            page = page,
-            lat = lat,
-            lng = lng
-        )
-        LocaPinResult.Success(response.data.orEmpty().map { it.toDomain() })
-    }.getOrElse { LocaPinResult.Error(it.message ?: "Unable to fetch attractions") }
+    ): LocaPinResult<List<Destination>> {
+        return runCatching {
+            val response = attractionApiService.getAttractions(
+                query = query,
+                categoryId = categoryId,
+                sort = sort,
+                page = page,
+                lat = lat,
+                lng = lng
+            )
+            when {
+                response.data != null -> LocaPinResult.Success(response.data.map { it.toDomain() })
+                !response.error.isNullOrBlank() -> LocaPinResult.Error(response.error)
+                else -> LocaPinResult.Error(response.message ?: "Unable to fetch attractions")
+            }
+        }.getOrElse {
+            fallbackRepository.getDestinations(query, categoryId, sort, page, lat, lng)
+        }
+    }
 
-    override suspend fun getDestinationDetail(id: String): LocaPinResult<Destination> = runCatching {
-        val response = attractionApiService.getAttractionDetail(id)
-        val destination = response.data ?: return LocaPinResult.Error(response.error ?: "Destination not found")
-        LocaPinResult.Success(destination.toDomain())
-    }.getOrElse { LocaPinResult.Error(it.message ?: "Unable to fetch destination") }
+    override suspend fun getDestinationDetail(id: String): LocaPinResult<Destination> {
+        return runCatching {
+            val response = attractionApiService.getAttractionDetail(id)
+            val destination = response.data
+            when {
+                destination != null -> LocaPinResult.Success(destination.toDomain())
+                !response.error.isNullOrBlank() -> LocaPinResult.Error(response.error)
+                else -> LocaPinResult.Error(response.message ?: "Destination not found")
+            }
+        }.getOrElse {
+            fallbackRepository.getDestinationDetail(id)
+        }
+    }
 
-    override suspend fun getCategories(): LocaPinResult<List<Category>> = runCatching {
-        val response = categoryApiService.getCategories()
-        LocaPinResult.Success(response.data.orEmpty().map { Category(id = it.id, name = it.name) })
-    }.getOrElse { LocaPinResult.Error(it.message ?: "Unable to fetch categories") }
+    override suspend fun getCategories(): LocaPinResult<List<Category>> {
+        return runCatching {
+            val response = categoryApiService.getCategories()
+            when {
+                response.data != null -> {
+                    LocaPinResult.Success(response.data.map { Category(id = it.id, name = it.name) })
+                }
+
+                !response.error.isNullOrBlank() -> LocaPinResult.Error(response.error)
+                else -> LocaPinResult.Error(response.message ?: "Unable to fetch categories")
+            }
+        }.getOrElse {
+            fallbackRepository.getCategories()
+        }
+    }
 
     override suspend fun getFavorites(): LocaPinResult<List<Destination>> =
-        LocaPinResult.Error("Remote favorites wiring is deferred to a later phase")
+        fallbackRepository.getFavorites()
 
     override suspend fun setFavorite(id: String, save: Boolean): LocaPinResult<Unit> =
-        LocaPinResult.Error("Remote favorites wiring is deferred to a later phase")
+        fallbackRepository.setFavorite(id, save)
 }

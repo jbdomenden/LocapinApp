@@ -53,8 +53,10 @@ data class CategoryDto(val id: String, val name: String)
 data class DestinationDto(
     val id: String,
     val name: String,
+    val knownFor: String? = null,
     val description: String? = null,
     val category: CategoryDto? = null,
+    val area: String? = null,
     val address: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
