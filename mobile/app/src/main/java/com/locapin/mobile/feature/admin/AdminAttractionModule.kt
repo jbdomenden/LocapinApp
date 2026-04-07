@@ -1,17 +1,20 @@
 package com.locapin.mobile.feature.admin
 
-import dagger.Binds
+import com.locapin.mobile.core.network.AppDataMode
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class AdminAttractionModule {
-    @Binds
+object AdminAttractionModule {
+    @Provides
     @Singleton
-    abstract fun bindAdminAttractionRepository(
-        impl: InMemoryAdminAttractionRepository
-    ): AdminAttractionRepository
+    fun bindAdminAttractionRepository(
+        mode: AppDataMode,
+        mockRepository: InMemoryAdminAttractionRepository,
+        remoteRepository: RemoteAdminAttractionRepository
+    ): AdminAttractionRepository = if (mode == AppDataMode.MOCK) mockRepository else remoteRepository
 }
