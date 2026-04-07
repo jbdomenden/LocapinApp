@@ -19,8 +19,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-enum class MapPermissionState { UNKNOWN, GRANTED, DENIED }
-
 data class SegmentedMapUiState(
     val isLoading: Boolean = true,
     val zones: List<MapZone> = emptyList(),
@@ -31,7 +29,7 @@ data class SegmentedMapUiState(
     val routePath: List<Pair<Double, Double>> = emptyList(),
     val userLocation: Pair<Double, Double>? = null,
     val favoriteIds: Set<String> = emptySet(),
-    val permissionState: MapPermissionState = MapPermissionState.UNKNOWN,
+    val permissionState: LocationPermissionUiState = LocationPermissionUiState.UNKNOWN,
     val errorMessage: String? = null
 ) {
     val visibleAttractions: List<ZoneAttraction>
@@ -128,19 +126,31 @@ class SegmentedMapViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(errorMessage = message)
     }
 
-    fun onPermissionResult(granted: Boolean) {
+    fun onPermissionResult(permissionState: LocationPermissionUiState) {
         _uiState.value = _uiState.value.copy(
-            permissionState = if (granted) MapPermissionState.GRANTED else MapPermissionState.DENIED
+            permissionState = permissionState
         )
-        if (granted) refreshLocation()
+        if (permissionState == LocationPermissionUiState.GRANTED) refreshLocation()
     }
 
     fun refreshLocation() {
+        if (_uiState.value.permissionState != LocationPermissionUiState.GRANTED) {
+            _uiState.value = _uiState.value.copy(
+                userLocation = null,
+                routePath = emptyList(),
+                errorMessage = null
+            )
+            return
+        }
         viewModelScope.launch {
             val user = locationProvider.getLastKnownLocation()
             _uiState.value = _uiState.value.copy(
                 userLocation = user,
-                errorMessage = if (user == null) "Current GPS location unavailable." else _uiState.value.errorMessage
+                errorMessage = if (user == null) {
+                    "We could not get your current location right now. Try again in a moment."
+                } else {
+                    _uiState.value.errorMessage
+                }
             )
             val nav = _uiState.value.navigationAttraction
             if (user != null && nav != null) {
@@ -161,10 +171,16 @@ class SegmentedMapViewModel @Inject constructor(
     fun distanceTextFor(attraction: ZoneAttraction): String {
         val user = _uiState.value.userLocation
         return when {
-            _uiState.value.permissionState != MapPermissionState.GRANTED -> "Location permission required to calculate distance"
+            _uiState.value.permissionState != LocationPermissionUiState.GRANTED -> {
+                "Location access is needed to show live distance."
+            }
             user == null -> "Current location unavailable"
             else -> formatDistanceMeters(distanceMeters(user.first, user.second, attraction.latitude, attraction.longitude))
         }
+    }
+
+    fun clearErrorMessage() {
+        _uiState.value = _uiState.value.copy(errorMessage = null)
     }
 
     private fun distanceMeters(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Float {

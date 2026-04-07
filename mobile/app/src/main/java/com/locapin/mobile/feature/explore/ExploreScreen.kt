@@ -12,6 +12,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,6 +39,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.locapin.mobile.domain.model.Destination
 import com.locapin.mobile.ui.MainViewModel
 import com.locapin.mobile.ui.components.DestinationCard
+import com.locapin.mobile.ui.components.LoadingBlock
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,10 +84,38 @@ fun ExploreScreen(vm: MainViewModel, onDetails: (String) -> Unit) {
             }
         }
 
-        if (state.destinations.isEmpty()) {
+        if (state.loading) {
+            LoadingBlock(modifier = Modifier.fillMaxWidth())
+        } else if (state.contentError != null) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
+            ) {
+                Column(
+                    modifier = Modifier.padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = state.contentError,
+                        color = MaterialTheme.colorScheme.onErrorContainer
+                    )
+                    OutlinedButton(onClick = vm::retryContentLoad) {
+                        Text("Retry")
+                    }
+                }
+            }
+        } else if (state.destinations.isEmpty()) {
             EmptyAttractionsState(
                 title = "No attractions yet",
                 subtitle = "Attractions will appear here once local data is available."
+            )
+        } else if (state.attractionCategoryFilters.isEmpty()) {
+            EmptyAttractionsState(
+                title = "No categories available",
+                subtitle = "Try again in a moment to refresh attraction categories.",
+                onClearFilters = vm::retryContentLoad
             )
         } else if (state.filteredAttractions.isEmpty()) {
             val isSearchOnly = state.attractionsQuery.isNotBlank() &&
