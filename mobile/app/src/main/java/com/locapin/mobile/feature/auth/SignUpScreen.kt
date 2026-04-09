@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +38,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.locapin.mobile.domain.model.UserRole
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,7 +48,9 @@ fun SignUpScreen(
     onBack: () -> Unit,
     onOpenEula: () -> Unit,
     onOpenTerms: () -> Unit,
-    onOpenPrivacyConsent: () -> Unit
+    onOpenPrivacyConsent: () -> Unit,
+    onRegistered: (UserRole) -> Unit,
+    vm: SignUpViewModel = hiltViewModel()
 ) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -58,6 +66,14 @@ fun SignUpScreen(
     var validationMessage by remember { mutableStateOf<String?>(null) }
 
     val allConsentsChecked = agreeEula && agreeTerms && agreePrivacy
+    val uiState by vm.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.registeredRole) {
+        uiState.registeredRole?.let { role ->
+            onRegistered(role)
+            vm.clearRegisteredRole()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -86,11 +102,6 @@ fun SignUpScreen(
                 text = "Set up your LocaPin account",
                 style = MaterialTheme.typography.headlineSmall
             )
-            Text(
-                text = "This screen prepares sign-up for the upcoming full authentication flow.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
 
             OutlinedTextField(
                 value = name,
@@ -100,6 +111,7 @@ fun SignUpScreen(
                 },
                 label = { Text("Name") },
                 singleLine = true,
+                enabled = !uiState.isLoading,
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
@@ -110,6 +122,7 @@ fun SignUpScreen(
                 },
                 label = { Text("Email") },
                 singleLine = true,
+                enabled = !uiState.isLoading,
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
@@ -120,13 +133,14 @@ fun SignUpScreen(
                 },
                 label = { Text("Password") },
                 singleLine = true,
+                enabled = !uiState.isLoading,
                 visualTransformation = if (passwordVisible) {
                     VisualTransformation.None
                 } else {
                     PasswordVisualTransformation()
                 },
                 trailingIcon = {
-                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    IconButton(onClick = { passwordVisible = !passwordVisible }, enabled = !uiState.isLoading) {
                         Icon(
                             imageVector = if (passwordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
                             contentDescription = "Toggle password visibility"
@@ -143,13 +157,14 @@ fun SignUpScreen(
                 },
                 label = { Text("Confirm Password") },
                 singleLine = true,
+                enabled = !uiState.isLoading,
                 visualTransformation = if (confirmPasswordVisible) {
                     VisualTransformation.None
                 } else {
                     PasswordVisualTransformation()
                 },
                 trailingIcon = {
-                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
+                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }, enabled = !uiState.isLoading) {
                         Icon(
                             imageVector = if (confirmPasswordVisible) Icons.Outlined.VisibilityOff else Icons.Outlined.Visibility,
                             contentDescription = "Toggle confirm password visibility"
@@ -194,7 +209,7 @@ fun SignUpScreen(
                 onOpenDocument = onOpenPrivacyConsent
             )
 
-            validationMessage?.let {
+            (validationMessage ?: uiState.errorMessage)?.let {
                 Text(
                     text = it,
                     color = MaterialTheme.colorScheme.error,
@@ -214,21 +229,23 @@ fun SignUpScreen(
                         }
 
                         else -> {
-                            validationMessage = "Sign-up backend is not connected yet. This screen is prepared for the full flow."
+                            validationMessage = null
+                            vm.register(name = name.trim(), email = email.trim(), password = password)
                         }
                     }
                 },
-                enabled = allConsentsChecked,
+                enabled = allConsentsChecked && !uiState.isLoading,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Create Account")
+                if (uiState.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.height(18.dp), strokeWidth = 2.dp)
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Creating account...")
+                } else {
+                    Text("Create Account")
+                }
             }
 
-            Text(
-                text = "Account creation is currently local UI only while backend sign-up is finalized.",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
