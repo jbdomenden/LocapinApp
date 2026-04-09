@@ -13,8 +13,10 @@ import javax.annotation.processing.Generated;
     originatingRoot = "com.locapin.mobile.app.LocaPinApp",
     originatingRootPackage = "com.locapin.mobile.app",
     rootAnnotation = HiltAndroidApp.class,
+    rootComponentPackage = "dagger.hilt.components",
     rootSimpleNames = "LocaPinApp",
-    originatingRootSimpleNames = "LocaPinApp"
+    originatingRootSimpleNames = "LocaPinApp",
+    rootComponentSimpleNames = "SingletonComponent"
 )
 @Generated("dagger.hilt.processor.internal.root.AggregatedRootGenerator")
 public class _com_locapin_mobile_app_LocaPinApp {

@@ -19,7 +19,8 @@ import javax.annotation.processing.Generated;
     "KotlinInternal",
     "KotlinInternalInJava",
     "cast",
-    "deprecation"
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class InMemoryCache_Factory implements Factory<InMemoryCache> {
   @Override
@@ -36,6 +37,6 @@ public final class InMemoryCache_Factory implements Factory<InMemoryCache> {
   }
 
   private static final class InstanceHolder {
-    private static final InMemoryCache_Factory INSTANCE = new InMemoryCache_Factory();
+    static final InMemoryCache_Factory INSTANCE = new InMemoryCache_Factory();
   }
 }

@@ -8,10 +8,10 @@ import com.locapin.mobile.domain.repository.ProfileRepository;
 import com.locapin.mobile.domain.repository.TouristFavoritesRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -26,7 +26,8 @@ import javax.inject.Provider;
     "KotlinInternal",
     "KotlinInternalInJava",
     "cast",
-    "deprecation"
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class MainViewModel_Factory implements Factory<MainViewModel> {
   private final Provider<UserPreferencesDataStore> prefsProvider;
@@ -41,7 +42,7 @@ public final class MainViewModel_Factory implements Factory<MainViewModel> {
 
   private final Provider<ConnectivityStatusHelper> connectivityStatusHelperProvider;
 
-  public MainViewModel_Factory(Provider<UserPreferencesDataStore> prefsProvider,
+  private MainViewModel_Factory(Provider<UserPreferencesDataStore> prefsProvider,
       Provider<AuthRepository> authRepositoryProvider,
       Provider<DestinationRepository> destinationRepositoryProvider,
       Provider<ProfileRepository> profileRepositoryProvider,

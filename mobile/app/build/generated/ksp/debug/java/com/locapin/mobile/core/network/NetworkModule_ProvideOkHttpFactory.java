@@ -4,10 +4,10 @@ import com.locapin.mobile.core.datastore.UserPreferencesDataStore;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import okhttp3.OkHttpClient;
 
 @ScopeMetadata("javax.inject.Singleton")
@@ -23,12 +23,13 @@ import okhttp3.OkHttpClient;
     "KotlinInternal",
     "KotlinInternalInJava",
     "cast",
-    "deprecation"
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class NetworkModule_ProvideOkHttpFactory implements Factory<OkHttpClient> {
   private final Provider<UserPreferencesDataStore> prefsProvider;
 
-  public NetworkModule_ProvideOkHttpFactory(Provider<UserPreferencesDataStore> prefsProvider) {
+  private NetworkModule_ProvideOkHttpFactory(Provider<UserPreferencesDataStore> prefsProvider) {
     this.prefsProvider = prefsProvider;
   }
 

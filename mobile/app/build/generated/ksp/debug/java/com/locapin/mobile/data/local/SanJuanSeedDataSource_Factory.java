@@ -19,7 +19,8 @@ import javax.annotation.processing.Generated;
     "KotlinInternal",
     "KotlinInternalInJava",
     "cast",
-    "deprecation"
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class SanJuanSeedDataSource_Factory implements Factory<SanJuanSeedDataSource> {
   @Override
@@ -36,6 +37,6 @@ public final class SanJuanSeedDataSource_Factory implements Factory<SanJuanSeedD
   }
 
   private static final class InstanceHolder {
-    private static final SanJuanSeedDataSource_Factory INSTANCE = new SanJuanSeedDataSource_Factory();
+    static final SanJuanSeedDataSource_Factory INSTANCE = new SanJuanSeedDataSource_Factory();
   }
 }
