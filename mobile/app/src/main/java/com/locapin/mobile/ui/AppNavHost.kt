@@ -43,7 +43,7 @@ import com.locapin.mobile.feature.favorites.FavoritesScreen
 import com.locapin.mobile.feature.home.TouristAboutScreen
 import com.locapin.mobile.feature.home.TouristDashboardScreen
 import com.locapin.mobile.feature.map.LocationPermissionUiState
-import com.locapin.mobile.feature.map.MapScreen
+import com.locapin.mobile.feature.map.SanJuanCityMapScreen
 import com.locapin.mobile.feature.profile.ChangePasswordScreen
 import com.locapin.mobile.feature.profile.ProfileScreen
 import com.locapin.mobile.feature.settings.SettingsScreen
@@ -294,11 +294,7 @@ private fun NavGraphBuilder.touristGraph(
     }
 
     composable(AppDestinations.TouristMap) {
-        MapScreen(
-            permissionUiState = locationPermissionUiState,
-            requestPermission = requestLocationPermission,
-            openAppSettings = openAppSettings
-        )
+        SanJuanCityMapScreen()
     }
     composable(AppDestinations.TouristAttractions) { backStackEntry ->
         val parentEntry = remember(backStackEntry) {

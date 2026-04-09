@@ -10,12 +10,12 @@ class RoleResolver @Inject constructor() {
 
     fun resolveDestination(session: AuthSession?): String = when (session?.role) {
         UserRole.ADMIN -> AppDestinations.AdminEntry
-        UserRole.TOURIST -> AppDestinations.TouristEntry
+        UserRole.TOURIST -> AppDestinations.TouristMap
         null -> AppDestinations.Auth
     }
 
     fun resolveDestination(role: UserRole): String = when (role) {
         UserRole.ADMIN -> AppDestinations.AdminEntry
-        UserRole.TOURIST -> AppDestinations.TouristEntry
+        UserRole.TOURIST -> AppDestinations.TouristMap
     }
 }
