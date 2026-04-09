@@ -1,5 +1,8 @@
 package com.locapin.mobile.feature.auth
 
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -30,19 +33,30 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.locapin.mobile.domain.model.UserRole
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.locapin.mobile.BuildConfig
 
 private val AuthScreenBackground = Color(0xFFF3E9E3)
 private val AuthCardBackground = Color(0xFFEAB7C2)
@@ -63,6 +77,65 @@ fun LoginScreen(
     vm: LoginViewModel = hiltViewModel()
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    val callbackManager = remember { CallbackManager.Factory.create() }
+
+    val googleSignInOptions = remember {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .apply {
+                if (BuildConfig.GOOGLE_SERVER_CLIENT_ID.isNotBlank()) {
+                    requestIdToken(BuildConfig.GOOGLE_SERVER_CLIENT_ID)
+                }
+            }
+            .build()
+    }
+    val googleSignInClient = remember(context) {
+        GoogleSignIn.getClient(context, googleSignInOptions)
+    }
+
+    val googleLoginLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode != Activity.RESULT_OK) {
+            vm.onSocialLoginError("Google sign-in was cancelled.")
+            return@rememberLauncherForActivityResult
+        }
+
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account = task.getResult(ApiException::class.java)
+            vm.loginWithGoogle(account.idToken)
+        } catch (_: ApiException) {
+            vm.onSocialLoginError("Google sign-in failed. Please try again.")
+        }
+    }
+
+    DisposableEffect(callbackManager) {
+        FacebookAuthBridge.setCallbackManager(callbackManager)
+        val loginManager = LoginManager.getInstance()
+
+        val callback = object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                vm.loginWithFacebook(result.accessToken?.token)
+            }
+
+            override fun onCancel() {
+                vm.onSocialLoginError("Facebook sign-in was cancelled.")
+            }
+
+            override fun onError(error: FacebookException) {
+                vm.onSocialLoginError(error.message ?: "Facebook sign-in failed.")
+            }
+        }
+
+        loginManager.registerCallback(callbackManager, callback)
+
+        onDispose {
+            FacebookAuthBridge.clearCallbackManager(callbackManager)
+            loginManager.unregisterCallback(callbackManager)
+        }
+    }
 
     LaunchedEffect(state.loggedInRole) {
         state.loggedInRole?.let {
@@ -223,28 +296,40 @@ fun LoginScreen(
                     Divider(modifier = Modifier.weight(1f), color = AuthDivider)
                 }
 
+                val activity = context as? Activity
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally)
                 ) {
                     Button(
-                        onClick = {},
-                        enabled = false,
+                        onClick = {
+                            googleSignInClient.signOut().addOnCompleteListener {
+                                googleLoginLauncher.launch(googleSignInClient.signInIntent)
+                            }
+                        },
+                        enabled = !state.isLoading,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = AuthFieldBackground,
-                            disabledContainerColor = AuthFieldBackground,
-                            disabledContentColor = AuthPrimaryText
+                            contentColor = AuthPrimaryText
                         )
                     ) {
                         Text("Google")
                     }
                     Button(
-                        onClick = {},
-                        enabled = false,
+                        onClick = {
+                            if (activity == null) {
+                                vm.onSocialLoginError("Facebook sign-in is unavailable in this context.")
+                            } else {
+                                LoginManager.getInstance().logInWithReadPermissions(
+                                    activity,
+                                    listOf("email", "public_profile")
+                                )
+                            }
+                        },
+                        enabled = !state.isLoading,
                         colors = ButtonDefaults.buttonColors(
                             containerColor = AuthFieldBackground,
-                            disabledContainerColor = AuthFieldBackground,
-                            disabledContentColor = AuthPrimaryText
+                            contentColor = AuthPrimaryText
                         )
                     ) {
                         Text("Facebook")
@@ -259,69 +344,7 @@ fun LoginScreen(
                         Text("Create account", color = AuthPrimaryText)
                     }
                 }
-
-                QuickAccountsBlock(
-                    onAdmin = { vm.applyQuickAccount(UserRole.ADMIN) },
-                    onTourist = { vm.applyQuickAccount(UserRole.TOURIST) },
-                    enabled = !state.isLoading
-                )
             }
         }
-    }
-}
-
-@Composable
-private fun QuickAccountsBlock(
-    onAdmin: () -> Unit,
-    onTourist: () -> Unit,
-    enabled: Boolean
-) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(AuthFieldBackground, RoundedCornerShape(20.dp))
-            .padding(12.dp)
-    ) {
-        Text("Test Accounts", style = MaterialTheme.typography.titleSmall, color = AuthPrimaryText)
-        QuickAccountRow(
-            label = "Admin",
-            email = "admin@locapin.app",
-            password = " / Admin123!",
-            onUse = onAdmin,
-            enabled = enabled
-        )
-        QuickAccountRow(
-            label = "Tourist",
-            email = "tourist@locapin.app",
-            password = " / Tourist123!",
-            onUse = onTourist,
-            enabled = enabled
-        )
-    }
-}
-
-@Composable
-private fun QuickAccountRow(
-    label: String,
-    email: String,
-    password: String,
-    onUse: () -> Unit,
-    enabled: Boolean
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White.copy(alpha = 0.62f), RoundedCornerShape(12.dp))
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Column {
-            Text(label, style = MaterialTheme.typography.labelLarge, color = AuthPrimaryText)
-            Text(email, style = MaterialTheme.typography.bodySmall)
-            Text(password, style = MaterialTheme.typography.bodySmall)
-        }
-        TextButton(onClick = onUse, enabled = enabled) { Text("Use", color = AuthPrimaryText) }
     }
 }

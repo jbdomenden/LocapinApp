@@ -112,7 +112,13 @@ fun AppNavHost(
                 onBack = navController::popBackStack,
                 onOpenEula = { navController.navigate(AppDestinations.Eula) },
                 onOpenTerms = { navController.navigate(AppDestinations.TermsConditions) },
-                onOpenPrivacyConsent = { navController.navigate(AppDestinations.PrivacyLocationConsent) }
+                onOpenPrivacyConsent = { navController.navigate(AppDestinations.PrivacyLocationConsent) },
+                onRegistered = { role ->
+                    navController.navigate(roleResolver.resolveDestination(role)) {
+                        popUpTo(navController.graph.id) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
             )
         }
 
