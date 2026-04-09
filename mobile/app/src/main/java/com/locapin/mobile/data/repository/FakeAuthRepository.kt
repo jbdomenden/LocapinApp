@@ -3,8 +3,10 @@ package com.locapin.mobile.data.repository
 import com.locapin.mobile.core.common.LocaPinResult
 import com.locapin.mobile.data.auth.MockAuthDataSource
 import com.locapin.mobile.data.session.SessionManager
+import com.locapin.mobile.domain.model.AuthRole
 import com.locapin.mobile.domain.model.AuthSession
 import com.locapin.mobile.domain.repository.AuthRepository
+import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
@@ -46,10 +48,43 @@ class FakeAuthRepository @Inject constructor(
         provider: String,
         idToken: String?,
         accessToken: String?
-    ): LocaPinResult<AuthSession> = LocaPinResult.Error("$provider sign-in is disabled in mock auth mode.")
+    ): LocaPinResult<AuthSession> {
+        val authSession = AuthSession(
+            userId = "mock-${provider}-${UUID.randomUUID()}",
+            name = when (provider.lowercase()) {
+                "google" -> "Google Tourist"
+                "facebook" -> "Facebook Tourist"
+                else -> "Social Tourist"
+            },
+            email = when (provider.lowercase()) {
+                "google" -> "google.tourist@locapin.app"
+                "facebook" -> "facebook.tourist@locapin.app"
+                else -> "social.tourist@locapin.app"
+            },
+            role = AuthRole.TOURIST,
+            isLoggedIn = true
+        )
 
-    override suspend fun register(name: String, email: String, password: String): LocaPinResult<AuthSession> =
-        LocaPinResult.Error("Sign up is temporarily unavailable in mock auth mode.")
+        sessionManager.saveSession(authSession)
+        return LocaPinResult.Success(authSession)
+    }
+
+    override suspend fun register(name: String, email: String, password: String): LocaPinResult<AuthSession> {
+        if (name.isBlank() || email.isBlank() || password.isBlank()) {
+            return LocaPinResult.Error("Please complete all required fields.")
+        }
+
+        val authSession = AuthSession(
+            userId = "mock-register-${UUID.randomUUID()}",
+            name = name.trim(),
+            email = email.trim().lowercase(),
+            role = AuthRole.TOURIST,
+            isLoggedIn = true
+        )
+
+        sessionManager.saveSession(authSession)
+        return LocaPinResult.Success(authSession)
+    }
 
     override suspend fun forgotPassword(email: String): LocaPinResult<Unit> =
         LocaPinResult.Success(Unit)
