@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">LocaPin</string>
-    <string name="facebook_app_id" translatable="false">0</string>
-    <string name="facebook_client_token" translatable="false"/>
-    <string name="fb_login_protocol_scheme" translatable="false">fb0</string>
-    <style name="Theme.LocaPin" parent="Theme.Material3.DayNight.NoActionBar"/>
-</resources>

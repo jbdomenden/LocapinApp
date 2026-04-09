@@ -23,7 +23,7 @@ fun SplashScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(painter = painterResource(id = R.drawable.ic_locapin_logo), contentDescription = "LocaPin logo")
+        Image(painter = painterResource(id = R.drawable.locapin_logo), contentDescription = "LocaPin logo")
         Text("LocaPin", style = MaterialTheme.typography.headlineMedium)
     }
 }
