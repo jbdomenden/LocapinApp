@@ -3916,6 +3916,7 @@ mipmap ic_locapin_logo
 mipmap ic_locapin_logo_foreground
 mipmap ic_locapin_logo_round
 plurals mtrl_badge_content_description
+raw firebase_common_keep
 raw locapin_logo
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -4018,6 +4019,11 @@ string fab_transformation_sheet_behavior
 string facebook_app_id
 string facebook_client_token
 string fb_login_protocol_scheme
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string in_progress
@@ -4187,6 +4193,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string project_id
 string range_end
 string range_start
 string search_menu_title

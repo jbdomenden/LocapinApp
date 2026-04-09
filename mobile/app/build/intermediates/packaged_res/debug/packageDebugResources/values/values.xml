@@ -4,5 +4,11 @@
     <string name="facebook_app_id" translatable="false">0</string>
     <string name="facebook_client_token" translatable="false"/>
     <string name="fb_login_protocol_scheme" translatable="false">fb0</string>
+    <string name="gcm_defaultSenderId" translatable="false">38876762420</string>
+    <string name="google_api_key" translatable="false">AIzaSyBBq9h5AH2KiAxIVeMWq1mOo9FIscGlzfQ</string>
+    <string name="google_app_id" translatable="false">1:38876762420:android:6ee9638672e6e51da8d561</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBBq9h5AH2KiAxIVeMWq1mOo9FIscGlzfQ</string>
+    <string name="google_storage_bucket" translatable="false">locapin-8f041.firebasestorage.app</string>
+    <string name="project_id" translatable="false">locapin-8f041</string>
     <style name="Theme.LocaPin" parent="Theme.Material3.DayNight.NoActionBar"/>
 </resources>

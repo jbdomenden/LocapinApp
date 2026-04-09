@@ -12,6 +12,8 @@ public final class BuildConfig {
   // Field from default config.
   public static final String API_BASE_URL = "https://example.com/";
   // Field from default config.
+  public static final boolean ENABLE_REMOTE_TOURIST_ATTRACTIONS_READ = false;
+  // Field from default config.
   public static final String GOOGLE_SERVER_CLIENT_ID = "";
   // Field from default config.
   public static final boolean USE_MOCK_DATA = true;
