@@ -3,7 +3,6 @@ package com.locapin.mobile.feature.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.locapin.mobile.core.common.LocaPinResult
-import com.locapin.mobile.domain.model.UserRole
 import com.locapin.mobile.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -33,19 +32,20 @@ class LoginViewModel @Inject constructor(
         _state.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
     }
 
-    fun applyQuickAccount(role: UserRole) {
-        when (role) {
-            UserRole.ADMIN -> _state.update {
-                it.copy(email = "admin@locapin.app", password = "Admin123!", errorMessage = null)
-            }
-            UserRole.TOURIST -> _state.update {
-                it.copy(email = "tourist@locapin.app", password = "Tourist123!", errorMessage = null)
-            }
-        }
-    }
-
     fun consumeLoginResult() {
         _state.update { it.copy(loggedInRole = null) }
+    }
+
+    fun loginWithGoogle(idToken: String?) {
+        loginWithSocialProvider(provider = "google", idToken = idToken, accessToken = null)
+    }
+
+    fun loginWithFacebook(accessToken: String?) {
+        loginWithSocialProvider(provider = "facebook", idToken = null, accessToken = accessToken)
+    }
+
+    fun onSocialLoginError(message: String) {
+        _state.update { it.copy(isLoading = false, errorMessage = message) }
     }
 
     fun login() {
@@ -92,6 +92,37 @@ class LoginViewModel @Inject constructor(
                 }
                 LocaPinResult.Loading -> {
                     _state.update { it.copy(email = trimmedEmail, isLoading = true) }
+                }
+            }
+        }
+    }
+
+    private fun loginWithSocialProvider(provider: String, idToken: String?, accessToken: String?) {
+        if (_state.value.isLoading) return
+
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, errorMessage = null) }
+
+            when (val result = authRepository.socialLogin(provider, idToken, accessToken)) {
+                is LocaPinResult.Success -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = null,
+                            loggedInRole = result.data.role
+                        )
+                    }
+                }
+                is LocaPinResult.Error -> {
+                    _state.update {
+                        it.copy(
+                            isLoading = false,
+                            errorMessage = result.message
+                        )
+                    }
+                }
+                LocaPinResult.Loading -> {
+                    _state.update { it.copy(isLoading = true) }
                 }
             }
         }
