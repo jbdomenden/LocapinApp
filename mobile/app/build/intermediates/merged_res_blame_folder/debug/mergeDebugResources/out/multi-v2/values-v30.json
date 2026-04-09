@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.locapin.mobile.app-mergeDebugResources-2:/values-v30/values-v30.xml",
+            "outputFile": "com.locapin.mobile.app-mergeDebugResources-3:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\transforms-4\\766591adfa4a37132853e5278b198419\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\transforms-4\\2d9bd05a818803a7ffaa9bca9b21f29e\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
