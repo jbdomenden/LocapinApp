@@ -7,7 +7,6 @@ coil-kt = "2.7.0"
 compose-material = "material-icons-extended"
 compose-material3 = "material3"
 compose-ui = "ui-tooling-preview"
-core-ktx = "1.13.1"
 core-splashscreen = "1.0.1"
 dagger = "2.59.2"
 datastore-preferences = "1.2.1"
@@ -42,7 +41,7 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 google-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version = "23.2.0" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.13.1" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "core-splashscreen" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
@@ -72,7 +71,7 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 retrofit2-kotlinx-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.4.2" }
+android-application = { id = "com.android.application", version = "8.9.1" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "2.0.21" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version = "2.0.21" }
 hilt-android = { id = "com.google.dagger.hilt.android", version = "2.52" }

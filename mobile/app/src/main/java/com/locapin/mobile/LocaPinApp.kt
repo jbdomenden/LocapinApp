@@ -1,10 +1,9 @@
-package com.locapin.mobile.app
+package com.locapin.mobile
 
 import android.app.Application
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import dagger.hilt.android.HiltAndroidApp
-import com.locapin.mobile.R
 
 @HiltAndroidApp
 class LocaPinApp : Application() {
