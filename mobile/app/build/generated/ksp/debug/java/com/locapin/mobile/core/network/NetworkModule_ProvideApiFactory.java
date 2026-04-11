@@ -4,10 +4,10 @@ import com.locapin.mobile.data.remote.LocaPinApi;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 import kotlinx.serialization.json.Json;
 import okhttp3.OkHttpClient;
 
@@ -24,14 +24,15 @@ import okhttp3.OkHttpClient;
     "KotlinInternal",
     "KotlinInternalInJava",
     "cast",
-    "deprecation"
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class NetworkModule_ProvideApiFactory implements Factory<LocaPinApi> {
   private final Provider<OkHttpClient> clientProvider;
 
   private final Provider<Json> jsonProvider;
 
-  public NetworkModule_ProvideApiFactory(Provider<OkHttpClient> clientProvider,
+  private NetworkModule_ProvideApiFactory(Provider<OkHttpClient> clientProvider,
       Provider<Json> jsonProvider) {
     this.clientProvider = clientProvider;
     this.jsonProvider = jsonProvider;

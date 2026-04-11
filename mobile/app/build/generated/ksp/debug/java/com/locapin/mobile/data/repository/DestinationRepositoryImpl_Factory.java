@@ -5,10 +5,10 @@ import com.locapin.mobile.domain.repository.TouristFavoritesRepository;
 import com.locapin.mobile.feature.admin.AdminAttractionRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
+import dagger.internal.Provider;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
@@ -23,7 +23,8 @@ import javax.inject.Provider;
     "KotlinInternal",
     "KotlinInternalInJava",
     "cast",
-    "deprecation"
+    "deprecation",
+    "nullness:initialization.field.uninitialized"
 })
 public final class DestinationRepositoryImpl_Factory implements Factory<DestinationRepositoryImpl> {
   private final Provider<LocaPinApi> apiProvider;
@@ -32,7 +33,7 @@ public final class DestinationRepositoryImpl_Factory implements Factory<Destinat
 
   private final Provider<TouristFavoritesRepository> favoritesRepositoryProvider;
 
-  public DestinationRepositoryImpl_Factory(Provider<LocaPinApi> apiProvider,
+  private DestinationRepositoryImpl_Factory(Provider<LocaPinApi> apiProvider,
       Provider<AdminAttractionRepository> adminAttractionRepositoryProvider,
       Provider<TouristFavoritesRepository> favoritesRepositoryProvider) {
     this.apiProvider = apiProvider;
