@@ -99,7 +99,6 @@
                     android:scheme="fbconnect" />
             </intent-filter>
         </activity>
-        <activity android:name="com.facebook.CustomTabMainActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
@@ -125,6 +124,7 @@
                 android:value="androidx.startup" />
         </provider>
 
+        <activity android:name="com.facebook.CustomTabMainActivity" />
         <activity
             android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
             android:excludeFromRecents="true"
@@ -175,6 +175,10 @@
                 android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
+
+        <activity
+            android:name="androidx.compose.ui.tooling.PreviewActivity"
+            android:exported="true" />
         <!--
          The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
          with the application context. This config is merged in with the host app's manifest,
@@ -204,18 +208,14 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name="androidx.compose.ui.tooling.PreviewActivity"
-            android:exported="true" />
-
+        <uses-library
+            android:name="android.ext.adservices"
+            android:required="false" />
         <uses-library
             android:name="androidx.window.extensions"
             android:required="false" />
         <uses-library
             android:name="androidx.window.sidecar"
-            android:required="false" />
-        <uses-library
-            android:name="android.ext.adservices"
             android:required="false" />
 
         <provider

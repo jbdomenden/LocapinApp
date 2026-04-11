@@ -4,7 +4,26 @@
             "outputFile": "com.locapin.mobile.app-mergeDebugResources-3:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\5e089cb9afb3926987119293351bc213\\transformed\\core-splashscreen-1.2.0\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\09ca03b0f378bf82a14f0f4223a34bb4\\transformed\\appcompat-1.7.0\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    },
+                    "to": {
+                        "startLines": "18,21,24",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "1294,1453,1624",
+                        "endLines": "20,23,26",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "1448,1619,1792"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\0a274e95009d8d921a23f9631d34e450\\transformed\\core-splashscreen-1.0.1\\res\\values-watch-v20\\values-watch-v20.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\e266d55fb49abb7c685ca679ff2048ed\\transformed\\play-services-auth-21.5.1\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\02e0bcca2313d456b3cebf57199d3834\\transformed\\play-services-auth-21.5.1\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -35,25 +54,6 @@
                         "startOffsets": "55,134,214,293,372,463,544,635",
                         "endColumns": "78,79,78,78,90,80,90,79",
                         "endOffsets": "129,209,288,367,458,539,630,710"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\dac071add8666891f3e8e4f6fb7015c6\\transformed\\appcompat-1.7.0\\res\\values-watch-v20\\values-watch-v20.xml",
-                    "from": {
-                        "startLines": "2,5,8",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,214,385",
-                        "endLines": "4,7,10",
-                        "endColumns": "12,12,12",
-                        "endOffsets": "209,380,553"
-                    },
-                    "to": {
-                        "startLines": "18,21,24",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "1294,1453,1624",
-                        "endLines": "20,23,26",
-                        "endColumns": "12,12,12",
-                        "endOffsets": "1448,1619,1792"
                     }
                 }
             ]

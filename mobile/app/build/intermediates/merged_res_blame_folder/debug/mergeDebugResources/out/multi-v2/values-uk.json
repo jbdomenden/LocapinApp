@@ -4,41 +4,7 @@
             "outputFile": "com.locapin.mobile.app-mergeDebugResources-3:/values-uk/values-uk.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\7188785d04476da085851b22552bdc6c\\transformed\\foundation\\res\\values-uk\\values-uk.xml",
-                    "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,165,262",
-                        "endColumns": "109,96,99",
-                        "endOffsets": "160,257,357"
-                    },
-                    "to": {
-                        "startLines": "35,244,245",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "3153,23310,23407",
-                        "endColumns": "109,96,99",
-                        "endOffsets": "3258,23402,23502"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\e6c4587ef1e54cff33d176f84d71d011\\transformed\\ui\\res\\values-uk\\values-uk.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,207,300,384,486,587,671,753,842,930,1012,1097,1185,1257,1346,1422,1499,1576,1656,1726",
-                        "endColumns": "101,92,83,101,100,83,81,88,87,81,84,87,71,88,75,76,76,79,69,122",
-                        "endOffsets": "202,295,379,481,582,666,748,837,925,1007,1092,1180,1252,1341,1417,1494,1571,1651,1721,1844"
-                    },
-                    "to": {
-                        "startLines": "36,51,52,85,86,87,92,93,226,227,229,230,234,236,237,238,239,241,242,243",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3263,4722,4815,8461,8563,8664,9044,9126,21800,21888,22052,22137,22468,22617,22706,22782,22859,23037,23117,23187",
-                        "endColumns": "101,92,83,101,100,83,81,88,87,81,84,87,71,88,75,76,76,79,69,122",
-                        "endOffsets": "3360,4810,4894,8558,8659,8743,9121,9210,21883,21965,22132,22220,22535,22701,22777,22854,22931,23112,23182,23305"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\65fb02aca046cc6537edb14ddd9c2c86\\transformed\\material-1.13.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\1812048b7503e82ffa1b3cef7537e3ad\\transformed\\material-1.13.0\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -57,24 +23,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\98603210f895d808c47e0e53fa29e87c\\transformed\\facebook-login-18.2.3\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\62e72947325840977045a1b6008398b1\\transformed\\foundation\\res\\values-uk\\values-uk.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,143,235,315,407,496,609,729,818,907,1007,1092,1177,1277",
-                        "endColumns": "87,91,79,91,88,112,119,88,88,99,84,84,99,113",
-                        "endOffsets": "138,230,310,402,491,604,724,813,902,1002,1087,1172,1272,1386"
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,165,262",
+                        "endColumns": "109,96,99",
+                        "endOffsets": "160,257,357"
                     },
                     "to": {
-                        "startLines": "53,54,55,56,57,58,59,60,61,62,63,64,65,66",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4899,4987,5079,5159,5251,5340,5453,5573,5662,5751,5851,5936,6021,6121",
-                        "endColumns": "87,91,79,91,88,112,119,88,88,99,84,84,99,113",
-                        "endOffsets": "4982,5074,5154,5246,5335,5448,5568,5657,5746,5846,5931,6016,6116,6230"
+                        "startLines": "35,244,245",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3153,23310,23407",
+                        "endColumns": "109,96,99",
+                        "endOffsets": "3258,23402,23502"
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\7d5d19597cea07026ec8f76e223741b9\\transformed\\play-services-base-18.5.0\\res\\values-uk\\values.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\f35dd036991c9cc559635398941c8cff\\transformed\\play-services-base-18.5.0\\res\\values-uk\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -91,24 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\2618c4d7a89983c5052246a81e75334d\\transformed\\play-services-basement-18.9.0\\res\\values-uk\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "218",
-                        "endColumns": "141",
-                        "endOffsets": "359"
-                    },
-                    "to": {
-                        "startLines": "75",
-                        "startColumns": "4",
-                        "startOffsets": "7246",
-                        "endColumns": "145",
-                        "endOffsets": "7387"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\dac071add8666891f3e8e4f6fb7015c6\\transformed\\appcompat-1.7.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\09ca03b0f378bf82a14f0f4223a34bb4\\transformed\\appcompat-1.7.0\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -125,24 +74,58 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\5e38d213017ccf123cb638364e949cfe\\transformed\\core-1.18.0\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\e3acdec8df4d35e954bf64b06565d9da\\transformed\\facebook-login-18.2.3\\res\\values-uk\\values-uk.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,155,257,358,459,564,669,782",
-                        "endColumns": "99,101,100,100,104,104,112,100",
-                        "endOffsets": "150,252,353,454,559,664,777,878"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,143,235,315,407,496,609,729,818,907,1007,1092,1177,1277",
+                        "endColumns": "87,91,79,91,88,112,119,88,88,99,84,84,99,113",
+                        "endOffsets": "138,230,310,402,491,604,724,813,902,1002,1087,1172,1272,1386"
                     },
                     "to": {
-                        "startLines": "41,42,43,44,45,46,47,240",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3700,3800,3902,4003,4104,4209,4314,22936",
-                        "endColumns": "99,101,100,100,104,104,112,100",
-                        "endOffsets": "3795,3897,3998,4099,4204,4309,4422,23032"
+                        "startLines": "53,54,55,56,57,58,59,60,61,62,63,64,65,66",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4899,4987,5079,5159,5251,5340,5453,5573,5662,5751,5851,5936,6021,6121",
+                        "endColumns": "87,91,79,91,88,112,119,88,88,99,84,84,99,113",
+                        "endOffsets": "4982,5074,5154,5246,5335,5448,5568,5657,5746,5846,5931,6016,6116,6230"
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\f0040f2795e2125c803e02484d1af783\\transformed\\material3\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\359b364bc1a64a0f1cc15c2b567ebbd2\\transformed\\ui\\res\\values-uk\\values-uk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,207,300,384,486,587,671,753,842,930,1012,1097,1185,1257,1346,1422,1499,1576,1656,1726",
+                        "endColumns": "101,92,83,101,100,83,81,88,87,81,84,87,71,88,75,76,76,79,69,122",
+                        "endOffsets": "202,295,379,481,582,666,748,837,925,1007,1092,1180,1252,1341,1417,1494,1571,1651,1721,1844"
+                    },
+                    "to": {
+                        "startLines": "36,51,52,85,86,87,92,93,226,227,229,230,234,236,237,238,239,241,242,243",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3263,4722,4815,8461,8563,8664,9044,9126,21800,21888,22052,22137,22468,22617,22706,22782,22859,23037,23117,23187",
+                        "endColumns": "101,92,83,101,100,83,81,88,87,81,84,87,71,88,75,76,76,79,69,122",
+                        "endOffsets": "3360,4810,4894,8558,8659,8743,9121,9210,21883,21965,22132,22220,22535,22701,22777,22854,22931,23112,23182,23305"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\d21b768fd9d36021fb167f389ed8782b\\transformed\\play-services-basement-18.9.0\\res\\values-uk\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "218",
+                        "endColumns": "141",
+                        "endOffsets": "359"
+                    },
+                    "to": {
+                        "startLines": "75",
+                        "startColumns": "4",
+                        "startOffsets": "7246",
+                        "endColumns": "145",
+                        "endOffsets": "7387"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\896f0c6bfc271b44f00e3e6661c52fa8\\transformed\\material3\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -159,7 +142,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\b1e4ee640243feb47b2b938dfa02aaff\\transformed\\material\\res\\values-uk\\values-uk.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\e76727bf585e88578bdcff9f7ea40825\\transformed\\material\\res\\values-uk\\values-uk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -173,6 +156,23 @@
                         "startOffsets": "17818",
                         "endColumns": "92",
                         "endOffsets": "17906"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\cff69313620858e67e4f0e592fca77be\\transformed\\core-1.18.0\\res\\values-uk\\values-uk.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,155,257,358,459,564,669,782",
+                        "endColumns": "99,101,100,100,104,104,112,100",
+                        "endOffsets": "150,252,353,454,559,664,777,878"
+                    },
+                    "to": {
+                        "startLines": "41,42,43,44,45,46,47,240",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3700,3800,3902,4003,4104,4209,4314,22936",
+                        "endColumns": "99,101,100,100,104,104,112,100",
+                        "endOffsets": "3795,3897,3998,4099,4204,4309,4422,23032"
                     }
                 }
             ]
