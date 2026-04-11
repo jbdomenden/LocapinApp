@@ -89,7 +89,12 @@ android {
         buildConfig = true
         resValues = true
     }
-    packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+        }
+    }
 }
 
 fun String.ensureTrailingSlash(): String = if (endsWith("/")) this else "$this/"
