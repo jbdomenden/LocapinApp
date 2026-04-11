@@ -95,7 +95,7 @@ android {
 fun String.ensureTrailingSlash(): String = if (endsWith("/")) this else "$this/"
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2025.01.01")
+    val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
