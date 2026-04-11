@@ -4,7 +4,17 @@
             "outputFile": "com.locapin.mobile.app-mergeDebugResources-3:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\09ca03b0f378bf82a14f0f4223a34bb4\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\79f70abfc4bfb04ba64d1e61385626f6\\transformed\\core-splashscreen-1.0.1\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "85",
+                        "endOffsets": "136"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\cae318941c74818e2aae1a84010dccba\\transformed\\appcompat-1.7.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,17 +31,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\0a274e95009d8d921a23f9631d34e450\\transformed\\core-splashscreen-1.0.1\\res\\values-night-v8\\values-night-v8.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "85",
-                        "endOffsets": "136"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\1812048b7503e82ffa1b3cef7537e3ad\\transformed\\material-1.13.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\a9bb834bac7630495e0034937064940a\\transformed\\material-1.13.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

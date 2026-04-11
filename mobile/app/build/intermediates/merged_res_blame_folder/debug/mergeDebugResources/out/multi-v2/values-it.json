@@ -4,75 +4,24 @@
             "outputFile": "com.locapin.mobile.app-mergeDebugResources-3:/values-it/values-it.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\359b364bc1a64a0f1cc15c2b567ebbd2\\transformed\\ui\\res\\values-it\\values-it.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\bb2734d4433ee748714f0589fd0a3433\\transformed\\material\\res\\values-it\\values-it.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,216,316,403,501,601,688,767,873,966,1061,1145,1233,1318,1403,1479,1551,1621,1699,1768",
-                        "endColumns": "110,99,86,97,99,86,78,105,92,94,83,87,84,84,75,71,69,77,68,120",
-                        "endOffsets": "211,311,398,496,596,683,762,868,961,1056,1140,1228,1313,1398,1474,1546,1616,1694,1763,1884"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "88",
+                        "endOffsets": "139"
                     },
                     "to": {
-                        "startLines": "34,49,50,92,93,94,99,100,233,234,236,237,241,243,244,245,246,248,249,250",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3131,4648,4748,9645,9743,9843,10240,10319,23280,23373,23548,23632,23966,24133,24218,24294,24366,24537,24615,24684",
-                        "endColumns": "110,99,86,97,99,86,78,105,92,94,83,87,84,84,75,71,69,77,68,120",
-                        "endOffsets": "3237,4743,4830,9738,9838,9925,10314,10420,23368,23463,23627,23715,24046,24213,24289,24361,24431,24610,24679,24800"
+                        "startLines": "185",
+                        "startColumns": "4",
+                        "startOffsets": "19249",
+                        "endColumns": "88",
+                        "endOffsets": "19333"
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\cff69313620858e67e4f0e592fca77be\\transformed\\core-1.18.0\\res\\values-it\\values-it.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,255,354,456,565,672,802",
-                        "endColumns": "97,101,98,101,108,106,129,100",
-                        "endOffsets": "148,250,349,451,560,667,797,898"
-                    },
-                    "to": {
-                        "startLines": "39,40,41,42,43,44,45,247",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3579,3677,3779,3878,3980,4089,4196,24436",
-                        "endColumns": "97,101,98,101,108,106,129,100",
-                        "endOffsets": "3672,3774,3873,3975,4084,4191,4321,24532"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\62e72947325840977045a1b6008398b1\\transformed\\foundation\\res\\values-it\\values-it.xml",
-                    "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,174,272",
-                        "endColumns": "118,97,98",
-                        "endOffsets": "169,267,366"
-                    },
-                    "to": {
-                        "startLines": "33,251,252",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "3012,24805,24903",
-                        "endColumns": "118,97,98",
-                        "endOffsets": "3126,24898,24997"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\f35dd036991c9cc559635398941c8cff\\transformed\\play-services-base-18.5.0\\res\\values-it\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,294,441,562,666,820,944,1060,1160,1313,1416,1566,1689,1841,2018,2081,2138",
-                        "endColumns": "100,146,120,103,153,123,115,99,152,102,149,122,151,176,62,56,72",
-                        "endOffsets": "293,440,561,665,819,943,1059,1159,1312,1415,1565,1688,1840,2017,2080,2137,2210"
-                    },
-                    "to": {
-                        "startLines": "74,75,76,77,78,79,80,81,83,84,85,86,87,88,89,90,91",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "7423,7528,7679,7804,7912,8070,8198,8318,8558,8715,8822,8976,9103,9259,9440,9507,9568",
-                        "endColumns": "104,150,124,107,157,127,119,103,156,106,153,126,155,180,66,60,76",
-                        "endOffsets": "7523,7674,7799,7907,8065,8193,8313,8417,8710,8817,8971,9098,9254,9435,9502,9563,9640"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\896f0c6bfc271b44f00e3e6661c52fa8\\transformed\\material3\\res\\values-it\\values-it.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\32fcd2af64d70ef2315ecaa027aaa35b\\transformed\\material3\\res\\values-it\\values-it.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -89,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\1812048b7503e82ffa1b3cef7537e3ad\\transformed\\material-1.13.0\\res\\values-it\\values-it.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\a9bb834bac7630495e0034937064940a\\transformed\\material-1.13.0\\res\\values-it\\values-it.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -108,24 +57,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\e76727bf585e88578bdcff9f7ea40825\\transformed\\material\\res\\values-it\\values-it.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "88",
-                        "endOffsets": "139"
-                    },
-                    "to": {
-                        "startLines": "185",
-                        "startColumns": "4",
-                        "startOffsets": "19249",
-                        "endColumns": "88",
-                        "endOffsets": "19333"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\e3acdec8df4d35e954bf64b06565d9da\\transformed\\facebook-login-18.2.3\\res\\values-it\\values-it.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\8175a70c713b4f71e05e536684fd038a\\transformed\\facebook-login-18.2.3\\res\\values-it\\values-it.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -142,7 +74,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\d21b768fd9d36021fb167f389ed8782b\\transformed\\play-services-basement-18.9.0\\res\\values-it\\values.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\f9d15bccd8492a2d128d0f3531d8cb98\\transformed\\play-services-base-18.5.0\\res\\values-it\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,294,441,562,666,820,944,1060,1160,1313,1416,1566,1689,1841,2018,2081,2138",
+                        "endColumns": "100,146,120,103,153,123,115,99,152,102,149,122,151,176,62,56,72",
+                        "endOffsets": "293,440,561,665,819,943,1059,1159,1312,1415,1565,1688,1840,2017,2080,2137,2210"
+                    },
+                    "to": {
+                        "startLines": "74,75,76,77,78,79,80,81,83,84,85,86,87,88,89,90,91",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "7423,7528,7679,7804,7912,8070,8198,8318,8558,8715,8822,8976,9103,9259,9440,9507,9568",
+                        "endColumns": "104,150,124,107,157,127,119,103,156,106,153,126,155,180,66,60,76",
+                        "endOffsets": "7523,7674,7799,7907,8065,8193,8313,8417,8710,8817,8971,9098,9254,9435,9502,9563,9640"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\e196b908ba60235ccc92118ffe92da32\\transformed\\foundation\\res\\values-it\\values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,174,272",
+                        "endColumns": "118,97,98",
+                        "endOffsets": "169,267,366"
+                    },
+                    "to": {
+                        "startLines": "33,251,252",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "3012,24805,24903",
+                        "endColumns": "118,97,98",
+                        "endOffsets": "3126,24898,24997"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\3c280f3ae9f85bd802622305b9abeed0\\transformed\\play-services-basement-18.9.0\\res\\values-it\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -159,7 +125,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\9.4.1\\transforms\\09ca03b0f378bf82a14f0f4223a34bb4\\transformed\\appcompat-1.7.0\\res\\values-it\\values-it.xml",
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\0a0b8c2cd74113844448f3e849989f78\\transformed\\ui\\res\\values-it\\values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,216,316,403,501,601,688,767,873,966,1061,1145,1233,1318,1403,1479,1551,1621,1699,1768",
+                        "endColumns": "110,99,86,97,99,86,78,105,92,94,83,87,84,84,75,71,69,77,68,120",
+                        "endOffsets": "211,311,398,496,596,683,762,868,961,1056,1140,1228,1313,1398,1474,1546,1616,1694,1763,1884"
+                    },
+                    "to": {
+                        "startLines": "34,49,50,92,93,94,99,100,233,234,236,237,241,243,244,245,246,248,249,250",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3131,4648,4748,9645,9743,9843,10240,10319,23280,23373,23548,23632,23966,24133,24218,24294,24366,24537,24615,24684",
+                        "endColumns": "110,99,86,97,99,86,78,105,92,94,83,87,84,84,75,71,69,77,68,120",
+                        "endOffsets": "3237,4743,4830,9738,9838,9925,10314,10420,23368,23463,23627,23715,24046,24213,24289,24361,24431,24610,24679,24800"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\d4cc627f03010162b976433ce82f0524\\transformed\\core-1.18.0\\res\\values-it\\values-it.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,255,354,456,565,672,802",
+                        "endColumns": "97,101,98,101,108,106,129,100",
+                        "endOffsets": "148,250,349,451,560,667,797,898"
+                    },
+                    "to": {
+                        "startLines": "39,40,41,42,43,44,45,247",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3579,3677,3779,3878,3980,4089,4196,24436",
+                        "endColumns": "97,101,98,101,108,106,129,100",
+                        "endOffsets": "3672,3774,3873,3975,4084,4191,4321,24532"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\john.domenden\\.jdks\\openjdk-25.0.2\\caches\\8.11.1\\transforms\\cae318941c74818e2aae1a84010dccba\\transformed\\appcompat-1.7.0\\res\\values-it\\values-it.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

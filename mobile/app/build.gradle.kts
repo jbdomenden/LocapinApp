@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -96,11 +97,15 @@ android {
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
         }
     }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 fun String.ensureTrailingSlash(): String = if (endsWith("/")) this else "$this/"
 
 dependencies {
+    implementation(libs.core.ktx)
     val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
     implementation(composeBom)
     androidTestImplementation(composeBom)
