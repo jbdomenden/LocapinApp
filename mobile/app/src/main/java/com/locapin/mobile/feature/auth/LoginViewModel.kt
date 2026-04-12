@@ -32,6 +32,30 @@ class LoginViewModel @Inject constructor(
         _state.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
     }
 
+    fun onRememberMeChange(value: Boolean) {
+        _state.update { it.copy(rememberMe = value) }
+    }
+
+    fun forgotPassword() {
+        val email = _state.value.email.trim()
+        if (email.isBlank()) {
+            _state.update { it.copy(errorMessage = "Please enter your email to reset password.") }
+            return
+        }
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, errorMessage = null) }
+            when (val result = authRepository.forgotPassword(email)) {
+                is LocaPinResult.Success -> {
+                    _state.update { it.copy(isLoading = false, errorMessage = "Reset link sent to your email.") }
+                }
+                is LocaPinResult.Error -> {
+                    _state.update { it.copy(isLoading = false, errorMessage = result.message) }
+                }
+                else -> {}
+            }
+        }
+    }
+
     fun consumeLoginResult() {
         _state.update { it.copy(loggedInRole = null) }
     }

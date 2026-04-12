@@ -90,6 +90,8 @@ fun AppNavHost(
             LoginScreen(
                 onForgotPassword = { navController.navigate(AppDestinations.ForgotPassword) },
                 onSignUp = { navController.navigate(AppDestinations.SignUp) },
+                onOpenEula = { navController.navigate(AppDestinations.Eula) },
+                onOpenTerms = { navController.navigate(AppDestinations.TermsConditions) },
                 onRoleResolved = { role ->
                     navController.navigate(roleResolver.resolveDestination(role)) {
                         popUpTo(navController.graph.id) { inclusive = true }
@@ -294,7 +296,7 @@ private fun NavGraphBuilder.touristGraph(
     }
 
     composable(AppDestinations.TouristMap) {
-        SanJuanCityMapScreen()
+        SanJuanCityMapScreen(onLogout = onLogout)
     }
     composable(AppDestinations.TouristAttractions) { backStackEntry ->
         val parentEntry = remember(backStackEntry) {

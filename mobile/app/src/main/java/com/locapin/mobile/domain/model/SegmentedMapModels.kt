@@ -23,5 +23,6 @@ data class ZoneAttraction(
     val zoneId: String,
     val area: String? = null,
     val imageUrl: String? = null,
-    val category: String? = null
+    val category: String? = null,
+    val distance: String? = null
 )

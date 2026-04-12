@@ -7,11 +7,126 @@ object SanJuanMapData {
     const val mapWidth = 1000f
     const val mapHeight = 620f
 
-    val attractionsBySector: Map<String, List<String>> = mapOf(
-        "greenhills" to listOf("Greenhills Shopping Center", "Promenade Cinema"),
-        "addition-hills" to listOf("Pinaglabanan Shrine", "Santuario del Santo Cristo"),
-        "little-baguio" to listOf("Little Baguio Terraces"),
-        "pasadena" to listOf("Pasadena Community Park")
+    val attractionsBySector: Map<String, List<Attraction>> = mapOf(
+        "greenhills" to listOf(
+            Attraction(
+                "Greenhills Shopping Center",
+                "Premier shopping destination for gadgets and pearls.",
+                "2.8 km",
+                "https://share.google/a065afgLuqEpcOcKb",
+                "Known for: A popular shopping destination famous for pearls, souvenirs, gadgets, bargain shopping, and food outlets."
+            ),
+            Attraction(
+                "Greenhills Promenade",
+                "Upscale lifestyle center with luxury cinemas.",
+                "3.1 km",
+                "https://share.google/MKsJAiGlTZoQrmv7j",
+                "Known for: The upscale dining and lifestyle area of Greenhills with restaurants, cafés, cinemas, and entertainment spots."
+            ),
+            Attraction(
+                "Virra Mall (V-Mall)",
+                "Shopping mall known for electronics and budget-friendly items.",
+                "2.9 km",
+                "https://share.google/tXc6Bhhsb7xw1rtx6",
+                "Known for: A shopping mall known for electronics, tiangge stalls, and budget-friendly items, especially popular with students."
+            ),
+            Attraction(
+                "Unimart at Greenhills",
+                "Premium grocery and shopping spot.",
+                "3.0 km",
+                "https://share.google/8bO96AZWQSag7ZaQG",
+                "Known for: A well-known premium grocery and shopping spot inside Greenhills, popular for local and imported goods."
+            )
+        ),
+        "addition-hills" to listOf(
+            Attraction(
+                "Pinaglabanan Shrine",
+                "Commemorating the first battle of the Katipunan.",
+                "0.9 km",
+                "https://share.google/KTGjRwqyUvzVyZbkS",
+                "Known for: A national historical landmark commemorating the Battle of San Juan del Monte, the first major battle of the Philippine Revolution."
+            ),
+            Attraction(
+                "Santuario del Santo Cristo Parish",
+                "One of the oldest churches in San Juan.",
+                "1.1 km",
+                "https://share.google/98z3Kh3qiUNmCEiNs",
+                "Known for: One of the oldest churches in San Juan, rich in religious heritage and local devotion."
+            ),
+            Attraction(
+                "El Deposito Museum",
+                "Underground reservoir turned museum.",
+                "0.8 km",
+                "https://share.google/mtZb9LYrFu2ea9WjY",
+                "Known for: An underground reservoir turned museum showcasing the Spanish-era water system of Manila and its role in Philippine history."
+            )
+        ),
+        "little-baguio" to listOf(
+            Attraction(
+                "The Corner House",
+                "Modern lifestyle and dining hub.",
+                "1.5 km",
+                "https://share.google/CWHsen0F8JoxHUF0l",
+                "Known for: A modern lifestyle and dining hub featuring a curated mix of cafés, restaurants, dessert spots, and retail stalls in a stylish, open-concept space."
+            ),
+            Attraction(
+                "Fundacion Sanso",
+                "Art museum featuring works of National Artist Juvenal Sansó.",
+                "1.6 km",
+                "https://share.google/F1P9LZjFN6NKfKRyX",
+                "Known for: An art and cultural museum featuring works of National Artist Juvenal Sansó and curated exhibitions by Filipino visual artists."
+            ),
+            Attraction(
+                "Good Pastry Cafe",
+                "Cozy café known for freshly baked pastries.",
+                "1.4 km",
+                "https://share.google/mqRVHvi4wPxlbFmcJ",
+                "A cozy café known for its freshly baked pastries and desserts. It offers a variety of croissants, cakes, and sweet treats."
+            )
+        ),
+        "pasadena" to listOf(
+            Attraction(
+                "Ronac Art Center",
+                "Contemporary art center on Ortigas Avenue.",
+                "1.3 km",
+                "https://share.google/nZxNrAeoiPMhEI7go",
+                "Known for: A contemporary art center showcasing modern Filipino art, large installations, rotating exhibitions, cafés, and design stores."
+            )
+        ),
+        "batis" to listOf(
+            Attraction(
+                "Club Filipino",
+                "Historic site of Corazon Aquino's inauguration.",
+                "2.4 km",
+                "https://share.google/lk8di0SW01riSp8tF",
+                "Known for: A historic clubhouse where Corazon Aquino was inaugurated as President in 1986 after the People Power Revolution."
+            ),
+            Attraction(
+                "Gaea",
+                "Modern all-day restaurant and bar.",
+                "2.2 km",
+                "https://share.google/4wFTs7JUC4QlS1QOI",
+                "GAEA is a modern all-day restaurant and bar in San Juan known for its stylish, moody interiors and upscale yet cozy ambiance."
+            )
+        ),
+        "kabayanan" to listOf(
+            Attraction(
+                "Museo ng Katipunan",
+                "Features artifacts of the Philippine Revolution.",
+                "0.8 km",
+                "https://share.google/VKJwnOaFpjPMRZNVZ",
+                "Known for: A historical museum about the Katipunan and the 1896 Philippine Revolution, featuring artifacts, documents, and multimedia exhibits."
+            )
+        ),
+        "santa-lucia" to listOf(
+            Attraction(
+                "Santolan Town Plaza",
+                "Open-air lifestyle mall with specialty restaurants.",
+                "3.2 km",
+                "https://share.google/Th2CJGpgzFw4bCkwP",
+                "Known for: An open-air lifestyle mall featuring specialty restaurants, cafés, and boutique shops."
+            )
+        )
     )
 
 

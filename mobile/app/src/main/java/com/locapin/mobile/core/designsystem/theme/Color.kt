@@ -2,10 +2,15 @@ package com.locapin.mobile.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
-val LocaPinPrimary = Color(0xFF0A7E8C)
-val LocaPinSecondary = Color(0xFF33A1B0)
-val LocaPinAccent = Color(0xFFF4A259)
-val LocaPinSurface = Color(0xFFF8FBFC)
-val LocaPinDark = Color(0xFF092B30)
+// New Theme based on Login Screen
+val LocaPinPrimary = Color(0xFF8B3A4D)
+val LocaPinSecondary = Color(0xFFFFA3B1)
+val LocaPinAccent = Color(0xFFE58B9C)
+val LocaPinSurface = Color(0xFFF7F0E9)
+val LocaPinCardBackground = Color(0xFFF9A7B3)
+val LocaPinFieldBackground = Color(0xFFFDF1F3)
+val LocaPinBorder = Color(0xFFE88C9D)
+val LocaPinDark = Color(0xFF5D2431)
 val LocaPinSuccess = Color(0xFF2E7D32)
 val LocaPinError = Color(0xFFB3261E)
+val LocaPinWhite = Color.White

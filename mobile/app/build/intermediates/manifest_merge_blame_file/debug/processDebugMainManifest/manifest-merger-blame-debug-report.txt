@@ -5,458 +5,593 @@
 5    android:versionName="1.0.0" >
 6
 7    <uses-sdk
+7-->INJECTED
 8        android:minSdkVersion="26"
+8-->INJECTED
 9        android:targetSdkVersion="35" />
+9-->INJECTED
 10
 11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-11-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:4:5-79
-11-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:4:22-76
+11-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:5:5-79
+11-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:5:22-76
 12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-12-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:5:5-81
-12-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:5:22-78
+12-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:6:5-81
+12-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:6:22-78
 13    <uses-permission android:name="android.permission.INTERNET" />
-13-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:6:5-67
-13-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:6:22-64
+13-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:7:5-67
+13-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:7:22-64
 14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-14-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:7:5-79
-14-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:7:22-76
+14-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:8:5-79
+14-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:8:22-76
 15
 16    <queries>
-16-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:15:5-17:15
-17        <package android:name="com.facebook.katana" />
-17-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:16:9-55
-17-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:16:18-52
-18        <!-- Needs to be explicitly declared on Android R+ -->
-19        <package android:name="com.google.android.apps.maps" />
-19-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\31d9d5756ad5446ad2b795fac5259393\transformed\play-services-maps-20.0.0\AndroidManifest.xml:29:7-61
-19-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\31d9d5756ad5446ad2b795fac5259393\transformed\play-services-maps-20.0.0\AndroidManifest.xml:29:16-59
-20    </queries>
-21
-22    <uses-feature
-22-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\31d9d5756ad5446ad2b795fac5259393\transformed\play-services-maps-20.0.0\AndroidManifest.xml:22:5-24:33
-23        android:glEsVersion="0x00020000"
-23-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\31d9d5756ad5446ad2b795fac5259393\transformed\play-services-maps-20.0.0\AndroidManifest.xml:23:8-40
-24        android:required="true" />
-24-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\31d9d5756ad5446ad2b795fac5259393\transformed\play-services-maps-20.0.0\AndroidManifest.xml:24:8-31
-25
-26    <uses-permission android:name="android.permission.WAKE_LOCK" />
-26-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:25:5-68
-26-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:25:22-65
-27    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-27-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:26:5-110
-27-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:26:22-107
-28    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-28-->[com.google.android.gms:play-services-measurement-impl:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\986670fe6a4649300d864a30af758858\transformed\play-services-measurement-impl-23.2.0\AndroidManifest.xml:27:5-79
-28-->[com.google.android.gms:play-services-measurement-impl:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\986670fe6a4649300d864a30af758858\transformed\play-services-measurement-impl-23.2.0\AndroidManifest.xml:27:22-76
-29    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
-29-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:26:5-88
-29-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:26:22-85
-30    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
-30-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:27:5-82
-30-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:27:22-79
-31    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_CUSTOM_AUDIENCE" />
-31-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:18:5-92
-31-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:18:22-89
-32    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS" />
-32-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:19:5-83
-32-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:19:22-80
-33
-34    <permission
-34-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d4cc627f03010162b976433ce82f0524\transformed\core-1.18.0\AndroidManifest.xml:22:5-24:47
-35        android:name="com.locapin.mobile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-35-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d4cc627f03010162b976433ce82f0524\transformed\core-1.18.0\AndroidManifest.xml:23:9-81
-36        android:protectionLevel="signature" />
-36-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d4cc627f03010162b976433ce82f0524\transformed\core-1.18.0\AndroidManifest.xml:24:9-44
-37
-38    <uses-permission android:name="com.locapin.mobile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-38-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d4cc627f03010162b976433ce82f0524\transformed\core-1.18.0\AndroidManifest.xml:26:5-97
-38-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d4cc627f03010162b976433ce82f0524\transformed\core-1.18.0\AndroidManifest.xml:26:22-94
+16-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:10:5-13:15
+17        <package android:name="com.google.android.gms" />
+17-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:11:9-58
+17-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:11:18-55
+18        <package android:name="com.android.vending" />
+18-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:9-55
+18-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:18-52
+19        <package android:name="com.facebook.katana" /> <!-- Needs to be explicitly declared on Android R+ -->
+19-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:16:9-55
+19-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:16:18-52
+20        <package android:name="com.google.android.apps.maps" />
+20-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\bf852a646714915b11414c43482287ac\workspace\transformed\play-services-maps-20.0.0\AndroidManifest.xml:29:7-61
+20-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\bf852a646714915b11414c43482287ac\workspace\transformed\play-services-maps-20.0.0\AndroidManifest.xml:29:16-59
+21    </queries>
+22
+23    <uses-feature
+23-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\bf852a646714915b11414c43482287ac\workspace\transformed\play-services-maps-20.0.0\AndroidManifest.xml:22:5-24:33
+24        android:glEsVersion="0x00020000"
+24-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\bf852a646714915b11414c43482287ac\workspace\transformed\play-services-maps-20.0.0\AndroidManifest.xml:23:8-40
+25        android:required="true" />
+25-->[com.google.android.gms:play-services-maps:20.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\bf852a646714915b11414c43482287ac\workspace\transformed\play-services-maps-20.0.0\AndroidManifest.xml:24:8-31
+26
+27    <uses-permission android:name="android.permission.WAKE_LOCK" />
+27-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:25:5-68
+27-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:25:22-65
+28    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+28-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:26:5-110
+28-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:26:22-107
+29    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+29-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:25:5-79
+29-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:25:22-76
+30    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+30-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:26:5-88
+30-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:26:22-85
+31    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+31-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:27:5-82
+31-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:27:22-79
+32    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+32-->[com.google.android.recaptcha:recaptcha:18.6.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8727ee9cfe24716bc1e5b6eef260959c\workspace\transformed\recaptcha-18.6.1\AndroidManifest.xml:9:5-98
+32-->[com.google.android.recaptcha:recaptcha:18.6.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8727ee9cfe24716bc1e5b6eef260959c\workspace\transformed\recaptcha-18.6.1\AndroidManifest.xml:9:22-95
+33    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_CUSTOM_AUDIENCE" />
+33-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:18:5-92
+33-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:18:22-89
+34    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS" />
+34-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:19:5-83
+34-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:19:22-80
+35
+36    <permission
+36-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\0de3260e282ce99aa7b7800527ceaa7a\workspace\transformed\core-1.18.0\AndroidManifest.xml:22:5-24:47
+37        android:name="com.locapin.mobile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+37-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\0de3260e282ce99aa7b7800527ceaa7a\workspace\transformed\core-1.18.0\AndroidManifest.xml:23:9-81
+38        android:protectionLevel="signature" />
+38-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\0de3260e282ce99aa7b7800527ceaa7a\workspace\transformed\core-1.18.0\AndroidManifest.xml:24:9-44
 39
-40    <application
-40-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:9:5-58:19
-41        android:name="com.locapin.mobile.app.LocaPinApp"
-41-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:10:9-39
-42        android:allowBackup="true"
-42-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:11:9-35
-43        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-43-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d4cc627f03010162b976433ce82f0524\transformed\core-1.18.0\AndroidManifest.xml:28:18-86
-44        android:debuggable="true"
-45        android:extractNativeLibs="false"
-46        android:icon="@drawable/locapin_logo"
-46-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:9-46
-47        android:label="@string/app_name"
-47-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:13:9-41
-48        android:roundIcon="@drawable/locapin_logo"
-48-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:14:9-51
-49        android:supportsRtl="true"
-49-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:9-35
-50        android:testOnly="true"
-51        android:theme="@style/Theme.LocaPin" >
-51-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:16:9-45
-52        <meta-data
-53            android:name="com.google.android.geo.API_KEY"
-53-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:19:13-58
-54            android:value="" />
-54-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:20:13-44
-55        <meta-data
-55-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:22:9-24:55
-56            android:name="com.facebook.sdk.ApplicationId"
-56-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:23:13-58
-57            android:value="@string/facebook_app_id" />
-57-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:24:13-52
-58        <meta-data
-58-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:25:9-27:61
-59            android:name="com.facebook.sdk.ClientToken"
-59-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:26:13-56
-60            android:value="@string/facebook_client_token" />
-60-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:27:13-58
-61        <meta-data
-61-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:28:9-30:37
-62            android:name="com.facebook.sdk.AutoInitEnabled"
-62-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:29:13-60
-63            android:value="false" />
-63-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:30:13-34
+40    <uses-permission android:name="com.locapin.mobile.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+40-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\0de3260e282ce99aa7b7800527ceaa7a\workspace\transformed\core-1.18.0\AndroidManifest.xml:26:5-97
+40-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\0de3260e282ce99aa7b7800527ceaa7a\workspace\transformed\core-1.18.0\AndroidManifest.xml:26:22-94
+41
+42    <application
+42-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:5-38:19
+43        android:name="com.locapin.mobile.LocaPinApp"
+43-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:16:9-35
+44        android:allowBackup="true"
+44-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:17:9-35
+45        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+45-->[androidx.core:core:1.18.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\0de3260e282ce99aa7b7800527ceaa7a\workspace\transformed\core-1.18.0\AndroidManifest.xml:28:18-86
+46        android:debuggable="true"
+47        android:extractNativeLibs="false"
+47-->INJECTED
+48        android:icon="@drawable/locapin_logo"
+48-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:18:9-46
+49        android:label="@string/app_name"
+49-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:19:9-41
+50        android:roundIcon="@drawable/locapin_logo"
+50-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:20:9-51
+51        android:supportsRtl="true"
+51-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:21:9-35
+52        android:testOnly="true"
+53        android:theme="@style/Theme.LocaPin" >
+53-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:22:9-45
+54        <meta-data
+54-->INJECTED
+55            android:name="com.google.android.geo.API_KEY"
+55-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:25:13-58
+56            android:value="" />
+56-->INJECTED
+57
+58        <activity
+58-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:28:9-36:20
+59            android:name="com.locapin.mobile.MainActivity"
+59-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:29:13-59
+60            android:exported="true"
+60-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:30:13-36
+61            android:theme="@style/Theme.LocaPin" >
+61-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:31:13-49
+62            <intent-filter>
+62-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:32:13-35:29
+63                <action android:name="android.intent.action.MAIN" />
+63-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:17-69
+63-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:25-66
 64
-65        <activity
-65-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:32:9-40:20
-66            android:name="com.locapin.mobile.MainActivity"
-66-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:13-59
-67            android:exported="true"
-67-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:13-36
-68            android:theme="@style/Theme.LocaPin" >
-68-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:35:13-49
-69            <intent-filter>
-69-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:36:13-39:29
-70                <action android:name="android.intent.action.MAIN" />
-70-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:37:17-69
-70-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:37:25-66
-71
-72                <category android:name="android.intent.category.LAUNCHER" />
-72-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:38:17-77
-72-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:38:27-74
-73            </intent-filter>
-74        </activity>
-75        <activity
-75-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:42:9-45:48
-76            android:name="com.facebook.FacebookActivity"
-76-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:43:13-57
-77            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-77-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:44:13-96
-78            android:label="@string/app_name"
-78-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:45:13-45
-79            android:theme="@style/com_facebook_activity_theme" />
-79-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:23:13-63
-80        <activity
-80-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:47:9-56:20
-81            android:name="com.facebook.CustomTabActivity"
-81-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:48:13-58
-82            android:exported="true" >
-82-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:49:13-36
-83            <intent-filter>
-83-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:50:13-55:29
-84                <action android:name="android.intent.action.VIEW" />
-84-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:51:17-69
-84-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:51:25-66
-85
-86                <category android:name="android.intent.category.DEFAULT" />
-86-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:52:17-76
-86-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:52:27-73
-87                <category android:name="android.intent.category.BROWSABLE" />
-87-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:53:17-78
-87-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:53:27-75
-88
-89                <data android:scheme="@string/fb_login_protocol_scheme" />
-89-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:54:17-75
-89-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:54:23-72
-90            </intent-filter>
-91            <intent-filter>
-91-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:29:13-38:29
-92                <action android:name="android.intent.action.VIEW" />
-92-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:51:17-69
-92-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:51:25-66
-93
-94                <category android:name="android.intent.category.DEFAULT" />
-94-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:52:17-76
-94-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:52:27-73
-95                <category android:name="android.intent.category.BROWSABLE" />
-95-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:53:17-78
-95-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:53:27-75
-96
-97                <data
-97-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:54:17-75
-98                    android:host="cct.com.locapin.mobile"
-99                    android:scheme="fbconnect" />
-99-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:54:23-72
-100            </intent-filter>
-101        </activity>
-102
-103        <provider
-103-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:24:9-32:20
-104            android:name="androidx.startup.InitializationProvider"
-104-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:25:13-67
-105            android:authorities="com.locapin.mobile.androidx-startup"
-105-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:26:13-68
-106            android:exported="false" >
-106-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:27:13-37
+65                <category android:name="android.intent.category.LAUNCHER" />
+65-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:17-77
+65-->C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:27-74
+66            </intent-filter>
+67        </activity>
+68        <activity
+68-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:20:9-23:66
+69            android:name="com.facebook.FacebookActivity"
+69-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:21:13-57
+70            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+70-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:22:13-96
+71            android:theme="@style/com_facebook_activity_theme" />
+71-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:23:13-63
+72        <activity android:name="com.facebook.CustomTabMainActivity" />
+72-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:24:9-71
+72-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:24:19-68
+73        <activity
+73-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:25:9-39:20
+74            android:name="com.facebook.CustomTabActivity"
+74-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:26:13-58
+75            android:exported="true" >
+75-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:27:13-36
+76            <intent-filter>
+76-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:29:13-38:29
+77                <action android:name="android.intent.action.VIEW" />
+77-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:30:17-69
+77-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:30:25-66
+78
+79                <category android:name="android.intent.category.DEFAULT" />
+79-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:32:17-76
+79-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:32:27-73
+80                <category android:name="android.intent.category.BROWSABLE" />
+80-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:33:17-78
+80-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:33:27-75
+81
+82                <data
+82-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:35:17-37:50
+83                    android:host="cct.com.locapin.mobile"
+83-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:36:21-56
+84                    android:scheme="fbconnect" />
+84-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:37:21-47
+85            </intent-filter>
+86        </activity>
+87
+88        <provider
+88-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:24:9-32:20
+89            android:name="androidx.startup.InitializationProvider"
+89-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:25:13-67
+90            android:authorities="com.locapin.mobile.androidx-startup"
+90-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:26:13-68
+91            android:exported="false" >
+91-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:27:13-37
+92            <meta-data
+92-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:29:13-31:52
+93                android:name="com.google.maps.android.compose.utils.attribution.AttributionIdInitializer"
+93-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:30:17-106
+94                android:value="androidx.startup" />
+94-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\b8b51bcf711f447cbf077c379f4fea67\workspace\transformed\maps-compose-8.2.2\AndroidManifest.xml:31:17-49
+95            <meta-data
+95-->[com.google.maps.android:maps-ktx:6.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\928a60a8f759923ccc6d8472f4f52de0\workspace\transformed\maps-ktx-6.0.1\AndroidManifest.xml:30:13-32:52
+96                android:name="com.google.maps.android.ktx.utils.attribution.AttributionIdInitializer"
+96-->[com.google.maps.android:maps-ktx:6.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\928a60a8f759923ccc6d8472f4f52de0\workspace\transformed\maps-ktx-6.0.1\AndroidManifest.xml:31:17-102
+97                android:value="androidx.startup" />
+97-->[com.google.maps.android:maps-ktx:6.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\928a60a8f759923ccc6d8472f4f52de0\workspace\transformed\maps-ktx-6.0.1\AndroidManifest.xml:32:17-49
+98            <meta-data
+98-->[androidx.emoji2:emoji2:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\a3edbeb9d7f2006b78afe670274dc6d7\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+99                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+99-->[androidx.emoji2:emoji2:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\a3edbeb9d7f2006b78afe670274dc6d7\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+100                android:value="androidx.startup" />
+100-->[androidx.emoji2:emoji2:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\a3edbeb9d7f2006b78afe670274dc6d7\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+101            <meta-data
+101-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\2decbf2e27621f3e1388eef4cacd822f\workspace\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:29:13-31:52
+102                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+102-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\2decbf2e27621f3e1388eef4cacd822f\workspace\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:30:17-78
+103                android:value="androidx.startup" />
+103-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\2decbf2e27621f3e1388eef4cacd822f\workspace\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:31:17-49
+104            <meta-data
+104-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\ecfef84c47f43b52d55e49b9cd87b6cd\workspace\transformed\okhttp-release\AndroidManifest.xml:16:13-18:52
+105                android:name="okhttp3.internal.platform.PlatformInitializer"
+105-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\ecfef84c47f43b52d55e49b9cd87b6cd\workspace\transformed\okhttp-release\AndroidManifest.xml:17:17-77
+106                android:value="androidx.startup" />
+106-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\ecfef84c47f43b52d55e49b9cd87b6cd\workspace\transformed\okhttp-release\AndroidManifest.xml:18:17-49
 107            <meta-data
-107-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:29:13-31:52
-108                android:name="com.google.maps.android.compose.utils.attribution.AttributionIdInitializer"
-108-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:30:17-106
+107-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+108                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+108-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
 109                android:value="androidx.startup" />
-109-->[com.google.maps.android:maps-compose:8.2.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8f38aeac9e752e983ebb10d53cfa604c\transformed\maps-compose-8.2.2\AndroidManifest.xml:31:17-49
-110            <meta-data
-110-->[com.google.maps.android:maps-ktx:6.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d899dccc1ea8246e003d8442abe6ef00\transformed\maps-ktx-6.0.1\AndroidManifest.xml:30:13-32:52
-111                android:name="com.google.maps.android.ktx.utils.attribution.AttributionIdInitializer"
-111-->[com.google.maps.android:maps-ktx:6.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d899dccc1ea8246e003d8442abe6ef00\transformed\maps-ktx-6.0.1\AndroidManifest.xml:31:17-102
-112                android:value="androidx.startup" />
-112-->[com.google.maps.android:maps-ktx:6.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d899dccc1ea8246e003d8442abe6ef00\transformed\maps-ktx-6.0.1\AndroidManifest.xml:32:17-49
-113            <meta-data
-113-->[androidx.emoji2:emoji2:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\68801a5266f4aa9c11ede46120e70d67\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
-114                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-114-->[androidx.emoji2:emoji2:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\68801a5266f4aa9c11ede46120e70d67\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
-115                android:value="androidx.startup" />
-115-->[androidx.emoji2:emoji2:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\68801a5266f4aa9c11ede46120e70d67\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
-116            <meta-data
-116-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f483e748c3f24b1a50c8806bf8f15a05\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:29:13-31:52
-117                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-117-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f483e748c3f24b1a50c8806bf8f15a05\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:30:17-78
-118                android:value="androidx.startup" />
-118-->[androidx.lifecycle:lifecycle-process:2.9.4] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f483e748c3f24b1a50c8806bf8f15a05\transformed\lifecycle-process-2.9.4\AndroidManifest.xml:31:17-49
-119            <meta-data
-119-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1a19f7c503cc29bcd739a14829064c95\transformed\okhttp-release\AndroidManifest.xml:16:13-18:52
-120                android:name="okhttp3.internal.platform.PlatformInitializer"
-120-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1a19f7c503cc29bcd739a14829064c95\transformed\okhttp-release\AndroidManifest.xml:17:17-77
-121                android:value="androidx.startup" />
-121-->[com.squareup.okhttp3:okhttp-android:5.3.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1a19f7c503cc29bcd739a14829064c95\transformed\okhttp-release\AndroidManifest.xml:18:17-49
-122            <meta-data
-122-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
-123                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-123-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
-124                android:value="androidx.startup" />
-124-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
-125        </provider>
-126
-127        <activity android:name="com.facebook.CustomTabMainActivity" />
-127-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:24:9-71
-127-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\d95093241116f0a621b9797ff134cbf0\transformed\facebook-common-18.2.3\AndroidManifest.xml:24:19-68
-128        <activity
-128-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:23:9-27:75
-129            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-129-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:24:13-93
-130            android:excludeFromRecents="true"
-130-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:25:13-46
-131            android:exported="false"
-131-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:26:13-37
-132            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-132-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:27:13-72
-133        <!--
-134            Service handling Google Sign-In user revocation. For apps that do not integrate with
-135            Google Sign-In, this service will never be started.
-136        -->
-137        <service
-137-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:33:9-37:51
-138            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-138-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:34:13-89
-139            android:exported="true"
-139-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:35:13-36
-140            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-140-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:36:13-107
-141            android:visibleToInstantApps="true" />
-141-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\a24d09cff09d9b356aa7c2f3fd9a644e\transformed\play-services-auth-21.5.1\AndroidManifest.xml:37:13-48
-142
-143        <receiver
-143-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:29:9-33:20
-144            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-144-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:30:13-85
-145            android:enabled="true"
-145-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:31:13-35
-146            android:exported="false" >
-146-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:32:13-37
-147        </receiver>
+109-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+110        </provider>
+111
+112        <activity
+112-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:29:9-46:20
+113            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+113-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:30:13-80
+114            android:excludeFromRecents="true"
+114-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:31:13-46
+115            android:exported="true"
+115-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:32:13-36
+116            android:launchMode="singleTask"
+116-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:33:13-44
+117            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+117-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:34:13-72
+118            <intent-filter>
+118-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:35:13-45:29
+119                <action android:name="android.intent.action.VIEW" />
+119-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:30:17-69
+119-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:30:25-66
+120
+121                <category android:name="android.intent.category.DEFAULT" />
+121-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:32:17-76
+121-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:32:27-73
+122                <category android:name="android.intent.category.BROWSABLE" />
+122-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:33:17-78
+122-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:33:27-75
+123
+124                <data
+124-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:35:17-37:50
+125                    android:host="firebase.auth"
+125-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:36:21-56
+126                    android:path="/"
+127                    android:scheme="genericidp" />
+127-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:37:21-47
+128            </intent-filter>
+129        </activity>
+130        <activity
+130-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:47:9-64:20
+131            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+131-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:48:13-79
+132            android:excludeFromRecents="true"
+132-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:49:13-46
+133            android:exported="true"
+133-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:50:13-36
+134            android:launchMode="singleTask"
+134-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:51:13-44
+135            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+135-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:52:13-72
+136            <intent-filter>
+136-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:53:13-63:29
+137                <action android:name="android.intent.action.VIEW" />
+137-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:30:17-69
+137-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:30:25-66
+138
+139                <category android:name="android.intent.category.DEFAULT" />
+139-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:32:17-76
+139-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:32:27-73
+140                <category android:name="android.intent.category.BROWSABLE" />
+140-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:33:17-78
+140-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:33:27-75
+141
+142                <data
+142-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:35:17-37:50
+143                    android:host="firebase.auth"
+143-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:36:21-56
+144                    android:path="/"
+145                    android:scheme="recaptcha" />
+145-->[com.facebook.android:facebook-common:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b98c821d8c39b6d9d9e48ae1c601b38\workspace\transformed\facebook-common-18.2.3\AndroidManifest.xml:37:21-47
+146            </intent-filter>
+147        </activity>
 148
 149        <service
-149-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:35:9-38:40
-150            android:name="com.google.android.gms.measurement.AppMeasurementService"
-150-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:36:13-84
-151            android:enabled="true"
-151-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:37:13-35
-152            android:exported="false" />
-152-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:38:13-37
-153        <service
-153-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:39:9-43:72
-154            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-154-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:40:13-87
-155            android:enabled="true"
-155-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:41:13-35
-156            android:exported="false"
-156-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:42:13-37
-157            android:permission="android.permission.BIND_JOB_SERVICE" />
-157-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\8b138d8cdcbd5d75481fe93205489080\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:43:13-69
-158
-159        <activity
-159-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f9d15bccd8492a2d128d0f3531d8cb98\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:9-173
-160            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-160-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f9d15bccd8492a2d128d0f3531d8cb98\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:19-85
-161            android:exported="false"
-161-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f9d15bccd8492a2d128d0f3531d8cb98\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:146-170
-162            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-162-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f9d15bccd8492a2d128d0f3531d8cb98\transformed\play-services-base-18.5.0\AndroidManifest.xml:5:86-145
-163
-164        <service
-164-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:30:9-36:19
-165            android:name="com.google.firebase.components.ComponentDiscoveryService"
-165-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:31:13-84
-166            android:directBootAware="true"
-166-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:32:13-43
-167            android:exported="false" >
-167-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:32:13-37
+149-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:66:9-72:19
+150            android:name="com.google.firebase.components.ComponentDiscoveryService"
+150-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:67:13-84
+151            android:directBootAware="true"
+151-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:32:13-43
+152            android:exported="false" >
+152-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:68:13-37
+153            <meta-data
+153-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:69:13-71:85
+154                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+154-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:70:17-109
+155                android:value="com.google.firebase.components.ComponentRegistrar" />
+155-->[com.google.firebase:firebase-auth:24.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f9d22903b8a710a5dab12b0c1a987f1b\workspace\transformed\firebase-auth-24.0.1\AndroidManifest.xml:71:17-82
+156            <meta-data
+156-->[com.google.firebase:firebase-firestore:26.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\16a95f90258701d712b52fc4f59ad59f\workspace\transformed\firebase-firestore-26.1.2\AndroidManifest.xml:17:13-19:85
+157                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+157-->[com.google.firebase:firebase-firestore:26.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\16a95f90258701d712b52fc4f59ad59f\workspace\transformed\firebase-firestore-26.1.2\AndroidManifest.xml:18:17-122
+158                android:value="com.google.firebase.components.ComponentRegistrar" />
+158-->[com.google.firebase:firebase-firestore:26.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\16a95f90258701d712b52fc4f59ad59f\workspace\transformed\firebase-firestore-26.1.2\AndroidManifest.xml:19:17-82
+159            <meta-data
+159-->[com.google.firebase:firebase-firestore:26.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\16a95f90258701d712b52fc4f59ad59f\workspace\transformed\firebase-firestore-26.1.2\AndroidManifest.xml:20:13-22:85
+160                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+160-->[com.google.firebase:firebase-firestore:26.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\16a95f90258701d712b52fc4f59ad59f\workspace\transformed\firebase-firestore-26.1.2\AndroidManifest.xml:21:17-111
+161                android:value="com.google.firebase.components.ComponentRegistrar" />
+161-->[com.google.firebase:firebase-firestore:26.1.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\16a95f90258701d712b52fc4f59ad59f\workspace\transformed\firebase-firestore-26.1.2\AndroidManifest.xml:22:17-82
+162            <meta-data
+162-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:33:13-35:85
+163                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+163-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:34:17-139
+164                android:value="com.google.firebase.components.ComponentRegistrar" />
+164-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\08ae87db360ca3dde8bdf8cc3fd6973a\workspace\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:35:17-82
+165            <meta-data
+165-->[com.google.firebase:firebase-storage:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d9c0826d8cad06779ef3f063cf662fa2\workspace\transformed\firebase-storage-22.0.1\AndroidManifest.xml:30:13-32:85
+166                android:name="com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar"
+166-->[com.google.firebase:firebase-storage:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d9c0826d8cad06779ef3f063cf662fa2\workspace\transformed\firebase-storage-22.0.1\AndroidManifest.xml:31:17-118
+167                android:value="com.google.firebase.components.ComponentRegistrar" />
+167-->[com.google.firebase:firebase-storage:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d9c0826d8cad06779ef3f063cf662fa2\workspace\transformed\firebase-storage-22.0.1\AndroidManifest.xml:32:17-82
 168            <meta-data
-168-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:33:13-35:85
-169                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-169-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:34:17-139
+168-->[com.google.firebase:firebase-storage:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d9c0826d8cad06779ef3f063cf662fa2\workspace\transformed\firebase-storage-22.0.1\AndroidManifest.xml:33:13-35:85
+169                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+169-->[com.google.firebase:firebase-storage:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d9c0826d8cad06779ef3f063cf662fa2\workspace\transformed\firebase-storage-22.0.1\AndroidManifest.xml:34:17-107
 170                android:value="com.google.firebase.components.ComponentRegistrar" />
-170-->[com.google.android.gms:play-services-measurement-api:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\ef51c5ee7d5f59462f4e353cb7e10b12\transformed\play-services-measurement-api-23.2.0\AndroidManifest.xml:35:17-82
+170-->[com.google.firebase:firebase-storage:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d9c0826d8cad06779ef3f063cf662fa2\workspace\transformed\firebase-storage-22.0.1\AndroidManifest.xml:35:17-82
 171            <meta-data
-171-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\30c805ada8e551109f926cf35c9179f9\transformed\firebase-installations-17.0.1\AndroidManifest.xml:18:13-20:85
-172                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
-172-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\30c805ada8e551109f926cf35c9179f9\transformed\firebase-installations-17.0.1\AndroidManifest.xml:19:17-127
+171-->[com.google.firebase:firebase-installations:19.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\53aaeb7d2c406900fc83e64210be1294\workspace\transformed\firebase-installations-19.1.0\AndroidManifest.xml:15:13-17:85
+172                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+172-->[com.google.firebase:firebase-installations:19.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\53aaeb7d2c406900fc83e64210be1294\workspace\transformed\firebase-installations-19.1.0\AndroidManifest.xml:16:17-130
 173                android:value="com.google.firebase.components.ComponentRegistrar" />
-173-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\30c805ada8e551109f926cf35c9179f9\transformed\firebase-installations-17.0.1\AndroidManifest.xml:20:17-82
+173-->[com.google.firebase:firebase-installations:19.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\53aaeb7d2c406900fc83e64210be1294\workspace\transformed\firebase-installations-19.1.0\AndroidManifest.xml:17:17-82
 174            <meta-data
-174-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
-175                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
-175-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+174-->[com.google.firebase:firebase-installations:19.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\53aaeb7d2c406900fc83e64210be1294\workspace\transformed\firebase-installations-19.1.0\AndroidManifest.xml:18:13-20:85
+175                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+175-->[com.google.firebase:firebase-installations:19.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\53aaeb7d2c406900fc83e64210be1294\workspace\transformed\firebase-installations-19.1.0\AndroidManifest.xml:19:17-127
 176                android:value="com.google.firebase.components.ComponentRegistrar" />
-176-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:37:17-82
-177        </service>
-178
-179        <activity
-179-->[androidx.compose.ui:ui-tooling-android:1.10.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f60378162bd0c7907c428065353f54d4\transformed\ui-tooling\AndroidManifest.xml:23:9-25:39
-180            android:name="androidx.compose.ui.tooling.PreviewActivity"
-180-->[androidx.compose.ui:ui-tooling-android:1.10.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f60378162bd0c7907c428065353f54d4\transformed\ui-tooling\AndroidManifest.xml:24:13-71
-181            android:exported="true" />
-181-->[androidx.compose.ui:ui-tooling-android:1.10.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\f60378162bd0c7907c428065353f54d4\transformed\ui-tooling\AndroidManifest.xml:25:13-36
-182        <!--
-183         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
-184         with the application context. This config is merged in with the host app's manifest,
-185         but there can only be one provider with the same authority activated at any given
-186         point; so if the end user has two or more different apps that use Facebook SDK, only the
-187         first one will be able to use the provider. To work around this problem, we use the
-188         following placeholder in the authority to identify each host application as if it was
-189         a completely different provider.
-190        -->
-191        <provider
-191-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:32:9-35:40
-192            android:name="com.facebook.internal.FacebookInitProvider"
-192-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:33:13-70
-193            android:authorities="com.locapin.mobile.FacebookInitProvider"
-193-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:34:13-72
-194            android:exported="false" />
-194-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:35:13-37
+176-->[com.google.firebase:firebase-installations:19.1.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\53aaeb7d2c406900fc83e64210be1294\workspace\transformed\firebase-installations-19.1.0\AndroidManifest.xml:20:17-82
+177            <meta-data
+177-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:35:13-37:85
+178                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+178-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:36:17-109
+179                android:value="com.google.firebase.components.ComponentRegistrar" />
+179-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:37:17-82
+180            <meta-data
+180-->[com.google.firebase:firebase-appcheck:19.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\5e87a6f4a5a9b8c4e62aeabf50b5182e\workspace\transformed\firebase-appcheck-19.0.2\AndroidManifest.xml:25:13-27:85
+181                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar"
+181-->[com.google.firebase:firebase-appcheck:19.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\5e87a6f4a5a9b8c4e62aeabf50b5182e\workspace\transformed\firebase-appcheck-19.0.2\AndroidManifest.xml:26:17-120
+182                android:value="com.google.firebase.components.ComponentRegistrar" />
+182-->[com.google.firebase:firebase-appcheck:19.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\5e87a6f4a5a9b8c4e62aeabf50b5182e\workspace\transformed\firebase-appcheck-19.0.2\AndroidManifest.xml:27:17-82
+183            <meta-data
+183-->[com.google.firebase:firebase-appcheck:19.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\5e87a6f4a5a9b8c4e62aeabf50b5182e\workspace\transformed\firebase-appcheck-19.0.2\AndroidManifest.xml:28:13-30:85
+184                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar"
+184-->[com.google.firebase:firebase-appcheck:19.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\5e87a6f4a5a9b8c4e62aeabf50b5182e\workspace\transformed\firebase-appcheck-19.0.2\AndroidManifest.xml:29:17-117
+185                android:value="com.google.firebase.components.ComponentRegistrar" />
+185-->[com.google.firebase:firebase-appcheck:19.0.2] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\5e87a6f4a5a9b8c4e62aeabf50b5182e\workspace\transformed\firebase-appcheck-19.0.2\AndroidManifest.xml:30:17-82
+186        </service>
+187        <service
+187-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:24:9-32:19
+188            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+188-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:25:13-94
+189            android:enabled="true"
+189-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:26:13-35
+190            android:exported="false" >
+190-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:27:13-37
+191            <meta-data
+191-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:29:13-31:104
+192                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+192-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:30:17-76
+193                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+193-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:31:17-101
+194        </service>
 195
-196        <receiver
-196-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:37:9-43:20
-197            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
-197-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:38:13-86
-198            android:exported="false" >
-198-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:39:13-37
-199            <intent-filter>
-199-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:40:13-42:29
-200                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
-200-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:41:17-95
-200-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:41:25-92
-201            </intent-filter>
-202        </receiver>
-203        <receiver
-203-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:44:9-50:20
-204            android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver"
-204-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:45:13-118
-205            android:exported="false" >
-205-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:46:13-37
-206            <intent-filter>
-206-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:47:13-49:29
-207                <action android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED" />
-207-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:48:17-103
-207-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\9a0bb419b97b9b83b13148a297668fff\transformed\facebook-core-18.2.3\AndroidManifest.xml:48:25-100
-208            </intent-filter>
-209        </receiver>
-210
-211        <uses-library
-211-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\7c3486890e506778e0b42fec2a8b0721\transformed\ads-adservices-1.1.0-beta11\AndroidManifest.xml:23:9-25:40
-212            android:name="android.ext.adservices"
-212-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\7c3486890e506778e0b42fec2a8b0721\transformed\ads-adservices-1.1.0-beta11\AndroidManifest.xml:24:13-50
-213            android:required="false" />
-213-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\7c3486890e506778e0b42fec2a8b0721\transformed\ads-adservices-1.1.0-beta11\AndroidManifest.xml:25:13-37
-214        <uses-library
-214-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\c2691d1741e3c64b2e96195214a0532a\transformed\window-1.5.0\AndroidManifest.xml:23:9-25:40
-215            android:name="androidx.window.extensions"
-215-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\c2691d1741e3c64b2e96195214a0532a\transformed\window-1.5.0\AndroidManifest.xml:24:13-54
-216            android:required="false" />
-216-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\c2691d1741e3c64b2e96195214a0532a\transformed\window-1.5.0\AndroidManifest.xml:25:13-37
-217        <uses-library
-217-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\c2691d1741e3c64b2e96195214a0532a\transformed\window-1.5.0\AndroidManifest.xml:26:9-28:40
-218            android:name="androidx.window.sidecar"
-218-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\c2691d1741e3c64b2e96195214a0532a\transformed\window-1.5.0\AndroidManifest.xml:27:13-51
-219            android:required="false" />
-219-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\c2691d1741e3c64b2e96195214a0532a\transformed\window-1.5.0\AndroidManifest.xml:28:13-37
-220
-221        <provider
-221-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
-222            android:name="com.google.firebase.provider.FirebaseInitProvider"
-222-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
-223            android:authorities="com.locapin.mobile.firebaseinitprovider"
-223-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
-224            android:directBootAware="true"
-224-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
-225            android:exported="false"
-225-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:27:13-37
-226            android:initOrder="100" />
-226-->[com.google.firebase:firebase-common:21.0.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\1d28c533ae0a6c07626a191d7e707406\transformed\firebase-common-21.0.0\AndroidManifest.xml:28:13-36
-227
-228        <meta-data
-228-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3c280f3ae9f85bd802622305b9abeed0\transformed\play-services-basement-18.9.0\AndroidManifest.xml:21:9-23:69
-229            android:name="com.google.android.gms.version"
-229-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3c280f3ae9f85bd802622305b9abeed0\transformed\play-services-basement-18.9.0\AndroidManifest.xml:22:13-58
-230            android:value="@integer/google_play_services_version" />
-230-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3c280f3ae9f85bd802622305b9abeed0\transformed\play-services-basement-18.9.0\AndroidManifest.xml:23:13-66
-231
-232        <receiver
-232-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
-233            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-233-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
-234            android:directBootAware="false"
-234-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
-235            android:enabled="true"
-235-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
-236            android:exported="true"
-236-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
-237            android:permission="android.permission.DUMP" >
-237-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
-238            <intent-filter>
-238-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
-239                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-239-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
-239-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
-240            </intent-filter>
-241            <intent-filter>
-241-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
-242                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-242-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
-242-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
-243            </intent-filter>
-244            <intent-filter>
-244-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
-245                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-245-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
-245-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
-246            </intent-filter>
-247            <intent-filter>
-247-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
-248                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-248-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
-248-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\8.11.1\transforms\3cefbcb48f001401dd4acf439f8a4e92\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
-249            </intent-filter>
-250        </receiver>
-251    </application>
-252
-253</manifest>
+196        <activity
+196-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:34:9-41:20
+197            android:name="androidx.credentials.playservices.HiddenActivity"
+197-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:35:13-76
+198            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+198-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:36:13-87
+199            android:enabled="true"
+199-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:37:13-35
+200            android:exported="false"
+200-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:38:13-37
+201            android:fitsSystemWindows="true"
+201-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:39:13-45
+202            android:theme="@style/Theme.Hidden" >
+202-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\259208c4a234dcc7ba85e1a074b665e5\workspace\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:40:13-48
+203        </activity>
+204        <activity
+204-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:23:9-27:75
+205            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+205-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:24:13-93
+206            android:excludeFromRecents="true"
+206-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:25:13-46
+207            android:exported="false"
+207-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:26:13-37
+208            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+208-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:27:13-72
+209        <!--
+210            Service handling Google Sign-In user revocation. For apps that do not integrate with
+211            Google Sign-In, this service will never be started.
+212        -->
+213        <service
+213-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:33:9-37:51
+214            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+214-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:34:13-89
+215            android:exported="true"
+215-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:35:13-36
+216            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+216-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:36:13-107
+217            android:visibleToInstantApps="true" />
+217-->[com.google.android.gms:play-services-auth:21.5.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\88b45f1aec47e85bf6bb7ef134d3e978\workspace\transformed\play-services-auth-21.5.1\AndroidManifest.xml:37:13-48
+218
+219        <receiver
+219-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:29:9-33:20
+220            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+220-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:30:13-85
+221            android:enabled="true"
+221-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:31:13-35
+222            android:exported="false" >
+222-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:32:13-37
+223        </receiver>
+224
+225        <service
+225-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:35:9-38:40
+226            android:name="com.google.android.gms.measurement.AppMeasurementService"
+226-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:36:13-84
+227            android:enabled="true"
+227-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:37:13-35
+228            android:exported="false" />
+228-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:38:13-37
+229        <service
+229-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:39:9-43:72
+230            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+230-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:40:13-87
+231            android:enabled="true"
+231-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:41:13-35
+232            android:exported="false"
+232-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:42:13-37
+233            android:permission="android.permission.BIND_JOB_SERVICE" />
+233-->[com.google.android.gms:play-services-measurement:23.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7c14633b20e9153cd0236176624d693e\workspace\transformed\play-services-measurement-23.2.0\AndroidManifest.xml:43:13-69
+234
+235        <provider
+235-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:23:9-28:39
+236            android:name="com.google.firebase.provider.FirebaseInitProvider"
+236-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:24:13-77
+237            android:authorities="com.locapin.mobile.firebaseinitprovider"
+237-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:25:13-72
+238            android:directBootAware="true"
+238-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:26:13-43
+239            android:exported="false"
+239-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:27:13-37
+240            android:initOrder="100" />
+240-->[com.google.firebase:firebase-common:22.0.1] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\479e02a0e445afba923f81626787862a\workspace\transformed\firebase-common-22.0.1\AndroidManifest.xml:28:13-36
+241        <!--
+242         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+243         with the application context. This config is merged in with the host app's manifest,
+244         but there can only be one provider with the same authority activated at any given
+245         point; so if the end user has two or more different apps that use Facebook SDK, only the
+246         first one will be able to use the provider. To work around this problem, we use the
+247         following placeholder in the authority to identify each host application as if it was
+248         a completely different provider.
+249        -->
+250        <provider
+250-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:32:9-35:40
+251            android:name="com.facebook.internal.FacebookInitProvider"
+251-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:33:13-70
+252            android:authorities="com.locapin.mobile.FacebookInitProvider"
+252-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:34:13-72
+253            android:exported="false" />
+253-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:35:13-37
+254
+255        <receiver
+255-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:37:9-43:20
+256            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+256-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:38:13-86
+257            android:exported="false" >
+257-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:39:13-37
+258            <intent-filter>
+258-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:40:13-42:29
+259                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+259-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:41:17-95
+259-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:41:25-92
+260            </intent-filter>
+261        </receiver>
+262        <receiver
+262-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:44:9-50:20
+263            android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver"
+263-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:45:13-118
+264            android:exported="false" >
+264-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:46:13-37
+265            <intent-filter>
+265-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:47:13-49:29
+266                <action android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED" />
+266-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:48:17-103
+266-->[com.facebook.android:facebook-core:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\dfa9699be197f7962ef5763fb84ad032\workspace\transformed\facebook-core-18.2.3\AndroidManifest.xml:48:25-100
+267            </intent-filter>
+268        </receiver>
+269
+270        <uses-library
+270-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d8821d00523e4ff050eafe2b8d9c2e82\workspace\transformed\ads-adservices-1.1.0-beta11\AndroidManifest.xml:23:9-25:40
+271            android:name="android.ext.adservices"
+271-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d8821d00523e4ff050eafe2b8d9c2e82\workspace\transformed\ads-adservices-1.1.0-beta11\AndroidManifest.xml:24:13-50
+272            android:required="false" />
+272-->[androidx.privacysandbox.ads:ads-adservices:1.1.0-beta11] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\d8821d00523e4ff050eafe2b8d9c2e82\workspace\transformed\ads-adservices-1.1.0-beta11\AndroidManifest.xml:25:13-37
+273
+274        <activity
+274-->[com.google.android.gms:play-services-base:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\09b7803857d145ceb4a3831dc125fd15\workspace\transformed\play-services-base-18.9.0\AndroidManifest.xml:20:9-22:45
+275            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+275-->[com.google.android.gms:play-services-base:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\09b7803857d145ceb4a3831dc125fd15\workspace\transformed\play-services-base-18.9.0\AndroidManifest.xml:20:19-85
+276            android:exported="false"
+276-->[com.google.android.gms:play-services-base:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\09b7803857d145ceb4a3831dc125fd15\workspace\transformed\play-services-base-18.9.0\AndroidManifest.xml:22:19-43
+277            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+277-->[com.google.android.gms:play-services-base:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\09b7803857d145ceb4a3831dc125fd15\workspace\transformed\play-services-base-18.9.0\AndroidManifest.xml:21:19-78
+278
+279        <uses-library
+279-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\961fbb0f7e00e89fa0e2ed57f741e4cb\workspace\transformed\window-1.5.0\AndroidManifest.xml:23:9-25:40
+280            android:name="androidx.window.extensions"
+280-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\961fbb0f7e00e89fa0e2ed57f741e4cb\workspace\transformed\window-1.5.0\AndroidManifest.xml:24:13-54
+281            android:required="false" />
+281-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\961fbb0f7e00e89fa0e2ed57f741e4cb\workspace\transformed\window-1.5.0\AndroidManifest.xml:25:13-37
+282        <uses-library
+282-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\961fbb0f7e00e89fa0e2ed57f741e4cb\workspace\transformed\window-1.5.0\AndroidManifest.xml:26:9-28:40
+283            android:name="androidx.window.sidecar"
+283-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\961fbb0f7e00e89fa0e2ed57f741e4cb\workspace\transformed\window-1.5.0\AndroidManifest.xml:27:13-51
+284            android:required="false" />
+284-->[androidx.window:window:1.5.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\961fbb0f7e00e89fa0e2ed57f741e4cb\workspace\transformed\window-1.5.0\AndroidManifest.xml:28:13-37
+285
+286        <activity
+286-->[androidx.compose.ui:ui-tooling-android:1.10.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7e45eefbdfa67d5894b67b1d218f3a38\workspace\transformed\ui-tooling\AndroidManifest.xml:23:9-25:39
+287            android:name="androidx.compose.ui.tooling.PreviewActivity"
+287-->[androidx.compose.ui:ui-tooling-android:1.10.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7e45eefbdfa67d5894b67b1d218f3a38\workspace\transformed\ui-tooling\AndroidManifest.xml:24:13-71
+288            android:exported="true" />
+288-->[androidx.compose.ui:ui-tooling-android:1.10.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7e45eefbdfa67d5894b67b1d218f3a38\workspace\transformed\ui-tooling\AndroidManifest.xml:25:13-36
+289
+290        <meta-data
+290-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\fb91e288b4403a04dad9678c28eeb949\workspace\transformed\play-services-basement-18.9.0\AndroidManifest.xml:21:9-23:69
+291            android:name="com.google.android.gms.version"
+291-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\fb91e288b4403a04dad9678c28eeb949\workspace\transformed\play-services-basement-18.9.0\AndroidManifest.xml:22:13-58
+292            android:value="@integer/google_play_services_version" />
+292-->[com.google.android.gms:play-services-basement:18.9.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\fb91e288b4403a04dad9678c28eeb949\workspace\transformed\play-services-basement-18.9.0\AndroidManifest.xml:23:13-66
+293
+294        <receiver
+294-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+295            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+295-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+296            android:directBootAware="false"
+296-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+297            android:enabled="true"
+297-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+298            android:exported="true"
+298-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+299            android:permission="android.permission.DUMP" >
+299-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+300            <intent-filter>
+300-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+301                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+301-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+301-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+302            </intent-filter>
+303            <intent-filter>
+303-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+304                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+304-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+304-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+305            </intent-filter>
+306            <intent-filter>
+306-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+307                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+307-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+307-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+308            </intent-filter>
+309            <intent-filter>
+309-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+310                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+310-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+310-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\f6fddce4e897534388ca6ca72ad8467d\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+311            </intent-filter>
+312        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+313        <activity
+313-->[com.google.android.play:core-common:2.0.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\4d4f31720f307d0776b87ca9222e95b3\workspace\transformed\core-common-2.0.3\AndroidManifest.xml:14:9-18:65
+314            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+314-->[com.google.android.play:core-common:2.0.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\4d4f31720f307d0776b87ca9222e95b3\workspace\transformed\core-common-2.0.3\AndroidManifest.xml:15:13-93
+315            android:exported="false"
+315-->[com.google.android.play:core-common:2.0.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\4d4f31720f307d0776b87ca9222e95b3\workspace\transformed\core-common-2.0.3\AndroidManifest.xml:16:13-37
+316            android:stateNotNeeded="true"
+316-->[com.google.android.play:core-common:2.0.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\4d4f31720f307d0776b87ca9222e95b3\workspace\transformed\core-common-2.0.3\AndroidManifest.xml:17:13-42
+317            android:theme="@style/Theme.PlayCore.Transparent" />
+317-->[com.google.android.play:core-common:2.0.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\4d4f31720f307d0776b87ca9222e95b3\workspace\transformed\core-common-2.0.3\AndroidManifest.xml:18:13-62
+318    </application>
+319
+320</manifest>

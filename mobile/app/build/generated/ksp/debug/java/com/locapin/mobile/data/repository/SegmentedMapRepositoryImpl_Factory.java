@@ -1,5 +1,6 @@
 package com.locapin.mobile.data.repository;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.locapin.mobile.data.local.SanJuanSeedDataSource;
 import com.locapin.mobile.data.remote.LocaPinApi;
 import com.locapin.mobile.feature.admin.AdminAttractionRepository;
@@ -27,15 +28,18 @@ import javax.annotation.processing.Generated;
     "nullness:initialization.field.uninitialized"
 })
 public final class SegmentedMapRepositoryImpl_Factory implements Factory<SegmentedMapRepositoryImpl> {
+  private final Provider<FirebaseFirestore> firestoreProvider;
+
   private final Provider<LocaPinApi> apiProvider;
 
   private final Provider<SanJuanSeedDataSource> seedDataSourceProvider;
 
   private final Provider<AdminAttractionRepository> adminAttractionRepositoryProvider;
 
-  private SegmentedMapRepositoryImpl_Factory(Provider<LocaPinApi> apiProvider,
-      Provider<SanJuanSeedDataSource> seedDataSourceProvider,
+  private SegmentedMapRepositoryImpl_Factory(Provider<FirebaseFirestore> firestoreProvider,
+      Provider<LocaPinApi> apiProvider, Provider<SanJuanSeedDataSource> seedDataSourceProvider,
       Provider<AdminAttractionRepository> adminAttractionRepositoryProvider) {
+    this.firestoreProvider = firestoreProvider;
     this.apiProvider = apiProvider;
     this.seedDataSourceProvider = seedDataSourceProvider;
     this.adminAttractionRepositoryProvider = adminAttractionRepositoryProvider;
@@ -43,17 +47,18 @@ public final class SegmentedMapRepositoryImpl_Factory implements Factory<Segment
 
   @Override
   public SegmentedMapRepositoryImpl get() {
-    return newInstance(apiProvider.get(), seedDataSourceProvider.get(), adminAttractionRepositoryProvider.get());
+    return newInstance(firestoreProvider.get(), apiProvider.get(), seedDataSourceProvider.get(), adminAttractionRepositoryProvider.get());
   }
 
-  public static SegmentedMapRepositoryImpl_Factory create(Provider<LocaPinApi> apiProvider,
+  public static SegmentedMapRepositoryImpl_Factory create(
+      Provider<FirebaseFirestore> firestoreProvider, Provider<LocaPinApi> apiProvider,
       Provider<SanJuanSeedDataSource> seedDataSourceProvider,
       Provider<AdminAttractionRepository> adminAttractionRepositoryProvider) {
-    return new SegmentedMapRepositoryImpl_Factory(apiProvider, seedDataSourceProvider, adminAttractionRepositoryProvider);
+    return new SegmentedMapRepositoryImpl_Factory(firestoreProvider, apiProvider, seedDataSourceProvider, adminAttractionRepositoryProvider);
   }
 
-  public static SegmentedMapRepositoryImpl newInstance(LocaPinApi api,
+  public static SegmentedMapRepositoryImpl newInstance(FirebaseFirestore firestore, LocaPinApi api,
       SanJuanSeedDataSource seedDataSource, AdminAttractionRepository adminAttractionRepository) {
-    return new SegmentedMapRepositoryImpl(api, seedDataSource, adminAttractionRepository);
+    return new SegmentedMapRepositoryImpl(firestore, api, seedDataSource, adminAttractionRepository);
   }
 }

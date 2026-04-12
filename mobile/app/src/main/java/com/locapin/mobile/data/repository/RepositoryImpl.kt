@@ -110,10 +110,10 @@ class DestinationRepositoryImpl @Inject constructor(
         address = "$area, San Juan City",
         lat = latitude,
         lng = longitude,
-        heroImageUrl = null,
-        galleryImages = emptyList(),
+        heroImageUrl = imageUrl,
+        galleryImages = imageUrl?.let { listOf(it) } ?: emptyList(),
         rating = null,
-        distanceKm = null,
+        distanceKm = distance?.removeSuffix(" km")?.toDoubleOrNull(),
         openingHours = null,
         contactInfo = null,
         isFavorite = isFavorite

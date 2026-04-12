@@ -15,6 +15,11 @@ object AdminAttractionModule {
     fun bindAdminAttractionRepository(
         mode: AppDataMode,
         mockRepository: InMemoryAdminAttractionRepository,
-        remoteRepository: RemoteAdminAttractionRepository
-    ): AdminAttractionRepository = if (mode == AppDataMode.MOCK) mockRepository else remoteRepository
+        remoteRepository: RemoteAdminAttractionRepository,
+        firebaseRepository: FirebaseAdminAttractionRepository
+    ): AdminAttractionRepository = when (mode) {
+        AppDataMode.MOCK -> mockRepository
+        AppDataMode.REMOTE -> remoteRepository
+        AppDataMode.FIREBASE -> firebaseRepository
+    }
 }

@@ -1,51 +1,68 @@
 # LocaPin Mobile (Android)
 
-## 1. Project overview
-LocaPin is a **mobile-only** repository.
+## 1. Project Overview
+LocaPin is a comprehensive tourism application for San Juan City, Metro Manila. It serves as a unified platform for both tourists and administrators, offering an interactive map-based exploration experience.
 
-- There is **no admin website** anymore.
-- The product is one **Android app** for both **Tourist** and **Admin** users.
-- Users sign in through one **shared login** entry point.
-- After login, the app applies **role-based routing** to the Admin or Tourist flow.
+- **Unified Platform**: A single Android application for all user roles.
+- **Interactive Map**: Explore San Juan City through custom-rendered map sectors.
+- **Role-Based Experience**: Tailored dashboards for Tourists and Administrators.
+- **Modern UI/UX**: Built with Jetpack Compose, featuring branded elements and high-fidelity social login integration.
 
-## 2. Current architecture
-At the moment, authentication and routing are organized as follows:
+## 2. Core Features
+### For Tourists
+- **Interactive City Map**: Tap on sectors to discover local attractions.
+- **Attraction Discovery**: Browse curated lists of historical sites, shopping centers, and more.
+- **Distance Estimation**: View distances from key landmarks (e.g., STI Sta. Mesa).
+- **Favorites**: Save your favorite spots for quick access.
+- **Ad-Free Option**: One-time premium upgrade to remove all advertisements.
 
-- **Shared auth entry:** one login flow is used for all roles.
-- **Mock auth for now:** sign-in for current role testing is mock-enabled.
-- **Role-based route:** once signed in, users are routed based on role.
-  - **ADMIN** users go to the admin path (currently mock).
-  - **TOURIST** users go to tourist modules.
+### For Administrators
+- **Map Management**: Define and edit map sectors and coordinates.
+- **Attraction Management**: Add, update, or remove tourism content.
+- **Real-time Updates**: Changes reflect instantly for all users.
 
-## 3. Mock test accounts
-Use these exact sample accounts for local testing:
+## 3. Architecture & Tech Stack
+- **Language**: Kotlin
+- **UI Framework**: Jetpack Compose
+- **Asynchronous Programming**: Coroutines & Flow
+- **Dependency Injection**: Hilt
+- **Navigation**: Jetpack Compose Navigation
+- **Image Loading**: Coil
+- **Backend**: Firebase (Auth & Firestore) / Mock implementation for rapid prototyping.
 
-### Admin
-- Email: [admin@locapin.app](mailto:admin@locapin.app)
-- Password: `Admin123!`
-
-### Tourist
-- Email: [tourist@locapin.app](mailto:tourist@locapin.app)
-- Password: `Tourist123!`
-
-## 4. Local configuration
+## 4. Getting Started
+### Local Configuration
 `local.properties` is required for local runs and is **not committed** to git.
 
-1. Copy `mobile/local.properties.example` to `mobile/local.properties`.
-2. Set values for these keys:
-   - `sdk.dir`
-   - `LOCAPIN_API_BASE_URL`
-   - `MAPS_API_KEY`
-   - `GOOGLE_SERVER_CLIENT_ID`
-   - `FACEBOOK_APP_ID`
-   - `FACEBOOK_CLIENT_TOKEN`
+1. Copy `local.properties.example` to `local.properties`.
+2. Set values for the following keys:
+   - `sdk.dir`: Path to your Android SDK.
+   - `LOCAPIN_API_BASE_URL`: API endpoint.
+   - `MAPS_API_KEY`: Google Maps API Key.
+   - `GOOGLE_SERVER_CLIENT_ID`: Firebase Google Auth Client ID.
+   - `FACEBOOK_APP_ID` & `FACEBOOK_CLIENT_TOKEN`: Facebook Login credentials.
 
-## 5. How to run
+### Installation
 1. Open the `mobile/` project in Android Studio.
-2. Ensure `mobile/local.properties` exists and is populated.
-3. Sync Gradle.
-4. Run the `app` module on an emulator or Android device.
+2. Sync Gradle to download dependencies.
+3. Ensure a `google-services.json` file is present in the `app/` directory.
+4. Run the `app` module on an emulator or physical device.
 
-## 6. Current implementation status
-- **Mock now:** login/auth behavior for role testing and the Admin dashboard flow are currently mock.
-- **Backend-driven where available:** Tourist modules may still include backend-driven flows where already implemented.
+## 5. Mock Test Accounts
+Use these credentials for testing specific role flows:
+
+### Admin
+- **Email**: `admin@locapin.app`
+- **Password**: `Admin123!`
+
+### Tourist
+- **Email**: `tourist@locapin.app`
+- **Password**: `Tourist123!`
+
+## 6. Project Status
+- [x] Refined Auth UI with Google & Facebook integration.
+- [x] Mandatory EULA & Terms agreement flow.
+- [x] Interactive San Juan City Map component.
+- [x] Tourist Dashboard & Attraction Details.
+- [ ] Real-time Navigation (In Progress).
+- [ ] Social Media Sharing (Planned).

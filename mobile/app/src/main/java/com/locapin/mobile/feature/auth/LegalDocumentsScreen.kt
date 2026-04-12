@@ -99,51 +99,51 @@ private data class LegalSection(val title: String, val body: String)
 
 private val EULA_CONTENT = listOf(
     LegalSection(
-        title = "About LocaPin",
-        body = "LocaPin is a San Juan City tourism mobile application designed to help visitors discover attractions and nearby points of interest."
+        title = "1. License Grant",
+        body = "LocaPin grants you a revocable, non-exclusive, non-transferable, limited license to download, install and use the Application strictly in accordance with the terms of this Agreement."
     ),
     LegalSection(
-        title = "Location and Connectivity",
-        body = "The app may use device location for nearby attraction context, distance estimates, and route guidance. LocaPin requires internet access and may use GPS or network-based location services for key features."
+        title = "2. Restrictions",
+        body = "You agree not to, and you will not permit others to license, sell, rent, lease, assign, distribute, transmit, host, outsource, disclose or otherwise commercially exploit the Application or make the Application available to any third party."
     ),
     LegalSection(
-        title = "User Responsibilities",
-        body = "You are responsible for lawful and appropriate use of the app, including how location and route guidance are used while traveling."
+        title = "3. Intellectual Property",
+        body = "The Application, including without limitation all copyrights, patents, trademarks, trade secrets and other intellectual property rights are, and shall remain, the sole and exclusive property of LocaPin."
     ),
     LegalSection(
-        title = "Service Changes",
-        body = "App content, attractions, and feature behavior may change over time. Services may be updated, interrupted, or temporarily unavailable during maintenance or technical issues."
+        title = "4. Your Suggestions",
+        body = "Any feedback, comments, ideas, improvements or suggestions provided by you to LocaPin with respect to the Application shall remain the sole and exclusive property of LocaPin."
     ),
     LegalSection(
-        title = "Deployment Disclaimer",
-        body = "To the extent appropriate for a student or capstone-style deployment, LocaPin is provided on an as-is basis without guaranteed uninterrupted performance."
+        title = "5. Modifications to Application",
+        body = "LocaPin reserves the right to modify, suspend or discontinue, temporarily or permanently, the Application or any service to which it connects, with or without notice and without liability to you."
+    ),
+    LegalSection(
+        title = "6. Term and Termination",
+        body = "This Agreement shall remain in effect until terminated by you or LocaPin. LocaPin may, in its sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice."
     )
 )
 
 private val TERMS_CONTENT = listOf(
     LegalSection(
-        title = "Eligibility and Responsible Use",
-        body = "You agree to use LocaPin responsibly and in compliance with applicable laws and platform policies."
+        title = "1. Agreement to Terms",
+        body = "By accessing or using LocaPin, you agree to be bound by these Terms and Conditions. If you disagree with any part of the terms, then you may not access the service."
     ),
     LegalSection(
-        title = "Account Responsibility",
-        body = "You are responsible for your account credentials, profile information, and any activity performed through your account."
+        title = "2. User Accounts",
+        body = "When you create an account with us, you must provide information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account."
     ),
     LegalSection(
-        title = "Accuracy and Limitations",
-        body = "Attraction details, route guidance, and location-based information are provided on a best-effort basis and may not always be complete, current, or fully accurate."
+        title = "3. Links To Other Web Sites",
+        body = "Our Service may contain links to third-party web sites or services that are not owned or controlled by LocaPin. LocaPin has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services."
     ),
     LegalSection(
-        title = "Prohibited Misuse",
-        body = "You may not misuse the app by attempting unauthorized access, disrupting services, or using content and features for unlawful purposes."
+        title = "4. Limitation of Liability",
+        body = "In no event shall LocaPin, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses."
     ),
     LegalSection(
-        title = "Third-Party Dependencies",
-        body = "Some features may rely on third-party services such as map providers or social login providers. Their availability can affect app behavior."
-    ),
-    LegalSection(
-        title = "Content Management and Updates",
-        body = "Administrative users are responsible for content they manage when applicable. Features and terms may be updated in later releases."
+        title = "5. Governing Law",
+        body = "These Terms shall be governed and construed in accordance with the laws of the Philippines, without regard to its conflict of law provisions."
     )
 )
 

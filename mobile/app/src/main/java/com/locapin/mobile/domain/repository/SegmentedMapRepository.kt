@@ -6,6 +6,7 @@ import com.locapin.mobile.domain.model.ZoneAttraction
 
 interface SegmentedMapRepository {
     suspend fun getMapZones(): LocaPinResult<List<MapZone>>
+    fun getZoneAttractionsFlow(): kotlinx.coroutines.flow.Flow<LocaPinResult<List<ZoneAttraction>>>
     suspend fun getZoneAttractions(): LocaPinResult<List<ZoneAttraction>>
     suspend fun getRoutePath(
         originLat: Double,

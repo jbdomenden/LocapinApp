@@ -1,5 +1,6 @@
 package com.locapin.mobile.core.network
 
+import com.google.firebase.auth.FirebaseAuth
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.locapin.mobile.BuildConfig
 import com.locapin.mobile.core.datastore.UserPreferencesDataStore
@@ -10,6 +11,10 @@ import com.locapin.mobile.data.remote.LocaPinApi
 import com.locapin.mobile.data.remote.MapAreaApiService
 import com.locapin.mobile.data.repository.FakeAuthRepository
 import com.locapin.mobile.data.repository.DestinationRepositoryImpl
+import com.locapin.mobile.data.repository.FirebaseAuthRepository
+import com.locapin.mobile.data.repository.FirebaseHistoryRepository
+import com.locapin.mobile.data.repository.FirebaseProfileRepository
+import com.locapin.mobile.data.repository.FirebaseTouristFavoritesRepository
 import com.locapin.mobile.data.repository.HistoryRepositoryImpl
 import com.locapin.mobile.data.repository.ProfileRepositoryImpl
 import com.locapin.mobile.data.repository.RemoteAuthRepository
@@ -22,6 +27,9 @@ import com.locapin.mobile.domain.repository.HistoryRepository
 import com.locapin.mobile.domain.repository.ProfileRepository
 import com.locapin.mobile.domain.repository.SegmentedMapRepository
 import com.locapin.mobile.domain.repository.TouristFavoritesRepository
+import com.locapin.mobile.feature.admin.AdminAttractionRepository
+import com.locapin.mobile.feature.admin.FirebaseAdminAttractionRepository
+import com.locapin.mobile.feature.admin.InMemoryAdminAttractionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -113,8 +121,19 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAppDataMode(): AppDataMode =
-        if (BuildConfig.USE_MOCK_DATA) AppDataMode.MOCK else AppDataMode.REMOTE
+    fun provideFirebaseAuth(): com.google.firebase.auth.FirebaseAuth = com.google.firebase.auth.FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): com.google.firebase.firestore.FirebaseFirestore = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): com.google.firebase.storage.FirebaseStorage = com.google.firebase.storage.FirebaseStorage.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideAppDataMode(): AppDataMode = AppDataMode.FIREBASE
 }
 
 @Module
@@ -125,8 +144,13 @@ object RepositoryModule {
     fun provideAuthRepository(
         mode: AppDataMode,
         mockRepository: FakeAuthRepository,
-        remoteRepository: RemoteAuthRepository
-    ): AuthRepository = if (mode == AppDataMode.MOCK) mockRepository else remoteRepository
+        remoteRepository: RemoteAuthRepository,
+        firebaseRepository: FirebaseAuthRepository
+    ): AuthRepository = when (mode) {
+        AppDataMode.MOCK -> mockRepository
+        AppDataMode.REMOTE -> remoteRepository
+        AppDataMode.FIREBASE -> firebaseRepository
+    }
 
     @Provides
     @Singleton
@@ -134,19 +158,33 @@ object RepositoryModule {
         mode: AppDataMode,
         mockRepository: DestinationRepositoryImpl,
         remoteRepository: RemoteDestinationRepository
-    ): DestinationRepository {
-        val isRemoteTouristAttractionsReadEnabled =
-            mode == AppDataMode.REMOTE || BuildConfig.ENABLE_REMOTE_TOURIST_ATTRACTIONS_READ
-        return if (isRemoteTouristAttractionsReadEnabled) remoteRepository else mockRepository
+    ): DestinationRepository = when (mode) {
+        AppDataMode.MOCK -> mockRepository
+        AppDataMode.REMOTE -> remoteRepository
+        AppDataMode.FIREBASE -> mockRepository // Currently DestinationRepositoryImpl uses AdminAttractionRepository
     }
 
     @Provides
     @Singleton
-    fun provideHistoryRepository(impl: HistoryRepositoryImpl): HistoryRepository = impl
+    fun provideHistoryRepository(
+        mode: AppDataMode,
+        localRepository: HistoryRepositoryImpl,
+        firebaseRepository: FirebaseHistoryRepository
+    ): HistoryRepository = when (mode) {
+        AppDataMode.FIREBASE -> firebaseRepository
+        else -> localRepository
+    }
 
     @Provides
     @Singleton
-    fun provideProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository = impl
+    fun provideProfileRepository(
+        mode: AppDataMode,
+        localRepository: ProfileRepositoryImpl,
+        firebaseRepository: FirebaseProfileRepository
+    ): ProfileRepository = when (mode) {
+        AppDataMode.FIREBASE -> firebaseRepository
+        else -> localRepository
+    }
 
     @Provides
     @Singleton
@@ -154,5 +192,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTouristFavoritesRepository(impl: TouristFavoritesRepositoryImpl): TouristFavoritesRepository = impl
+    fun provideTouristFavoritesRepository(
+        mode: AppDataMode,
+        localRepository: TouristFavoritesRepositoryImpl,
+        firebaseRepository: FirebaseTouristFavoritesRepository
+    ): TouristFavoritesRepository = when (mode) {
+        AppDataMode.FIREBASE -> firebaseRepository
+        else -> localRepository
+    }
 }

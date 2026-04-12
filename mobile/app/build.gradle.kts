@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.google.services)
-    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -97,18 +95,13 @@ android {
             excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
         }
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 }
 
 fun String.ensureTrailingSlash(): String = if (endsWith("/")) this else "$this/"
 
 dependencies {
-    implementation(libs.core.ktx)
-    val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
+    implementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(platform(libs.androidx.compose.bom))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -151,8 +144,11 @@ dependencies {
 
     implementation(libs.androidx.core.splashscreen)
 
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase.bom))
     implementation(libs.google.firebase.analytics)
+    implementation(libs.google.firebase.auth)
+    implementation(libs.google.firebase.firestore)
+    implementation(libs.google.firebase.storage)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -7,6 +7,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,6 +19,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.input.pointer.pointerInput
@@ -29,45 +32,60 @@ fun SanJuanMapCanvas(
     scale: Float,
     offset: Offset,
     onTransformChanged: (Float, Offset) -> Unit,
-    onSectorTapped: (MapSector?) -> Unit
+    onSectorTapped: (MapSector?) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(430.dp)
-            .background(color = Color(0xFFEFE8D2), shape = RoundedCornerShape(8.dp))
-            .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
-            .padding(8.dp)
+    Canvas(
+        modifier = modifier
+            .fillMaxSize()
+            .pointerInput(scale, offset) {
+                detectTransformGestures { centroid, pan, zoom, _ ->
+                    val newScale = (scale * zoom).coerceIn(1f, 4f)
+                    val scaledCentroid = (centroid - offset) / scale
+                    val newOffset = centroid - (scaledCentroid * newScale) + pan
+                    onTransformChanged(newScale, newOffset)
+                }
+            }
+            .pointerInput(sectors, scale, offset) {
+                detectTapGestures { tapOffset ->
+                    val mapWidthPx = size.width
+                    val mapHeightPx = size.height
+                    val scaleFit = minOf(
+                        mapWidthPx / SanJuanMapData.mapWidth,
+                        mapHeightPx / SanJuanMapData.mapHeight
+                    )
+                    val contentWidth = SanJuanMapData.mapWidth * scaleFit
+                    val contentHeight = SanJuanMapData.mapHeight * scaleFit
+                    val centeringOffset = Offset(
+                        (mapWidthPx - contentWidth) / 2f,
+                        (mapHeightPx - contentHeight) / 2f
+                    )
+
+                    val mapPoint = (tapOffset - offset - centeringOffset) / (scale * scaleFit)
+                    val tappedSector = sectors.firstOrNull { sector ->
+                        pointInPolygon(mapPoint, sector.polygonPoints)
+                    }
+                    onSectorTapped(tappedSector)
+                }
+            }
     ) {
-        Canvas(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(410.dp)
-                .pointerInput(scale, offset) {
-                    detectTransformGestures { centroid, pan, zoom, _ ->
-                        val newScale = (scale * zoom).coerceIn(1f, 4f)
-                        val scaledCentroid = (centroid - offset) / scale
-                        val newOffset = centroid - (scaledCentroid * newScale) + pan
-                        onTransformChanged(newScale, newOffset)
-                    }
-                }
-                .pointerInput(sectors, scale, offset) {
-                    detectTapGestures { tapOffset ->
-                        val mapPoint = (tapOffset - offset) / scale
-                        val tappedSector = sectors.firstOrNull { sector ->
-                            pointInPolygon(mapPoint, sector.polygonPoints)
-                        }
-                        onSectorTapped(tappedSector)
-                    }
-                }
-        ) {
-            val sx = size.width / SanJuanMapData.mapWidth
-            val sy = size.height / SanJuanMapData.mapHeight
+
+            val scaleFit = minOf(
+                size.width / SanJuanMapData.mapWidth,
+                size.height / SanJuanMapData.mapHeight
+            )
+            val contentWidth = SanJuanMapData.mapWidth * scaleFit
+            val contentHeight = SanJuanMapData.mapHeight * scaleFit
+            val centeringOffset = Offset(
+                (size.width - contentWidth) / 2f,
+                (size.height - contentHeight) / 2f
+            )
 
             withTransform({
                 translate(left = offset.x, top = offset.y)
+                translate(left = centeringOffset.x, top = centeringOffset.y)
                 scale(scale, scale)
-                scale(sx, sy)
+                scale(scaleFit, scaleFit)
             }) {
                 sectors.forEach { sector ->
                     val path = Path().apply {
@@ -94,15 +112,15 @@ fun SanJuanMapCanvas(
                         sector.labelPosition.y,
                         Paint().apply {
                             color = android.graphics.Color.BLACK
-                            textSize = 20f
+                            textSize = 24f
                             textAlign = Paint.Align.CENTER
                             isFakeBoldText = true
+                            alpha = if (isSelected) 255 else 180
                         }
                     )
                 }
             }
         }
-    }
 }
 
 private fun pointInPolygon(point: Offset, polygon: List<Offset>): Boolean {

@@ -103,6 +103,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun completeOnboarding() = viewModelScope.launch { prefs.setOnboardingCompleted(true) }
+
     fun setSearchQuery(q: String) {
         queryFlow.value = q
         viewModelScope.launch { if (q.isNotBlank()) prefs.addRecentSearch(q) }
@@ -122,7 +123,6 @@ class MainViewModel @Inject constructor(
             val destinationsResult = destinationRepository.getDestinations()
             val categoriesResult = destinationRepository.getCategories()
             val profileResult = profileRepository.getProfile()
-
             val destinations = (destinationsResult as? LocaPinResult.Success)?.data.orEmpty()
             val categories = (categoriesResult as? LocaPinResult.Success)?.data.orEmpty()
             val profile = (profileResult as? LocaPinResult.Success)?.data
@@ -130,7 +130,6 @@ class MainViewModel @Inject constructor(
                 destinationsResult is LocaPinResult.Error ||
                     categoriesResult is LocaPinResult.Error ||
                     profileResult is LocaPinResult.Error
-
             val contentError = if (hasAnyFailure) {
                 if (!connectivityStatusHelper.isConnected()) {
                     "No internet connection detected. Retry when you are back online."
@@ -140,7 +139,6 @@ class MainViewModel @Inject constructor(
             } else {
                 null
             }
-
             _state.value = _state.value.copy(
                 loading = false,
                 destinations = destinations,

@@ -8,5 +8,6 @@ data class AuthUiState(
     val isPasswordVisible: Boolean = false,
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
-    val loggedInRole: UserRole? = null
+    val loggedInRole: UserRole? = null,
+    val rememberMe: Boolean = false
 )
