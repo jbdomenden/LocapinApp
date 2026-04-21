@@ -1,5 +1,6 @@
 package com.locapin.mobile.feature.admin
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,6 +52,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.locapin.mobile.core.designsystem.theme.LocaPinBorder
+import com.locapin.mobile.core.designsystem.theme.LocaPinCardBackground
+import com.locapin.mobile.core.designsystem.theme.LocaPinPrimary
+import com.locapin.mobile.core.designsystem.theme.LocaPinSurface
 import com.locapin.mobile.core.navigation.AppDestinations
 import kotlinx.coroutines.launch
 
@@ -72,12 +77,6 @@ fun AdminDashboardScreen(
 ) {
     val modules = remember {
         listOf(
-            AdminModuleItem(
-                route = AppDestinations.AdminEntry,
-                title = "Dashboard",
-                description = "Overview of mobile admin operations.",
-                icon = Icons.Default.Home
-            ),
             AdminModuleItem(
                 route = AppDestinations.AdminAttractions,
                 title = "Manage Attractions",
@@ -124,23 +123,35 @@ fun AdminDashboardScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet {
+            ModalDrawerSheet(
+                drawerContainerColor = LocaPinSurface
+            ) {
                 Text(
                     text = "Admin Modules",
                     style = MaterialTheme.typography.titleLarge,
+                    color = LocaPinPrimary,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 20.dp)
                 )
                 Text(
                     text = "LocaPin Control Panel",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = LocaPinPrimary.copy(alpha = 0.6f),
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 2.dp)
                 )
                 modules.forEach { module ->
                     NavigationDrawerItem(
-                        label = { Text(module.title) },
+                        label = { Text(module.title, fontWeight = FontWeight.Bold) },
                         selected = currentRoute == module.route,
                         icon = { Icon(module.icon, contentDescription = module.title) },
+                        colors = androidx.compose.material3.NavigationDrawerItemDefaults.colors(
+                            selectedContainerColor = LocaPinPrimary.copy(alpha = 0.1f),
+                            selectedIconColor = LocaPinPrimary,
+                            selectedTextColor = LocaPinPrimary,
+                            unselectedIconColor = LocaPinPrimary.copy(alpha = 0.6f),
+                            unselectedTextColor = LocaPinPrimary.copy(alpha = 0.6f)
+                        ),
                         onClick = {
                             onOpenModule(module.route)
                             scope.launch { drawerState.close() }
@@ -149,11 +160,15 @@ fun AdminDashboardScreen(
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                HorizontalDivider(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp), color = LocaPinBorder)
                 NavigationDrawerItem(
-                    label = { Text("Logout") },
+                    label = { Text("Logout", fontWeight = FontWeight.Bold) },
                     selected = false,
                     icon = { Icon(Icons.Default.Logout, contentDescription = "Logout") },
+                    colors = androidx.compose.material3.NavigationDrawerItemDefaults.colors(
+                        unselectedIconColor = LocaPinPrimary,
+                        unselectedTextColor = LocaPinPrimary
+                    ),
                     onClick = {
                         scope.launch { drawerState.close() }
                         onLogout()
@@ -164,28 +179,36 @@ fun AdminDashboardScreen(
         }
     ) {
         Scaffold(
+            containerColor = LocaPinSurface,
             topBar = {
                 TopAppBar(
-                    title = { Text("Admin Dashboard") },
+                    title = { Text("Admin Dashboard", color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Open admin menu")
+                            Icon(Icons.Default.Menu, contentDescription = "Open admin menu", tint = LocaPinPrimary)
                         }
                     },
+                    colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
+                        containerColor = LocaPinSurface
+                    ),
                     actions = {
                         IconButton(onClick = { showMenu = true }) {
-                            Icon(Icons.Default.MoreVert, contentDescription = "Dashboard actions")
+                            Icon(Icons.Default.MoreVert, contentDescription = "Dashboard actions", tint = LocaPinPrimary)
                         }
-                        DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
+                        DropdownMenu(
+                            expanded = showMenu, 
+                            onDismissRequest = { showMenu = false },
+                            modifier = Modifier.background(LocaPinSurface)
+                        ) {
                             DropdownMenuItem(
-                                text = { Text("Change Password") },
+                                text = { Text("Change Password", color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
                                 onClick = {
                                     showMenu = false
                                     onChangePassword()
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Logout") },
+                                text = { Text("Logout", color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
                                 onClick = {
                                     showMenu = false
                                     onLogout()
@@ -206,12 +229,14 @@ fun AdminDashboardScreen(
                 Text(
                     text = "Welcome${adminName?.let { ", $it" } ?: ""}",
                     style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.SemiBold
+                    color = LocaPinPrimary,
+                    fontWeight = FontWeight.ExtraBold
                 )
                 Text(
                     text = "Mobile admin control center.",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = LocaPinPrimary.copy(alpha = 0.7f),
+                    fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -227,7 +252,8 @@ fun AdminDashboardScreen(
                                 .fillMaxWidth()
                                 .height(156.dp)
                                 .clickable { onOpenModule(module.route) },
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                            colors = CardDefaults.cardColors(containerColor = LocaPinCardBackground.copy(alpha = 0.5f)),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, LocaPinBorder)
                         ) {
                             Column(
                                 modifier = Modifier
@@ -239,15 +265,21 @@ fun AdminDashboardScreen(
                                     Icon(
                                         imageVector = module.icon,
                                         contentDescription = module.title,
-                                        tint = MaterialTheme.colorScheme.primary
+                                        tint = LocaPinPrimary
                                     )
                                 }
                                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                                    Text(text = module.title, style = MaterialTheme.typography.titleMedium)
+                                    Text(
+                                        text = module.title, 
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = LocaPinPrimary,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                     Text(
                                         text = module.description,
                                         style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        color = LocaPinPrimary.copy(alpha = 0.8f),
+                                        fontWeight = FontWeight.Medium
                                     )
                                 }
                             }

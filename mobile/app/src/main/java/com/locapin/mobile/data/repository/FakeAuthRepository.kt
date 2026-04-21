@@ -69,7 +69,14 @@ class FakeAuthRepository @Inject constructor(
         return LocaPinResult.Success(authSession)
     }
 
-    override suspend fun register(name: String, email: String, password: String): LocaPinResult<AuthSession> {
+    override suspend fun register(
+        name: String,
+        email: String,
+        password: String,
+        agreedToEula: Boolean,
+        agreedToTerms: Boolean,
+        agreedToPrivacy: Boolean
+    ): LocaPinResult<AuthSession> {
         if (name.isBlank() || email.isBlank() || password.isBlank()) {
             return LocaPinResult.Error("Please complete all required fields.")
         }

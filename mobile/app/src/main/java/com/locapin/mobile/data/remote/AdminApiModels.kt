@@ -26,5 +26,7 @@ data class AdminMapAreaRequest(
     val description: String,
     val districtLabel: String,
     val centerLatitude: Double,
-    val centerLongitude: Double
+    val centerLongitude: Double,
+    val polygonPoints: String = "",
+    val hexColor: String = "#F0F4A4"
 )

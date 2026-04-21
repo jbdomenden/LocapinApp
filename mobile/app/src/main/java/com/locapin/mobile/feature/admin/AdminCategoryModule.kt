@@ -15,6 +15,6 @@ object AdminCategoryModule {
     fun bindAdminCategoryRepository(
         mode: AppDataMode,
         mockRepository: InMemoryAdminCategoryRepository,
-        remoteRepository: RemoteAdminCategoryRepository
-    ): AdminCategoryRepository = if (mode == AppDataMode.MOCK) mockRepository else remoteRepository
+        firebaseRepository: FirebaseAdminCategoryRepository
+    ): AdminCategoryRepository = if (mode == AppDataMode.MOCK) mockRepository else firebaseRepository
 }

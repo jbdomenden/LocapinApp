@@ -5,7 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 private const val ARG_ATTRACTION_ID = "attractionId"
@@ -19,6 +23,7 @@ data class AdminAttractionFormUiState(
     val latitude: String = "",
     val longitude: String = "",
     val area: String = "",
+    val imageUrl: String = "",
     val isVisible: Boolean = true,
     val errors: Map<String, String> = emptyMap()
 )
@@ -26,10 +31,14 @@ data class AdminAttractionFormUiState(
 @HiltViewModel
 class AdminAttractionFormViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val repository: AdminAttractionRepository
+    private val repository: AdminAttractionRepository,
+    categoryRepository: AdminCategoryRepository
 ) : ViewModel() {
 
     private val attractionId: String? = savedStateHandle[ARG_ATTRACTION_ID]
+
+    val categories: StateFlow<List<AdminCategory>> = categoryRepository.categories
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     var uiState by mutableStateOf(
         attractionId
@@ -46,6 +55,7 @@ class AdminAttractionFormViewModel @Inject constructor(
     fun onLatitudeChange(value: String) = update { copy(latitude = value) }
     fun onLongitudeChange(value: String) = update { copy(longitude = value) }
     fun onAreaChange(value: String) = update { copy(area = value) }
+    fun onImageUrlChange(value: String) = update { copy(imageUrl = value) }
     fun onVisibilityChange(value: Boolean) = update { copy(isVisible = value) }
 
     fun save(): Boolean {
@@ -63,7 +73,8 @@ class AdminAttractionFormViewModel @Inject constructor(
             latitude = uiState.latitude.toDouble(),
             longitude = uiState.longitude.toDouble(),
             area = uiState.area.trim(),
-            isVisible = uiState.isVisible
+            isVisible = uiState.isVisible,
+            imageUrl = uiState.imageUrl.trim().ifEmpty { null }
         )
 
         val id = uiState.attractionId
@@ -82,6 +93,7 @@ class AdminAttractionFormViewModel @Inject constructor(
         if (state.name.isBlank()) errors["name"] = "Name is required"
         if (state.knownFor.isBlank()) errors["knownFor"] = "Known for is required"
         if (state.description.isBlank()) errors["description"] = "Description is required"
+        if (state.category.isBlank()) errors["category"] = "Category is required"
 
         val lat = state.latitude.toDoubleOrNull()
         if (state.latitude.isBlank()) {
@@ -113,6 +125,7 @@ class AdminAttractionFormViewModel @Inject constructor(
         latitude = latitude.toString(),
         longitude = longitude.toString(),
         area = area,
+        imageUrl = imageUrl ?: "",
         isVisible = isVisible
     )
 }

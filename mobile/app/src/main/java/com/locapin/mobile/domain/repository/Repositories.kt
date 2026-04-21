@@ -12,7 +12,14 @@ import kotlinx.coroutines.flow.StateFlow
 interface AuthRepository {
     suspend fun login(email: String, password: String): LocaPinResult<AuthSession>
     suspend fun socialLogin(provider: String, idToken: String? = null, accessToken: String? = null): LocaPinResult<AuthSession>
-    suspend fun register(name: String, email: String, password: String): LocaPinResult<AuthSession>
+    suspend fun register(
+        name: String,
+        email: String,
+        password: String,
+        agreedToEula: Boolean = true,
+        agreedToTerms: Boolean = true,
+        agreedToPrivacy: Boolean = true
+    ): LocaPinResult<AuthSession>
     suspend fun forgotPassword(email: String): LocaPinResult<Unit>
     suspend fun logout()
     suspend fun getCurrentSession(): AuthSession?

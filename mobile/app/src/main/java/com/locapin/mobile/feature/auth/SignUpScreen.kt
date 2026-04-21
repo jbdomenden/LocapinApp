@@ -230,7 +230,14 @@ fun SignUpScreen(
 
                         else -> {
                             validationMessage = null
-                            vm.register(name = name.trim(), email = email.trim(), password = password)
+                            vm.register(
+                                name = name.trim(),
+                                email = email.trim(),
+                                password = password,
+                                agreeEula = agreeEula,
+                                agreeTerms = agreeTerms,
+                                agreePrivacy = agreePrivacy
+                            )
                         }
                     }
                 },

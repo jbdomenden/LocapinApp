@@ -37,6 +37,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.locapin.mobile.core.designsystem.theme.LocaPinBorder
+import com.locapin.mobile.core.designsystem.theme.LocaPinCardBackground
+import com.locapin.mobile.core.designsystem.theme.LocaPinFieldBackground
+import com.locapin.mobile.core.designsystem.theme.LocaPinPrimary
+import com.locapin.mobile.core.designsystem.theme.LocaPinSurface
+import com.locapin.mobile.core.designsystem.theme.LocaPinWhite
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,18 +56,26 @@ fun AdminCategoriesListScreen(
     var deleteTarget by rememberSaveable { mutableStateOf<AdminCategory?>(null) }
 
     Scaffold(
+        containerColor = LocaPinSurface,
         topBar = {
             TopAppBar(
-                title = { Text("Manage Categories") },
+                title = { Text("Manage Categories", color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = LocaPinPrimary)
                     }
-                }
+                },
+                colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
+                    containerColor = LocaPinSurface
+                )
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onCreateCategory) {
+            FloatingActionButton(
+                onClick = onCreateCategory,
+                containerColor = LocaPinPrimary,
+                contentColor = LocaPinWhite
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "Create category")
             }
         }
@@ -77,14 +91,28 @@ fun AdminCategoriesListScreen(
                 value = uiState.searchQuery,
                 onValueChange = viewModel::onSearchQueryChange,
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Search by category name") },
-                singleLine = true
+                label = { Text("Search by category name", color = LocaPinPrimary.copy(alpha = 0.7f)) },
+                singleLine = true,
+                colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = LocaPinPrimary,
+                    unfocusedBorderColor = LocaPinBorder,
+                    focusedLabelColor = LocaPinPrimary,
+                    cursorColor = LocaPinPrimary,
+                    focusedContainerColor = LocaPinFieldBackground,
+                    unfocusedContainerColor = LocaPinFieldBackground
+                ),
+                trailingIcon = {
+                    TextButton(onClick = viewModel::populateFromAttractions) {
+                        Text("Import", color = LocaPinPrimary, fontWeight = FontWeight.Bold)
+                    }
+                }
             )
 
             if (uiState.categories.isEmpty()) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                    colors = CardDefaults.cardColors(containerColor = LocaPinCardBackground.copy(alpha = 0.5f)),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, LocaPinBorder)
                 ) {
                     Text(
                         text = if (uiState.searchQuery.isBlank()) {
@@ -94,7 +122,8 @@ fun AdminCategoriesListScreen(
                         },
                         modifier = Modifier.padding(16.dp),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = LocaPinPrimary,
+                        fontWeight = FontWeight.Medium
                     )
                 }
             } else {
@@ -106,7 +135,8 @@ fun AdminCategoriesListScreen(
                     items(uiState.categories, key = { it.id }) { category ->
                         Card(
                             modifier = Modifier.fillMaxWidth(),
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                            colors = CardDefaults.cardColors(containerColor = LocaPinCardBackground.copy(alpha = 0.5f)),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, LocaPinBorder)
                         ) {
                             Column(
                                 modifier = Modifier.padding(14.dp),
@@ -115,13 +145,15 @@ fun AdminCategoriesListScreen(
                                 Text(
                                     text = category.name,
                                     style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.SemiBold
+                                    fontWeight = FontWeight.Bold,
+                                    color = LocaPinPrimary
                                 )
                                 if (category.description.isNotBlank()) {
                                     Text(
                                         text = category.description,
                                         style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        color = LocaPinPrimary.copy(alpha = 0.8f),
+                                        fontWeight = FontWeight.Medium
                                     )
                                 }
                                 Row(
@@ -129,10 +161,10 @@ fun AdminCategoriesListScreen(
                                     horizontalArrangement = Arrangement.End
                                 ) {
                                     IconButton(onClick = { onEditCategory(category.id) }) {
-                                        Icon(Icons.Default.Edit, contentDescription = "Edit ${category.name}")
+                                        Icon(Icons.Default.Edit, contentDescription = "Edit ${category.name}", tint = LocaPinPrimary)
                                     }
                                     IconButton(onClick = { deleteTarget = category }) {
-                                        Icon(Icons.Default.Delete, contentDescription = "Delete ${category.name}")
+                                        Icon(Icons.Default.Delete, contentDescription = "Delete ${category.name}", tint = LocaPinPrimary)
                                     }
                                 }
                             }
@@ -148,7 +180,7 @@ fun AdminCategoriesListScreen(
             onDismissRequest = { deleteTarget = null },
             title = { Text("Delete category") },
             text = {
-                Text("Delete ${deleteTarget?.name}? This will remove it from the local mock list.")
+                Text("Are you sure you want to delete '${deleteTarget?.name}'? This action cannot be undone.")
             },
             confirmButton = {
                 TextButton(

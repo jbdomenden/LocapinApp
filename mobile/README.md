@@ -17,9 +17,11 @@ LocaPin is a comprehensive tourism application for San Juan City, Metro Manila. 
 - **Ad-Free Option**: One-time premium upgrade to remove all advertisements.
 
 ### For Administrators
-- **Map Management**: Define and edit map sectors and coordinates.
-- **Attraction Management**: Add, update, or remove tourism content.
-- **Real-time Updates**: Changes reflect instantly for all users.
+- **Attraction Management**: Full CRUD (Create, Read, Update, Delete) for city attractions, ensuring tourists have up-to-date info.
+- **Content Enrichment**: Manage high-fidelity data including "Known For" tags, rich descriptions, and image URLs.
+- **Precision Mapping**: Set exact GPS coordinates (latitude/longitude) and assign attractions to specific map sectors.
+- **Visibility Control**: Toggle attraction visibility to hide or show locations on the tourist map instantly.
+- **Map Management**: Define and edit the boundaries and names of San Juan City map sectors.
 
 ## 3. Architecture & Tech Stack
 - **Language**: Kotlin

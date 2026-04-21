@@ -1,40 +1,59 @@
 package com.locapin.mobile.feature.admin
 
-import com.locapin.mobile.data.remote.AdminMapAreaRequest
 import com.locapin.mobile.data.remote.MapAreaApiService
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import javax.inject.Inject
+import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Singleton
 class RemoteAdminMapAreaRepository @Inject constructor(
     private val mapAreaApiService: MapAreaApiService
 ) : AdminMapAreaRepository {
-    private val _mapAreas = MutableStateFlow(emptyList<AdminMapArea>())
+    private val _mapAreas = MutableStateFlow<List<AdminMapArea>>(emptyList())
     override val mapAreas: StateFlow<List<AdminMapArea>> = _mapAreas.asStateFlow()
+    private val scope = CoroutineScope(Dispatchers.IO)
 
-    override fun getMapAreaById(id: String): AdminMapArea? =
-        _mapAreas.value.firstOrNull { it.id == id }
-
-    override fun createMapArea(input: AdminMapAreaInput) {
-        // Remote wiring intentionally deferred; stub keeps interface backend-ready.
+    init {
+        refresh()
     }
 
-    override fun updateMapArea(id: String, input: AdminMapAreaInput) {
-        // Remote wiring intentionally deferred; stub keeps interface backend-ready.
+    private fun refresh() {
+        scope.launch {
+            try {
+                val response = mapAreaApiService.getMapAreas()
+                if (response.data != null) {
+                    val areas = response.data.map { dto ->
+                        AdminMapArea(
+                            id = dto.id,
+                            name = dto.displayName,
+                            description = "",
+                            districtLabel = "",
+                            centerLatitude = dto.centerLat,
+                            centerLongitude = dto.centerLng,
+                            polygonPoints = dto.polygonPoints.joinToString(";") { "${it.lng},${it.lat}" },
+                            hexColor = dto.hexColor ?: "#F0F4A4",
+                            isPremium = dto.isPremium ?: false
+                        )
+                    }
+                    _mapAreas.update { areas }
+                }
+            } catch (e: Exception) {
+                // Handle error
+            }
+        }
     }
 
-    override fun deleteMapArea(id: String) {
-        // Remote wiring intentionally deferred; stub keeps interface backend-ready.
+    override fun togglePremium(id: String) {
+        _mapAreas.update { current ->
+            current.map { 
+                if (it.id == id) it.copy(isPremium = !it.isPremium) else it
+            }
+        }
     }
-
-    private fun AdminMapAreaInput.toRequest() = AdminMapAreaRequest(
-        name = name,
-        description = description,
-        districtLabel = districtLabel,
-        centerLatitude = centerLatitude,
-        centerLongitude = centerLongitude
-    )
 }

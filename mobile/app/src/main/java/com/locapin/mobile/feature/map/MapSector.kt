@@ -9,7 +9,8 @@ data class MapSector(
     val fillColor: Color,
     val labelPosition: Offset,
     val polygonPoints: List<Offset>,
-    val attractionsCount: Int = 0
+    val attractionsCount: Int = 0,
+    val isPremium: Boolean = false
 )
 
 data class Attraction(
@@ -27,5 +28,8 @@ data class SanJuanMapUiState(
     val currentOffset: Offset = Offset.Zero,
     val isAdsDisabled: Boolean = false,
     val showInterstitialAd: Boolean = false,
-    val tapCount: Int = 0
+    val tapCount: Int = 0,
+    val showPremiumPrompt: MapSector? = null,
+    val premiumAccessSectors: Set<String> = emptySet(),
+    val isLegendVisible: Boolean = true
 )

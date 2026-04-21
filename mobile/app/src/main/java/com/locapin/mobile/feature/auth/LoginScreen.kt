@@ -65,6 +65,7 @@ fun LoginScreen(
     onRoleResolved: (UserRole) -> Unit,
     onOpenEula: () -> Unit = {},
     onOpenTerms: () -> Unit = {},
+    onOpenPrivacyConsent: () -> Unit = {},
     vm: LoginViewModel = hiltViewModel(),
     signUpVm: SignUpViewModel = hiltViewModel()
 ) {
@@ -80,7 +81,9 @@ fun LoginScreen(
     var signUpPasswordVisible by rememberSaveable { mutableStateOf(false) }
     var signUpConfirmPasswordVisible by rememberSaveable { mutableStateOf(false) }
     var signUpValidationMessage by rememberSaveable { mutableStateOf<String?>(null) }
-    var agreeToTerms by rememberSaveable { mutableStateOf(false) }
+    var agreeEula by rememberSaveable { mutableStateOf(false) }
+    var agreeTerms by rememberSaveable { mutableStateOf(false) }
+    var agreePrivacy by rememberSaveable { mutableStateOf(false) }
 
     val googleSignInOptions = remember {
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -150,7 +153,12 @@ fun LoginScreen(
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize().background(AuthScreenBackground)) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(AuthScreenBackground),
+        contentAlignment = Alignment.Center
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -253,7 +261,9 @@ fun LoginScreen(
                         passwordVisible = signUpPasswordVisible,
                         confirmPasswordVisible = signUpConfirmPasswordVisible,
                         validationMessage = signUpValidationMessage,
-                        agreeToTerms = agreeToTerms,
+                        agreeEula = agreeEula,
+                        agreeTerms = agreeTerms,
+                        agreePrivacy = agreePrivacy,
                         onNameChange = {
                             signUpName = it
                             signUpValidationMessage = null
@@ -272,14 +282,17 @@ fun LoginScreen(
                         },
                         onTogglePassword = { signUpPasswordVisible = !signUpPasswordVisible },
                         onToggleConfirmPassword = { signUpConfirmPasswordVisible = !signUpConfirmPasswordVisible },
-                        onAgreeToTermsChange = { agreeToTerms = it },
+                        onAgreeEulaChange = { agreeEula = it },
+                        onAgreeTermsChange = { agreeTerms = it },
+                        onAgreePrivacyChange = { agreePrivacy = it },
                         onOpenEula = {
-                            // Using a simple Toast for now as we don't have direct access to navController here 
-                            // but we can pass it as a lambda from the top level
                             onOpenEula()
                         },
                         onOpenTerms = {
                             onOpenTerms()
+                        },
+                        onOpenPrivacyConsent = {
+                            onOpenPrivacyConsent()
                         },
                         onCreateAccount = {
                             val passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$".toRegex()
@@ -294,15 +307,18 @@ fun LoginScreen(
                                 signUpPassword != signUpConfirmPassword -> {
                                     signUpValidationMessage = "Passwords do not match."
                                 }
-                                !agreeToTerms -> {
-                                    signUpValidationMessage = "You must agree to the EULA and Terms."
+                                !agreeEula || !agreeTerms || !agreePrivacy -> {
+                                    signUpValidationMessage = "You must agree to all legal consents."
                                 }
                                 else -> {
                                     signUpValidationMessage = null
                                     signUpVm.register(
                                         name = signUpName.trim(),
                                         email = signUpEmail.trim(),
-                                        password = signUpPassword
+                                        password = signUpPassword,
+                                        agreeEula = agreeEula,
+                                        agreeTerms = agreeTerms,
+                                        agreePrivacy = agreePrivacy
                                     )
                                 }
                             }
@@ -318,11 +334,7 @@ fun LoginScreen(
                         onForgotPassword = vm::forgotPassword,
                         onLogin = vm::login,
                         onGoogleLogin = {
-                            Toast.makeText(
-                                context,
-                                "Google login is coming soon. Please try other login methods.",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            googleLoginLauncher.launch(googleSignInClient.signInIntent)
                         },
                         onFacebookLogin = {
                             Toast.makeText(
@@ -348,7 +360,7 @@ fun LocaPinLogo() {
                 fontSize = 58.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = AuthCardBackground,
-                shadow = Shadow(color = Color.White, offset = Offset(0f, 0f), blurRadius = 10f)
+                shadow = Shadow(color = Color.White, offset = Offset(0f, 0f), blurRadius = 8f)
             )
         )
         
@@ -376,7 +388,7 @@ fun LocaPinLogo() {
                 fontSize = 58.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = AuthCardBackground,
-                shadow = Shadow(color = Color.White, offset = Offset(0f, 0f), blurRadius = 10f)
+                shadow = Shadow(color = Color.White, offset = Offset(0f, 0f), blurRadius = 8f)
             )
         )
     }
@@ -513,7 +525,7 @@ fun StyledTextField(
                 trailingIcon?.invoke()
             }
         },
-        modifier = Modifier.fillMaxWidth().height(56.dp),
+        modifier = Modifier.fillMaxWidth(),
         shape = CircleShape,
         colors = OutlinedTextFieldDefaults.colors(
             focusedContainerColor = AuthFieldBackground,
@@ -530,13 +542,13 @@ fun StyledTextField(
 @Composable
 fun SocialDivider() {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-        Divider(modifier = Modifier.weight(1f), color = AuthPrimaryText, thickness = 2.dp)
+        HorizontalDivider(modifier = Modifier.weight(1f), color = AuthPrimaryText, thickness = 2.dp)
         Text(
             text = "Login with",
             style = TextStyle(fontWeight = FontWeight.Bold, color = AuthWhite, fontSize = 16.sp),
             modifier = Modifier.padding(horizontal = 8.dp)
         )
-        Divider(modifier = Modifier.weight(1f), color = AuthPrimaryText, thickness = 2.dp)
+        HorizontalDivider(modifier = Modifier.weight(1f), color = AuthPrimaryText, thickness = 2.dp)
     }
 }
 
@@ -675,16 +687,21 @@ private fun ColumnScope.SignUpInlineContent(
     passwordVisible: Boolean,
     confirmPasswordVisible: Boolean,
     validationMessage: String?,
-    agreeToTerms: Boolean,
+    agreeEula: Boolean,
+    agreeTerms: Boolean,
+    agreePrivacy: Boolean,
     onNameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onConfirmPasswordChange: (String) -> Unit,
     onTogglePassword: () -> Unit,
     onToggleConfirmPassword: () -> Unit,
-    onAgreeToTermsChange: (Boolean) -> Unit,
+    onAgreeEulaChange: (Boolean) -> Unit,
+    onAgreeTermsChange: (Boolean) -> Unit,
+    onAgreePrivacyChange: (Boolean) -> Unit,
     onOpenEula: () -> Unit,
     onOpenTerms: () -> Unit,
+    onOpenPrivacyConsent: () -> Unit,
     onCreateAccount: () -> Unit
 ) {
     StyledTextField(value = name, onValueChange = onNameChange, label = "Name")
@@ -697,13 +714,14 @@ private fun ColumnScope.SignUpInlineContent(
 
     Spacer(modifier = Modifier.height(8.dp))
 
+    // EULA Consent
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().clickable { onAgreeToTermsChange(!agreeToTerms) }
+        modifier = Modifier.fillMaxWidth().clickable { onAgreeEulaChange(!agreeEula) }
     ) {
         Checkbox(
-            checked = agreeToTerms,
-            onCheckedChange = onAgreeToTermsChange,
+            checked = agreeEula,
+            onCheckedChange = onAgreeEulaChange,
             colors = CheckboxDefaults.colors(
                 checkedColor = AuthPrimaryText,
                 uncheckedColor = AuthWhite,
@@ -719,14 +737,55 @@ private fun ColumnScope.SignUpInlineContent(
             style = TextStyle(fontSize = 14.sp, color = AuthWhite, fontWeight = FontWeight.Black, textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline),
             modifier = Modifier.clickable { onOpenEula() }
         )
+    }
+
+    // Terms Consent
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth().clickable { onAgreeTermsChange(!agreeTerms) }
+    ) {
+        Checkbox(
+            checked = agreeTerms,
+            onCheckedChange = onAgreeTermsChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = AuthPrimaryText,
+                uncheckedColor = AuthWhite,
+                checkmarkColor = AuthWhite
+            )
+        )
         Text(
-            text = " and ",
+            text = "I agree to the ",
             style = TextStyle(fontSize = 14.sp, color = AuthWhite, fontWeight = FontWeight.Bold)
         )
         Text(
-            text = "Terms",
+            text = "Terms and Conditions",
             style = TextStyle(fontSize = 14.sp, color = AuthWhite, fontWeight = FontWeight.Black, textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline),
             modifier = Modifier.clickable { onOpenTerms() }
+        )
+    }
+
+    // Privacy Consent
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.fillMaxWidth().clickable { onAgreePrivacyChange(!agreePrivacy) }
+    ) {
+        Checkbox(
+            checked = agreePrivacy,
+            onCheckedChange = onAgreePrivacyChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = AuthPrimaryText,
+                uncheckedColor = AuthWhite,
+                checkmarkColor = AuthWhite
+            )
+        )
+        Text(
+            text = "I agree to the ",
+            style = TextStyle(fontSize = 14.sp, color = AuthWhite, fontWeight = FontWeight.Bold)
+        )
+        Text(
+            text = "Privacy and Location Consent",
+            style = TextStyle(fontSize = 14.sp, color = AuthWhite, fontWeight = FontWeight.Black, textDecoration = androidx.compose.ui.text.style.TextDecoration.Underline),
+            modifier = Modifier.clickable { onOpenPrivacyConsent() }
         )
     }
 
@@ -741,7 +800,7 @@ private fun ColumnScope.SignUpInlineContent(
         modifier = Modifier.width(200.dp).height(54.dp),
         shape = CircleShape,
         colors = ButtonDefaults.buttonColors(containerColor = AuthPrimaryButton),
-        enabled = !isLoading && agreeToTerms,
+        enabled = !isLoading && agreeEula && agreeTerms && agreePrivacy,
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
     ) {
         if (isLoading) {

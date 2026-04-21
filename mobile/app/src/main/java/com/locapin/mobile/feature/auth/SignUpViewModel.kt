@@ -30,12 +30,28 @@ class SignUpViewModel @Inject constructor(
         _state.update { it.copy(registeredRole = null) }
     }
 
-    fun register(name: String, email: String, password: String) {
+    fun register(
+        name: String,
+        email: String,
+        password: String,
+        agreeEula: Boolean,
+        agreeTerms: Boolean,
+        agreePrivacy: Boolean
+    ) {
         if (_state.value.isLoading) return
 
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, errorMessage = null) }
-            when (val result = authRepository.register(name, email, password)) {
+            when (
+                val result = authRepository.register(
+                    name = name,
+                    email = email,
+                    password = password,
+                    agreedToEula = agreeEula,
+                    agreedToTerms = agreeTerms,
+                    agreedToPrivacy = agreePrivacy
+                )
+            ) {
                 is LocaPinResult.Success -> {
                     _state.update {
                         it.copy(

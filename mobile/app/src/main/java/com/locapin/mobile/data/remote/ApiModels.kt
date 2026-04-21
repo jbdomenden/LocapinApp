@@ -22,7 +22,10 @@ data class AuthRequest(
 data class RegisterRequest(
     val name: String,
     val email: String,
-    val password: String
+    val password: String,
+    val agreedToEula: Boolean = true,
+    val agreedToTerms: Boolean = true,
+    val agreedToPrivacy: Boolean = true
 )
 
 @Serializable
@@ -93,7 +96,9 @@ data class MapZoneDto(
     val displayName: String,
     val polygonPoints: List<MapPointDto>,
     val centerLat: Double,
-    val centerLng: Double
+    val centerLng: Double,
+    val hexColor: String? = null,
+    val isPremium: Boolean? = false
 )
 
 @Serializable

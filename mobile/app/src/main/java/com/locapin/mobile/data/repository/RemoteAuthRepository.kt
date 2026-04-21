@@ -61,8 +61,24 @@ class RemoteAuthRepository @Inject constructor(
         LocaPinResult.Success(authSession)
     }.getOrElse { LocaPinResult.Error(it.message ?: "Unable to login") }
 
-    override suspend fun register(name: String, email: String, password: String): LocaPinResult<AuthSession> = runCatching {
-        val response = authApiService.register(RegisterRequest(name = name, email = email, password = password))
+    override suspend fun register(
+        name: String,
+        email: String,
+        password: String,
+        agreedToEula: Boolean,
+        agreedToTerms: Boolean,
+        agreedToPrivacy: Boolean
+    ): LocaPinResult<AuthSession> = runCatching {
+        val response = authApiService.register(
+            RegisterRequest(
+                name = name,
+                email = email,
+                password = password,
+                agreedToEula = agreedToEula,
+                agreedToTerms = agreedToTerms,
+                agreedToPrivacy = agreedToPrivacy
+            )
+        )
         val user = response.data?.user ?: return LocaPinResult.Error(response.error ?: "Unable to register")
         val authSession = AuthSession(
             userId = user.id,

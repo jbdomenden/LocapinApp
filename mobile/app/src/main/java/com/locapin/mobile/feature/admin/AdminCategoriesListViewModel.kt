@@ -8,8 +8,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 data class AdminCategoriesListUiState(
     val searchQuery: String = "",
@@ -18,7 +20,8 @@ data class AdminCategoriesListUiState(
 
 @HiltViewModel
 class AdminCategoriesListViewModel @Inject constructor(
-    private val repository: AdminCategoryRepository
+    private val repository: AdminCategoryRepository,
+    private val attractionRepository: AdminAttractionRepository
 ) : ViewModel() {
 
     private val searchQuery = MutableStateFlow("")
@@ -38,6 +41,23 @@ class AdminCategoriesListViewModel @Inject constructor(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = AdminCategoriesListUiState()
     )
+
+    fun populateFromAttractions() {
+        viewModelScope.launch {
+            val currentAttractions = attractionRepository.attractions.first()
+            val currentCategories = repository.categories.first()
+            
+            val uniqueCategoryNames = currentAttractions.map { it.category }
+                .filter { it.isNotBlank() }
+                .distinct()
+            
+            uniqueCategoryNames.forEach { name ->
+                if (currentCategories.none { it.name.equals(name, ignoreCase = true) }) {
+                    repository.createCategory(AdminCategoryInput(name = name, description = "Automatically imported from attractions."))
+                }
+            }
+        }
+    }
 
     fun onSearchQueryChange(value: String) {
         searchQuery.update { value }

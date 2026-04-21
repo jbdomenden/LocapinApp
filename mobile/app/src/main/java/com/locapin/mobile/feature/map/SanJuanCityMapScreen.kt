@@ -1,5 +1,6 @@
 package com.locapin.mobile.feature.map
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -11,7 +12,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Payment
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -84,6 +88,15 @@ fun SanJuanCityMapScreen(
         AttractionDetailsDialog(
             attraction = selectedAttraction!!,
             onDismiss = { selectedAttraction = null }
+        )
+    }
+
+    state.showPremiumPrompt?.let { sector ->
+        PremiumAreaDialog(
+            sectorName = sector.name,
+            onDismiss = vm::dismissPremiumPrompt,
+            onWatchAd = { vm.watchAdForPremium(sector.id) },
+            onBuy = { vm.buyPremiumAccess(sector.id) }
         )
     }
 
@@ -199,16 +212,29 @@ fun SanJuanCityMapScreen(
                 SanJuanMapCanvas(
                     sectors = state.sectors,
                     selectedSectorId = state.selectedSectorId,
-                    scale = state.currentScale,
-                    offset = state.currentOffset,
-                    onTransformChanged = vm::onTransformChanged,
                     onSectorTapped = { sector ->
                         vm.onSectorTapped(sector?.id)
                         showSheet = sector != null
                     },
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    scale = state.currentScale,
+                    offset = state.currentOffset,
+                    onTransformChanged = vm::onTransformChanged
                 )
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Map Legend Section
+            MapLegend(
+                sectors = state.sectors,
+                selectedSectorId = state.selectedSectorId,
+                isVisible = state.isLegendVisible,
+                onToggleVisibility = vm::toggleLegend,
+                onSectorClick = { sectorId: String ->
+                    vm.onSectorTapped(if (sectorId == state.selectedSectorId) null else sectorId)
+                }
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -614,5 +640,159 @@ fun MockGooglePlayDialog(price: String, onDismiss: () -> Unit, onPay: () -> Unit
                 }
             }
         }
+    }
+}
+
+@Composable
+fun MapLegend(
+    sectors: List<MapSector>,
+    selectedSectorId: String?,
+    isVisible: Boolean,
+    onToggleVisibility: () -> Unit,
+    onSectorClick: (String) -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = LocaPinCardBackground.copy(alpha = 0.7f)),
+        border = BorderStroke(1.dp, LocaPinBorder.copy(alpha = 0.5f))
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = onToggleVisibility),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Map Legend",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = LocaPinPrimary
+                )
+                Icon(
+                    imageVector = if (isVisible) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                    contentDescription = if (isVisible) "Hide Legend" else "Show Legend",
+                    tint = LocaPinPrimary
+                )
+            }
+            
+            AnimatedVisibility(
+                visible = isVisible,
+                enter = expandVertically() + fadeIn(),
+                exit = shrinkVertically() + fadeOut()
+            ) {
+                Column {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    // FlowRow would be better but keeping it simple with nested Rows or a custom layout
+                    // Since we have many sectors, let's use a simple wrapping grid-like approach
+                    val chunkedSectors = sectors.chunked(2)
+                    chunkedSectors.forEach { rowSectors ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            rowSectors.forEach { sector ->
+                                LegendItem(
+                                    sector = sector,
+                                    isSelected = sector.id == selectedSectorId,
+                                    onClick = { onSectorClick(sector.id) },
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
+                            if (rowSectors.size == 1) {
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PremiumAreaDialog(
+    sectorName: String,
+    onDismiss: () -> Unit,
+    onWatchAd: () -> Unit,
+    onBuy: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Star, contentDescription = null, tint = Color(0xFFFFD700))
+                Spacer(Modifier.width(8.dp))
+                Text("Premium Area", color = LocaPinPrimary, fontWeight = FontWeight.Bold)
+            }
+        },
+        text = {
+            Text(
+                "Access to $sectorName is restricted to premium users. Would you like to buy permanent access or watch a short ad for 5 minutes of temporary access?",
+                color = LocaPinDark
+            )
+        },
+        confirmButton = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    onClick = onBuy,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = LocaPinSecondary)
+                ) {
+                    Text("Buy Permanent Access (₱29.00)", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+                Button(
+                    onClick = onWatchAd,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = LocaPinPrimary)
+                ) {
+                    Text("Watch Ad for 5m Access", color = Color.White, fontWeight = FontWeight.Bold)
+                }
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Maybe Later", color = LocaPinPrimary)
+            }
+        },
+        containerColor = LocaPinSurface
+    )
+}
+
+@Composable
+fun LegendItem(
+    sector: MapSector,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(if (isSelected) LocaPinPrimary.copy(alpha = 0.1f) else Color.Transparent)
+            .clickable(onClick = onClick)
+            .padding(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(16.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .background(sector.fillColor)
+                .border(1.dp, if (isSelected) Color.Black else Color.Gray.copy(alpha = 0.5f), RoundedCornerShape(4.dp))
+        )
+        Text(
+            text = sector.name,
+            style = MaterialTheme.typography.labelMedium,
+            color = if (isSelected) LocaPinPrimary else LocaPinDark,
+            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+            maxLines = 1
+        )
     }
 }

@@ -7,10 +7,10 @@ INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:24:9-
 	android:name
 		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:25:13-58
 manifest
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-40:12
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-40:12
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:2:1-47:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\7ed2f6f5d7f0d8bcfef231339bc8020e\workspace\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8b3f1ba8aeafa5768fb55c36a1b1525d\workspace\transformed\hilt-navigation-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\8c61cb6d975d24ea4bf09d5fd5f953b3\workspace\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
@@ -251,8 +251,8 @@ ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:9-55
 	android:name
 		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:12:18-52
 application
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:5-38:19
-INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:5-38:19
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:5-45:19
+INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:15:5-45:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\e1c505c54f91c43cb1bb062cc85c7ba5\workspace\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\e1c505c54f91c43cb1bb062cc85c7ba5\workspace\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.facebook.android:facebook-login:18.2.3] C:\Users\john.domenden\.jdks\openjdk-25.0.2\caches\9.3.1\transforms\abd92e6ef4f7d4d1e0c7d5edeba27ebb\workspace\transformed\facebook-login-18.2.3\AndroidManifest.xml:14:5-15:19
@@ -363,24 +363,36 @@ MERGED from [com.google.android.play:core-common:2.0.3] C:\Users\john.domenden\.
 		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:22:9-45
 	android:name
 		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:16:9-35
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:28:9-30:55
+	android:value
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:30:13-52
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:29:13-58
+meta-data#com.facebook.sdk.ClientToken
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:31:9-33:61
+	android:value
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:13-58
+	android:name
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:32:13-56
 activity#com.locapin.mobile.MainActivity
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:28:9-36:20
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:35:9-43:20
 	android:exported
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:30:13-36
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:37:13-36
 	android:theme
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:31:13-49
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:38:13-49
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:29:13-59
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:36:13-59
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:32:13-35:29
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:39:13-42:29
 action#android.intent.action.MAIN
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:17-69
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:33:25-66
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:17-77
+ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:41:17-77
 	android:name
-		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:34:27-74
+		ADDED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml:41:27-74
 uses-sdk
 INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\GitHub\LocapinApp\mobile\app\src\main\AndroidManifest.xml

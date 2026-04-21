@@ -1,141 +1,143 @@
 package com.locapin.mobile.feature.map
 
-import android.graphics.Paint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun SanJuanMapCanvas(
     sectors: List<MapSector>,
     selectedSectorId: String?,
-    scale: Float,
-    offset: Offset,
-    onTransformChanged: (Float, Offset) -> Unit,
     onSectorTapped: (MapSector?) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    scale: Float = 1f,
+    offset: Offset = Offset.Zero,
+    onTransformChanged: (Float, Offset) -> Unit
 ) {
-    Canvas(
+    val mapWidth = 1000f
+    val mapHeight = 620f
+
+    val state = rememberTransformableState { zoomChange, offsetChange, _ ->
+        onTransformChanged(scale * zoomChange, offset + offsetChange)
+    }
+
+    Box(
         modifier = modifier
-            .fillMaxSize()
-            .pointerInput(scale, offset) {
-                detectTransformGestures { centroid, pan, zoom, _ ->
-                    val newScale = (scale * zoom).coerceIn(1f, 4f)
-                    val scaledCentroid = (centroid - offset) / scale
-                    val newOffset = centroid - (scaledCentroid * newScale) + pan
-                    onTransformChanged(newScale, newOffset)
-                }
-            }
+            .transformable(state = state)
             .pointerInput(sectors, scale, offset) {
                 detectTapGestures { tapOffset ->
-                    val mapWidthPx = size.width
-                    val mapHeightPx = size.height
-                    val scaleFit = minOf(
-                        mapWidthPx / SanJuanMapData.mapWidth,
-                        mapHeightPx / SanJuanMapData.mapHeight
-                    )
-                    val contentWidth = SanJuanMapData.mapWidth * scaleFit
-                    val contentHeight = SanJuanMapData.mapHeight * scaleFit
-                    val centeringOffset = Offset(
-                        (mapWidthPx - contentWidth) / 2f,
-                        (mapHeightPx - contentHeight) / 2f
-                    )
+                    val canvasWidth = size.width.toFloat()
+                    val canvasHeight = size.height.toFloat()
+                    
+                    val scaleX = canvasWidth / mapWidth
+                    val scaleY = canvasHeight / mapHeight
+                    val minScale = minOf(scaleX, scaleY)
+                    
+                    val startX = (canvasWidth - mapWidth * minScale) / 2
+                    val startY = (canvasHeight - mapHeight * minScale) / 2
 
-                    val mapPoint = (tapOffset - offset - centeringOffset) / (scale * scaleFit)
-                    val tappedSector = sectors.firstOrNull { sector ->
-                        pointInPolygon(mapPoint, sector.polygonPoints)
+                    // Adjust tap for scale and offset
+                    val adjustedTap = (tapOffset - offset) / scale
+                    
+                    // Adjust for centering and initial scaling
+                    val mapTapX = (adjustedTap.x - startX) / minScale
+                    val mapTapY = (adjustedTap.y - startY) / minScale
+
+                    val tappedSector = sectors.find { sector ->
+                        isPointInPolygon(Offset(mapTapX, mapTapY), sector.polygonPoints)
                     }
                     onSectorTapped(tappedSector)
                 }
             }
     ) {
-
-            val scaleFit = minOf(
-                size.width / SanJuanMapData.mapWidth,
-                size.height / SanJuanMapData.mapHeight
-            )
-            val contentWidth = SanJuanMapData.mapWidth * scaleFit
-            val contentHeight = SanJuanMapData.mapHeight * scaleFit
-            val centeringOffset = Offset(
-                (size.width - contentWidth) / 2f,
-                (size.height - contentHeight) / 2f
-            )
+        Canvas(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            val canvasWidth = size.width
+            val canvasHeight = size.height
+            
+            val scaleX = canvasWidth / mapWidth
+            val scaleY = canvasHeight / mapHeight
+            val minScale = minOf(scaleX, scaleY)
 
             withTransform({
-                translate(left = offset.x, top = offset.y)
-                translate(left = centeringOffset.x, top = centeringOffset.y)
-                scale(scale, scale)
-                scale(scaleFit, scaleFit)
+                translate(offset.x, offset.y)
+                scale(scale, scale, pivot = Offset.Zero)
+                translate(
+                    (canvasWidth - mapWidth * minScale) / 2,
+                    (canvasHeight - mapHeight * minScale) / 2
+                )
+                scale(minScale, minScale, pivot = Offset.Zero)
             }) {
                 sectors.forEach { sector ->
                     val path = Path().apply {
-                        moveTo(sector.polygonPoints.first().x, sector.polygonPoints.first().y)
-                        for (i in 1 until sector.polygonPoints.size) {
-                            lineTo(sector.polygonPoints[i].x, sector.polygonPoints[i].y)
+                        sector.polygonPoints.forEachIndexed { index, point ->
+                            val projected = toLatLng(point)
+                            if (index == 0) moveTo(projected.x, projected.y)
+                            else lineTo(projected.x, projected.y)
                         }
                         close()
                     }
+                    
                     val isSelected = sector.id == selectedSectorId
                     drawPath(
                         path = path,
-                        color = if (isSelected) sector.fillColor.copy(alpha = 0.95f) else sector.fillColor,
+                        color = if (isSelected) sector.fillColor.copy(alpha = 0.9f) else sector.fillColor.copy(alpha = 0.6f),
+                        style = Fill
                     )
                     drawPath(
                         path = path,
-                        color = if (isSelected) Color.Black else Color(0xFF9D978A),
-                        style = Stroke(width = if (isSelected) 3f else 2f)
-                    )
-
-                    drawContext.canvas.nativeCanvas.drawText(
-                        sector.name.uppercase(),
-                        sector.labelPosition.x,
-                        sector.labelPosition.y,
-                        Paint().apply {
-                            color = android.graphics.Color.BLACK
-                            textSize = 24f
-                            textAlign = Paint.Align.CENTER
-                            isFakeBoldText = true
-                            alpha = if (isSelected) 255 else 180
-                        }
+                        color = if (isSelected) Color.Black else Color.Black.copy(alpha = 0.3f),
+                        style = Stroke(width = if (isSelected) 2f else 1f)
                     )
                 }
             }
         }
-}
-
-private fun pointInPolygon(point: Offset, polygon: List<Offset>): Boolean {
-    var intersections = 0
-    polygon.indices.forEach { i ->
-        val a = polygon[i]
-        val b = polygon[(i + 1) % polygon.size]
-        val intersects = ((a.y > point.y) != (b.y > point.y)) &&
-            (point.x < (b.x - a.x) * (point.y - a.y) / ((b.y - a.y).takeIf { it != 0f } ?: 0.0001f) + a.x)
-        if (intersects) intersections++
     }
-    return intersections % 2 == 1
 }
 
-private operator fun Offset.minus(other: Offset): Offset = Offset(x - other.x, y - other.y)
-private operator fun Offset.div(value: Float): Offset = Offset(x / value, y / value)
-private operator fun Offset.times(value: Float): Offset = Offset(x * value, y * value)
-private operator fun Offset.plus(other: Offset): Offset = Offset(x + other.x, y + other.y)
+private fun toLatLng(offset: Offset): Offset {
+    // Check if the offset is already a GPS coordinate (San Juan: Lat ~14.6, Lng ~121.0)
+    // If it's a relative offset (0-1000 range), project it. 
+    // If it's a GPS coordinate, we need to map it to the 1000x620 canvas space.
+    
+    val isGps = offset.y in 14.0..15.0 && offset.x in 120.0..122.0
+    if (!isGps) return offset
+
+    // Linear projection from San Juan GPS bounds to our 1000x620 canvas
+    val minLat = 14.5900
+    val maxLat = 14.6200
+    val minLng = 121.0150
+    val maxLng = 121.0550
+
+    val x = (offset.x - minLng) / (maxLng - minLng) * 1000f
+    val y = (1.0 - (offset.y - minLat) / (maxLat - minLat)) * 620f
+    
+    return Offset(x.toFloat(), y.toFloat())
+}
+
+private fun isPointInPolygon(point: Offset, polygon: List<Offset>): Boolean {
+    var isInside = false
+    var j = polygon.size - 1
+    for (i in polygon.indices) {
+        if (polygon[i].y < point.y && polygon[j].y >= point.y || polygon[j].y < point.y && polygon[i].y >= point.y) {
+            if (polygon[i].x + (point.y - polygon[i].y) / (polygon[j].y - polygon[i].y) * (polygon[j].x - polygon[i].x) < point.x) {
+                isInside = !isInside
+            }
+        }
+        j = i
+    }
+    return isInside
+}

@@ -1,6 +1,6 @@
 [versions]
 activity-compose = "1.10.0"
-androidx-compose-bom = "2025.02.00"
+androidx-compose-bom = "2024.12.01"
 coil-kt = "2.7.0"
 core-splashscreen = "1.0.1"
 dagger = "2.59.2"
