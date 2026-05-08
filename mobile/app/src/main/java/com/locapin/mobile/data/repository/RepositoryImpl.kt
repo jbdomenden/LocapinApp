@@ -112,7 +112,7 @@ class DestinationRepositoryImpl @Inject constructor(
         lng = longitude,
         heroImageUrl = imageUrl,
         galleryImages = imageUrl?.let { listOf(it) } ?: emptyList(),
-        rating = null,
+        rating = rating,
         distanceKm = distance?.removeSuffix(" km")?.toDoubleOrNull(),
         openingHours = null,
         contactInfo = null,

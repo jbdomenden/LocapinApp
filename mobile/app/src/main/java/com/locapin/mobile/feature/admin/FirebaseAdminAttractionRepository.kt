@@ -65,12 +65,11 @@ class FirebaseAdminAttractionRepository @Inject constructor(
         _attractions.value.firstOrNull { it.id == id }
 
     override fun createAttraction(input: AdminAttractionInput): Boolean {
-        // This is a bit tricky because the interface is synchronous but Firebase is async.
-        // Using runBlocking is generally discouraged in repositories, but the interface requires a Boolean return.
-        // However, most of the app uses this in a ViewModel scope.
-        // For now, I'll use a simplified async-to-sync approach or assume it's called from a background thread.
         return try {
-            val docRef = firestore.collection("attractions").document()
+            val id = input.name.lowercase(java.util.Locale.US)
+                .replace(" ", "_")
+                .replace("[^a-z0-9_]".toRegex(), "")
+            val docRef = firestore.collection("attractions").document(id)
             docRef.set(input.toFirebaseModel())
             true
         } catch (e: Exception) {
@@ -99,7 +98,11 @@ class FirebaseAdminAttractionRepository @Inject constructor(
         }
     }
 
-    suspend fun uploadImage(uri: Uri): String {
+    override fun refresh() {
+        // Real-time updates are already handled by observeAttractions()
+    }
+
+    override suspend fun uploadImage(uri: Uri): String? {
         val fileName = "attractions/${System.currentTimeMillis()}.jpg"
         val ref = storage.reference.child(fileName)
         ref.putFile(uri).await()
@@ -115,23 +118,61 @@ class FirebaseAdminAttractionRepository @Inject constructor(
         longitude = longitude,
         area = area,
         visible = isVisible,
-        imageUrl = imageUrl ?: ""
+        imageUrl = imageUrl ?: "",
+        distance = distance,
+        rating = rating,
+        reviews = reviews
     )
 }
 
 data class FirebaseAdminAttractionModel(
-    val name: String = "",
-    val knownFor: String = "",
-    val description: String = "",
-    val category: String = "",
-    val latitude: Double = 0.0,
-    val longitude: Double = 0.0,
-    val area: String = "",
+    @get:com.google.firebase.firestore.PropertyName("name")
+    @set:com.google.firebase.firestore.PropertyName("name")
+    var name: String = "",
+
+    @get:com.google.firebase.firestore.PropertyName("knownFor")
+    @set:com.google.firebase.firestore.PropertyName("knownFor")
+    var knownFor: String = "",
+
+    @get:com.google.firebase.firestore.PropertyName("description")
+    @set:com.google.firebase.firestore.PropertyName("description")
+    var description: String = "",
+
+    @get:com.google.firebase.firestore.PropertyName("category")
+    @set:com.google.firebase.firestore.PropertyName("category")
+    var category: String = "",
+
+    @get:com.google.firebase.firestore.PropertyName("latitude")
+    @set:com.google.firebase.firestore.PropertyName("latitude")
+    var latitude: Double = 0.0,
+
+    @get:com.google.firebase.firestore.PropertyName("longitude")
+    @set:com.google.firebase.firestore.PropertyName("longitude")
+    var longitude: Double = 0.0,
+
+    @get:com.google.firebase.firestore.PropertyName("area")
+    @set:com.google.firebase.firestore.PropertyName("area")
+    var area: String = "",
+
     @get:com.google.firebase.firestore.PropertyName("visible")
     @set:com.google.firebase.firestore.PropertyName("visible")
     var visible: Boolean = true,
-    val imageUrl: String = "",
-    val distance: String? = null
+
+    @get:com.google.firebase.firestore.PropertyName("imageUrl")
+    @set:com.google.firebase.firestore.PropertyName("imageUrl")
+    var imageUrl: String = "",
+
+    @get:com.google.firebase.firestore.PropertyName("distance")
+    @set:com.google.firebase.firestore.PropertyName("distance")
+    var distance: String? = null,
+
+    @get:com.google.firebase.firestore.PropertyName("rating")
+    @set:com.google.firebase.firestore.PropertyName("rating")
+    var rating: Double = 0.0,
+
+    @get:com.google.firebase.firestore.PropertyName("reviews")
+    @set:com.google.firebase.firestore.PropertyName("reviews")
+    var reviews: Int = 0
 ) {
     fun toAdminAttraction(id: String) = AdminAttraction(
         id = id,
@@ -144,6 +185,8 @@ data class FirebaseAdminAttractionModel(
         area = area,
         isVisible = visible,
         imageUrl = imageUrl.ifEmpty { null },
-        distance = distance
+        distance = distance,
+        rating = rating,
+        reviews = reviews
     )
 }

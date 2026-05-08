@@ -11,5 +11,7 @@ data class AdminAttraction(
     val area: String,
     val isVisible: Boolean,
     val imageUrl: String? = null,
-    val distance: String? = null
+    val distance: String? = null,
+    val rating: Double = 0.0,
+    val reviews: Int = 0
 )

@@ -11,7 +11,9 @@ data class AdminAttractionRequest(
     val latitude: Double,
     val longitude: Double,
     val area: String,
-    val isVisible: Boolean
+    val isVisible: Boolean,
+    val imageUrl: String? = null,
+    val distance: String? = null
 )
 
 @Serializable

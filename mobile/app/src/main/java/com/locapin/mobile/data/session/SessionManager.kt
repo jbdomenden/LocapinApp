@@ -37,6 +37,29 @@ class SessionManager @Inject constructor(
         }
     }
 
+    val premiumSectorsFlow: Flow<Set<String>> = context.authSessionDataStore.data
+        .catch { emit(emptyPreferences()) }
+        .map { it[PREMIUM_SECTORS]?.split(",")?.filter { s -> s.isNotBlank() }?.toSet() ?: emptySet() }
+
+    val adsDisabledFlow: Flow<Boolean> = context.authSessionDataStore.data
+        .catch { emit(emptyPreferences()) }
+        .map { it[ADS_DISABLED] ?: false }
+
+    suspend fun savePremiumSector(sectorId: String) {
+        val current = getPremiumSectors().toMutableSet()
+        current.add(sectorId)
+        context.authSessionDataStore.edit { prefs ->
+            prefs[PREMIUM_SECTORS] = current.joinToString(",")
+        }
+    }
+
+    suspend fun setAdsDisabled(disabled: Boolean) {
+        context.authSessionDataStore.edit { it[ADS_DISABLED] = disabled }
+    }
+
+    suspend fun getPremiumSectors(): Set<String> = premiumSectorsFlow.first()
+    suspend fun isAdsDisabled(): Boolean = adsDisabledFlow.first()
+
     suspend fun clearSession() {
         context.authSessionDataStore.edit { prefs ->
             prefs.remove(IS_LOGGED_IN)
@@ -76,5 +99,7 @@ class SessionManager @Inject constructor(
         val USER_NAME: Preferences.Key<String> = stringPreferencesKey("user_name")
         val USER_EMAIL: Preferences.Key<String> = stringPreferencesKey("user_email")
         val USER_ROLE: Preferences.Key<String> = stringPreferencesKey("user_role")
+        val PREMIUM_SECTORS: Preferences.Key<String> = stringPreferencesKey("premium_sectors")
+        val ADS_DISABLED: Preferences.Key<Boolean> = booleanPreferencesKey("ads_disabled")
     }
 }

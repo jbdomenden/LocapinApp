@@ -19,4 +19,7 @@ interface MapAreaApiService {
 
     @DELETE("admin/map-areas/{id}")
     suspend fun deleteMapArea(@Path("id") id: String): ApiEnvelope<Unit>
+
+    @PUT("admin/map-areas/{id}/toggle-premium")
+    suspend fun togglePremium(@Path("id") id: String): ApiEnvelope<MapZoneDto>
 }

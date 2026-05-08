@@ -18,7 +18,8 @@ data class AdminMapAreasListUiState(
     val searchQuery: String = "",
     val mapAreas: List<AdminMapArea> = emptyList(),
     val isImporting: Boolean = false,
-    val message: String? = null
+    val message: String? = null,
+    val pendingPremiumToggles: Map<String, Boolean> = emptyMap()
 )
 
 @HiltViewModel
@@ -30,23 +31,32 @@ class AdminMapAreasListViewModel @Inject constructor(
     private val searchQuery = MutableStateFlow("")
     private val isImporting = MutableStateFlow(false)
     private val message = MutableStateFlow<String?>(null)
+    private val pendingPremiumToggles = MutableStateFlow<Map<String, Boolean>>(emptyMap())
 
     val uiState: StateFlow<AdminMapAreasListUiState> = combine(
         searchQuery,
         repository.mapAreas,
         isImporting,
-        message
-    ) { query, mapAreas, importing, msg ->
+        message,
+        pendingPremiumToggles
+    ) { query, mapAreas, importing, msg, pending ->
         val filtered = if (query.isBlank()) {
             mapAreas
         } else {
             mapAreas.filter { it.name.contains(query, ignoreCase = true) }
         }
+        
+        // Apply pending toggles to the displayed list
+        val updatedAreas = filtered.map { area ->
+            pending[area.id]?.let { area.copy(isPremium = it) } ?: area
+        }
+
         AdminMapAreasListUiState(
             searchQuery = query,
-            mapAreas = filtered,
+            mapAreas = updatedAreas,
             isImporting = importing,
-            message = msg
+            message = msg,
+            pendingPremiumToggles = pending
         )
     }.stateIn(
         scope = viewModelScope,
@@ -63,6 +73,43 @@ class AdminMapAreasListViewModel @Inject constructor(
     }
 
     fun togglePremium(id: String) {
-        repository.togglePremium(id)
+        viewModelScope.launch {
+            val areas = repository.mapAreas.value
+            val area = areas.find { it.id == id } ?: return@launch
+            val originalValue = area.isPremium
+            
+            pendingPremiumToggles.update { current ->
+                val newValue = !(current[id] ?: originalValue)
+                if (newValue == originalValue) {
+                    current - id
+                } else {
+                    current + (id to newValue)
+                }
+            }
+        }
+    }
+
+    fun savePremiumChanges() {
+        val changes = pendingPremiumToggles.value
+        if (changes.isEmpty()) return
+
+        viewModelScope.launch {
+            changes.forEach { (id, isPremium) ->
+                val currentAreas = repository.mapAreas.value
+                val area = currentAreas.find { it.id == id }
+                if (area != null && area.isPremium != isPremium) {
+                    repository.togglePremium(id)
+                }
+            }
+            pendingPremiumToggles.update { emptyMap() }
+            message.update { "Premium settings saved successfully" }
+        }
+    }
+
+    fun deleteMapArea(id: String) {
+        viewModelScope.launch {
+            repository.deleteMapArea(id)
+            message.update { "Map area deleted successfully" }
+        }
     }
 }

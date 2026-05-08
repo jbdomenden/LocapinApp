@@ -19,6 +19,7 @@ class RemoteAdminAttractionRepository @Inject constructor(
     private val attractionApiService: AttractionApiService,
     private val fallbackRepository: InMemoryAdminAttractionRepository
 ) : AdminAttractionRepository {
+    override suspend fun uploadImage(uri: android.net.Uri): String? = null
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val _attractions = MutableStateFlow(fallbackRepository.attractions.value)
@@ -70,6 +71,10 @@ class RemoteAdminAttractionRepository @Inject constructor(
         }.isSuccess
     }
 
+    override fun refresh() {
+        refreshAttractions()
+    }
+
     private fun refreshAttractions() {
         repositoryScope.launch {
             runCatching {
@@ -94,7 +99,9 @@ class RemoteAdminAttractionRepository @Inject constructor(
         latitude = latitude,
         longitude = longitude,
         area = area,
-        isVisible = isVisible
+        isVisible = isVisible,
+        imageUrl = imageUrl,
+        distance = distance
     )
 
     private fun DestinationDto.toAdminAttraction() = AdminAttraction(

@@ -27,21 +27,28 @@ class SegmentedMapRepositoryImpl @Inject constructor(
 
     override suspend fun getMapZones(): LocaPinResult<List<MapZone>> {
         return try {
-            val snapshot = firestore.collection("map_zones").get().await()
+            val snapshot = firestore.collection("map_areas").get().await()
             val zones = snapshot.documents.mapNotNull { doc ->
-                val pointsData = doc.get("polygonPoints") as? List<Map<String, Any>>
-                val polygonPoints = pointsData?.map { 
-                    val lat = (it["lat"] as? Number)?.toDouble() ?: 0.0
-                    val lng = (it["lng"] as? Number)?.toDouble() ?: 0.0
-                    ZonePoint(lat, lng) 
-                } ?: emptyList()
+                val pointsStr = doc.getString("polygonPoints") ?: ""
+                val polygonPoints = if (pointsStr.isBlank()) {
+                    emptyList()
+                } else {
+                    pointsStr.split(";").mapNotNull {
+                        val coords = it.split(",")
+                        if (coords.size == 2) {
+                            val lng = coords[0].toDoubleOrNull() ?: 0.0
+                            val lat = coords[1].toDoubleOrNull() ?: 0.0
+                            ZonePoint(lat, lng)
+                        } else null
+                    }
+                }
                 
                 MapZone(
                     id = doc.id,
-                    displayName = doc.getString("displayName") ?: "",
+                    displayName = doc.getString("name") ?: "",
                     polygonPoints = polygonPoints,
-                    centerLat = doc.getDouble("centerLat") ?: 0.0,
-                    centerLng = doc.getDouble("centerLng") ?: 0.0
+                    centerLat = doc.getDouble("centerLatitude") ?: 0.0,
+                    centerLng = doc.getDouble("centerLongitude") ?: 0.0
                 )
             }
             if (zones.isEmpty()) LocaPinResult.Success(seedDataSource.mapZones())
@@ -63,11 +70,13 @@ class SegmentedMapRepositoryImpl @Inject constructor(
                         knownFor = item.knownFor,
                         latitude = item.latitude,
                         longitude = item.longitude,
-                        zoneId = item.area.lowercase(Locale.US),
+                        zoneId = item.area.lowercase(Locale.US).trim().replace(" ", "-"),
                         area = item.area,
                         imageUrl = item.imageUrl,
                         category = item.category,
-                        distance = item.distance
+                        distance = item.distance,
+                        rating = item.rating,
+                        reviews = item.reviews
                     )
                 }
                 .sortedBy { it.name.lowercase(Locale.US) }

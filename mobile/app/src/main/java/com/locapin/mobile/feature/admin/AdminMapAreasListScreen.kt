@@ -55,7 +55,10 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.locapin.mobile.R
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import com.locapin.mobile.core.designsystem.theme.LocaPinSecondary
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.locapin.mobile.core.designsystem.theme.LocaPinBorder
@@ -69,16 +72,43 @@ import com.locapin.mobile.core.designsystem.theme.LocaPinWhite
 @Composable
 fun AdminMapAreasListScreen(
     onBack: () -> Unit,
+    onAddArea: () -> Unit,
+    onEditArea: (String) -> Unit,
     viewModel: AdminMapAreasListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
+    var areaToDelete by remember { mutableStateOf<AdminMapArea?>(null) }
 
     LaunchedEffect(uiState.message) {
         uiState.message?.let {
             snackbarHostState.showSnackbar(it)
             viewModel.clearMessage()
         }
+    }
+
+    if (areaToDelete != null) {
+        AlertDialog(
+            onDismissRequest = { areaToDelete = null },
+            title = { Text("Delete Map Area", color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
+            text = { Text("Are you sure you want to delete ${areaToDelete?.name}? This action cannot be undone.", color = LocaPinPrimary) },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        areaToDelete?.id?.let { viewModel.deleteMapArea(it) }
+                        areaToDelete = null
+                    }
+                ) {
+                    Text("Delete", color = Color.Red, fontWeight = FontWeight.Bold)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { areaToDelete = null }) {
+                    Text("Cancel", color = LocaPinPrimary)
+                }
+            },
+            containerColor = LocaPinSurface
+        )
     }
 
     Scaffold(
@@ -94,8 +124,26 @@ fun AdminMapAreasListScreen(
                 },
                 colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
                     containerColor = LocaPinSurface
-                )
+                ),
+                actions = {
+                    if (uiState.pendingPremiumToggles.isNotEmpty()) {
+                        TextButton(onClick = viewModel::savePremiumChanges) {
+                            Icon(Icons.Default.Save, contentDescription = null, modifier = Modifier.size(18.dp))
+                            androidx.compose.foundation.layout.Spacer(Modifier.size(4.dp))
+                            Text("Save Changes", fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddArea,
+                containerColor = LocaPinPrimary,
+                contentColor = LocaPinWhite
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "Add Map Area")
+            }
         }
     ) { paddingValues ->
         Column(
@@ -248,6 +296,15 @@ fun AdminMapAreasListScreen(
                                                 uncheckedTrackColor = LocaPinBorder
                                             )
                                         )
+                                    }
+                                    
+                                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        IconButton(onClick = { onEditArea(area.id) }) {
+                                            Icon(Icons.Default.Edit, contentDescription = "Edit", tint = LocaPinPrimary)
+                                        }
+                                        IconButton(onClick = { areaToDelete = area }) {
+                                            Icon(Icons.Default.Delete, contentDescription = "Delete", tint = Color.Red)
+                                        }
                                     }
                                 }
                             }

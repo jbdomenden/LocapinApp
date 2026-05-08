@@ -1,6 +1,8 @@
 R_DEF: Internal format may change without notice
 local
 drawable locapin_logo
+drawable pin_location
+drawable san_juan_map
 string app_name
 string facebook_app_id
 string facebook_client_token

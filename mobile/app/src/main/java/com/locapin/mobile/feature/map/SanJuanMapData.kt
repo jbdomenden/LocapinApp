@@ -4,174 +4,75 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 
 object SanJuanMapData {
-    const val mapWidth = 1000f
-    const val mapHeight = 620f
+    const val MAP_WIDTH = 1000f
+    const val MAP_HEIGHT = 620f
 
-    val attractionsBySector: Map<String, List<Attraction>> = mapOf(
-        "greenhills" to listOf(
-            Attraction(
-                "Greenhills Shopping Center",
-                "Premier shopping destination for gadgets and pearls.",
-                "2.8 km",
-                "https://share.google/a065afgLuqEpcOcKb",
-                "Known for: A popular shopping destination famous for pearls, souvenirs, gadgets, bargain shopping, and food outlets."
-            ),
-            Attraction(
-                "Greenhills Promenade",
-                "Upscale lifestyle center with luxury cinemas.",
-                "3.1 km",
-                "https://share.google/MKsJAiGlTZoQrmv7j",
-                "Known for: The upscale dining and lifestyle area of Greenhills with restaurants, cafés, cinemas, and entertainment spots."
-            ),
-            Attraction(
-                "Virra Mall (V-Mall)",
-                "Shopping mall known for electronics and budget-friendly items.",
-                "2.9 km",
-                "https://share.google/tXc6Bhhsb7xw1rtx6",
-                "Known for: A shopping mall known for electronics, tiangge stalls, and budget-friendly items, especially popular with students."
-            ),
-            Attraction(
-                "Unimart at Greenhills",
-                "Premium grocery and shopping spot.",
-                "3.0 km",
-                "https://share.google/8bO96AZWQSag7ZaQG",
-                "Known for: A well-known premium grocery and shopping spot inside Greenhills, popular for local and imported goods."
-            )
-        ),
-        "addition-hills" to listOf(
-            Attraction(
-                "Pinaglabanan Shrine",
-                "Commemorating the first battle of the Katipunan.",
-                "0.9 km",
-                "https://share.google/KTGjRwqyUvzVyZbkS",
-                "Known for: A national historical landmark commemorating the Battle of San Juan del Monte, the first major battle of the Philippine Revolution."
-            ),
-            Attraction(
-                "Santuario del Santo Cristo Parish",
-                "One of the oldest churches in San Juan.",
-                "1.1 km",
-                "https://share.google/98z3Kh3qiUNmCEiNs",
-                "Known for: One of the oldest churches in San Juan, rich in religious heritage and local devotion."
-            ),
-            Attraction(
-                "El Deposito Museum",
-                "Underground reservoir turned museum.",
-                "0.8 km",
-                "https://share.google/mtZb9LYrFu2ea9WjY",
-                "Known for: An underground reservoir turned museum showcasing the Spanish-era water system of Manila and its role in Philippine history."
-            )
-        ),
-        "little-baguio" to listOf(
-            Attraction(
-                "The Corner House",
-                "Modern lifestyle and dining hub.",
-                "1.5 km",
-                "https://share.google/CWHsen0F8JoxHUF0l",
-                "Known for: A modern lifestyle and dining hub featuring a curated mix of cafés, restaurants, dessert spots, and retail stalls in a stylish, open-concept space."
-            ),
-            Attraction(
-                "Fundacion Sanso",
-                "Art museum featuring works of National Artist Juvenal Sansó.",
-                "1.6 km",
-                "https://share.google/F1P9LZjFN6NKfKRyX",
-                "Known for: An art and cultural museum featuring works of National Artist Juvenal Sansó and curated exhibitions by Filipino visual artists."
-            ),
-            Attraction(
-                "Good Pastry Cafe",
-                "Cozy café known for freshly baked pastries.",
-                "1.4 km",
-                "https://share.google/mqRVHvi4wPxlbFmcJ",
-                "A cozy café known for its freshly baked pastries and desserts. It offers a variety of croissants, cakes, and sweet treats."
-            )
-        ),
-        "pasadena" to listOf(
-            Attraction(
-                "Ronac Art Center",
-                "Contemporary art center on Ortigas Avenue.",
-                "1.3 km",
-                "https://share.google/nZxNrAeoiPMhEI7go",
-                "Known for: A contemporary art center showcasing modern Filipino art, large installations, rotating exhibitions, cafés, and design stores."
-            )
-        ),
-        "batis" to listOf(
-            Attraction(
-                "Club Filipino",
-                "Historic site of Corazon Aquino's inauguration.",
-                "2.4 km",
-                "https://share.google/lk8di0SW01riSp8tF",
-                "Known for: A historic clubhouse where Corazon Aquino was inaugurated as President in 1986 after the People Power Revolution."
-            ),
-            Attraction(
-                "Gaea",
-                "Modern all-day restaurant and bar.",
-                "2.2 km",
-                "https://share.google/4wFTs7JUC4QlS1QOI",
-                "GAEA is a modern all-day restaurant and bar in San Juan known for its stylish, moody interiors and upscale yet cozy ambiance."
-            )
-        ),
-        "kabayanan" to listOf(
-            Attraction(
-                "Museo ng Katipunan",
-                "Features artifacts of the Philippine Revolution.",
-                "0.8 km",
-                "https://share.google/VKJwnOaFpjPMRZNVZ",
-                "Known for: A historical museum about the Katipunan and the 1896 Philippine Revolution, featuring artifacts, documents, and multimedia exhibits."
-            )
-        ),
-        "santa-lucia" to listOf(
-            Attraction(
-                "Santolan Town Plaza",
-                "Open-air lifestyle mall with specialty restaurants.",
-                "3.2 km",
-                "https://share.google/Th2CJGpgzFw4bCkwP",
-                "Known for: An open-air lifestyle mall featuring specialty restaurants, cafés, and boutique shops."
-            )
-        )
-    )
+    val attractionsBySector: Map<String, List<Attraction>> = emptyMap()
 
     val sectors: List<MapSector> = listOf(
-        sector("salapan", "Salapan", 180f, 100f, color = 0xFFF0F4A4, 
-            points = listOf(140f to 60f, 175f to 55f, 220f to 75f, 280f to 80f, 260f to 150f, 220f to 140f, 185f to 145f, 150f to 175f, 110f to 160f, 120f to 100f)),
-        sector("ermitaño", "Ermitaño", 310f, 110f, color = 0xFFF4D2C1, 
-            points = listOf(280f to 80f, 340f to 95f, 370f to 140f, 340f to 175f, 300f to 175f, 260f to 150f)),
-        sector("balong-bato", "Balong-Bato", 200f, 180f, color = 0xFFD7D3E4, 
-            points = listOf(150f to 175f, 185f to 145f, 220f to 140f, 260f to 150f, 300f to 175f, 310f to 215f, 280f to 260f, 180f to 230f)),
-        sector("rivera", "Rivera", 110f, 220f, color = 0xFFC7E2B0, 
-            points = listOf(110f to 160f, 150f to 175f, 180f to 230f, 135f to 255f, 100f to 265f, 70f to 245f)),
-        sector("progreso", "Progreso", 80f, 290f, color = 0xFFE9DCC9, 
-            points = listOf(70f to 245f, 100f to 265f, 95f to 285f, 55f to 315f, 40f to 275f)),
-        sector("san-perfecto", "San Perfecto", 140f, 300f, color = 0xFFF0F4A4, 
-            points = listOf(100f to 265f, 135f to 255f, 220f to 320f, 180f to 365f, 120f to 345f, 95f to 285f)),
-        sector("pedro-cruz", "Pedro Cruz", 220f, 270f, color = 0xFFF0E6D2, 
-            points = listOf(180f to 230f, 280f to 260f, 310f to 315f, 220f to 320f, 135f to 255f)),
-        sector("corazon-de-jesus", "Corazon de Jesus", 350f, 280f, color = 0xFFF0F4A4, 
-            points = listOf(280f to 260f, 310f to 215f, 350f to 260f, 380f to 320f, 310f to 315f)),
-        sector("pasadena", "Pasadena", 400f, 220f, color = 0xFFC9DFEE, 
-            points = listOf(300f to 175f, 340f to 175f, 370f to 140f, 420f to 180f, 460f to 230f, 460f to 280f, 350f to 260f, 310f to 215f)),
-        sector("batis", "Batis", 200f, 450f, color = 0xFFC9DFEE, 
-            points = listOf(95f to 285f, 120f to 345f, 180f to 365f, 225f to 415f, 280f to 480f, 220f to 570f, 180f to 480f, 55f to 365f, 55f to 315f)),
-        sector("tibagan", "Tibagan", 280f, 400f, color = 0xFFF0E6D2, 
-            points = listOf(220f to 320f, 265f to 320f, 285f to 365f, 330f to 375f, 330f to 440f, 280f to 480f, 225f to 415f, 180f to 365f)),
-        sector("kabayanan", "Kabayanan", 320f, 500f, color = 0xFFF0E6D2, 
-            points = listOf(280f to 480f, 330f to 440f, 335f to 435f, 395f to 405f, 470f to 460f, 360f to 520f)),
-        sector("maytunas", "Maytunas", 380f, 550f, color = 0xFFD7D3E4, 
-            points = listOf(360f to 520f, 470f to 460f, 470f to 540f, 430f to 560f, 325f to 540f, 260f to 535f)),
-        sector("santa-lucia", "Santa Lucia", 410f, 420f, color = 0xFFF0F4A4, 
-            points = listOf(380f to 320f, 380f to 345f, 450f to 315f, 490f to 385f, 395f to 405f, 385f to 365f)),
-        sector("isabelita", "Isabelita", 320f, 335f, color = 0xFFC7E2B0, 
-            points = listOf(310f to 315f, 345f to 320f, 330f to 350f, 300f to 355f, 285f to 365f, 265f to 320f)),
-        sector("halo-halo", "Halo-Halo", 360f, 345f, color = 0xFFD7D3E4, 
-            points = listOf(345f to 320f, 380f to 320f, 385f to 365f, 330f to 375f, 300f to 355f, 330f to 350f)),
-        sector("onse", "Onse", 360f, 400f, color = 0xFFC9DFEE, 
-            points = listOf(330f to 375f, 385f to 365f, 395f to 405f, 335f to 435f, 330f to 440f)),
-        sector("little-baguio", "Little Baguio", 480f, 370f, color = 0xFFE9B7B7, 
-            points = listOf(350f to 260f, 460f to 280f, 520f to 320f, 580f to 450f, 530f to 480f, 470f to 460f, 380f to 345f, 380f to 320f)),
-        sector("greenhills", "Greenhills", 700f, 350f, color = 0xFFC7E2B0, 
-            points = listOf(460f to 230f, 550f to 165f, 630f to 125f, 690f to 160f, 715f to 230f, 810f to 215f, 920f to 315f, 830f to 335f, 750f to 330f, 650f to 410f, 570f to 490f, 530f to 480f, 580f to 450f, 520f to 320f, 460f to 280f)),
-        sector("west-crame", "West Crame", 740f, 180f, color = 0xFFD7D3E4, 
-            points = listOf(690f to 160f, 765f to 145f, 790f to 205f, 715f to 230f, 690f to 160f)),
-        sector("addition-hills", "Addition Hills", 520f, 540f, color = 0xFFF0E6D2, 
-            points = listOf(470f to 460f, 530f to 480f, 570f to 490f, 545f to 560f, 515f to 585f, 460f to 580f, 395f to 575f, 345f to 605f, 315f to 565f, 260f to 535f, 325f to 540f, 430f to 560f, 470f to 540f, 470f to 460f))
+        sector("salapan", "Salapan", 140f, 260f, color = 0xFFF0F4A4, 
+            pathData = "m73 137.58l2.25-3.5 2.75-3.08 3.25-2.09 2.67-0.58 3.08-0.33 5-2 4.33-1 8.09-2.26 21.25-7.58 11.33-4.16 0.42-2 0.16-1.42c-0.33-2-0.1-3.58 0.42-3.58l1-2 2-1-1-2-2-1-2-1h-2-4l-2 1h-3c0 0-0.8-0.18-3 0-2.2 0.18-4 0-4 0h-3-3-2l-2-2-1-2-1-4v-2l-1-2-2-2-3-1h-3l-4-1h-2-2l-2 3-1 3-1 3v3 5 3l-1 2-8 10-8 12-2 3v3l2 2 2 2z",
+            gridRotation = 15f, gridDensity = 25f),
+        sector("ermitaño", "Ermitaño", 340f, 220f, color = 0xFFF4D2C1, 
+            pathData = "m156 129l4.08-2 7.92-8.26 8.42-3.66 6.58-0.25 8 0.17-11-8-4-3-4-4-1-8-6-2h-3-2-3-3l-2 1-1 3v2l-2 4-2 1h-3l-2-1h-2l-1 2-1 2-1 4v2l1 3h2l3 1 2 2 2 2 1 3 3 3 3 3z",
+            gridRotation = 10f, gridDensity = 20f),
+        sector("balong-bato", "Balong-Bato", 180f, 380f, color = 0xFFD7D3E4, 
+            pathData = "m77 153v-3l1-3v-2l-1-2-1-2-2-2-2-1 2-1 2-4 2-1 2-2 2-1 4-1 2-1 5-1 4-1 3-1 3-1 4-1 4-2 5-1 4-2 4-1 3-2 4-1 3-1 2-1 2 1 2 1 2 1 2 1 3 3 1 3 3 3 2 1 2 3 2 1-3 2-8 7-8 5-7 3-4 3-5 3-3 2.74-4 1.26-5.33 2.49-8.75 3.51-6.92 2-4 3-7-7z",
+            gridRotation = 25f, gridDensity = 25f),
+        sector("rivera", "Rivera", 160f, 320f, color = 0xFFC7E2B0, 
+            pathData = "m90 167c0.37 0.09-5.05 7.51-10 14.24-4.21 5.73-8.01 10.96-8.5 10.84l-3.5-2.08-2-3-1-2v-2l-2-1-2-2-2-1-2-2 1-2 2-4 2-3 2-2 2-3 2-2 2-2 2-2 2-1 1-2 2-1 2 2 1 2 3 3 4 4z",
+            gridRotation = 35f, gridDensity = 22f),
+        sector("progreso", "Progreso", 120f, 380f, color = 0xFFE9DCC9, 
+            pathData = "m71 193l-16 22-5-2-1-3-2-3v-2-5-4l1-3 2-3 1-3 1-3 2-3 2-2 1-2 4 2 2 3 3 2v3l2 3z",
+            gridRotation = 45f, gridDensity = 22f),
+        sector("san-perfecto", "San Perfecto", 180f, 440f, color = 0xFFF0F4A4, 
+            pathData = "m58 212l59-16-3-2-3-1-2-1h-2l-2-2-4-1h-4l-3-2-14-6z",
+            gridRotation = 50f, gridDensity = 18f),
+        sector("pedro-cruz", "Pedro Cruz", 250f, 380f, color = 0xFFF0E6D2, 
+            pathData = "m117 197l31-8-1.25-2.84-0.33-3.17 0.08-1.5-0.5-1.83-1-0.66-2-2-2-2-4-3v-2l-1-4v-4-3l-1-3-1-2-3-2-4-4-8 7-27 10-12 16 17 8h6z",
+            gridRotation = 20f, gridDensity = 24f),
+        sector("corazon-de-jesus", "Corazon de Jesus", 420f, 400f, color = 0xFFF0F4A4, 
+            pathData = "m230 180l5-6 4-5h-8l-9 3-3 1h-3l-3-2-2-2-2-2-1-2-2-2-2-1h-3-3-2l-2-1-3-1-1-2-3-1-2-2-2-2-3-3-3-5-3-5-3-3-2-3-3-2-3-2-1-2-2-1-8 6-4 4-5 4-15 7 2 3 5 5 0.8 4.98 0.2 5.02 0.4 2.78 0.2 2.8 2.4 1.6 2 1.82 3 3 2.6 2.58-0.6 3.42 2 6 6 7h6l6-5 4.8-0.62 4.2 0.62 3-2 7-3 5-4 5-5 2-2 14 2 9 2z",
+            gridRotation = 10f, gridDensity = 22f),
+        sector("pasadena", "Pasadena", 460f, 340f, color = 0xFFC9DFEE, 
+            pathData = "m245 163l-7 6-7-1-10 4-4 1-3-1-9-10h-7l-3-1-2-1-3-2-3-1-3-3-2-1-2-3-2-3-2-3-2-3-2-3-1-2-11-9 3-3 2-2 3-3 3-1 3-2h2l3-1h3 4 3l2 1 11 13h5 3 2l6 9 3 1h4l3-1h3l4 2v3 3 3l2 2 1 3v4l2 2 3 2z",
+            gridRotation = 30f, gridDensity = 26f),
+        sector("batis", "Batis", 220f, 540f, color = 0xFFC9DFEE, 
+            pathData = "m114 280l-5-8-3-9-8-10-6-12-7-6-30-19 3-3 29-9 29-7 9 6 8 8 5 11 2 9 2 8 3 5 4 5-7 8-8 9z",
+            gridRotation = 40f, gridDensity = 24f),
+        sector("tibagan", "Tibagan", 340f, 520f, color = 0xFFF0E6D2, 
+            pathData = "m117 197l31-8 5 8h5l2-1 3-1 1-2 2-1v3l-1 2-1 4 1 2 1 2v3l-3 2h-2l-2 3 3 2v4l1 2v3h3 2l1 2 1 3v2 4l1 2 2 3 1 2 1 2-4 2-3 3h-3l-3 3h-4-2l-2-1-3-1-2-1-2-2-3-3-2-5-1-3-1-4-1-3v-4l-2-3-1-3-1-3-2-4-2-3-1-2-2-2-2-1-2-2-2-1z",
+            gridRotation = 15f, gridDensity = 25f),
+        sector("kabayanan", "Kabayanan", 380f, 620f, color = 0xFFF0E6D2, 
+            pathData = "m113 280l4 10 9-12h4l13 9 4 1 2-3 2 1 2 2 1 2 2 1 2-1 3-3-3-3v-2l11-4 10-8 8-6v-8l5-10v-6l-6-1-6-0.02-5 3.02v3h-2l-3 2-1 2h-4l-2 1-1 2h-3-2-3l-2-1-3-1-4 4-9 10-11 9z",
+            gridRotation = 5f, gridDensity = 28f),
+        sector("maytunas", "Maytunas", 440f, 680f, color = 0xFFD7D3E4, 
+            pathData = "m183 307l-1-2h-2l-1-2-2-3h-2-3-2l-3-2-3-2h-2l-2-1c-0.4-1.82-1-3-1-3l-2-2 2-2 2-2-2-1-1-2 3-2 2-1 3-1 2-1 3 2 3 2 2 1h2 3 2 2l2 1c1.8-0.22 3 0 3 0h2 3 3l2-2 3-1 2-2c0 0 2.4-1.58 4-2 1.6-0.42 3 0 3 0h4 2 2 4l3-3 3-1 3-3 4-1 2-1 3-1 3-2 1 3 1 4v4 3 2l-1 2-2 2-1 2v2l-1 2-1 3-2 3-3 1-2 2-2 2-3 1-3 1-4 1-4-1h-4-3-3-2-2l-4-1h-3l-3 2h-3l-3 2h-3z",
+            gridRotation = 25f, gridDensity = 26f),
+        sector("santa-lucia", "Santa Lucia", 520f, 540f, color = 0xFFF0F4A4, 
+            pathData = "m169 278l18-14v-9l5-9-1-7 3-3 1-2 2-1 0.58-2.34 0.34-2.25-1.92-1.41-3-1-2-3v-3l1-2h3l1-2h2 2l1-2 1.92-1.51 0.75-1.49 1.83-2.42 2.25-0.34 0.33 0.42 2.5-1 3.75-1.83 2.67 1.17 3 1 0.83 2.24 1.92 4.17 0.5 1.59 1 2.33c0 0 0.08 0.33 1.5 2.66 0.56 0.92 1.18 3.71 3.65 7.99 2.69 4.67 5.05 10.27 6.47 12.68 3.37 5.7 6.13 10.34 6.13 10.34l1 2 1 3v2l1 4v2l-2 2-3 1-2 1-3 1h-3l-2 2-2 1-2 1-2 2-2 1h-2-3-4-2-2l-4 1-1 2-3 2-3 1-3 1h-4-4l-2-1h-2-4-4l-2-1-3-2z",
+            gridRotation = 45f, gridDensity = 24f),
+        sector("isabelita", "Isabelita", 175f, 210f, color = 0xFFC7E2B0, 
+            pathData = "m175 191h-2-2-3l-3 1v2 2l-2 2v2l2 3v3l1 2-3 1c0 0-6 2.42-3 3 3 0.58 5 0 5 0h2c1.6 0.18 3 0 3 0l2 1h2 2l-1-3-1-2 2-1 2-1 3-1-2-4-2-4v-3z",
+            gridRotation = 0f, gridDensity = 15f),
+        sector("halo-halo", "Halo-Halo", 195f, 205f, color = 0xFFD7D3E4, 
+            pathData = "m187.58 184.83l-3.58 2.17-2.42 1.16-2.08 1c0-0.15-1.5-0.23-1.5-0.16l-1.5 1.49 0.08 2.17 0.42 1.34v3l1 4 1 2 1 3h-2l-2 2v2h6l7-1 2-2 3-2c2-0.42 4-1 4-1l2-2-2-2-2-3-1-2-2-4-2-2z",
+            gridRotation = 10f, gridDensity = 12f),
+        sector("onse", "Onse", 215f, 195f, color = 0xFFC9DFEE, 
+            pathData = "m206 209l-2-1-3-3.59-2-1.41-5 2.08-3.08 2.08-2.92 2.5-2-0.08-4 0.25-5 0.17-2 4-5.42-2.09-5.16 0.75c0-0.35-4.75-0.46-4.75-0.42 0 0.12 1.58 2.76 1.33 2.76l1 2 0.75 4.24c-0.47 2.65 2.08 3.71 2.25 2.76l1.75 0.33 1.67 1 0.58 1.67 1 3-0.33 2.08 0.83 3.33 0.5 1.59 2 3 1 2 6-3h4l5 1 3-1.09 1-0.91 1-3 3-2 1-2v-3l-3-1-2-1-2-2v-4l1-1 2-1 3-2h2l3.42-2.92z",
+            gridRotation = 20f, gridDensity = 25f),
+        sector("little-baguio", "Little Baguio", 260f, 230f, color = 0xFFE9B7B7, 
+            pathData = "m243 165l-7 6-6 9-33-4-9 9c0 0 6 10.62 8 13 2 2.38 8 10 8 10l5 1 3-2 2-1 3 1 3 1 8 19 8 13 5 10 2 2 3 11 6-2 9-1 3-4 2-5-1-3v-4l2-1 3-1 4 1 4 1h3l2-2 1-2v-3l4-2 1-2 1-3-1-2-1-2-1-3-2-1 1-4v-2l-1-2-2-2-2-1-3-1-3-2-2-2-3-3-3-2h-2-8l1-4-2-4-2-1-2-1h-3-2l-2-1v-3-2z",
+            gridRotation = 18f, gridDensity = 30f),
+        sector("greenhills", "Greenhills", 430f, 150f, color = 0xFFC7E2B0, 
+            pathData = "m377 192l5-3 3 2 18-10 12-5 37-16 25 55-28 10-22-1-18-3-13-2-7 5-5 5-17 14-15 14-19 18-13 11-13 13-6 1-4 2-4-8c0 0-0.6-2.18 1-5 1.6-2.82-4-5-4-5l1-4-4-3c0 0 0.4-7.78-6-2-6.4 5.78-8.6 2.22-10 1-1.4-1.22-11-12-11-12v-3l1-3 3-4 1-3v-5l1-3 4-1 4 2h7l3-5v-2l3-2 2-4-1-5-2-2-2-3 2-5-3-4-7-3-3-4-6-4h-2-3-4l-1-4-1-3-3-2-2-1h-3l-2-1-2-4v-4-3-2-3l-1-6 1-5 16-14 17-12 24-9 11 7 18 4c0 0 2.8 25.02 7 23 4.2-2.02 17-11 17-11l3-5 2-1z",
+            gridRotation = 0f, gridDensity = 35f),
+        sector("west-crame", "West Crame", 360f, 130f, color = 0xFFD7D3E4, 
+            pathData = "m330.67 139l5.33-2 5-1 8-3h4l5-2 14-3 6-1 19 50 4.08 5-16 8.66-3-1.83-5.16 3.41-18.17-47.75-2.75 3.51v1l-10.5 7.83-8.83 5.17c0 0-2.59-0.52-4.75-10.51-0.44-2.01-0.96-4.56-1.17-7.49-0.11-1.57 0.16-3.25-0.08-5z",
+            gridRotation = 10f, gridDensity = 15f),
+        sector("addition-hills", "Addition Hills", 280f, 320f, color = 0xFFF0E6D2,
+            pathData = "m296 302v3l-13 4 3 10h-39l-11 3-8 5-17 8-9-11-5 1-9-10h-4l-4-1v-3l2-4 3.67 0.08 3.33-1.08 4-1.09 2-0.91 4-1h3l3 1h2 3 2 3 3 2l3.42 0.74 3.58-0.74 2-1 3-1 2-2 3-2 2-2c1.58-0.29 2.81-3.15 2-3l1-2 1.5-3.67 1.83-4.34 1.67-1.99v-4-3-2-2l-1-2-1-2v-2l3-1.84 3.83-1 1.34-0.42 2.33-0.5 2 0.34 2.5 0.42v2l2 4 3 3 2.25 2.33 1.75 1.67 1 1 1 1 2 2 2.17 0.33 2.58-1 2.25-1.33 4-3h2l1 2v2l1.25 0.83 2.08 1.83 0.09 3.92 2.58 2.42 1 2v2l-1.25 2.49 0.67 2.34 0.58 1.17 0.5 1.49 2 3.17z",
+            gridRotation = 20f, gridDensity = 25f),
     )
 
     private fun sector(
@@ -180,17 +81,20 @@ object SanJuanMapData {
         labelX: Float,
         labelY: Float,
         color: Long,
-        points: List<Pair<Float, Float>>
+        pathData: String = "",
+        gridRotation: Float = 45f,
+        gridDensity: Float = 30f
     ): MapSector {
-        val polygon = points.map { Offset(it.first, it.second) }
         val attractionCount = attractionsBySector[id]?.size ?: 0
         return MapSector(
             id = id,
             name = name,
             fillColor = Color(color),
             labelPosition = Offset(labelX, labelY),
-            polygonPoints = polygon,
-            attractionsCount = attractionCount
+            pathData = pathData,
+            attractionsCount = attractionCount,
+            gridRotation = gridRotation,
+            gridDensity = gridDensity
         )
     }
 }

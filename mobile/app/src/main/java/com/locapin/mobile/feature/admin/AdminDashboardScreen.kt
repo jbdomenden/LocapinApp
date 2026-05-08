@@ -96,22 +96,10 @@ fun AdminDashboardScreen(
                 icon = Icons.Default.Map
             ),
             AdminModuleItem(
-                route = AppDestinations.AdminReports,
-                title = "Reports",
-                description = "View summary insights and future analytics.",
-                icon = Icons.Default.Analytics
-            ),
-            AdminModuleItem(
                 route = AppDestinations.AdminProfile,
                 title = "Profile",
                 description = "View and manage the admin account.",
                 icon = Icons.Default.Person
-            ),
-            AdminModuleItem(
-                route = AppDestinations.AdminSettings,
-                title = "Settings",
-                description = "Access admin settings and configuration.",
-                icon = Icons.Default.Settings
             )
         )
     }

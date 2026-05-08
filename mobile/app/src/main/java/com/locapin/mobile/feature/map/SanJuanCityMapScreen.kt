@@ -1,6 +1,7 @@
 package com.locapin.mobile.feature.map
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -24,8 +25,22 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.graphics.asComposePath
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.withTransform
+import androidx.core.graphics.PathParser
+import android.graphics.RectF
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,6 +56,8 @@ import com.locapin.mobile.core.designsystem.theme.LocaPinFieldBackground
 import com.locapin.mobile.core.designsystem.theme.LocaPinPrimary
 import com.locapin.mobile.core.designsystem.theme.LocaPinSecondary
 import com.locapin.mobile.core.designsystem.theme.LocaPinSurface
+import com.locapin.mobile.R
+import androidx.compose.ui.res.painterResource
 import com.locapin.mobile.ui.components.SectorBottomSheet
 import kotlinx.coroutines.delay
 
@@ -56,6 +73,10 @@ fun SanJuanCityMapScreen(
     var showNoAdsPrompt by remember { mutableStateOf(false) }
     var showAttractionsModal by remember { mutableStateOf(false) }
     var selectedAttraction by remember { mutableStateOf<Attraction?>(null) }
+
+    if (state.isLoading) {
+        SkeletonMapLoading()
+    }
 
     val selectedSector = state.sectors.firstOrNull { it.id == state.selectedSectorId }
 
@@ -74,6 +95,15 @@ fun SanJuanCityMapScreen(
     }
 
     val attractionsMap by vm.attractions.collectAsStateWithLifecycle()
+
+    if (selectedSector != null) {
+        SectorZoomDialog(
+            sector = selectedSector,
+            attractions = attractionsMap[selectedSector.id].orEmpty(),
+            onDismiss = { vm.onSectorTapped(null) },
+            onAttractionClick = { selectedAttraction = it }
+        )
+    }
 
     if (showAttractionsModal && selectedSector != null) {
         AttractionsGridDialog(
@@ -212,13 +242,18 @@ fun SanJuanCityMapScreen(
                 SanJuanMapCanvas(
                     sectors = state.sectors,
                     selectedSectorId = state.selectedSectorId,
+                    attractions = attractionsMap[state.selectedSectorId].orEmpty(),
+                    allAttractions = attractionsMap,
                     onSectorTapped = { sector ->
                         vm.onSectorTapped(sector?.id)
-                        showSheet = sector != null
+                    },
+                    onAttractionTapped = { attraction ->
+                        selectedAttraction = attraction
                     },
                     modifier = Modifier.fillMaxSize(),
                     scale = state.currentScale,
                     offset = state.currentOffset,
+                    showLabels = state.showLabels,
                     onTransformChanged = vm::onTransformChanged
                 )
             }
@@ -230,7 +265,9 @@ fun SanJuanCityMapScreen(
                 sectors = state.sectors,
                 selectedSectorId = state.selectedSectorId,
                 isVisible = state.isLegendVisible,
+                showLabels = state.showLabels,
                 onToggleVisibility = vm::toggleLegend,
+                onToggleLabels = vm::toggleLabels,
                 onSectorClick = { sectorId: String ->
                     vm.onSectorTapped(if (sectorId == state.selectedSectorId) null else sectorId)
                 }
@@ -415,6 +452,33 @@ fun AttractionDetailsDialog(attraction: Attraction, onDismiss: () -> Unit) {
                     contentScale = ContentScale.Crop
                 )
                 
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            Icons.Default.Star,
+                            contentDescription = null,
+                            tint = Color(0xFFFFD700),
+                            modifier = Modifier.size(18.dp)
+                        )
+                        androidx.compose.foundation.layout.Spacer(Modifier.size(4.dp))
+                        Text(
+                            text = "%.1f".format(attraction.rating),
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = LocaPinPrimary
+                        )
+                    }
+                    Text(
+                        text = "(${attraction.reviews} reviews)",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = LocaPinPrimary.copy(alpha = 0.6f)
+                    )
+                }
+
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(
                         text = "From STI Sta. Mesa:",
@@ -553,7 +617,7 @@ fun NoAdsPaymentDialog(onDismiss: () -> Unit, onConfirmPayment: () -> Unit) {
 
     if (showMockGooglePlay) {
         MockGooglePlayDialog(
-            price = "₱99.00",
+            price = "₱149.00",
             onDismiss = { showMockGooglePlay = false },
             onPay = {
                 onConfirmPayment()
@@ -565,7 +629,7 @@ fun NoAdsPaymentDialog(onDismiss: () -> Unit, onConfirmPayment: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Go Ad-Free!", color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
-        text = { Text("Disable all advertisements for a one-time fee of ₱99.00. Enjoy a cleaner exploration experience in San Juan.", color = LocaPinDark) },
+        text = { Text("Disable all advertisements for a one-time fee of ₱149.00. Enjoy a cleaner exploration experience in San Juan.", color = LocaPinDark) },
         confirmButton = {
             Button(
                 onClick = { showMockGooglePlay = true },
@@ -644,11 +708,190 @@ fun MockGooglePlayDialog(price: String, onDismiss: () -> Unit, onPay: () -> Unit
 }
 
 @Composable
+fun SectorZoomDialog(
+    sector: MapSector,
+    attractions: List<Attraction>,
+    onDismiss: () -> Unit,
+    onAttractionClick: (Attraction) -> Unit
+) {
+    val pinPainter = painterResource(id = R.drawable.pin_location)
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures { onDismiss() }
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            val parsedPath = remember(sector.pathData) {
+                try {
+                    PathParser.createPathFromPathData(sector.pathData)
+                } catch (e: Exception) {
+                    android.graphics.Path()
+                }
+            }
+            
+            val bounds = remember(parsedPath) {
+                val b = RectF()
+                parsedPath.computeBounds(b, true)
+                b
+            }
+
+            var svgBoundsInRoot by remember { mutableStateOf(RectF()) }
+            var currentScale by remember { mutableStateOf(1f) }
+            var currentTx by remember { mutableStateOf(0f) }
+            var currentTy by remember { mutableStateOf(0f) }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize(0.9f)
+                    .pointerInput(attractions, currentScale, currentTx, currentTy) {
+                        detectTapGestures { tap ->
+                            // Check pins first
+                            val tappedAttraction = attractions.find { attraction ->
+                                // FIX: Coordinates in SVG space are (longitude, latitude) -> (X, Y)
+                                val originalX = attraction.longitude.toFloat()
+                                val originalY = attraction.latitude.toFloat()
+
+                                // Use same snap-to-center logic
+                                var pinX = originalX
+                                var pinY = originalY
+                                
+                                val region = android.graphics.Region()
+                                val rectF = android.graphics.RectF()
+                                parsedPath.computeBounds(rectF, true)
+                                region.setPath(parsedPath, android.graphics.Region(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt()))
+                                
+                                if (!region.contains(pinX.toInt(), pinY.toInt())) {
+                                    val centerX = bounds.centerX()
+                                    val centerY = bounds.centerY()
+                                    pinX = centerX
+                                    pinY = centerY
+                                }
+
+                                val px = pinX * currentScale + currentTx
+                                val py = pinY * currentScale + currentTy
+                                val dist = Offset(tap.x - px, tap.y - py).getDistance()
+                                dist < 80f // Increased hit radius for pins in dialog
+                            }
+                            
+                            if (tappedAttraction != null) {
+                                onAttractionClick(tappedAttraction)
+                            } else if (!svgBoundsInRoot.contains(tap.x, tap.y)) {
+                                onDismiss()
+                            }
+                        }
+                    }
+            ) {
+                Canvas(modifier = Modifier.fillMaxSize()) {
+                    if (bounds.width() > 0) {
+                        val padding = 40f
+                        val scaleX = (size.width - padding * 2) / bounds.width()
+                        val scaleY = (size.height - padding * 2) / bounds.height()
+                        val scale = minOf(scaleX, scaleY)
+                        
+                        val tx = (size.width - bounds.width() * scale) / 2 - bounds.left * scale
+                        val ty = (size.height - bounds.height() * scale) / 2 - bounds.top * scale
+                        
+                        currentScale = scale
+                        currentTx = tx
+                        currentTy = ty
+
+                        // Update bounds for hit testing
+                        svgBoundsInRoot = RectF(
+                            tx + bounds.left * scale,
+                            ty + bounds.top * scale,
+                            tx + bounds.right * scale,
+                            ty + bounds.bottom * scale
+                        )
+
+                        withTransform({
+                            translate(tx, ty)
+                            scale(scale, scale, pivot = Offset.Zero)
+                        }) {
+                            val composePath = parsedPath.asComposePath()
+                            drawPath(
+                                path = composePath,
+                                color = sector.fillColor,
+                                style = Fill
+                            )
+                            drawStreetGrid(
+                                path = composePath,
+                                color = Color.Black.copy(alpha = 0.05f),
+                                rotation = sector.gridRotation,
+                                density = sector.gridDensity
+                            )
+                            drawPath(
+                                path = composePath,
+                                color = Color.Black.copy(alpha = 0.5f),
+                                style = Stroke(width = 2f / scale)
+                            )
+                        }
+
+                        // Draw Pins on the same coordinate system
+                        attractions.forEach { attraction ->
+                            // FIX: Coordinates in SVG space are (longitude, latitude) -> (X, Y)
+                            val originalX = attraction.longitude.toFloat()
+                            val originalY = attraction.latitude.toFloat()
+
+                            // Use same snap-to-center logic
+                            var pinX = originalX
+                            var pinY = originalY
+                            
+                            val region = android.graphics.Region()
+                            val rectF = android.graphics.RectF()
+                            parsedPath.computeBounds(rectF, true)
+                            region.setPath(parsedPath, android.graphics.Region(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt()))
+                            
+                            if (!region.contains(pinX.toInt(), pinY.toInt())) {
+                                val centerX = bounds.centerX()
+                                val centerY = bounds.centerY()
+                                pinX = centerX
+                                pinY = centerY
+                            }
+
+                            val px = pinX * scale + tx
+                            val py = pinY * scale + ty
+                            
+                            withTransform({
+                                translate(px, py)
+                                // Increase pin size for visibility (was 3f scale, 24f size)
+                                scale(4f, 4f, pivot = Offset.Zero)
+                                translate(-12f, -24f) // Center of pin
+                            }) {
+                                with(pinPainter) {
+                                    draw(size = androidx.compose.ui.geometry.Size(24f, 24f))
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Overlay Barangay Name
+                Text(
+                    text = sector.name,
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Black,
+                    color = LocaPinPrimary.copy(alpha = 0.2f),
+                    modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 48.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
 fun MapLegend(
     sectors: List<MapSector>,
     selectedSectorId: String?,
     isVisible: Boolean,
+    showLabels: Boolean,
     onToggleVisibility: () -> Unit,
+    onToggleLabels: () -> Unit,
     onSectorClick: (String) -> Unit
 ) {
     Card(
@@ -687,6 +930,28 @@ fun MapLegend(
             ) {
                 Column {
                     Spacer(modifier = Modifier.height(12.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onToggleLabels() }
+                            .padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Checkbox(
+                            checked = showLabels,
+                            onCheckedChange = { onToggleLabels() },
+                            colors = CheckboxDefaults.colors(checkedColor = LocaPinPrimary)
+                        )
+                        Text(
+                            "Show Barangay Labels",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = LocaPinDark
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
                     // FlowRow would be better but keeping it simple with nested Rows or a custom layout
                     // Since we have many sectors, let's use a simple wrapping grid-like approach
                     val chunkedSectors = sectors.chunked(2)
@@ -744,7 +1009,7 @@ fun PremiumAreaDialog(
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(containerColor = LocaPinSecondary)
                 ) {
-                    Text("Buy Permanent Access (₱29.00)", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("Buy Permanent Access (₱199.00)", color = Color.White, fontWeight = FontWeight.Bold)
                 }
                 Button(
                     onClick = onWatchAd,
@@ -762,6 +1027,75 @@ fun PremiumAreaDialog(
         },
         containerColor = LocaPinSurface
     )
+}
+
+@Composable
+fun SkeletonMapLoading() {
+    val transition = rememberInfiniteTransition(label = "skeleton")
+    val alpha by transition.animateFloat(
+        initialValue = 0.3f,
+        targetValue = 0.7f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "alpha"
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(LocaPinSurface)
+            .statusBarsPadding()
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            // Header Skeleton
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.6f)
+                    .height(40.dp)
+                    .alpha(alpha)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.Gray.copy(alpha = 0.2f))
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.4f)
+                    .height(24.dp)
+                    .alpha(alpha)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.Gray.copy(alpha = 0.2f))
+            )
+            
+            Spacer(modifier = Modifier.height(48.dp))
+            
+            // Map Area Skeleton
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+                    .alpha(alpha)
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(Color.Gray.copy(alpha = 0.1f))
+                    .border(2.dp, LocaPinBorder.copy(alpha = 0.3f), RoundedCornerShape(24.dp))
+            )
+            
+            Spacer(modifier = Modifier.height(32.dp))
+            
+            // Legend Skeleton
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+                    .alpha(alpha)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(Color.Gray.copy(alpha = 0.1f))
+            )
+        }
+    }
 }
 
 @Composable

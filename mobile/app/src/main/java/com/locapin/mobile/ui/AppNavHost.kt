@@ -30,6 +30,7 @@ import com.locapin.mobile.feature.admin.AdminCategoriesListScreen
 import com.locapin.mobile.feature.admin.AdminCategoryFormScreen
 import com.locapin.mobile.feature.admin.AdminModulePlaceholderScreen
 import com.locapin.mobile.feature.admin.AdminMapAreasListScreen
+import com.locapin.mobile.feature.admin.AdminMapAreaFormScreen
 import com.locapin.mobile.feature.auth.EulaScreen
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.auth.PrivacyLocationConsentScreen
@@ -225,8 +226,19 @@ private fun NavGraphBuilder.adminGraph(
     }
     composable(AppDestinations.AdminMapAreas) {
         AdminMapAreasListScreen(
-            onBack = navController::popBackStack
+            onBack = navController::popBackStack,
+            onAddArea = { navController.navigate(AppDestinations.AdminMapAreaCreate) },
+            onEditArea = { id -> navController.navigate(AppDestinations.adminMapAreaEdit(id)) }
         )
+    }
+    composable(AppDestinations.AdminMapAreaCreate) {
+        AdminMapAreaFormScreen(onBack = navController::popBackStack)
+    }
+    composable(
+        route = AppDestinations.AdminMapAreaEdit,
+        arguments = listOf(navArgument("areaId") { type = NavType.StringType })
+    ) {
+        AdminMapAreaFormScreen(onBack = navController::popBackStack)
     }
     composable(AppDestinations.AdminReports) {
         AdminModulePlaceholderScreen(

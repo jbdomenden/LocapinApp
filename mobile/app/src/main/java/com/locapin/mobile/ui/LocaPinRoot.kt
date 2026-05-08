@@ -63,6 +63,7 @@ import com.locapin.mobile.core.navigation.Routes
 import com.locapin.mobile.domain.model.UserRole
 import com.locapin.mobile.feature.auth.LoginScreen
 import com.locapin.mobile.feature.common.ComingSoonScreen
+import com.locapin.mobile.feature.map.SanJuanCityMapScreen
 import kotlinx.coroutines.launch
 
 private data class ModuleItem(val route: String, val title: String, val description: String, val icon: ImageVector)
@@ -141,7 +142,14 @@ fun LocaPinRoot(
         composable(Routes.AdminProfile) { ComingSoonScreen("Admin Profile", "Manage profile and contact settings.", navController::popBackStack) }
         composable(Routes.AdminSettings) { ComingSoonScreen("Admin Settings", "Manage app preferences and admin-level options.", navController::popBackStack) }
 
-        composable(Routes.TouristMap) { ComingSoonScreen("Map", "Browse interactive map experiences here.", navController::popBackStack) }
+        composable(Routes.TouristMap) {
+            SanJuanCityMapScreen(
+                onLogout = {
+                    vm.logout()
+                    navController.navigate(Routes.Login) { popUpTo(0) }
+                }
+            )
+        }
         composable(Routes.TouristAttractions) { ComingSoonScreen("Attractions", "Discover attractions curated for tourists.", navController::popBackStack) }
         composable(Routes.TouristFavorites) { ComingSoonScreen("Favorites", "Review your saved places and quick picks.", navController::popBackStack) }
         composable(Routes.TouristProfile) { ComingSoonScreen("Profile", "Update your personal and travel preferences.", navController::popBackStack) }

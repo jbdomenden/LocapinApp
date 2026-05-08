@@ -10,6 +10,7 @@ import com.locapin.mobile.domain.model.MapZone
 import com.locapin.mobile.domain.model.ZoneAttraction
 import com.locapin.mobile.domain.repository.AuthRepository
 import com.locapin.mobile.domain.repository.SegmentedMapRepository
+import com.locapin.mobile.data.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -24,7 +26,8 @@ import kotlinx.coroutines.launch
 class SanJuanMapViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val mapRepository: SegmentedMapRepository,
-    private val adminMapAreaRepository: AdminMapAreaRepository
+    private val adminMapAreaRepository: AdminMapAreaRepository,
+    private val sessionManager: SessionManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -33,12 +36,13 @@ class SanJuanMapViewModel @Inject constructor(
             currentScale = 1f,
             currentOffset = Offset.Zero,
             isAdsDisabled = false,
-            showInterstitialAd = false
+            showInterstitialAd = false,
+            isLoading = false
         )
     )
     val uiState: StateFlow<SanJuanMapUiState> = _uiState.asStateFlow()
 
-    private val _attractions = MutableStateFlow<Map<String, List<Attraction>>>(emptyMap())
+    private val _attractions = MutableStateFlow<Map<String, List<Attraction>>>(SanJuanMapData.attractionsBySector)
     val attractions: StateFlow<Map<String, List<Attraction>>> = _attractions.asStateFlow()
 
     init {
@@ -48,18 +52,31 @@ class SanJuanMapViewModel @Inject constructor(
 
     private fun observeData() {
         viewModelScope.launch {
+            // Observe premium status and ads from DataStore
+            launch {
+                combine(
+                    sessionManager.premiumSectorsFlow,
+                    sessionManager.adsDisabledFlow
+                ) { premiumSectors, adsDisabled ->
+                    Pair(premiumSectors, adsDisabled)
+                }.collect { (premiumSectors, adsDisabled) ->
+                    _uiState.update { it.copy(
+                        premiumAccessSectors = premiumSectors,
+                        isAdsDisabled = adsDisabled
+                    ) }
+                }
+            }
+
             // Observe zones from repository and sync all attributes including polygons
-            viewModelScope.launch {
+            launch {
                 adminMapAreaRepository.mapAreas.collect { adminAreas ->
                     _uiState.update { state ->
                         state.copy(sectors = state.sectors.map { sector ->
                             val adminArea = adminAreas.find { it.id == sector.id }
                             if (adminArea != null) {
-                                val points = parsePolygonPoints(adminArea.polygonPoints)
                                 sector.copy(
                                     name = adminArea.name,
                                     isPremium = adminArea.isPremium,
-                                    polygonPoints = if (points.isNotEmpty()) points else sector.polygonPoints,
                                     fillColor = try {
                                         Color(android.graphics.Color.parseColor(adminArea.hexColor))
                                     } catch (e: Exception) {
@@ -92,24 +109,35 @@ class SanJuanMapViewModel @Inject constructor(
             // Observe attractions from repository
             mapRepository.getZoneAttractionsFlow().collectLatest { result ->
                 if (result is LocaPinResult.Success<List<ZoneAttraction>>) {
-                    val grouped = result.data.groupBy { it.zoneId }
+                    // Use only repo data
+                    val groupedFromRepo = result.data.groupBy { it.zoneId }
                         .mapValues { entry ->
                             entry.value.map {
                                 Attraction(
+                                    id = it.id,
                                     name = it.name,
                                     knownFor = it.knownFor,
                                     distance = it.distance ?: "N/A",
                                     imageUrl = it.imageUrl ?: "",
-                                    description = it.description
+                                    description = it.description,
+                                    latitude = it.latitude,
+                                    longitude = it.longitude,
+                                    category = it.category ?: "Attraction",
+                                    rating = it.rating,
+                                    reviews = it.reviews
                                 )
                             }
                         }
-                    _attractions.value = grouped
+                    
+                    _attractions.value = groupedFromRepo
                     
                     _uiState.update { state ->
-                        state.copy(sectors = state.sectors.map { sector ->
-                            sector.copy(attractionsCount = grouped[sector.id]?.size ?: 0)
-                        })
+                        state.copy(
+                            sectors = state.sectors.map { sector ->
+                                sector.copy(attractionsCount = groupedFromRepo[sector.id]?.size ?: 0)
+                            },
+                            isLoading = false
+                        )
                     }
                 }
             }
@@ -136,7 +164,9 @@ class SanJuanMapViewModel @Inject constructor(
     }
 
     fun disableAds() {
-        _uiState.update { it.copy(isAdsDisabled = true) }
+        viewModelScope.launch {
+            sessionManager.setAdsDisabled(true)
+        }
     }
 
     fun logout() {
@@ -204,16 +234,20 @@ class SanJuanMapViewModel @Inject constructor(
     }
 
     fun buyPremiumAccess(sectorId: String) {
-        _uiState.update { state ->
-            state.copy(
-                showPremiumPrompt = null,
-                premiumAccessSectors = state.premiumAccessSectors + sectorId
-            )
+        viewModelScope.launch {
+            sessionManager.savePremiumSector(sectorId)
+            _uiState.update { state ->
+                state.copy(showPremiumPrompt = null)
+            }
         }
     }
 
     fun toggleLegend() {
         _uiState.update { it.copy(isLegendVisible = !it.isLegendVisible) }
+    }
+
+    fun toggleLabels() {
+        _uiState.update { it.copy(showLabels = !it.showLabels) }
     }
 
     private fun parsePolygonPoints(pointsStr: String): List<Offset> {

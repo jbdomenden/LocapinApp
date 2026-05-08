@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.update
 interface AdminMapAreaRepository {
     val mapAreas: StateFlow<List<AdminMapArea>>
     fun togglePremium(id: String)
+    fun addMapArea(area: AdminMapArea)
+    fun updateMapArea(area: AdminMapArea)
+    fun deleteMapArea(id: String)
 }
 
 @Singleton
@@ -26,87 +29,24 @@ class InMemoryAdminMapAreaRepository @Inject constructor() : AdminMapAreaReposit
         }
     }
 
+    override fun addMapArea(area: AdminMapArea) {
+        val newArea = if (area.id.isBlank()) {
+            area.copy(id = area.name.lowercase().trim().replace(" ", "-"))
+        } else area
+        _mapAreas.update { (it + newArea).sortedBy { a -> a.name.lowercase() } }
+    }
+
+    override fun updateMapArea(area: AdminMapArea) {
+        _mapAreas.update { existing ->
+            existing.map { if (it.id == area.id) area else it }.sortedBy { it.name.lowercase() }
+        }
+    }
+
+    override fun deleteMapArea(id: String) {
+        _mapAreas.update { it.filterNot { area -> area.id == id } }
+    }
+
     private fun seedMapAreas(): List<AdminMapArea> = listOf(
-        AdminMapArea(
-            id = "greenhills",
-            name = "Greenhills",
-            description = "Premier shopping and commercial district.",
-            districtLabel = "District 2",
-            centerLatitude = 14.6019,
-            centerLongitude = 121.0446,
-            polygonPoints = "470,215;550,165;630,125;690,160;715,230;810,215;920,315;830,335;750,330;650,410;570,490;530,480;470,320",
-            hexColor = "#C7E2B0"
-        ),
-        AdminMapArea(
-            id = "addition-hills",
-            name = "Addition Hills",
-            description = "Historic residential and civic area.",
-            districtLabel = "District 1",
-            centerLatitude = 14.5965,
-            centerLongitude = 121.0334,
-            polygonPoints = "470,460;530,480;570,490;545,560;515,585;460,580;395,575;345,605;315,565;260,535;325,540;430,560;470,540",
-            hexColor = "#F0E6D2"
-        ),
-        AdminMapArea(
-            id = "little-baguio",
-            name = "Little Baguio",
-            description = "Cultural and residential hub.",
-            districtLabel = "District 1",
-            centerLatitude = 14.6072,
-            centerLongitude = 121.0316,
-            polygonPoints = "350,260;460,280;470,320;550,460;520,485;490,385;450,315;380,345",
-            hexColor = "#E9B7B7"
-        ),
-        AdminMapArea(
-            id = "pasadena",
-            name = "Pasadena",
-            description = "Residential area and home to Ronac Art Center.",
-            districtLabel = "District 1",
-            centerLatitude = 14.6103,
-            centerLongitude = 121.0385,
-            polygonPoints = "300,175;340,175;370,140;420,180;460,230;460,280;350,260;310,215",
-            hexColor = "#C9DFEE"
-        ),
-        AdminMapArea(
-            id = "batis",
-            name = "Batis",
-            description = "Central residential community near Club Filipino.",
-            districtLabel = "District 1",
-            centerLatitude = 14.6035,
-            centerLongitude = 121.0210,
-            polygonPoints = "95,285;120,345;180,365;225,415;280,480;220,570;180,480;55,365;55,315",
-            hexColor = "#C9DFEE"
-        ),
-        AdminMapArea(
-            id = "kabayanan",
-            name = "Kabayanan",
-            description = "Historical heart of San Juan, home to Museo ng Katipunan.",
-            districtLabel = "District 1",
-            centerLatitude = 14.6042,
-            centerLongitude = 121.0287,
-            polygonPoints = "280,480;330,440;335,435;395,405;470,460;360,520",
-            hexColor = "#F0E6D2"
-        ),
-        AdminMapArea(
-            id = "santa-lucia",
-            name = "Santa Lucia",
-            description = "Quiet residential area featuring Santolan Town Plaza.",
-            districtLabel = "District 1",
-            centerLatitude = 14.6105,
-            centerLongitude = 121.0234,
-            polygonPoints = "380,320;380,345;450,315;490,385;395,405;385,365",
-            hexColor = "#F0F4A4"
-        ),
-        AdminMapArea(
-            id = "balong-bato",
-            name = "Balong-Bato",
-            description = "Northern riverside barangay cluster.",
-            districtLabel = "District 1",
-            centerLatitude = 14.6152,
-            centerLongitude = 121.0304,
-            polygonPoints = "150,175;185,145;220,140;260,150;300,175;310,215;280,260;180,230",
-            hexColor = "#D7D3E4"
-        ),
         AdminMapArea(
             id = "salapan",
             name = "Salapan",
@@ -114,7 +54,7 @@ class InMemoryAdminMapAreaRepository @Inject constructor() : AdminMapAreaReposit
             districtLabel = "District 1",
             centerLatitude = 14.6105,
             centerLongitude = 121.0210,
-            polygonPoints = "140,60;175,55;220,75;280,80;260,150;220,140;185,145;150,175;110,160;120,100",
+            polygonPoints = "73,137.58;75.25,134.08;78,131;81.25,128.91;83.92,128.33;87,128;92,126;96.33,125;104.42,122.74;125.67,115.16;137,111;137.42,109;137.58,107.58;137.25,105.58;137.67,104;138.67,102;140.67,101;139.67,99;137.67,98;135.67,97;133.67,97;129.67,97;127.67,98;124.67,98;121.67,98.18;118.67,98;114.67,98;111.67,98;108.67,98;106.67,96;105.67,94;104.67,90;104.67,88;103.67,86;101.67,84;98.67,83;95.67,83;91.67,82;89.67,82;87.67,85;86.67,88;85.67,91;85.67,94;85.67,99;85.67,102;84.67,104;76.67,114;68.67,126;66.67,129;66.67,132;68.67,134;70.67,136",
             hexColor = "#F0F4A4"
         ),
         AdminMapArea(
@@ -124,8 +64,199 @@ class InMemoryAdminMapAreaRepository @Inject constructor() : AdminMapAreaReposit
             districtLabel = "District 1",
             centerLatitude = 14.6120,
             centerLongitude = 121.0250,
-            polygonPoints = "280,80;340,95;370,140;340,175;300,175;260,150",
+            polygonPoints = "156,129;160.08,127;168,118.74;176.42,115.08;183,114.83;191,115;180,107;176,104;172,100;171,92;165,90;162,90;160,90;157,90;154,90;152,91;151,94;151,96;149,100;147,101;144,101;142,100;140,100;139,102;138,104;137,108;137,110;138,113;140,113;143,114;145,116;147,118;148,121;151,124;154,127;157,130",
             hexColor = "#F4D2C1"
+        ),
+        AdminMapArea(
+            id = "balong-bato",
+            name = "Balong-Bato",
+            description = "Northern riverside barangay cluster.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6152,
+            centerLongitude = 121.0304,
+            polygonPoints = "77,153;77,150;78,147;78,145;77,143;76,141;74,139;72,138;74,137;76,133;78,132;80,130;82,129;86,128;88,127;93,126;97,125;100,124;104,123;108,121;113,120;117,118;121,116;125,115;127,117;128,119;129,121;130,123;131,126;134,129;135,132;138,135;140,136;142,139;144,140;143,143;135,150;127,157;120,160;116,163;111,166;108,168.74;104,170;98.67,172.49;89.92,176;83,178;79,181;72,174",
+            hexColor = "#D7D3E4"
+        ),
+        AdminMapArea(
+            id = "rivera",
+            name = "Rivera",
+            description = "Quiet residential neighborhood.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6140,
+            centerLongitude = 121.0280,
+            polygonPoints = "90,167;84.95,174.51;79.95,181.24;75.74,186.97;75.25,186.85;71.75,184.77;69.75,181.77;68.75,179.77;68.75,177.77;66.75,176.77;64.75,174.77;62.75,173.77;60.75,171.77;61.75,169.77;63.75,165.77;65.75,162.77;67.75,160.77;69.75,157.77;71.75,155.77;73.75,153.77;75.75,151.77;77.75,150.77;78.75,148.77;80.75,147.77;82.75,149.77;83.75,151.77;86.75,154.77;90.75,158.77",
+            hexColor = "#C7E2B0"
+        ),
+        AdminMapArea(
+            id = "progreso",
+            name = "Progreso",
+            description = "Commercial and residential area.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6110,
+            centerLongitude = 121.0190,
+            polygonPoints = "71,193;55,215;50,213;49,210;47,207;47,205;47,200;47,195;47,191;48,188;50,185;51,182;52,179;54,176;56,174;57,172;61,174;63,177;66,179;66,182;68,185",
+            hexColor = "#E9DCC9"
+        ),
+        AdminMapArea(
+            id = "san-perfecto",
+            name = "San Perfecto",
+            description = "Dynamic residential community.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6085,
+            centerLongitude = 121.0185,
+            polygonPoints = "58,212;117,196;114,194;111,193;109,192;107,192;105,190;101,189;97,189;94,187;80,181",
+            hexColor = "#F0F4A4"
+        ),
+        AdminMapArea(
+            id = "pedro-cruz",
+            name = "Pedro Cruz",
+            description = "Centrally located barangay.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6090,
+            centerLongitude = 121.0230,
+            polygonPoints = "117,197;148,189;146.75,186.16;146.42,182.99;146.5,181.49;146,179.66;145,179;143,177;141,175;137,172;137,170;136,166;136,162;136,159;135,156;134,154;131,152;127,148;119,155;92,165;80,181;97,189;103,189",
+            hexColor = "#F0E6D2"
+        ),
+        AdminMapArea(
+            id = "corazon-de-jesus",
+            name = "Corazon de Jesus",
+            description = "Civic center and historical site.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6060,
+            centerLongitude = 121.0320,
+            polygonPoints = "230,180;235,174;239,169;231,169;222,172;219,173;216,173;213,171;211,169;209,167;208,165;206,163;204,162;202,162;200,161;197,160;196,158;193,157;191,155;189,153;186,150;183,145;180,140;178,137;176,134;173,132;170,130;169,128;167,127;159,133;155,137;150,141;135,148;137,151;142,156;142.8,160.98;143,166;143.4,168.78;143.6,171.58;146,173.18;148,175;151,178;153.6,180.58;153,184;155,190;161,196;167,203;173,203;179,198;183.8,197.38;188,198;191,196;198,193;203,189;208,184;210,182;224,184;233,186",
+            hexColor = "#F0F4A4"
+        ),
+        AdminMapArea(
+            id = "pasadena",
+            name = "Pasadena",
+            description = "Residential area and home to Ronac Art Center.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6103,
+            centerLongitude = 121.0385,
+            polygonPoints = "245,163;238,169;231,168;221,172;217,173;214,172;205,162;198,162;195,161;193,160;190,158;187,157;184,154;182,153;180,150;178,147;176,144;174,141;172,138;171,136;160,127;163,124;165,122;168,119;171,118;174,116;176,117;179,117;183,117;186,118;197,131;202,131;205,131;207,131;213,140;216,141;220,141;223,140;226,140;230,142;230,145;230,148;230,151;232,153;233,156;233,159;235,161;238,163",
+            hexColor = "#C9DFEE"
+        ),
+        AdminMapArea(
+            id = "batis",
+            name = "Batis",
+            description = "Central residential community near Club Filipino.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6035,
+            centerLongitude = 121.0210,
+            polygonPoints = "114,280;109,272;106,263;98,253;92,241;85,235;55,216;58,213;87,204;116,197;125,203;133,211;138,222;140,231;142,239;145,244;149,249;142,257;134,266",
+            hexColor = "#C9DFEE"
+        ),
+        AdminMapArea(
+            id = "tibagan",
+            name = "Tibagan",
+            description = "Residential enclave.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6050,
+            centerLongitude = 121.0260,
+            polygonPoints = "117,197;148,189;153,197;158,197;160,196;163,195;164,193;166,192;166,195;165,197;164,201;165,203;166,205;166,208;163,210;161,210;159,213;162,215;162,219;163,221;164,224;164,227;167,227;169,227;170,229;171,232;171,234;171,238;172,240;174,243;175,245;176,247;172,249;169,252;166,252;163,255;159,255;157,255;155,254;152,253;150,252;148,250;145,247;143,242;142,239;141,235;140,232;140,228;138,225;137,222;136,219;134,215;132,212;131,210;129,208;127,206;125,205;123,204",
+            hexColor = "#F0E6D2"
+        ),
+        AdminMapArea(
+            id = "kabayanan",
+            name = "Kabayanan",
+            description = "Historical heart of San Juan.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6042,
+            centerLongitude = 121.0287,
+            polygonPoints = "113,280;117,290;126,278;130,278;143,287;147,288;149,285;151,286;153,288;154,290;156,291;158,290;161,287;158,284;158,282;169,278;179,270;187,264;187,256;192,246;192,240;186,239;180,238.98;175,242;175,245;173,247;172,249;168,250;166,251;165,253;162,253;161,254;158,255;155,254;152,253;148,257;139,267;128,276",
+            hexColor = "#F0E6D2"
+        ),
+        AdminMapArea(
+            id = "maytunas",
+            name = "Maytunas",
+            description = "Quiet neighborhood.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6030,
+            centerLongitude = 121.0330,
+            polygonPoints = "183,307;182,305;180,305;179,303;177,300;175,300;172,300;170,300;167,298;164,296;162,296;160,295;159.6,293.18;159,290;159,287;157,285;159,283;161,281;164,280;166,279;169,281;172,283;174,284;176,284;179,284;181,285;182.8,284.78;184.3,284.78;186.3,284.78;189.3,284.78;191.3,282.78;194.3,281.78;196.3,279.78;196.3,279.78;198.7,278.2;200.3,277.78;201.7,277.78;205.7,277.78;207.7,277.78;209.7,277.78;213.7,274.78;216.7,273.78;219.7,270.78;223.7,269.78;225.7,268.78;228.7,267.78;231.7,264.78;232.7,267.78;233.7,271.78;233.7,275.78;233.7,278.78;233.7,280.78;232.7,282.78;230.7,284.78;229.7,286.78;229.7,288.78;228.7,290.78;227.7,293.78;225.7,296.78;222.7,297.78;220.7,299.78;218.7,301.78;215.7,302.78;212.7,303.78;208.7,304.78;204.7,303.78;200.7,302.78;197.7,302.78;194.7,299.78;192.7,298.78;190.7,297.78;186.7,296.78;183.7,296.78;180.7,298.78;177.7,298.78;174.7,300.78",
+            hexColor = "#D7D3E4"
+        ),
+        AdminMapArea(
+            id = "santa-lucia",
+            name = "Santa Lucia",
+            description = "Residential area featuring Santolan Town Plaza.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6105,
+            centerLongitude = 121.0234,
+            polygonPoints = "169,278;187,264;187,255;192,246;191,239;194,236;195,234;197,233;197.58,230.66;197.92,228.41;196,227;193,226;191,223;191,220;192,218;195,218;196,216;198,216;200,216;201,214;202.92,212.49;203.67,211;205.5,208.58;207.75,208.24;208.08,208.66;210.58,207.66;214.33,205.83;217,207;220,208;220.83,210.24;222.75,214.41;223.25,216;224.25,218.33;225.75,220.99;229.4,225.28;232.09,229.95;233.51,232.36;236.88,238.06;239.63,242.7;240.63,244.7;241.63,247.7;241.63,249.7;242.63,253.7;242.63,255.7;240.63,257.7;237.63,258.7;235.63,259.7;232.63,260.7;229.63,260.7;227.63,262.7;225.63,263.7;223.63,264.7;221.63,266.7;219.63,267.7;217.63,267.7;214.63,267.7;210.63,267.7;208.63,267.7;204.63,268.7;203.63,270.7;200.63,272.7;197.63,273.7;194.63,273.7;190.63,273.7;186.63,273.7;184.63,272.7;182.63,272.7;178.63,271.7;174.63,271.7;171.63,269.7",
+            hexColor = "#F0F4A4"
+        ),
+        AdminMapArea(
+            id = "isabelita",
+            name = "Isabelita",
+            description = "Quiet residential zone.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6100,
+            centerLongitude = 121.0210,
+            polygonPoints = "175,191;173,191;171,191;168,191;165,192;165,194;165,196;163,198;163,200;165,203;165,206;166,208;163,209;157,211.42;160,212;165,212.58;167,212.58;168.6,212.76;171.6,212.76;173.6,213.76;175.6,213.76;177.6,213.76;176.6,210.76;175.6,208.76;177.6,207.76;179.6,206.76;182.6,205.76;180.6,201.76;178.6,197.76;178.6,194.76",
+            hexColor = "#C7E2B0"
+        ),
+        AdminMapArea(
+            id = "halo-halo",
+            name = "Halo-Halo",
+            description = "Small residential cluster.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6095,
+            centerLongitude = 121.0205,
+            polygonPoints = "187.58,184.83;184,187;181.58,188.16;179.5,189.16;179.5,189.01;178,190.5;178.08,192.67;178.5,194.01;178.5,197.01;179.5,201.01;180.5,203.01;181.5,206.01;179.5,206.01;177.5,208.01;177.5,210.01;183.5,209.01;190.5,208.01;192.5,206.01;195.5,204.01;197.5,203.59;201.5,203.59;203.5,201.59;201.5,199.59;199.5,196.59;198.5,194.59;196.5,190.59;194.5,188.59",
+            hexColor = "#D7D3E4"
+        ),
+        AdminMapArea(
+            id = "onse",
+            name = "Onse",
+            description = "Residential area near Wilson St.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6080,
+            centerLongitude = 121.0200,
+            polygonPoints = "206,209;204,208;201,204.41;199,203;194,205.08;190.92,207.16;188,209.66;186,209.58;182,209.83;177,210;175,210.17;173,214.17;167.58,212.08;162.42,212.83;162.42,212.41;164,212.53;165,214.53;165.75,218.77;166,221.42;167.75,221.75;169.42,222.75;170,224.42;171,227.42;170.67,229.5;171.5,232.83;172,234.42;174,237.42;175,239.42;181,236.42;185,236.42;190,237.42;193,236.33;194,235.42;195,232.42;198,230.42;199,228.42;199,225.42;196,224.42;194,223.42;192,221.42;192,217.42;193,216.42;195,215.42;198,213.42;200,213.42;203.42,210.5",
+            hexColor = "#C9DFEE"
+        ),
+        AdminMapArea(
+            id = "little-baguio",
+            name = "Little Baguio",
+            description = "Cultural and residential hub.",
+            districtLabel = "District 1",
+            centerLatitude = 14.6072,
+            centerLongitude = 121.0316,
+            polygonPoints = "243,165;236,171;230,180;197,176;188,185;196,198;198,200.38;206,210.38;206,210.38;211,211.38;214,209.38;216,208.38;219,209.38;222,210.38;230,229.38;238,242.38;243,252.38;245,254.38;248,265.38;254,263.38;263,262.38;266,258.38;268,253.38;267,250.38;269,249.38;272,248.38;276,249.38;280,250.38;283,250.38;285,248.38;286,246.38;286,243.38;290,241.38;291,239.38;292,236.38;291,234.38;290,232.38;289,229.38;287,228.38;288,224.38;288,222.38;287,220.38;285,218.38;283,217.38;280,216.38;278,214.38;276,212.38;273,210.38;270,208.38;268,208.38;260,208.38;261,204.38;259,200.38;257,199.38;255,198.38;252,198.38;250,197.38;248,197.38;248,194.38;248,192.38",
+            hexColor = "#E9B7B7"
+        ),
+        AdminMapArea(
+            id = "greenhills",
+            name = "Greenhills",
+            description = "Premier shopping and commercial district.",
+            districtLabel = "District 2",
+            centerLatitude = 14.6019,
+            centerLongitude = 121.0446,
+            polygonPoints = "377,192;382,189;385,191;403,181;415,176;452,160;477,215;449,225;427,224;409,221;396,219;389,224;384,229;367,243;352,257;333,275;320,286;307,299;294,310;288,311;284,313;280,305;279.4,302.82;281,297.82;282.6,295;278.6,290;279.6,286;275.6,283;275.6,283;276,275.22;269.6,281;263.2,283.22;261.8,284.22;261.8,284.22;262.8,281.22;258.8,278.22;258.8,278.22;259.2,270.44;252.8,276.22;246.4,278.44;245,279.44;245,276.44;246,273.44;249,269.44;250,266.44;250,261.44;251,258.44;255,257.44;259,259.44;266,259.44;269,254.44;269,252.44;272,250.44;274,246.44;273,241.44;271,239.44;269,236.44;271,231.44;268,227.44;265,224.44;262,220.44;256,220.44;254,216.44;251,214.44;244,211.44;243,207.44;241,204.44;238,203.44;235,202.44;233,201.44;231,197.44;231,194.44;230,188.44;231,183.44;247,169.44;264,157.44;288,148.44;299,155.44;317,159.44;317,159.44;319.8,184.46;324,173.44;324,173.44;327,168.44;329,167.44",
+            hexColor = "#C7E2B0",
+            isPremium = true
+        ),
+        AdminMapArea(
+            id = "west-crame",
+            name = "West Crame",
+            description = "Residential area on the eastern edge.",
+            districtLabel = "District 2",
+            centerLatitude = 14.6050,
+            centerLongitude = 121.0500,
+            polygonPoints = "330.67,139;336,137;341,136;349,133;353,133;358,131;372,128;378,127;397,177;401.08,182;385.08,190.66;382.08,188.83;376.92,192.24;358.75,144.49;356,148;356,149;345.5,156.83;336.67,162;336.67,162;334.08,161.48;331.92,151.49;331.48,149.48;330.52,146.92;330.41,145.35;330.67,139",
+            hexColor = "#D7D3E4"
+        ),
+        AdminMapArea(
+            id = "addition-hills",
+            name = "Addition Hills",
+            description = "Historic residential and civic area.",
+            districtLabel = "District 1",
+            centerLatitude = 14.5965,
+            centerLongitude = 121.0334,
+            polygonPoints = "296,302;296,305;283,309;286,319;247,319;236,322;228,327;211,335;202,324;197,325;188,315;184,315;180,314;180,311;182,307;185.67,307.08;189,306;193,304.91;195,304;199,303;202,304;205,305;207,307;209,309;212,311;215.42,311.74;219,311;221,310;224,309;226,307;229,305;231,303;233,301;234.58,300.71;235.58,300.71;236.58,298.71;238.08,295.04;239.91,290.7;241.58,288.71;241.58,284.71;241.58,281.71;241.58,279.71;241.58,277.71;240.58,275.71;240.58,273.71;240.58,271.71;243.58,269.87;247.41,268.87;248.75,268.45;251.08,267.95;253.08,268.29;255.58,268.71;255.58,270.71;257.58,274.71;260.58,277.71;262.83,280.04;264.58,281.71;265.58,282.71;266.58,283.71;268.58,285.71;270.75,286.04;273.33,285.04;275.58,283.71;279.58,280.71;281.58,280.71;282.58,282.71;282.58,284.71;283.83,285.54;285.91,287.37;286,291.29;288.58,293.71;289.58,295.71;289.58,297.71;288.33,300.2;289,302.54;289.58,303.71;290.08,305.2;290.58,306.69;292.58,309.86",
+            hexColor = "#F0E6D2"
         )
     ).sortedBy { it.name.lowercase() }
 }

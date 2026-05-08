@@ -1,6 +1,7 @@
 package com.locapin.mobile.feature.admin
 
 import com.locapin.mobile.data.remote.MapAreaApiService
+import com.locapin.mobile.data.remote.AdminMapAreaRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -50,9 +51,73 @@ class RemoteAdminMapAreaRepository @Inject constructor(
     }
 
     override fun togglePremium(id: String) {
-        _mapAreas.update { current ->
-            current.map { 
-                if (it.id == id) it.copy(isPremium = !it.isPremium) else it
+        scope.launch {
+            try {
+                val response = mapAreaApiService.togglePremium(id)
+                if (response.data != null) {
+                    _mapAreas.update { current ->
+                        current.map { 
+                            if (it.id == id) it.copy(isPremium = response.data.isPremium ?: false) else it
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Fallback or error handling
+            }
+        }
+    }
+
+    override fun addMapArea(area: AdminMapArea) {
+        scope.launch {
+            try {
+                val request = AdminMapAreaRequest(
+                    name = area.name,
+                    description = area.description,
+                    districtLabel = area.districtLabel,
+                    centerLatitude = area.centerLatitude,
+                    centerLongitude = area.centerLongitude,
+                    polygonPoints = area.polygonPoints,
+                    hexColor = area.hexColor
+                )
+                val response = mapAreaApiService.createMapArea(request)
+                if (response.data != null) {
+                    refresh()
+                }
+            } catch (e: Exception) {
+                // Handle error
+            }
+        }
+    }
+
+    override fun updateMapArea(area: AdminMapArea) {
+        scope.launch {
+            try {
+                val request = AdminMapAreaRequest(
+                    name = area.name,
+                    description = area.description,
+                    districtLabel = area.districtLabel,
+                    centerLatitude = area.centerLatitude,
+                    centerLongitude = area.centerLongitude,
+                    polygonPoints = area.polygonPoints,
+                    hexColor = area.hexColor
+                )
+                val response = mapAreaApiService.updateMapArea(area.id, request)
+                if (response.data != null) {
+                    refresh()
+                }
+            } catch (e: Exception) {
+                // Handle error
+            }
+        }
+    }
+
+    override fun deleteMapArea(id: String) {
+        scope.launch {
+            try {
+                mapAreaApiService.deleteMapArea(id)
+                refresh()
+            } catch (e: Exception) {
+                // Handle error
             }
         }
     }

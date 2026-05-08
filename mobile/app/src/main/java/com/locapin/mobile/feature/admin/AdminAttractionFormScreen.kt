@@ -3,6 +3,7 @@ package com.locapin.mobile.feature.admin
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -38,13 +40,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.CircularProgressIndicator
+import coil.compose.AsyncImage
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.draw.clip
 import com.locapin.mobile.core.designsystem.theme.LocaPinBorder
+import com.locapin.mobile.core.designsystem.theme.LocaPinPrimary
+import com.locapin.mobile.core.designsystem.theme.LocaPinSurface
 import com.locapin.mobile.core.designsystem.theme.LocaPinFieldBackground
 import com.locapin.mobile.core.designsystem.theme.LocaPinPrimary
 import com.locapin.mobile.core.designsystem.theme.LocaPinSurface
@@ -212,23 +225,120 @@ fun AdminAttractionFormScreen(
                 colors = commonTextFieldColors()
             )
 
-            OutlinedTextField(
-                value = state.area,
-                onValueChange = viewModel::onAreaChange,
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text("Area / District") },
-                colors = commonTextFieldColors()
-            )
+            // Area Dropdown
+            val areas by viewModel.areas.collectAsStateWithLifecycle()
+            var areaExpanded by remember { mutableStateOf(false) }
+            Box(modifier = Modifier.fillMaxWidth()) {
+                OutlinedTextField(
+                    value = state.area,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Area / District *") },
+                    trailingIcon = { 
+                        IconButton(onClick = { areaExpanded = !areaExpanded }) {
+                            Icon(
+                                imageVector = if (areaExpanded) Icons.Default.ArrowDropUp else Icons.Default.ArrowDropDown,
+                                contentDescription = null,
+                                tint = LocaPinPrimary
+                            )
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    isError = state.errors.containsKey("area"),
+                    supportingText = { state.errors["area"]?.let { Text(it) } },
+                    colors = commonTextFieldColors()
+                )
 
-            OutlinedTextField(
-                value = state.imageUrl,
-                onValueChange = viewModel::onImageUrlChange,
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable { areaExpanded = true }
+                )
+
+                DropdownMenu(
+                    expanded = areaExpanded,
+                    onDismissRequest = { areaExpanded = false },
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .background(LocaPinSurface)
+                ) {
+                    areas.forEach { area ->
+                        DropdownMenuItem(
+                            text = { Text(area.name, color = LocaPinPrimary, fontWeight = FontWeight.Bold) },
+                            onClick = {
+                                viewModel.onAreaChange(area.name)
+                                areaExpanded = false
+                            }
+                        )
+                    }
+                }
+            }
+
+            val launcher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.GetContent()
+            ) { uri: android.net.Uri? ->
+                uri?.let { viewModel.onImageSelected(it) }
+            }
+
+            if (state.imageUrl.isNotEmpty()) {
+                AsyncImage(
+                    model = state.imageUrl,
+                    contentDescription = "Attraction Image",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .clip(RoundedCornerShape(8.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            Row(
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Image URL") },
-                placeholder = { Text("https://example.com/image.jpg") },
-                supportingText = { Text("Direct link to a high-quality image of the attraction.") },
-                colors = commonTextFieldColors()
-            )
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OutlinedTextField(
+                    value = state.imageUrl,
+                    onValueChange = viewModel::onImageUrlChange,
+                    modifier = Modifier.weight(1f),
+                    label = { Text("Image URL") },
+                    placeholder = { Text("https://example.com/image.jpg") },
+                    supportingText = { Text("Direct link or upload a new one.") },
+                    isError = state.errors.containsKey("imageUrl"),
+                    colors = commonTextFieldColors()
+                )
+                
+                if (state.isUploading) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                } else {
+                    TextButton(onClick = { launcher.launch("image/*") }) {
+                        Text("Upload", color = LocaPinPrimary)
+                    }
+                }
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                OutlinedTextField(
+                    value = state.rating,
+                    onValueChange = viewModel::onRatingChange,
+                    modifier = Modifier.weight(1f),
+                    label = { Text("Rating (0.0 - 5.0)") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    colors = commonTextFieldColors()
+                )
+
+                OutlinedTextField(
+                    value = state.reviews,
+                    onValueChange = viewModel::onReviewsChange,
+                    modifier = Modifier.weight(1f),
+                    label = { Text("Reviews Count") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    colors = commonTextFieldColors()
+                )
+            }
 
             Text(
                 text = "Visibility",

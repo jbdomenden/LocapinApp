@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val ARG_ATTRACTION_ID = "attractionId"
@@ -25,6 +26,9 @@ data class AdminAttractionFormUiState(
     val area: String = "",
     val imageUrl: String = "",
     val isVisible: Boolean = true,
+    val isUploading: Boolean = false,
+    val rating: String = "0.0",
+    val reviews: String = "0",
     val errors: Map<String, String> = emptyMap()
 )
 
@@ -32,12 +36,16 @@ data class AdminAttractionFormUiState(
 class AdminAttractionFormViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val repository: AdminAttractionRepository,
-    categoryRepository: AdminCategoryRepository
+    categoryRepository: AdminCategoryRepository,
+    areaRepository: AdminMapAreaRepository
 ) : ViewModel() {
 
     private val attractionId: String? = savedStateHandle[ARG_ATTRACTION_ID]
 
     val categories: StateFlow<List<AdminCategory>> = categoryRepository.categories
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val areas: StateFlow<List<AdminMapArea>> = areaRepository.mapAreas
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     var uiState by mutableStateOf(
@@ -57,6 +65,41 @@ class AdminAttractionFormViewModel @Inject constructor(
     fun onAreaChange(value: String) = update { copy(area = value) }
     fun onImageUrlChange(value: String) = update { copy(imageUrl = value) }
     fun onVisibilityChange(value: Boolean) = update { copy(isVisible = value) }
+    fun onRatingChange(value: String) = update { copy(rating = value) }
+    fun onReviewsChange(value: String) = update { copy(reviews = value) }
+
+    fun onImageSelected(uri: android.net.Uri) {
+        viewModelScope.launch {
+            uiState = uiState.copy(isUploading = true)
+            val downloadUrl = repository.uploadImage(uri)
+            if (downloadUrl != null) {
+                uiState = uiState.copy(imageUrl = downloadUrl, isUploading = false)
+            } else {
+                uiState = uiState.copy(
+                    isUploading = false,
+                    errors = uiState.errors + ("imageUrl" to "Failed to upload image")
+                )
+            }
+        }
+    }
+
+    private fun calculateDistanceFromSTIMesa(lat: Double, lng: Double): String {
+        // STI College Sta. Mesa Coordinates (Approximate)
+        val stiLat = 14.6009
+        val stiLng = 121.0117
+
+        val earthRadius = 6371.0 // kilometers
+        val dLat = Math.toRadians(lat - stiLat)
+        val dLng = Math.toRadians(lng - stiLng)
+
+        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(stiLat)) * Math.cos(Math.toRadians(lat)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        val distanceKm = earthRadius * c
+
+        return "%.1f km".format(java.util.Locale.US, distanceKm)
+    }
 
     fun save(): Boolean {
         val validationErrors = validate(uiState)
@@ -65,16 +108,23 @@ class AdminAttractionFormViewModel @Inject constructor(
             return false
         }
 
+        val lat = uiState.latitude.toDouble()
+        val lng = uiState.longitude.toDouble()
+        val distance = calculateDistanceFromSTIMesa(lat, lng)
+
         val payload = AdminAttractionInput(
             name = uiState.name.trim(),
             knownFor = uiState.knownFor.trim(),
             description = uiState.description.trim(),
             category = uiState.category.trim(),
-            latitude = uiState.latitude.toDouble(),
-            longitude = uiState.longitude.toDouble(),
+            latitude = lat,
+            longitude = lng,
             area = uiState.area.trim(),
             isVisible = uiState.isVisible,
-            imageUrl = uiState.imageUrl.trim().ifEmpty { null }
+            imageUrl = uiState.imageUrl.trim().ifEmpty { null },
+            distance = distance,
+            rating = uiState.rating.toDoubleOrNull() ?: 0.0,
+            reviews = uiState.reviews.toIntOrNull() ?: 0
         )
 
         val id = uiState.attractionId
@@ -98,15 +148,15 @@ class AdminAttractionFormViewModel @Inject constructor(
         val lat = state.latitude.toDoubleOrNull()
         if (state.latitude.isBlank()) {
             errors["latitude"] = "Latitude is required"
-        } else if (lat == null || lat !in -90.0..90.0) {
-            errors["latitude"] = "Latitude must be between -90 and 90"
+        } else if (lat == null || lat !in -90.0..1000.0) {
+            errors["latitude"] = "Latitude must be a valid number"
         }
 
         val lng = state.longitude.toDoubleOrNull()
         if (state.longitude.isBlank()) {
             errors["longitude"] = "Longitude is required"
-        } else if (lng == null || lng !in -180.0..180.0) {
-            errors["longitude"] = "Longitude must be between -180 and 180"
+        } else if (lng == null || lng !in -180.0..1000.0) {
+            errors["longitude"] = "Longitude must be a valid number"
         }
 
         return errors
@@ -126,6 +176,8 @@ class AdminAttractionFormViewModel @Inject constructor(
         longitude = longitude.toString(),
         area = area,
         imageUrl = imageUrl ?: "",
-        isVisible = isVisible
+        isVisible = isVisible,
+        rating = rating.toString(),
+        reviews = reviews.toString()
     )
 }

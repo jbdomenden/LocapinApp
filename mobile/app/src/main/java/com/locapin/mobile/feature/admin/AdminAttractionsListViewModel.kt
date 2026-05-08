@@ -52,4 +52,8 @@ class AdminAttractionsListViewModel @Inject constructor(
     fun deleteAttraction(id: String) {
         repository.deleteAttraction(id)
     }
+
+    fun refresh() {
+        repository.refresh()
+    }
 }
